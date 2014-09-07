@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Settings>
+    <GameSettings>
+      <GameSettings>
+        <Name>Anti-AFK</Name>
+        <PosibleValues>
+          <string>True</string>
+          <string>False</string>
+        </PosibleValues>
+        <SelectedValue>False</SelectedValue>
+      </GameSettings>
+
+      <GameSettings>
+        <Name>Debug Console</Name>
+        <PosibleValues>
+          <string>True</string>
+          <string>False</string>
+        </PosibleValues>
+        <SelectedValue>False</SelectedValue>
+      </GameSettings>
+
+      <GameSettings>
+        <Name>Display Enemy Tower Range</Name>
+        <PosibleValues>
+          <string>True</string>
+          <string>False</string>
+        </PosibleValues>
+        <SelectedValue>False</SelectedValue>
+      </GameSettings>
+      
+      <GameSettings>
+        <Name>Extended Zoom</Name>
+        <PosibleValues>
+          <string>True</string>
+          <string>False</string>
+        </PosibleValues>
+        <SelectedValue>False</SelectedValue>
+      </GameSettings>
+      
+    </GameSettings>
+  </Settings>
+  <InstalledAssemblies>
+    <InstalledAssemblies>
+      <InstallChecked>true</InstallChecked>
+      <InjectChecked>false</InjectChecked>
+      <DisplayName>LeagueSharp.Common</DisplayName>
+      <Name>LeagueSharp.Common</Name>
+      <PathToProjectFile>%leaguesharp%\Repositories\8A7DEFD1\trunk\LeagueSharp.Common\LeagueSharp.Common\LeagueSharp.Common.csproj</PathToProjectFile>
+      <Description>No</Description>
+      <SvnUrl>https://github.com/LeagueSharp/LeagueSharpCommon</SvnUrl>
+    </InstalledAssemblies>
+  </InstalledAssemblies>
+  <KnownRepositories>
+    <KnownRepositories>https://github.com/Lizzaran/LeagueSharp</KnownRepositories>
+    <KnownRepositories>https://github.com/LeagueSharp/LeagueSharpCommon</KnownRepositories>
+    <KnownRepositories>https://github.com/Esk0r/LeagueSharp</KnownRepositories>
+    <KnownRepositories>https://github.com/RoachxD/LeagueSharp</KnownRepositories>
+    <KnownRepositories>https://github.com/trelli/LeagueSharp</KnownRepositories>
+    <KnownRepositories>https://github.com/detuks/LeagueSharp</KnownRepositories>
+    <KnownRepositories>https://github.com/Chogart/LeagueSharp</KnownRepositories>
+    <KnownRepositories>https://github.com/Irvinee/leaguesharp</KnownRepositories>
+    <KnownRepositories>https://github.com/TC-Crew/L-Assemblies</KnownRepositories>
+    <KnownRepositories>https://github.com/jasteph/LeagueSharp</KnownRepositories>
+    <KnownRepositories>https://github.com/Xionanx/Leaguesharp-Projects</KnownRepositories>
+    <KnownRepositories>https://github.com/BotHappy/Ecko</KnownRepositories>
+  </KnownRepositories>
+</Config>
