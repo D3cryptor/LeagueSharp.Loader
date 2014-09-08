@@ -1,4 +1,5 @@
 ﻿#region
+
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -54,7 +55,8 @@ namespace LeagueSharp.Loader.Data
 
         public static readonly string LibrariesDir = System.IO.Path.Combine(AssembliesDir, "System") + "\\";
 
-        public static readonly string LogsDir = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Logs") + "\\";
+        public static readonly string LogsDir = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Logs") +
+                                                "\\";
     }
 
     [ XmlType(AnonymousType = true) ]
@@ -65,6 +67,17 @@ namespace LeagueSharp.Loader.Data
         private ObservableCollection<string> _knownRepositories;
 
         private ConfigSettings _settings;
+        private bool _updateOnLoad = true;
+
+        public bool UpdateOnLoad
+        {
+            get { return _updateOnLoad; }
+            set
+            {
+                _updateOnLoad = value;
+                OnPropertyChanged("UpdateOnLoad");
+            }
+        }
 
         public string Username { get; set; }
 

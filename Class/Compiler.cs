@@ -1,14 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
+﻿#region
+
+using System;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using LeagueSharp.Loader.Class;
 using LeagueSharp.Loader.Data;
 using Microsoft.Build.Evaluation;
-using Microsoft.Build.Execution;
 using Microsoft.Build.Logging;
+
+#endregion
 
 /*
     Copyright (C) 2014 LeagueSharp
@@ -54,10 +53,10 @@ namespace LeagueSharp.Loader
             {
                 if (project != null)
                 {
-                    bool doLog = false;
+                    var doLog = false;
                     if (!string.IsNullOrWhiteSpace(logfile))
                     {
-                        string logDir = Path.GetDirectoryName(logfile);
+                        var logDir = Path.GetDirectoryName(logfile);
                         if (!string.IsNullOrWhiteSpace(logDir))
                         {
                             doLog = true;
@@ -65,25 +64,24 @@ namespace LeagueSharp.Loader
                             {
                                 Directory.CreateDirectory(logDir);
                             }
-                            var fileLogger = new FileLogger
-                            {
-                                Parameters = @"logfile=" + logfile,
-                                ShowSummary = true
-                            };
+                            var fileLogger = new FileLogger { Parameters = @"logfile=" + logfile, ShowSummary = true };
                             ProjectCollection.GlobalProjectCollection.RegisterLogger(fileLogger);
                         }
                     }
-                    bool result = project.Build();
+
+                    var result = project.Build();
                     ProjectCollection.GlobalProjectCollection.UnregisterAllLoggers();
-                    Utility.Log(result ? LogStatus.Ok : LogStatus.Error, "Compiler",
+                    Utility.Log(
+                        result ? LogStatus.Ok : LogStatus.Error, "Compiler",
                         string.Format("Compile - Check ./logs/ for details - {0}", project.FullPath), log);
 
                     if (!result && doLog && File.Exists(logfile))
                     {
-                        string pathDir = Path.GetDirectoryName(logfile);
+                        var pathDir = Path.GetDirectoryName(logfile);
                         if (!string.IsNullOrWhiteSpace(pathDir))
                         {
-                            File.Move(logfile, Path.Combine(Directories.LogsDir, ("Error - " + Path.GetFileName(logfile))));
+                            File.Move(
+                                logfile, Path.Combine(Directories.LogsDir, ("Error - " + Path.GetFileName(logfile))));
                         }
                     }
                     else if (result && File.Exists(logfile))
@@ -104,10 +102,10 @@ namespace LeagueSharp.Loader
         {
             if (project != null)
             {
-                string extension = project.GetPropertyValue("OutputType").ToLower() == "exe"
+                var extension = project.GetPropertyValue("OutputType").ToLower() == "exe"
                     ? ".exe"
                     : (project.GetPropertyValue("OutputType").ToLower() == "library" ? ".dll" : string.Empty);
-                string pathDir = Path.GetDirectoryName(project.FullPath);
+                var pathDir = Path.GetDirectoryName(project.FullPath);
                 if (!string.IsNullOrWhiteSpace(extension) && !string.IsNullOrWhiteSpace(pathDir))
                 {
                     return Path.Combine(pathDir, project.GetPropertyValue("OutputPath")) +

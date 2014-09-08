@@ -1,7 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿#region
+
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+
+#endregion
 
 /*
     Copyright (C) 2014 LeagueSharp
@@ -63,15 +65,17 @@ namespace LeagueSharp.Loader.Data
         private void OnPropertyChanged(string propertyName)
         {
             if (PropertyChanged != null)
+            {
                 PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            }
         }
     }
 
     public class LogItem : INotifyPropertyChanged
     {
         private string _message;
-        private string _status;
         private string _source;
+        private string _status;
 
         public string Status
         {
@@ -108,7 +112,9 @@ namespace LeagueSharp.Loader.Data
         private void OnPropertyChanged(string propertyName)
         {
             if (PropertyChanged != null)
+            {
                 PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            }
         }
     }
 

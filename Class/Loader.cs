@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-/*
+﻿ /*
     Copyright (C) 2014 LeagueSharp
 
     This program is free software: you can redistribute it and/or modify
@@ -25,16 +19,12 @@ namespace LeagueSharp.Loader.Class
 {
     public static class Loader
     {
-        
         /// <summary>
         /// Gets called when an assembly is ticked.
         /// </summary>
         public static bool LoadAssembly(LeagueSharpAssembly assembly)
         {
-            if (assembly.Type != "Library")
-            {
-                
-            }
+            if (assembly.Type != AssemblyType.Library) { }
             return true;
         }
 
@@ -43,10 +33,7 @@ namespace LeagueSharp.Loader.Class
         /// </summary>
         public static bool UnLoadAssembly(LeagueSharpAssembly assembly)
         {
-            if (assembly.Type != "Library")
-            {
-
-            }
+            if (assembly.Type != AssemblyType.Library) { }
             return true;
         }
     }

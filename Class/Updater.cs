@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-/*
+﻿ /*
     Copyright (C) 2014 LeagueSharp
 
     This program is free software: you can redistribute it and/or modify
@@ -23,7 +17,5 @@ using System.Threading.Tasks;
 
 namespace LeagueSharp.Loader.Class
 {
-    static class Updater
-    {
-    }
+    internal static class Updater { }
 }

@@ -2,10 +2,16 @@
                       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                       xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+                      xmlns:tb="http://www.hardcodet.net/taskbar"
+                      xmlns:Data="clr-namespace:LeagueSharp.Loader.Data"
                       Title="LeagueSharp" 
                       Height="463" 
                       Width="770"
-                      ResizeMode="CanMinimize" WindowStartupLocation="CenterScreen" Loaded="MainWindow_OnLoaded" Closing="MainWindow_OnClosing">
+                      ResizeMode="CanMinimize" WindowStartupLocation="CenterScreen" 
+                      Loaded="MainWindow_OnLoaded" 
+                      Closing="MainWindow_OnClosing"
+                      StateChanged="MainWindow_OnStateChanged">
+
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
@@ -16,6 +22,17 @@
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
+                    <tb:TaskbarIcon x:Name="TrayIcon"
+                                    Visibility="Visible"
+                                    ToolTipText="LeagueSharp"
+                                    TrayMouseDoubleClick="TrayIcon_OnTrayMouseDoubleClick"
+                                    TrayLeftMouseUp="TrayIcon_OnTrayLeftMouseUp">
+                        <tb:TaskbarIcon.ContextMenu>
+                            <ContextMenu Style="{x:Null}">
+                                <MenuItem x:Name="TrayMenuClose" Header="Close" Click="TrayMenuClose_OnClick"/>
+                            </ContextMenu>
+                        </tb:TaskbarIcon.ContextMenu>
+                    </tb:TaskbarIcon>
                     <WebBrowser x:Name="Browser" Visibility="Visible" Margin="10" Source="https://rawgit.com/LeagueSharp/LeagueSharpLoader/master/News.html" Grid.ColumnSpan="2"/>
                 </Grid>
             </TabItem>
@@ -30,11 +47,9 @@
                               CanUserAddRows="False"
                               AutoGenerateColumns="False"
                               ContextMenuOpening="InstalledAssembliesDataGrid_OnContextMenuOpening"
-                              ItemsSource="{Binding LeagueSharpAssemblies.InstalledAssemblies.List}">
+                              ItemsSource="{Binding Config.InstalledAssemblies}">
                         <DataGrid.ContextMenu>
                             <ContextMenu>
-                                <MenuItem x:Name="UpdateMenuItem" Header="Update" Click="UpdateMenuItem_OnClick"/>
-                                <MenuItem x:Name="CompileMenuItem" Header="Compile" Click="CompileMenuItem_OnClick"/>
                                 <MenuItem x:Name="UpdateAndCompileMenuItem" Header="Update and Compile" Click="UpdateAndCompileMenuItem_OnClick"/>
                                 <MenuItem x:Name="RemoveMenuItem" Header="Remove" Click="RemoveMenuItem_OnClick"/>
                                 <MenuItem x:Name="GithubItem" Header="Github" Click="GithubItem_OnClick"/>
@@ -77,11 +92,11 @@
             <TabItem Header="Settings" Height="36" VerticalAlignment="Top" Margin="351,0,-351,0">
                 <Grid Background="#FFE5E5E5">
                     <Button Content="Logout" Margin="0,0,10,10" RenderTransformOrigin="0.947,1.44" Height="25" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="75" Click="ButtonBase_OnClick"/>
-                    <CheckBox Content="Install" HorizontalAlignment="Left" Margin="10,346,0,0" VerticalAlignment="Top" Width="169" IsChecked="True"/>
-                    <DataGrid Margin="10,10,10,40"
+                    <DataGrid Margin="10,10,10,66"
                               x:Name="GameSettingsDataGrid"
                               CanUserAddRows="False"
-                              AutoGenerateColumns="False">
+                              AutoGenerateColumns="False"
+                                ItemsSource="{Binding Config.Settings.GameSettings}">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Game Settings" Width="*" Binding="{Binding Name}" IsReadOnly="True"/>
                             <DataGridComboBoxColumn Width="*">
@@ -98,9 +113,11 @@
                                     </Style>
                                 </DataGridComboBoxColumn.EditingElementStyle>
                             </DataGridComboBoxColumn>
-                            
+
                         </DataGrid.Columns>
                     </DataGrid>
+                    <CheckBox IsChecked="{Binding Config.UpdateOnLoad, UpdateSourceTrigger=PropertyChanged}" Content="Update the assemblies at the start" HorizontalAlignment="Left" Margin="10,323,0,0" VerticalAlignment="Top"/>
+                    <CheckBox Content="Install" HorizontalAlignment="Left" Margin="10,346,0,0" VerticalAlignment="Top" Width="169" IsChecked="True"/>
                 </Grid>
             </TabItem>
         </TabControl>

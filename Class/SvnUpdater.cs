@@ -1,11 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Windows;
+
+#region
+
+using System;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using LeagueSharp.Loader.Data;
 using SharpSvn;
+
+#endregion
 
 /*
     Copyright (C) 2014 LeagueSharp
@@ -55,16 +57,17 @@ namespace LeagueSharp.Loader.Class
             {
                 try
                 {
-                    string dir = Path.Combine(directory, url.GetHashCode().ToString("X"));
+                    var dir = Path.Combine(directory, url.GetHashCode().ToString("X"));
                     using (var client = new SvnClient())
                     {
-                        bool cleanUp = false;
+                        var cleanUp = false;
                         client.Conflict +=
                             delegate(object sender, SvnConflictEventArgs eventArgs)
                             {
                                 eventArgs.Choice = SvnAccept.TheirsFull;
                             };
-                        client.Status(dir, new SvnStatusArgs { ThrowOnError = false },
+                        client.Status(
+                            dir, new SvnStatusArgs { ThrowOnError = false },
                             delegate(object sender, SvnStatusEventArgs args)
                             {
                                 if (args.Wedged)
@@ -72,10 +75,34 @@ namespace LeagueSharp.Loader.Class
                                     cleanUp = true;
                                 }
                             });
+
                         if (cleanUp)
                         {
                             client.CleanUp(dir);
                         }
+
+                        try
+                        {
+                            if (Directory.Exists(dir))
+                            {
+                                SvnInfoEventArgs remoteVersion;
+                                client.GetInfo(new Uri(url), out remoteVersion);
+
+                                SvnInfoEventArgs localVersion;
+                                client.GetInfo(dir, out localVersion);
+
+                                if (remoteVersion.Revision == localVersion.Revision)
+                                {
+                                    Utility.Log(LogStatus.Ok, "Updater", string.Format("Update not needed - {0}", url), log);
+                                    return dir;
+                                }
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            Utility.Log(LogStatus.Error, "Updater", string.Format("{0} - {1}", ex, url), log);
+                        }
+                       
                         client.CheckOut(new Uri(url), dir);
                         client.Update(dir);
                         Utility.Log(LogStatus.Ok, "Updater", string.Format("Updated - {0}", url), log);

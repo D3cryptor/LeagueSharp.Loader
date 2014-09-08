@@ -1,16 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
+﻿#region
+
+using System;
 using System.IO;
-using System.Linq;
 using System.Reflection;
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+using System.Windows;
 using System.Xml.Serialization;
 using LeagueSharp.Loader.Data;
-using Application = System.Windows.Application;
+using MessageBox = System.Windows.Forms.MessageBox;
+
+#endregion
 
 /*
     Copyright (C) 2014 LeagueSharp
@@ -70,7 +71,7 @@ namespace LeagueSharp.Loader.Class
 
         public static string ReadResourceString(string resource)
         {
-            using (Stream stream = Assembly.GetExecutingAssembly().GetManifestResourceStream(resource))
+            using (var stream = Assembly.GetExecutingAssembly().GetManifestResourceStream(resource))
             {
                 if (stream != null)
                 {
@@ -86,8 +87,10 @@ namespace LeagueSharp.Loader.Class
         public static void CreateFileFromResource(string path, string resource, bool overwrite = false)
         {
             if (!overwrite && File.Exists(path))
+            {
                 return;
-            using (Stream stream = Assembly.GetExecutingAssembly().GetManifestResourceStream(resource))
+            }
+            using (var stream = Assembly.GetExecutingAssembly().GetManifestResourceStream(resource))
             {
                 if (stream != null)
                 {
@@ -107,52 +110,42 @@ namespace LeagueSharp.Loader.Class
             try
             {
                 var dir = new DirectoryInfo(directory);
-                foreach (FileInfo fi in dir.GetFiles())
+                foreach (var fi in dir.GetFiles())
                 {
                     fi.Delete();
                 }
-                foreach (DirectoryInfo di in dir.GetDirectories())
+                foreach (var di in dir.GetDirectories())
                 {
                     ClearDirectory(di.FullName);
                     di.Delete();
                 }
             }
-            catch
-            {
-            }
+            catch { }
         }
 
         public static string MakeValidFileName(string name)
         {
-            string invalidChars = Regex.Escape(new string(Path.GetInvalidFileNameChars()));
-            string invalidRegStr = string.Format(@"([{0}]*\.+$)|([{0}]+)", invalidChars);
+            var invalidChars = Regex.Escape(new string(Path.GetInvalidFileNameChars()));
+            var invalidRegStr = string.Format(@"([{0}]*\.+$)|([{0}]+)", invalidChars);
             return Regex.Replace(name, invalidRegStr, "_");
         }
 
         public static void Log(string status, string source, string message, Log log)
         {
             Application.Current.Dispatcher.Invoke(
-                () => log.Items.Add(new LogItem
-                {
-                    Status = status,
-                    Source = source,
-                    Message = message
-                }));
+                () => log.Items.Add(new LogItem { Status = status, Source = source, Message = message }));
         }
 
         public static string WildcardToRegex(string pattern)
         {
-            return "^" + Regex.Escape(pattern)
-                .Replace(@"\*", ".*")
-                .Replace(@"\?", ".")
-                   + "$";
+            return "^" + Regex.Escape(pattern).Replace(@"\*", ".*").Replace(@"\?", ".") + "$";
         }
 
         public static bool OverwriteFile(string file, string path)
         {
             try
             {
-                string dir = Path.GetDirectoryName(path);
+                var dir = Path.GetDirectoryName(path);
                 if (dir != null)
                 {
                     if (!Directory.Exists(dir))
@@ -164,13 +157,16 @@ namespace LeagueSharp.Loader.Class
                 {
                     File.Delete(path);
                 }
-                try { File.Move(file, path); }
+                try
+                {
+                    File.Move(file, path);
+                }
                 catch (Exception e)
                 {
                     MessageBox.Show(e.ToString());
                     throw;
                 }
-                
+
                 return true;
             }
             catch
@@ -183,11 +179,11 @@ namespace LeagueSharp.Loader.Class
         {
             try
             {
-                int counter = 1;
-                string fileName = Path.GetFileNameWithoutExtension(file);
-                string fileExtension = Path.GetExtension(file);
-                string newPath = path;
-                string pathDirectory = Path.GetDirectoryName(path);
+                var counter = 1;
+                var fileName = Path.GetFileNameWithoutExtension(file);
+                var fileExtension = Path.GetExtension(file);
+                var newPath = path;
+                var pathDirectory = Path.GetDirectoryName(path);
                 if (pathDirectory != null)
                 {
                     if (!Directory.Exists(pathDirectory))
@@ -196,7 +192,7 @@ namespace LeagueSharp.Loader.Class
                     }
                     while (File.Exists(newPath))
                     {
-                        string tmpFileName = string.Format("{0} ({1})", fileName, counter++);
+                        var tmpFileName = string.Format("{0} ({1})", fileName, counter++);
                         newPath = Path.Combine(pathDirectory, tmpFileName + fileExtension);
                     }
                     File.Move(file, newPath);

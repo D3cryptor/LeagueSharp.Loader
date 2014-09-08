@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
 using System.Reflection;
-using System.Windows;
 using System.Xml.Serialization;
 using LeagueSharp.Loader.Data;
 using Microsoft.Build.Evaluation;
@@ -56,16 +55,35 @@ namespace LeagueSharp.Loader.Class
         }
     }
 
+    public enum AssemblyType
+    {
+        Library,
+        Executable,
+        Unknown,
+    }
+
+    public enum AssemblyStatus
+    {
+        Ready,
+        Updating,
+        UpdatingError,
+        CompilingError,
+        Compiling,
+    }
+
     [ XmlType(AnonymousType = true) ]
     public class LeagueSharpAssembly : INotifyPropertyChanged
     {
         private string _displayName = "";
+        private bool _injectChecked;
+        private string _pathToProjectFile;
         private ProjectFile _pf;
         private Project _project;
         private string _svnUrl;
 
         public LeagueSharpAssembly()
         {
+            Status = AssemblyStatus.Ready;
         }
 
         public LeagueSharpAssembly(string name, string path, string svnUrl)
@@ -74,11 +92,10 @@ namespace LeagueSharp.Loader.Class
             PathToProjectFile = path;
             SvnUrl = svnUrl;
             Description = "";
+            Status = AssemblyStatus.Ready;
         }
 
         public bool InstallChecked { get; set; }
-
-        private bool _injectChecked;
 
         public bool InjectChecked
         {
@@ -98,11 +115,13 @@ namespace LeagueSharp.Loader.Class
 
                 if (success)
                 {
-                    _injectChecked =  value;
+                    _injectChecked = value;
                     OnPropertyChanged("InjectChecked");
                 }
             }
         }
+
+        public AssemblyStatus Status { get; set; }
 
         public string DisplayName
         {
@@ -112,11 +131,9 @@ namespace LeagueSharp.Loader.Class
 
         public string Name { get; set; }
 
-        private string _pathToProjectFile;
-
         public string PathToProjectFile
         {
-            get {return _pathToProjectFile; }
+            get { return _pathToProjectFile; }
             set
             {
                 if (!value.Contains("%leaguesharp%"))
@@ -130,7 +147,14 @@ namespace LeagueSharp.Loader.Class
             }
         }
 
-        public string PathToBinary { get { return (Type == "Library" ? Directories.LibrariesDir : Directories.AssembliesDir) + Path.GetFileName(Compiler.GetOutputFilePath(Project)); } }
+        public string PathToBinary
+        {
+            get
+            {
+                return (Type == AssemblyType.Library ? Directories.LibrariesDir : Directories.AssembliesDir) +
+                       Path.GetFileName(Compiler.GetOutputFilePath(Project));
+            }
+        }
 
         public string Location
         {
@@ -171,16 +195,18 @@ namespace LeagueSharp.Loader.Class
             }
         }
 
-        public string Type
+        public AssemblyType Type
         {
             get
             {
                 if (Project != null)
                 {
-                    return Project.GetPropertyValue("OutputType").ToLower() == "exe" ? "Executable" : "Library";
+                    return Project.GetPropertyValue("OutputType").ToLower() == "exe"
+                        ? AssemblyType.Executable
+                        : AssemblyType.Library;
                 }
 
-                return "?";
+                return AssemblyType.Unknown;
             }
         }
 
@@ -190,6 +216,11 @@ namespace LeagueSharp.Loader.Class
         {
             get
             {
+                if (Status != AssemblyStatus.Ready)
+                {
+                    return Status.ToString();
+                }
+
                 if (!string.IsNullOrEmpty(PathToBinary) && File.Exists(PathToBinary))
                 {
                     return AssemblyName.GetAssemblyName(PathToBinary).Version.ToString();
@@ -212,22 +243,51 @@ namespace LeagueSharp.Loader.Class
 
         public void Update()
         {
-            SvnUpdater.Update(SvnUrl, Logs.MainLog, Directories.RepositoryDir);
-            OnPropertyChanged("Type");
+            if (Status == AssemblyStatus.Updating || SvnUrl == "")
+            {
+                return;
+            }
+
+            Status = AssemblyStatus.Updating;
             OnPropertyChanged("Version");
+
+            SvnUpdater.Update(SvnUrl, Logs.MainLog, Directories.RepositoryDir);
+
+            Status = AssemblyStatus.Ready;
+            OnPropertyChanged("Type");
         }
 
         public bool Compile()
         {
-            if (Compiler.Compile(Project, Path.Combine(Directories.LogsDir,  Name + ".txt"), Logs.MainLog))
+            Status = AssemblyStatus.Compiling;
+            OnPropertyChanged("Version");
+
+            if (Compiler.Compile(Project, Path.Combine(Directories.LogsDir, Name + ".txt"), Logs.MainLog))
             {
                 var result = Utility.OverwriteFile(
                     Compiler.GetOutputFilePath(Project),
-                    (Type == "Library" ? Directories.LibrariesDir : Directories.AssembliesDir) + "\\" +
+                    (Type == AssemblyType.Library ? Directories.LibrariesDir : Directories.AssembliesDir) + "\\" +
                     Path.GetFileName(Compiler.GetOutputFilePath(Project)));
+
+                Utility.ClearDirectory(Compiler.GetOutputFilePath(Project));
+                Utility.ClearDirectory(Path.Combine(Project.DirectoryPath, "bin"));
+                Utility.ClearDirectory(Path.Combine(Project.DirectoryPath, "obj"));
+
+                if (result)
+                {
+                    Status = AssemblyStatus.Ready;
+                }
+                else
+                {
+                    Status = AssemblyStatus.CompilingError;
+                }
+
                 OnPropertyChanged("Version");
                 return result;
             }
+
+            Status = AssemblyStatus.CompilingError;
+            OnPropertyChanged("Version");
             return false;
         }
 

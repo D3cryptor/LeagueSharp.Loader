@@ -1,5 +1,10 @@
 ﻿#region
 
+using System.Collections.Generic;
+using Microsoft.Build.Evaluation;
+
+#region
+
 using System;
 using System.ComponentModel;
 using System.Linq;
@@ -9,6 +14,8 @@ using LeagueSharp.Loader.Class;
 using LeagueSharp.Loader.Data;
 using MahApps.Metro.Controls;
 using MahApps.Metro.Controls.Dialogs;
+
+#endregion
 
 #endregion
 
@@ -33,7 +40,8 @@ namespace LeagueSharp.Loader.Views
 {
     public partial class MainWindow : MetroWindow
     {
-        public Config Config;
+        public Config Config { get; set; }
+        public bool Working { get; set; }
 
         private void MainWindow_OnLoaded(object sender, RoutedEventArgs e)
         {
@@ -42,9 +50,8 @@ namespace LeagueSharp.Loader.Views
 
             Browser.Visibility = Visibility.Hidden;
             DataContext = this;
-            GameSettingsDataGrid.ItemsSource = Config.Settings.GameSettings;
+
             LogsDataGrid.ItemsSource = Logs.MainLog.Items;
-            InstalledAssembliesDataGrid.ItemsSource = Config.InstalledAssemblies;
 
             //Try to login with the saved credentials.
             if (!Auth.Login(Config.Username, Config.Password).Item1)
@@ -55,6 +62,8 @@ namespace LeagueSharp.Loader.Views
             {
                 OnLogin(Config.Username);
             }
+
+            PrepareAssemblies(Config.InstalledAssemblies, Config.UpdateOnLoad, true);
         }
 
         private async void ShowLoginDialog()
@@ -134,28 +143,73 @@ namespace LeagueSharp.Loader.Views
             }
         }
 
-        private void CompileMenuItem_OnClick(object sender, RoutedEventArgs e)
-        {
-            foreach (var selectedAssemblyData in InstalledAssembliesDataGrid.SelectedItems)
-            {
-                var selectedAssembly = (LeagueSharpAssembly)selectedAssemblyData;
-                selectedAssembly.Compile();
-            }
-        }
-
-        private void UpdateMenuItem_OnClick(object sender, RoutedEventArgs e)
-        {
-            foreach (var selectedAssemblyData in InstalledAssembliesDataGrid.SelectedItems)
-            {
-                var selectedAssembly = (LeagueSharpAssembly)selectedAssemblyData;
-                selectedAssembly.Update();
-            }
-        }
-
         private void UpdateAndCompileMenuItem_OnClick(object sender, RoutedEventArgs e)
         {
-            UpdateMenuItem_OnClick(null, null);
-            CompileMenuItem_OnClick(null, null);
+            if (InstalledAssembliesDataGrid.SelectedItems.Count == 0)
+            {
+                return;
+            }
+
+            PrepareAssemblies(InstalledAssembliesDataGrid.SelectedItems.Cast<LeagueSharpAssembly>(), true, true);
+        }
+
+        private void PrepareAssemblies(IEnumerable<LeagueSharpAssembly> assemblies, bool update, bool compile)
+        {
+            if (Working)
+            {
+                return;
+            }
+
+            Working = true;
+
+            var bgWorker = new BackgroundWorker();
+            bgWorker.DoWork += delegate
+            {
+                var updatedSvnUrls = new List<string>();
+
+                var leagueSharpAssemblies = assemblies as IList<LeagueSharpAssembly> ?? assemblies.ToList();
+                foreach (var assembly in leagueSharpAssemblies)
+                {
+                    if (assembly.Type == AssemblyType.Library)
+                    {
+                        if (update && !updatedSvnUrls.Contains(assembly.SvnUrl))
+                        {
+                            assembly.Update();
+                            updatedSvnUrls.Add(assembly.SvnUrl);
+                        }
+
+                        if (compile)
+                        {
+                            assembly.Compile();
+                        }
+                    }
+                }
+
+                foreach (var assembly in leagueSharpAssemblies)
+                {
+                    if (assembly.Type != AssemblyType.Library)
+                    {
+                        if (update && !updatedSvnUrls.Contains(assembly.SvnUrl))
+                        {
+                            assembly.Update();
+                            updatedSvnUrls.Add(assembly.SvnUrl);
+                        }
+
+                        if (compile)
+                        {
+                            assembly.Compile();
+                        }
+                    }
+                }
+            };
+
+            bgWorker.RunWorkerCompleted += delegate
+            {
+                ProjectCollection.GlobalProjectCollection.UnloadAllProjects();
+                Working = false;
+            };
+
+            bgWorker.RunWorkerAsync();
         }
 
         private void RemoveMenuItem_OnClick(object sender, RoutedEventArgs e)
@@ -192,6 +246,37 @@ namespace LeagueSharp.Loader.Views
             MainWindow_OnClosing(null, null);
             System.Diagnostics.Process.Start(Application.ResourceAssembly.Location);
             Application.Current.Shutdown();
+        }
+
+        private void TrayIcon_OnTrayMouseDoubleClick(object sender, RoutedEventArgs e)
+        {
+            if (Visibility == Visibility.Hidden)
+            {
+                Show();
+                Activate();
+                WindowState = WindowState.Normal;
+            }
+        }
+
+        private void MainWindow_OnStateChanged(object sender, EventArgs e)
+        {
+            if (WindowState == WindowState.Minimized)
+            {
+                Hide();
+            }
+        }
+
+        private void TrayMenuClose_OnClick(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
+
+        private void TrayIcon_OnTrayLeftMouseUp(object sender, RoutedEventArgs e)
+        {
+            if (Visibility == Visibility.Visible)
+            {
+                Hide();
+            }
         }
     }
 }

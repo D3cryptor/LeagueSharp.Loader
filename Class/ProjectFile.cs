@@ -1,11 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
+﻿#region
+
+using System;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using LeagueSharp.Loader.Data;
 using Microsoft.Build.Evaluation;
+
+#endregion
 
 /*
     Copyright (C) 2014 LeagueSharp
@@ -55,7 +56,7 @@ namespace LeagueSharp.Loader.Class
                 _log = log;
                 if (File.Exists(file))
                 {
-                    ICollection<Project> projects = ProjectCollection.GlobalProjectCollection.GetLoadedProjects(file);
+                    var projects = ProjectCollection.GlobalProjectCollection.GetLoadedProjects(file);
                     Project = projects.Count == 0 ? new Project(file) : projects.First();
                 }
             }
@@ -97,22 +98,24 @@ namespace LeagueSharp.Loader.Class
                 {
                     Project.SetProperty("PlatformTarget", PlatformTarget);
                 }
-                ProjectProperty outputPath = Project.GetProperty("OutputPath");
+                var outputPath = Project.GetProperty("OutputPath");
                 if (outputPath == null || string.IsNullOrWhiteSpace(outputPath.EvaluatedValue))
                 {
                     Project.SetProperty("OutputPath", "bin\\" + Configuration);
                 }
                 if (UpdateReferences)
                 {
-                    foreach (ProjectItem item in Project.GetItems("Reference"))
+                    foreach (var item in Project.GetItems("Reference"))
                     {
                         if (item == null)
+                        {
                             continue;
-                        ProjectMetadata hintPath = item.GetMetadata("HintPath");
+                        }
+                        var hintPath = item.GetMetadata("HintPath");
                         if (hintPath != null && !string.IsNullOrWhiteSpace(hintPath.EvaluatedValue))
                         {
-                            item.SetMetadataValue("HintPath",
-                                Path.Combine(ReferencesPath, Path.GetFileName(hintPath.EvaluatedValue)));
+                            item.SetMetadataValue(
+                                "HintPath", Path.Combine(ReferencesPath, Path.GetFileName(hintPath.EvaluatedValue)));
                         }
                     }
                 }
