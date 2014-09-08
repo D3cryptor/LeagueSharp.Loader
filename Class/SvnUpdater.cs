@@ -86,12 +86,12 @@ namespace LeagueSharp.Loader.Class
                             if (Directory.Exists(dir))
                             {
                                 SvnInfoEventArgs remoteVersion;
-                                client.GetInfo(new Uri(url), out remoteVersion);
+                                var b1 = client.GetInfo(new Uri(url), out remoteVersion);
 
                                 SvnInfoEventArgs localVersion;
-                                client.GetInfo(dir, out localVersion);
+                                var b2 = client.GetInfo(dir, out localVersion);
 
-                                if (remoteVersion.Revision == localVersion.Revision)
+                                if (b1 && b2 && remoteVersion.Revision == localVersion.Revision)
                                 {
                                     Utility.Log(LogStatus.Ok, "Updater", string.Format("Update not needed - {0}", url), log);
                                     return dir;

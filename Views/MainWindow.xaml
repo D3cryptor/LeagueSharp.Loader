@@ -51,7 +51,7 @@
                         <DataGrid.ContextMenu>
                             <ContextMenu>
                                 <MenuItem x:Name="UpdateAndCompileMenuItem" Header="Update and Compile" Click="UpdateAndCompileMenuItem_OnClick"/>
-                                <MenuItem x:Name="RemoveMenuItem" Header="Remove" Click="RemoveMenuItem_OnClick"/>
+                                <MenuItem x:Name="RemoveMenuItem" Header="Uninstall" Click="RemoveMenuItem_OnClick"/>
                                 <MenuItem x:Name="GithubItem" Header="Github" Click="GithubItem_OnClick"/>
                             </ContextMenu>
                         </DataGrid.ContextMenu>
@@ -79,7 +79,7 @@
                               Margin="10" 
                               ItemsSource="{Binding Logs.MainLog.Items}"
                               AutoGenerateColumns="False"
-                              IsReadOnly="True">
+                              CanUserAddRows="False">
 
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Status" Binding="{Binding Status}"/>

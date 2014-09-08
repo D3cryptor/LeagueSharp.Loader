@@ -1,4 +1,6 @@
-﻿#region
+﻿using System.Windows.Input;
+
+#region
 
 using System.Collections.Generic;
 using Microsoft.Build.Evaluation;
@@ -74,7 +76,7 @@ namespace LeagueSharp.Loader.Views
                     this.ShowLoginAsync(
                         "LeagueSharp", "Sign in",
                         new LoginDialogSettings { ColorScheme = MetroDialogOptions.ColorScheme });
-
+            
             var loginResult = new Tuple<bool, string>(false, "Cancel button pressed");
             if (result != null)
             {
@@ -218,9 +220,24 @@ namespace LeagueSharp.Loader.Views
             {
                 return;
             }
+             
+
             var remove = InstalledAssembliesDataGrid.SelectedItems.Cast<LeagueSharpAssembly>().ToList();
 
-            foreach (var ee in remove)
+            DeleteWithConfirmation(remove);
+            
+        }
+
+        private async void DeleteWithConfirmation(IEnumerable<LeagueSharpAssembly> asemblies)
+        {
+            var result = await this.ShowMessageAsync("Uninstall", "Are you sure you want to uninstall selected assemblies?", MessageDialogStyle.AffirmativeAndNegative);
+            
+            if (result == MessageDialogResult.Negative)
+            {
+                return;
+            }
+
+            foreach (var ee in asemblies)
             {
                 Config.InstalledAssemblies.Remove(ee);
             }
@@ -278,5 +295,6 @@ namespace LeagueSharp.Loader.Views
                 Hide();
             }
         }
+
     }
 }
