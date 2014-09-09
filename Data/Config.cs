@@ -69,7 +69,7 @@ namespace LeagueSharp.Loader.Data
         private ObservableCollection<string> _knownRepositories;
 
         private ConfigSettings _settings;
-        private bool _updateOnLoad = true;
+        private bool _updateOnLoad = false;
         private bool _install = true;
 
         public bool Install
