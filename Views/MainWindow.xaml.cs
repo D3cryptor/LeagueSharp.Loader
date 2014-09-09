@@ -319,38 +319,35 @@ namespace LeagueSharp.Loader.Views
             {
                 InstalledAssembliesDataGrid.ItemsSource = Config.InstalledAssemblies;
             }
+            else
+            {
+                var searchAssemblies = new List<LeagueSharpAssembly>();
+
+                foreach (var assembly in Config.InstalledAssemblies)
+                {
+                    try
+                    {
+                        var nameMatch = Regex.Match(assembly.Name, SearchTextBox.Text, RegexOptions.IgnoreCase);
+                        var displayNameMatch = Regex.Match(assembly.DisplayName, SearchTextBox.Text, RegexOptions.IgnoreCase);
+
+                        if (displayNameMatch.Success || nameMatch.Success)
+                        {
+                            searchAssemblies.Add(assembly);
+                        }
+                    }
+                    catch (Exception ee)
+                    {
+                        searchAssemblies.Clear();
+                        searchAssemblies.AddRange(Config.InstalledAssemblies);
+                        break;
+                    }
+
+                }
+
+                InstalledAssembliesDataGrid.ItemsSource = searchAssemblies;
+            }
             
         }
 
-        private void SearchTextBox_OnKeyUp(object sender, KeyEventArgs e)
-        {
-            if (e.Key != Key.Enter)
-            {
-                return;
-            }
-                
-            var searchAssemblies = new List<LeagueSharpAssembly>();
-
-            foreach (var assembly in Config.InstalledAssemblies)
-            {
-                try
-                {
-                    var nameMatch = Regex.Match(assembly.Name, SearchTextBox.Text, RegexOptions.IgnoreCase);
-                    var displayNameMatch = Regex.Match(assembly.DisplayName, SearchTextBox.Text, RegexOptions.IgnoreCase);
-
-                    if (displayNameMatch.Success || nameMatch.Success)
-                    {
-                        searchAssemblies.Add(assembly);
-                    }
-                }
-                catch (Exception ee)
-                {
-                    searchAssemblies.Add(assembly);
-                }
-
-            }
-
-            InstalledAssembliesDataGrid.ItemsSource = searchAssemblies;
-        }
     }
 }
