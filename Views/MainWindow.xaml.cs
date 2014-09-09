@@ -1,5 +1,10 @@
-﻿using System.Windows.Input;
+﻿using System.Text.RegularExpressions;
+using System.Threading;
+using System.Windows.Forms;
+using System.Windows.Input;
 using System.Windows.Interop;
+using Application = System.Windows.Application;
+using DataGrid = System.Windows.Controls.DataGrid;
 
 #region
 
@@ -307,5 +312,30 @@ namespace LeagueSharp.Loader.Views
             }
         }
 
+        private void TextBoxBase_OnTextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (SearchTextBox.Text.Trim() != "")
+            {
+                var searchAssemblies = new List<LeagueSharpAssembly>();
+
+                foreach (var assembly in Config.InstalledAssemblies)
+                {
+                    var nameMatch = Regex.Match(assembly.Name, SearchTextBox.Text, RegexOptions.IgnoreCase);
+                    var displayNameMatch = Regex.Match(assembly.DisplayName, SearchTextBox.Text, RegexOptions.IgnoreCase);
+
+                    if (displayNameMatch.Success || nameMatch.Success)
+                    {
+                        searchAssemblies.Add(assembly);
+                    }
+                }
+
+                InstalledAssembliesDataGrid.ItemsSource = searchAssemblies;
+            }
+            else
+            {
+                InstalledAssembliesDataGrid.ItemsSource = Config.InstalledAssemblies;
+            }
+            
+        }
     }
 }

@@ -39,7 +39,7 @@
                 <Grid Background="#FFE5E5E5" Margin="0,2,0,-2">
                     <DataGrid x:Name="InstalledAssembliesDataGrid"
                               HorizontalAlignment="Left" 
-                              Margin="10,10,0,0" 
+                              Margin="10,41,0,0" 
                               VerticalAlignment="Top"
                               Height="323"
                               Width="716" 
@@ -108,7 +108,8 @@
                             <DataGridTextColumn Header="Location" Width="275" Binding="{Binding Location}" IsReadOnly="True"/>
                         </DataGrid.Columns>
                     </DataGrid>
-                    <Button x:Name="InstallButton" Content="Install new assembly" HorizontalAlignment="Left" Margin="595,339,0,0" VerticalAlignment="Top" Width="131" RenderTransformOrigin="1.08,-0.48" Click="InstallButton_Click"/>
+                    <Button x:Name="InstallButton" Content="Install new assembly" HorizontalAlignment="Left" Margin="595,10,0,0" VerticalAlignment="Top" Width="131" RenderTransformOrigin="1.08,-0.48" Click="InstallButton_Click"/>
+                    <TextBox x:Name="SearchTextBox" HorizontalAlignment="Left" Height="23" Margin="10,9,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="173" TextChanged="TextBoxBase_OnTextChanged"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Log" HorizontalAlignment="Left" Height="36" VerticalAlignment="Top" Width="60">
