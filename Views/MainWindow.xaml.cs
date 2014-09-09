@@ -5,6 +5,7 @@ using System.Windows.Input;
 using System.Windows.Interop;
 using Application = System.Windows.Application;
 using DataGrid = System.Windows.Controls.DataGrid;
+using KeyEventArgs = System.Windows.Input.KeyEventArgs;
 
 #region
 
@@ -314,11 +315,25 @@ namespace LeagueSharp.Loader.Views
 
         private void TextBoxBase_OnTextChanged(object sender, TextChangedEventArgs e)
         {
-            if (SearchTextBox.Text.Trim() != "")
+            if (SearchTextBox.Text.Trim() == "")
             {
-                var searchAssemblies = new List<LeagueSharpAssembly>();
+                InstalledAssembliesDataGrid.ItemsSource = Config.InstalledAssemblies;
+            }
+            
+        }
 
-                foreach (var assembly in Config.InstalledAssemblies)
+        private void SearchTextBox_OnKeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.Key != Key.Enter)
+            {
+                return;
+            }
+                
+            var searchAssemblies = new List<LeagueSharpAssembly>();
+
+            foreach (var assembly in Config.InstalledAssemblies)
+            {
+                try
                 {
                     var nameMatch = Regex.Match(assembly.Name, SearchTextBox.Text, RegexOptions.IgnoreCase);
                     var displayNameMatch = Regex.Match(assembly.DisplayName, SearchTextBox.Text, RegexOptions.IgnoreCase);
@@ -328,14 +343,14 @@ namespace LeagueSharp.Loader.Views
                         searchAssemblies.Add(assembly);
                     }
                 }
+                catch (Exception ee)
+                {
+                    searchAssemblies.Add(assembly);
+                }
 
-                InstalledAssembliesDataGrid.ItemsSource = searchAssemblies;
             }
-            else
-            {
-                InstalledAssembliesDataGrid.ItemsSource = Config.InstalledAssemblies;
-            }
-            
+
+            InstalledAssembliesDataGrid.ItemsSource = searchAssemblies;
         }
     }
 }
