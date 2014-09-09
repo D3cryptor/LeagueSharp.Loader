@@ -43,7 +43,7 @@ using Microsoft.Build.Logging;
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-namespace LeagueSharp.Loader
+namespace LeagueSharp.Loader.Class
 {
     internal class Compiler
     {
@@ -73,7 +73,7 @@ namespace LeagueSharp.Loader
                     ProjectCollection.GlobalProjectCollection.UnregisterAllLoggers();
                     Utility.Log(
                         result ? LogStatus.Ok : LogStatus.Error, "Compiler",
-                        string.Format("Compile - Check ./logs/ for details - {0}", project.FullPath), log);
+                        result ? string.Format("Compile - {0}", project.FullPath) : string.Format("Compile - Check ./logs/ for details - {0}", project.FullPath), log);
 
                     if (!result && doLog && File.Exists(logfile))
                     {

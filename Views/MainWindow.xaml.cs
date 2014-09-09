@@ -1,4 +1,5 @@
 ﻿using System.Windows.Input;
+using System.Windows.Interop;
 
 #region
 
@@ -66,6 +67,15 @@ namespace LeagueSharp.Loader.Views
             }
 
             PrepareAssemblies(Config.InstalledAssemblies, Config.UpdateOnLoad, true);
+
+            //Used to reload the assemblies from inside the game.
+            KeyboardHook.SetHook();
+            KeyboardHook.OnKeyUpTrigger += KeyboardHookOnOnKeyUpTrigger;
+        }
+
+        private void KeyboardHookOnOnKeyUpTrigger(int vKeyCode)
+        {
+            
         }
 
         private async void ShowLoginDialog()
@@ -127,6 +137,7 @@ namespace LeagueSharp.Loader.Views
         private void MainWindow_OnClosing(object sender, CancelEventArgs e)
         {
             Utility.MapClassToXmlFile(typeof(Config), Config, "config.xml");
+            KeyboardHook.UnHook();
         }
 
         private void InstalledAssembliesDataGrid_OnContextMenuOpening(object sender, ContextMenuEventArgs e)
