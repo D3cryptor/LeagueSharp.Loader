@@ -1,5 +1,6 @@
 ﻿using System.Text.RegularExpressions;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Interop;
@@ -50,7 +51,10 @@ namespace LeagueSharp.Loader.Views
     public partial class MainWindow : MetroWindow
     {
         public Config Config { get; set; }
+
         public bool Working { get; set; }
+
+        public Thread InjectThread { get; set; }
 
         private void MainWindow_OnLoaded(object sender, RoutedEventArgs e)
         {
@@ -77,11 +81,79 @@ namespace LeagueSharp.Loader.Views
             //Used to reload the assemblies from inside the game.
             KeyboardHook.SetHook();
             KeyboardHook.OnKeyUpTrigger += KeyboardHookOnOnKeyUpTrigger;
+
+            InjectThread = new Thread((ThreadStart)(() =>
+            {
+                while (true)
+                {
+                    if(Config.Install)
+                        Injection.Pulse();
+                    Thread.Sleep(1000);
+                }
+            }));
+
+            InjectThread.Start();
+        }
+
+        protected override void OnSourceInitialized(EventArgs e)
+        {
+            base.OnSourceInitialized(e);
+            HwndSource source = PresentationSource.FromVisual(this) as HwndSource;
+            source.AddHook(WndProc);
+        }
+
+        private IntPtr WndProc(IntPtr hwnd, int msg, IntPtr wParam, IntPtr lParam, ref bool handled)
+        {
+            if (msg == 32769)
+            {
+                var lhwid = wParam;
+                Task.Factory.StartNew((Action)(() =>
+                {
+                    Injection.SendConfig(lhwid, Config);
+                    Task.Delay(1000);
+                    foreach (var assembly in Config.InstalledAssemblies.Where(a => a.InjectChecked))
+                        Injection.LoadAssembly(lhwid, assembly);
+                }));
+            }
+            return IntPtr.Zero;
         }
 
         private void KeyboardHookOnOnKeyUpTrigger(int vKeyCode)
         {
-            
+            //F5 & F8
+            if (vKeyCode == 0x74 || vKeyCode == 0x77)
+            {
+                var hwnd = Injection.GetLeagueWnd();
+                var targetAssemblies = Config.InstalledAssemblies.Where(a => a.InjectChecked).ToList();
+
+                foreach (var assembly in targetAssemblies)
+                    Injection.UnloadAssembly(hwnd, assembly);
+
+                if (vKeyCode == 0x77)
+                {
+                    //Recompile the assemblies:
+                    foreach (var assembly in targetAssemblies)
+                    {
+                        if (assembly.Type == AssemblyType.Library)
+                        {
+                            assembly.Compile();
+                        }
+                    }
+
+                    foreach (var assembly in targetAssemblies)
+                    {
+                        if (assembly.Type != AssemblyType.Library)
+                        {
+                            assembly.Compile();
+                        }
+                    }
+                }
+                
+                foreach (var assembly in targetAssemblies)
+                    Injection.LoadAssembly(hwnd, assembly);
+
+                Injection.SendConfig(hwnd, Config);
+            }
         }
 
         private async void ShowLoginDialog()
@@ -144,6 +216,7 @@ namespace LeagueSharp.Loader.Views
         {
             Utility.MapClassToXmlFile(typeof(Config), Config, "config.xml");
             KeyboardHook.UnHook();
+            InjectThread.Abort();
         }
 
         private void InstalledAssembliesDataGrid_OnContextMenuOpening(object sender, ContextMenuEventArgs e)
@@ -329,19 +402,19 @@ namespace LeagueSharp.Loader.Views
                     {
                         var nameMatch = Regex.Match(assembly.Name, SearchTextBox.Text, RegexOptions.IgnoreCase);
                         var displayNameMatch = Regex.Match(assembly.DisplayName, SearchTextBox.Text, RegexOptions.IgnoreCase);
+                        var svnNameMatch = Regex.Match(assembly.SvnUrl, SearchTextBox.Text, RegexOptions.IgnoreCase);
 
-                        if (displayNameMatch.Success || nameMatch.Success)
+                        if (displayNameMatch.Success || nameMatch.Success || svnNameMatch.Success)
                         {
                             searchAssemblies.Add(assembly);
                         }
                     }
-                    catch (Exception ee)
+                    catch (Exception)
                     {
                         searchAssemblies.Clear();
                         searchAssemblies.AddRange(Config.InstalledAssemblies);
                         break;
                     }
-
                 }
 
                 InstalledAssembliesDataGrid.ItemsSource = searchAssemblies;

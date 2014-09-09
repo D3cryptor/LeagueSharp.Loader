@@ -106,18 +106,15 @@ namespace LeagueSharp.Loader.Class
 
                 if (value)
                 {
-                    success = Loader.LoadAssembly(this);
+                    Injection.LoadAssembly(Injection.GetLeagueWnd(), this);
                 }
                 else
                 {
-                    success = Loader.UnLoadAssembly(this);
+                    Injection.UnloadAssembly(Injection.GetLeagueWnd(), this);
                 }
 
-                if (success)
-                {
-                    _injectChecked = value;
-                    OnPropertyChanged("InjectChecked");
-                }
+                _injectChecked = value;
+                OnPropertyChanged("InjectChecked");
             }
         }
 

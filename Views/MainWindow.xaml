@@ -69,7 +69,7 @@
                                         <Canvas Width="10"
                                         Height="15"
                                         Clip="F1 M 0,0L 76,0L 76,76L 0,76L 0,0">
-                                        <Path Canvas.Left="0"
+                                            <Path Canvas.Left="0"
                                         Canvas.Top="0"
                                         Width="15"
                                         Height="15"
@@ -159,7 +159,7 @@
                         </DataGrid.Columns>
                     </DataGrid>
                     <CheckBox IsChecked="{Binding Config.UpdateOnLoad, UpdateSourceTrigger=PropertyChanged}" Content="Update the assemblies at the start" HorizontalAlignment="Left" Margin="10,323,0,0" VerticalAlignment="Top"/>
-                    <CheckBox Content="Install" HorizontalAlignment="Left" Margin="10,346,0,0" VerticalAlignment="Top" Width="169" IsChecked="True"/>
+                    <CheckBox Content="Install" HorizontalAlignment="Left" Margin="10,346,0,0" VerticalAlignment="Top" Width="169" IsChecked="{Binding Config.Install, UpdateSourceTrigger=PropertyChanged}"/>
                 </Grid>
             </TabItem>
         </TabControl>

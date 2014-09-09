@@ -1,4 +1,6 @@
-﻿#region
+﻿using System.Windows;
+
+#region
 
 using System;
 using System.Collections.Generic;
@@ -68,6 +70,20 @@ namespace LeagueSharp.Loader.Data
 
         private ConfigSettings _settings;
         private bool _updateOnLoad = true;
+        private bool _install = true;
+
+        public bool Install
+        {
+            get
+            {
+                return _install;
+            }
+            set
+            {
+                _install = value;
+                OnPropertyChanged("Install");
+            }
+        }
 
         public bool UpdateOnLoad
         {
