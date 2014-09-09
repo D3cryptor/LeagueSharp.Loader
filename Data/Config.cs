@@ -50,7 +50,7 @@ namespace LeagueSharp.Loader.Data
     public static class Directories
     {
         public static readonly string RepositoryDir =
-            System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Repositories") + "\\";
+            System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "LeagueSharp", "Repositories") + "\\";
 
         public static readonly string AssembliesDir =
             System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Assemblies") + "\\";

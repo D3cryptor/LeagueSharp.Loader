@@ -133,13 +133,13 @@ namespace LeagueSharp.Loader.Class
             get { return _pathToProjectFile; }
             set
             {
-                if (!value.Contains("%leaguesharp%"))
+                if (!value.Contains("%AppData%"))
                 {
                     _pathToProjectFile = value;
                 }
                 else
                 {
-                    _pathToProjectFile = value.Replace("%leaguesharp%", AppDomain.CurrentDomain.BaseDirectory);
+                    _pathToProjectFile = value.Replace("%AppData%", Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData));
                 }
             }
         }

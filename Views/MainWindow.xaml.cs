@@ -217,6 +217,7 @@ namespace LeagueSharp.Loader.Views
             Utility.MapClassToXmlFile(typeof(Config), Config, "config.xml");
             KeyboardHook.UnHook();
             InjectThread.Abort();
+            SvnUpdater.ClearUnusedRepos(Config.InstalledAssemblies.ToList());
         }
 
         private void InstalledAssembliesDataGrid_OnContextMenuOpening(object sender, ContextMenuEventArgs e)

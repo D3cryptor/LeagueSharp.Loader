@@ -47,7 +47,7 @@
       <InjectChecked>false</InjectChecked>
       <DisplayName>LeagueSharp.Common</DisplayName>
       <Name>LeagueSharp.Common</Name>
-      <PathToProjectFile>%leaguesharp%\Repositories\8A7DEFD1\trunk\LeagueSharp.Common\LeagueSharp.Common\LeagueSharp.Common.csproj</PathToProjectFile>
+      <PathToProjectFile>%AppData%\LeagueSharp\Repositories\8A7DEFD1\trunk\LeagueSharp.Common\LeagueSharp.Common\LeagueSharp.Common.csproj</PathToProjectFile>
       <Description>No</Description>
       <SvnUrl>https://github.com/LeagueSharp/LeagueSharpCommon</SvnUrl>
     </InstalledAssemblies>

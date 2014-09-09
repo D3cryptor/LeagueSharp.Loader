@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.Collections.Generic;
+using System.Windows;
 
 #region
 
@@ -120,6 +121,33 @@ namespace LeagueSharp.Loader.Class
             }
 
             return string.Empty;
+        }
+
+        public static void ClearUnusedRepos(List<LeagueSharpAssembly> assemblyList)
+        {
+            try
+            {
+                var usedRepos = new List<string>();
+                foreach (var assembly in assemblyList)
+                {
+                    usedRepos.Add(assembly.SvnUrl.GetHashCode().ToString("X"));
+                }
+
+                var dirs = new List<string>(Directory.EnumerateDirectories(Directories.RepositoryDir));
+
+                foreach (var dir in dirs)
+                {
+                    if (!usedRepos.Contains(Path.GetFileName(dir)))
+                    {
+                        Utility.ClearDirectory(dir);
+                        Directory.Delete(dir);
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                
+            }
         }
     }
 }
