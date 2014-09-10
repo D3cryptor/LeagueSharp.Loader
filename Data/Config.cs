@@ -71,6 +71,20 @@ namespace LeagueSharp.Loader.Data
         private ConfigSettings _settings;
         private bool _updateOnLoad = false;
         private bool _install = true;
+        private bool _firstRun = true;
+
+        public bool FirstRun
+        {
+            get
+            {
+                return _firstRun;
+            }
+            set
+            {
+                _firstRun = value;
+                OnPropertyChanged("FirstRun");
+            }
+        }
 
         public bool Install
         {

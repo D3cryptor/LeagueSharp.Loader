@@ -76,7 +76,9 @@ namespace LeagueSharp.Loader.Views
                 OnLogin(Config.Username);
             }
 
-            PrepareAssemblies(Config.InstalledAssemblies, Config.UpdateOnLoad, true);
+            
+            PrepareAssemblies(Config.InstalledAssemblies, Config.FirstRun || Config.UpdateOnLoad, true);
+            Config.FirstRun = false;
 
             //Used to reload the assemblies from inside the game.
             KeyboardHook.SetHook();

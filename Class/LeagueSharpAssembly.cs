@@ -1,4 +1,6 @@
-﻿#region
+﻿using System.Windows;
+
+#region
 
 using System;
 using System.Collections.Generic;
@@ -164,6 +166,7 @@ namespace LeagueSharp.Loader.Class
                 {
                     return _project;
                 }
+
                 if (File.Exists(PathToProjectFile))
                 {
                     try
@@ -250,7 +253,6 @@ namespace LeagueSharp.Loader.Class
             SvnUpdater.Update(SvnUrl, Logs.MainLog, Directories.RepositoryDir);
 
             Status = AssemblyStatus.Ready;
-            OnPropertyChanged("Type");
         }
 
         public bool Compile()
@@ -279,6 +281,7 @@ namespace LeagueSharp.Loader.Class
                 }
 
                 OnPropertyChanged("Version");
+                OnPropertyChanged("Type");
                 return result;
             }
 
