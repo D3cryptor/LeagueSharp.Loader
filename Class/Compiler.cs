@@ -107,8 +107,7 @@ namespace LeagueSharp.Loader.Class
                 var pathDir = Path.GetDirectoryName(project.FullPath);
                 if (!string.IsNullOrWhiteSpace(extension) && !string.IsNullOrWhiteSpace(pathDir))
                 {
-                    return Path.Combine(pathDir, project.GetPropertyValue("OutputPath")) +
-                           (project.GetPropertyValue("AssemblyName") + extension);
+                    return Path.Combine(pathDir, project.GetPropertyValue("OutputPath"), (project.GetPropertyValue("AssemblyName") + extension));
                 }
             }
             return string.Empty;
