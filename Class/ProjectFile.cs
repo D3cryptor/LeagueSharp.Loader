@@ -72,6 +72,7 @@ namespace LeagueSharp.Loader.Class
         public string PlatformTarget { get; set; }
         public bool UpdateReferences { get; set; }
         public string ReferencesPath { get; set; }
+        public bool ResetOutputPath { get; set; }
 
         public void Change()
         {
@@ -98,8 +99,8 @@ namespace LeagueSharp.Loader.Class
                 {
                     Project.SetProperty("PlatformTarget", PlatformTarget);
                 }
-                var outputPath = Project.GetProperty("OutputPath");
-                if (outputPath == null || string.IsNullOrWhiteSpace(outputPath.EvaluatedValue))
+                ProjectProperty outputPath = Project.GetProperty("OutputPath");
+                if (ResetOutputPath || outputPath == null || string.IsNullOrWhiteSpace(outputPath.EvaluatedValue))
                 {
                     Project.SetProperty("OutputPath", "bin\\" + Configuration);
                 }

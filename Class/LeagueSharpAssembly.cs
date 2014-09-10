@@ -177,7 +177,8 @@ namespace LeagueSharp.Loader.Class
                             ReferencesPath = Directories.LibrariesDir,
                             UpdateReferences = true,
                             PostbuildEvent = true,
-                            PrebuildEvent = true
+                            PrebuildEvent = true,
+                            ResetOutputPath = true
                         };
                         _pf.Change();
                         _project = _pf.Project;
