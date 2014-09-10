@@ -102,8 +102,6 @@ namespace LeagueSharp.Loader.Class
             get { return _injectChecked; }
             set
             {
-                bool success;
-
                 if (value)
                 {
                     Injection.LoadAssembly(Injection.GetLeagueWnd(), this);

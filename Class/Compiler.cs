@@ -2,7 +2,6 @@
 
 using System;
 using System.IO;
-using LeagueSharp.Loader.Class;
 using LeagueSharp.Loader.Data;
 using Microsoft.Build.Evaluation;
 using Microsoft.Build.Logging;

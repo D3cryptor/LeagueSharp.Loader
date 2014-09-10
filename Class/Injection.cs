@@ -20,9 +20,9 @@
 using System;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 using System.Runtime.InteropServices;
-using System.Windows;
 using LeagueSharp.Loader.Data;
 
 #endregion
@@ -90,18 +90,10 @@ namespace LeagueSharp.Loader.Class
 
         public static bool Pulse()
         {
-            var leagueProcess = Injection.GetLeagueProcess();
+            var leagueProcess = GetLeagueProcess();
             if (leagueProcess != null)
             {
-                var flag = false;
-                foreach (ProcessModule processModule in leagueProcess.Modules)
-                {
-                    if (processModule.ModuleName == "LeagueSharp.Core.dll")
-                    {
-                        flag = true;
-                        break;
-                    }
-                }
+                var flag = leagueProcess.Modules.Cast<ProcessModule>().Any(processModule => processModule.ModuleName == "LeagueSharp.Core.dll");
                 if (!flag)
                 {
                     var num = injectDLL(
@@ -143,8 +135,7 @@ namespace LeagueSharp.Loader.Class
                 (config.Settings.GameSettings[3].SelectedValue == "True") ? "2" : "0",
                 (config.Settings.GameSettings[2].SelectedValue == "True") ? (object)"1" : (object)"0");
             
-            var lParam = new COPYDATASTRUCT()
-            {
+            var lParam = new COPYDATASTRUCT {
                 cbData = 2,
                 dwData = str.Length * 2 + 2,
                 lpData = str
