@@ -16,7 +16,7 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <TabControl Margin="10" Grid.ColumnSpan="2">
+        <TabControl Margin="3" Grid.ColumnSpan="2">
             <TabItem Header="News">
                 <Grid Background="#FFE5E5E5">
                     <Grid.ColumnDefinitions>
