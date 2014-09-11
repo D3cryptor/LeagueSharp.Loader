@@ -1,0 +1,15 @@
+﻿Windows Registry Editor Version 5.00
+
+[HKEY_CLASSES_ROOT\%name%]
+"URL Protocol"=""
+
+[HKEY_CLASSES_ROOT\%name%\DefaultIcon]
+@="\"%leaguesharploader%\",0"
+
+[HKEY_CLASSES_ROOT\%name%\shell]
+
+[HKEY_CLASSES_ROOT\%name%\shell\open]
+
+[HKEY_CLASSES_ROOT\%name%\shell\open\command]
+@="\"%leaguesharploader%\" %1"
+

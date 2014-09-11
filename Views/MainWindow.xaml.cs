@@ -1,9 +1,13 @@
-﻿using System.Text.RegularExpressions;
+﻿using System.IO;
+using System.Runtime.InteropServices;
+using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Interop;
+using Microsoft.Win32;
 using Application = System.Windows.Application;
 using DataGrid = System.Windows.Controls.DataGrid;
 using KeyEventArgs = System.Windows.Input.KeyEventArgs;
@@ -61,6 +65,19 @@ namespace LeagueSharp.Loader.Views
             Utility.CreateFileFromResource("config.xml", "LeagueSharp.Loader.Resources.config.xml");
             Config = ((Config)Utility.MapXmlFileToClass(typeof(Config), "config.xml"));
 
+            if (Config.FirstRun)
+            {
+                LSUriScheme.CreateRegFile("lsURIScheme.reg");
+            }
+            else
+            {
+                var regFile = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "lsURIScheme.reg");
+                if (File.Exists(regFile))
+                {
+                    File.Delete(regFile);
+                }
+            }
+            
             Browser.Visibility = Visibility.Hidden;
             DataContext = this;
 
@@ -76,7 +93,6 @@ namespace LeagueSharp.Loader.Views
                 OnLogin(Config.Username);
             }
 
-            
             PrepareAssemblies(Config.InstalledAssemblies, Config.FirstRun || Config.UpdateOnLoad, true);
             Config.FirstRun = false;
 
@@ -117,6 +133,18 @@ namespace LeagueSharp.Loader.Views
                         Injection.LoadAssembly(lhwid, assembly);
                 }));
             }
+
+            if (msg == 74)
+            {
+                var url = (Injection.COPYDATASTRUCT)Marshal.PtrToStructure(lParam, typeof(Injection.COPYDATASTRUCT));
+                if (url.lpData.StartsWith(LSUriScheme.FullName))
+                {
+                    Activate();
+                    Show();
+                    LSUriScheme.HandleUrl(url.lpData, this);
+                }
+            }
+
             return IntPtr.Zero;
         }
 
@@ -355,7 +383,7 @@ namespace LeagueSharp.Loader.Views
             Config.Password = "";
             MainWindow_OnClosing(null, null);
             System.Diagnostics.Process.Start(Application.ResourceAssembly.Location);
-            Application.Current.Shutdown();
+            Environment.Exit(0);
         }
 
         private void TrayIcon_OnTrayMouseDoubleClick(object sender, RoutedEventArgs e)
@@ -391,7 +419,8 @@ namespace LeagueSharp.Loader.Views
 
         private void TextBoxBase_OnTextChanged(object sender, TextChangedEventArgs e)
         {
-            if (SearchTextBox.Text.Trim() == "")
+            var searchText = SearchTextBox.Text;
+            if (searchText.Trim() == "")
             {
                 InstalledAssembliesDataGrid.ItemsSource = Config.InstalledAssemblies;
             }
@@ -403,9 +432,9 @@ namespace LeagueSharp.Loader.Views
                 {
                     try
                     {
-                        var nameMatch = Regex.Match(assembly.Name, SearchTextBox.Text, RegexOptions.IgnoreCase);
-                        var displayNameMatch = Regex.Match(assembly.DisplayName, SearchTextBox.Text, RegexOptions.IgnoreCase);
-                        var svnNameMatch = Regex.Match(assembly.SvnUrl, SearchTextBox.Text, RegexOptions.IgnoreCase);
+                        var nameMatch = Regex.Match(assembly.Name, searchText, RegexOptions.IgnoreCase);
+                        var displayNameMatch = Regex.Match(assembly.DisplayName, searchText, RegexOptions.IgnoreCase);
+                        var svnNameMatch = Regex.Match(assembly.SvnUrl, searchText, RegexOptions.IgnoreCase);
 
                         if (displayNameMatch.Success || nameMatch.Success || svnNameMatch.Success)
                         {
@@ -425,5 +454,14 @@ namespace LeagueSharp.Loader.Views
             
         }
 
+        private void MainWindow_OnActivated(object sender, EventArgs e)
+        {
+            var text = System.Windows.Clipboard.GetText();
+            if (text.StartsWith(LSUriScheme.FullName))
+            {
+                System.Windows.Clipboard.SetText("");
+                LSUriScheme.HandleUrl(text, this);
+            }
+        }
     }
 }

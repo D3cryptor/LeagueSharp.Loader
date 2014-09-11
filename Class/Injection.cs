@@ -54,7 +54,7 @@ namespace LeagueSharp.Loader.Class
             ref COPYDATASTRUCT lParam);
 
         [ DllImport("user32.dll", SetLastError = true) ]
-        private static extern IntPtr FindWindow(IntPtr ZeroOnly, string lpWindowName);
+        public static extern IntPtr FindWindow(IntPtr ZeroOnly, string lpWindowName);
 
         private static void ResolveInjectDLL()
         {
@@ -130,10 +130,10 @@ namespace LeagueSharp.Loader.Class
 
         public static void SendConfig(IntPtr wnd, Config config)
         {
-            var str = string.Format("{0}{1}{2}{3}", (config.Settings.GameSettings[0].SelectedValue == "True") ? (object)"1" : (object)"0",
-                (config.Settings.GameSettings[1].SelectedValue == "True") ? (object)"1" : (object)"0",
+            var str = string.Format("{0}{1}{2}{3}", (config.Settings.GameSettings[0].SelectedValue == "True") ? "1" : "0",
+                (config.Settings.GameSettings[1].SelectedValue == "True") ? "1" : "0",
                 (config.Settings.GameSettings[3].SelectedValue == "True") ? "2" : "0",
-                (config.Settings.GameSettings[2].SelectedValue == "True") ? (object)"1" : (object)"0");
+                (config.Settings.GameSettings[2].SelectedValue == "True") ? "1" : "0");
             
             var lParam = new COPYDATASTRUCT {
                 cbData = 2,

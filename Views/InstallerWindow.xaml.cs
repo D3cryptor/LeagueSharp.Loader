@@ -1,4 +1,6 @@
-﻿#region
+﻿using System.Collections.ObjectModel;
+
+#region
 
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -33,11 +35,33 @@ using TextBox = System.Windows.Controls.TextBox;
 
 namespace LeagueSharp.Loader.Views
 {
-    public partial class InstallerWindow : MetroWindow
+    public partial class InstallerWindow : INotifyPropertyChanged
     {
-        public List<LeagueSharpAssembly> FoundAssemblies;
+        private List<LeagueSharpAssembly> _foundAssemblies = new List<LeagueSharpAssembly>();
+        private ProgressDialogController controller;
+        public List<LeagueSharpAssembly> FoundAssemblies
+        {
+            get { return _foundAssemblies; }
+            set
+            {
+                _foundAssemblies = value;
+                OnPropertyChanged("FoundAssemblies");
+            }
+        }
+        private bool _ableToList = true;
 
-        public string SearchLocation = "";
+        public bool AbleToList
+        {
+            get
+            {
+                return _ableToList;
+            }
+            set
+            {
+                _ableToList = value;
+                OnPropertyChanged("AbleToList");
+            }
+        }
 
         public InstallerWindow()
         {
@@ -45,44 +69,60 @@ namespace LeagueSharp.Loader.Views
             DataContext = this;
         }
 
-        private void Step1_Click(object sender, RoutedEventArgs e)
+        public async void ShowProgress()
         {
-            Step1.IsEnabled = false;
+            controller = await this.ShowProgressAsync("Updating...", "");
+            controller.SetIndeterminate();
+        }
 
+        public void ListAssemblies(string location, bool isSvn, string autoInstallName = null)
+        {
+            AbleToList = false;
             var bgWorker = new BackgroundWorker();
 
-            if (LocalRadioButton.IsChecked == true)
+            if (!isSvn)
             {
-                SearchLocation = PathTextBox.Text;
                 bgWorker.DoWork += delegate
                 {
-                    FoundAssemblies = LeagueSharpAssemblies.GetAssemblies(SearchLocation);
-                    System.Windows.Application.Current.Dispatcher.Invoke(
-                        () => MainDataGrid.ItemsSource = FoundAssemblies);
+                    FoundAssemblies = LeagueSharpAssemblies.GetAssemblies(location);
                 };
             }
-            else if (SvnRadioButton.IsChecked == true)
+            else
             {
-                SearchLocation = SvnComboBox.Text;
                 bgWorker.DoWork += delegate
                 {
-                    var updatedDir = SvnUpdater.Update(SearchLocation, Logs.MainLog, Directories.RepositoryDir);
-                    FoundAssemblies = LeagueSharpAssemblies.GetAssemblies(updatedDir, SearchLocation);
-                    System.Windows.Application.Current.Dispatcher.Invoke(
-                        () => MainDataGrid.ItemsSource = FoundAssemblies);
+                    var updatedDir = SvnUpdater.Update(location, Logs.MainLog, Directories.RepositoryDir);
+                    FoundAssemblies = LeagueSharpAssemblies.GetAssemblies(updatedDir, location);
+                    foreach (var assembly in FoundAssemblies)
+                    {
+                        if (autoInstallName != null && assembly.Name.ToLower() == autoInstallName.ToLower())
+                        {
+                            assembly.InstallChecked = true;
+                        }
+                    }
                 };
             }
 
             bgWorker.RunWorkerCompleted += delegate
             {
-                System.Windows.Application.Current.Dispatcher.Invoke(() => Step1.IsEnabled = true);
+                AbleToList = true;
                 System.Windows.Application.Current.Dispatcher.Invoke(() => installTabControl.SelectedIndex++);
+                if (autoInstallName != null)
+                {
+                    InstallSelected();
+                }
+
+                if (controller != null)
+                {
+                    controller.CloseAsync();
+                }
+                
             };
 
             bgWorker.RunWorkerAsync();
         }
 
-        private void Step2_Click(object sender, RoutedEventArgs e)
+        public void InstallSelected()
         {
             var amount = FoundAssemblies.Count(a => a.InstallChecked);
 
@@ -92,7 +132,8 @@ namespace LeagueSharp.Loader.Views
                 {
                     if (assembly.Compile())
                     {
-                        ((MainWindow)Owner).Config.InstalledAssemblies.Add(assembly);
+                        if (((MainWindow) Owner).Config.InstalledAssemblies.All(a => a.Name != assembly.Name))
+                            ((MainWindow)Owner).Config.InstalledAssemblies.Add(assembly);
                         amount--;
                     }
                 }
@@ -107,6 +148,18 @@ namespace LeagueSharp.Loader.Views
                 AfterInstallMessage(
                     "There was an error while trying to install some of the assemblies, check the log for more details.");
             }
+        }
+
+        private void Step1_Click(object sender, RoutedEventArgs e)
+        {
+            ShowProgress();
+            ListAssemblies((SvnRadioButton.IsChecked == true) ? SvnComboBox.Text : PathTextBox.Text,
+                (SvnRadioButton.IsChecked == true));
+        }
+
+        private void Step2_Click(object sender, RoutedEventArgs e)
+        {
+            InstallSelected();
         }
 
         private async void AfterInstallMessage(string msg, bool close = false)
@@ -153,6 +206,16 @@ namespace LeagueSharp.Loader.Views
         {
             SvnRadioButton.IsChecked = false;
             LocalRadioButton.IsChecked = !SvnRadioButton.IsChecked;
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        private void OnPropertyChanged(string propertyName)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            }
         }
     }
 }

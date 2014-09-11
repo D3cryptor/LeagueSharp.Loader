@@ -8,6 +8,7 @@
                       Width="770"
                       ResizeMode="CanMinimize" WindowStartupLocation="CenterScreen" 
                       Loaded="MainWindow_OnLoaded" 
+                      Activated="MainWindow_OnActivated"
                       Closing="MainWindow_OnClosing"
                       StateChanged="MainWindow_OnStateChanged">
 

@@ -75,6 +75,7 @@
     <Compile Include="Class\Auth.cs" />
     <Compile Include="Class\KeyboardHook.cs" />
     <Compile Include="Class\Injection.cs" />
+    <Compile Include="Class\LSUriScheme.cs" />
     <Compile Include="Class\Updater.cs" />
     <Compile Include="Data\Config.cs" />
     <Compile Include="Class\LeagueSharpAssembly.cs" />
@@ -113,6 +114,7 @@
     </Compile>
     <None Include="packages.config" />
     <AppDesigner Include="Properties\" />
+    <EmbeddedResource Include="Resources\CreateScheme.reg" />
     <Resource Include="Resources\Entypo.ttf" />
   </ItemGroup>
   <ItemGroup>
