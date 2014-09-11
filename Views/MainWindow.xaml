@@ -10,7 +10,8 @@
                       Loaded="MainWindow_OnLoaded" 
                       Activated="MainWindow_OnActivated"
                       Closing="MainWindow_OnClosing"
-                      Icon="../icon.ico"
+                      Icon="../icon_64x64.ico"
+                      ShowIconOnTitleBar="False"
                       StateChanged="MainWindow_OnStateChanged">
 
     <Grid>
@@ -28,7 +29,7 @@
                                     ToolTipText="LeagueSharp"
                                     TrayMouseDoubleClick="TrayIcon_OnTrayMouseDoubleClick"
                                     TrayLeftMouseUp="TrayIcon_OnTrayLeftMouseUp"
-                                    IconSource="../icon.ico">
+                                    IconSource="../icon_16x16.ico">
                         <tb:TaskbarIcon.ContextMenu>
                             <ContextMenu Style="{x:Null}">
                                 <MenuItem x:Name="TrayMenuClose" Header="Close" Click="TrayMenuClose_OnClick"/>
