@@ -154,7 +154,7 @@ namespace LeagueSharp.Loader.Views
             if (vKeyCode == 0x74 || vKeyCode == 0x77)
             {
                 var hwnd = Injection.GetLeagueWnd();
-                var targetAssemblies = Config.InstalledAssemblies.Where(a => a.InjectChecked).ToList();
+                var targetAssemblies = Config.InstalledAssemblies.Where(a => a.InjectChecked || a.Type == AssemblyType.Library).ToList();
 
                 foreach (var assembly in targetAssemblies)
                     Injection.UnloadAssembly(hwnd, assembly);

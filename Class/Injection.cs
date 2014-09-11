@@ -23,6 +23,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.InteropServices;
+using System.Windows;
 using LeagueSharp.Loader.Data;
 
 #endregion
@@ -131,10 +132,10 @@ namespace LeagueSharp.Loader.Class
         public static void SendConfig(IntPtr wnd, Config config)
         {
             var str = string.Format("{0}{1}{2}{3}", (config.Settings.GameSettings[0].SelectedValue == "True") ? "1" : "0",
+                (config.Settings.GameSettings[3].SelectedValue == "True") ? "1" : "0",
                 (config.Settings.GameSettings[1].SelectedValue == "True") ? "1" : "0",
-                (config.Settings.GameSettings[3].SelectedValue == "True") ? "2" : "0",
-                (config.Settings.GameSettings[2].SelectedValue == "True") ? "1" : "0");
-            
+                (config.Settings.GameSettings[2].SelectedValue == "True") ? "2" : "0");
+
             var lParam = new COPYDATASTRUCT {
                 cbData = 2,
                 dwData = str.Length * 2 + 2,
