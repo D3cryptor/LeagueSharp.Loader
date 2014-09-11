@@ -1,4 +1,6 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -23,19 +25,31 @@ using MahApps.Metro.Controls;
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#endregion
+
 namespace LeagueSharp.Loader.Class
 {
     public static class LSUriScheme
     {
-        public const string Name = "leaguesharp";
-        public static string FullName { get { return Name + "://"; } }
+        public const string Name = "ls";
+
+        public static string FullName
+        {
+            get { return Name + "://"; }
+        }
 
         public static void CreateRegFile(string fileName)
         {
             var regFileContents = Utility.ReadResourceString("LeagueSharp.Loader.Resources.CreateScheme.reg");
-            regFileContents = regFileContents.Replace("%leaguesharploader%", Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "LeagueSharp.Loader.exe").Replace(@"\", @"\\"));
+
+            regFileContents = regFileContents.Replace(
+                "%leaguesharploader%",
+                Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "LeagueSharp.Loader.exe").Replace(@"\", @"\\"));
             regFileContents = regFileContents.Replace("%name%", Name);
-            using (var writer = new StreamWriter(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, fileName), false, Encoding.Unicode))
+
+            using (
+                var writer = new StreamWriter(
+                    Path.Combine(AppDomain.CurrentDomain.BaseDirectory, fileName), false, Encoding.Unicode))
             {
                 writer.Write(regFileContents);
             }
@@ -45,20 +59,38 @@ namespace LeagueSharp.Loader.Class
 
         public static void HandleUrl(string url, MetroWindow window)
         {
-            //Remove the KeyStart
             url = url.Remove(0, FullName.Length);
+            url = WebUtility.UrlDecode(url);
 
-            if (url.Count(c => c == '/') >= 3)
+            var urlSplit = url.Split('/');
+            var splitCount = url.Count(c => c == '/');
+
+            var baseUri = "https://github.com/";
+            for (var i = 1; i < splitCount; i++)
             {
-                url = WebUtility.UrlDecode(url);
-                var splittedUrl = url.Split('/');
-                var gitHubUser = splittedUrl[0];
-                var repoName = splittedUrl[1];
-                var assemblyName = splittedUrl[2];
+                baseUri += urlSplit[i] + "/";
+            }
 
-                var w = new InstallerWindow { Owner = window };
-                w.ListAssemblies(string.Format("https://github.com/{0}/{1}", gitHubUser, repoName), true, assemblyName != "List" ? assemblyName : null);
-                w.ShowDialog();
+            switch (urlSplit[0])
+            {
+                case "profile":
+                    //dosomeprofilestuff
+                    break;
+
+                case "project":
+                    var w = new InstallerWindow { Owner = window };
+                    switch (splitCount)
+                    {
+                        case 3:
+                            w.ListAssemblies(baseUri, true);
+                            w.ShowDialog();
+                            break;
+                        case 4:
+                            w.ListAssemblies(baseUri.Replace(urlSplit[3] + "/", ""), true, urlSplit[3]);
+                            w.ShowDialog();
+                            break;
+                    }
+                    break;
             }
         }
     }
