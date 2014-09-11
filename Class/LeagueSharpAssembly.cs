@@ -97,7 +97,20 @@ namespace LeagueSharp.Loader.Class
             Status = AssemblyStatus.Ready;
         }
 
-        public bool InstallChecked { get; set; }
+        private bool _installChecked;
+
+        public bool InstallChecked
+        {
+            get
+            {
+                return _installChecked;
+            }
+            set
+            {
+                _installChecked = value;
+                OnPropertyChanged("InstallChecked");
+            }
+        }
 
         public bool InjectChecked
         {

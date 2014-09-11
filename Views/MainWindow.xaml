@@ -106,7 +106,7 @@
                             <DataGridTextColumn Header="Name" Width="200" Binding="{Binding DisplayName, UpdateSourceTrigger=PropertyChanged}"/>
                             <DataGridTextColumn Header="Type" Width="75" Binding="{Binding Type}" IsReadOnly="True"/>
                             <DataGridTextColumn Header="Version" Width="110" Binding="{Binding Version}" IsReadOnly="True"/>
-                            <DataGridTextColumn Header="Location" Width="255" Binding="{Binding Location}" IsReadOnly="True"/>
+                            <DataGridTextColumn Header="Location" Width="*" Binding="{Binding Location}" IsReadOnly="True"/>
                         </DataGrid.Columns>
                     </DataGrid>
                     <Button x:Name="InstallButton" Content="Install new assembly" HorizontalAlignment="Left" Margin="595,10,0,0" VerticalAlignment="Top" Width="131" RenderTransformOrigin="1.08,-0.48" Click="InstallButton_Click"/>

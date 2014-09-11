@@ -41,9 +41,10 @@
                                                     ElementStyle="{DynamicResource MetroDataGridCheckBox}"/>
                             <DataGridTextColumn Header="Name" Width="150" Binding="{Binding Name}" IsReadOnly="True" />
                             <DataGridTextColumn Header="Type" Binding="{Binding Type}" IsReadOnly="True"/>
-                            <DataGridTextColumn Header="Description"  Binding="{Binding Description}" IsReadOnly="True"/>
+                            <DataGridTextColumn Header="Description"  Binding="{Binding Description}" IsReadOnly="True" Width="*"/>
                         </DataGrid.Columns>
                     </DataGrid>
+                    <Button Content="Select all" HorizontalAlignment="Left" Margin="10,0,0,10" Width="75" Height="25" VerticalAlignment="Bottom" Click="SelectAllButton_Click"/>
                 </Grid>
             </TabItem>
         </TabControl>
