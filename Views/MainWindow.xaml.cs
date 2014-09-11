@@ -384,6 +384,16 @@ namespace LeagueSharp.Loader.Views
             }
         }
 
+        private void ShareItem_OnClick(object sender, RoutedEventArgs e)
+        {
+            if (InstalledAssembliesDataGrid.SelectedItems.Count <= 0)
+            {
+                return;
+            }
+            var selectedAssembly = (LeagueSharpAssembly)InstalledAssembliesDataGrid.SelectedItems[0];
+            
+        }
+
         private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
         {
             Config.Username = "";
