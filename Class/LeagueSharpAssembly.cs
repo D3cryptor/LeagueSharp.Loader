@@ -114,7 +114,15 @@ namespace LeagueSharp.Loader.Class
 
         public bool InjectChecked
         {
-            get { return _injectChecked; }
+            get
+            {
+                if (Type == AssemblyType.Library)
+                {
+                    return true;
+                }
+
+                return _injectChecked;
+            }
             set
             {
                 if (value)

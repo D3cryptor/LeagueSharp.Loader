@@ -71,7 +71,7 @@ namespace LeagueSharp.Loader.Views
 
         public async void ShowProgress()
         {
-            controller = await this.ShowProgressAsync("Updating...", "");
+            controller = await this.ShowProgressAsync("Updating...", "Downloading the required data.");
             controller.SetIndeterminate();
         }
 
@@ -208,6 +208,16 @@ namespace LeagueSharp.Loader.Views
             LocalRadioButton.IsChecked = !SvnRadioButton.IsChecked;
         }
 
+        private void SelectAllButton_Click(object sender, RoutedEventArgs e)
+        {
+            foreach (var assembly in FoundAssemblies)
+            {
+                assembly.InstallChecked = true;
+            }
+            OnPropertyChanged("FoundAssemblies");
+        }
+    
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         private void OnPropertyChanged(string propertyName)
@@ -218,13 +228,5 @@ namespace LeagueSharp.Loader.Views
             }
         }
 
-        private void SelectAllButton_Click(object sender, RoutedEventArgs e)
-        {
-            foreach (var assembly in FoundAssemblies)
-            {
-                assembly.InstallChecked = true;
-            }
-            OnPropertyChanged("FoundAssemblies");
-        }
-    }
+    }  
 }

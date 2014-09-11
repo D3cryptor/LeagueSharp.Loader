@@ -52,11 +52,18 @@ using MahApps.Metro.Controls.Dialogs;
 
 namespace LeagueSharp.Loader.Views
 {
-    public partial class MainWindow : MetroWindow
+    public partial class MainWindow : INotifyPropertyChanged
     {
         public Config Config { get; set; }
-
-        public bool Working { get; set; }
+        private bool _working;
+        public bool Working { 
+            get { return _working; } 
+            set 
+            { 
+                _working = value;
+                OnPropertyChanged("Working");
+            } 
+        }
 
         public Thread InjectThread { get; set; }
 
@@ -461,6 +468,17 @@ namespace LeagueSharp.Loader.Views
             {
                 System.Windows.Clipboard.SetText("");
                 LSUriScheme.HandleUrl(text, this);
+            }
+        }
+
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        private void OnPropertyChanged(string propertyName)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
             }
         }
     }

@@ -38,12 +38,8 @@
             </TabItem>
             <TabItem Header="Assemblies">
                 <Grid Background="#FFE5E5E5" Margin="0,2,0,-2">
-                    <DataGrid x:Name="InstalledAssembliesDataGrid"
-                              HorizontalAlignment="Left" 
-                              Margin="10,41,0,0" 
-                              VerticalAlignment="Top"
-                              Height="323"
-                              Width="716" 
+                    <DataGrid x:Name="InstalledAssembliesDataGrid" 
+                              Margin="10,41,10,10" 
                               CanUserAddRows="False"
                               AutoGenerateColumns="False"
                               ContextMenuOpening="InstalledAssembliesDataGrid_OnContextMenuOpening"
@@ -109,8 +105,9 @@
                             <DataGridTextColumn Header="Location" Width="*" Binding="{Binding Location}" IsReadOnly="True"/>
                         </DataGrid.Columns>
                     </DataGrid>
-                    <Button x:Name="InstallButton" Content="Install new assembly" HorizontalAlignment="Left" Margin="595,10,0,0" VerticalAlignment="Top" Width="131" RenderTransformOrigin="1.08,-0.48" Click="InstallButton_Click"/>
+                    <Button x:Name="InstallButton" Content="Install new assembly" HorizontalAlignment="Left" Margin="609,10,0,0" VerticalAlignment="Top" Width="131" RenderTransformOrigin="1.08,-0.48" Click="InstallButton_Click"/>
                     <TextBox x:Name="SearchTextBox" HorizontalAlignment="Left" Height="23" Margin="10,9,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="173" TextChanged="TextBoxBase_OnTextChanged" />
+                    <Controls:ProgressRing IsActive="{Binding Working}" HorizontalAlignment="Right" Margin="0,0,29,29" VerticalAlignment="Bottom" Width="64" Height="56"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Log" HorizontalAlignment="Left" Height="36" VerticalAlignment="Top" Width="60">
@@ -127,7 +124,7 @@
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Status" Binding="{Binding Status}"/>
                             <DataGridTextColumn Header="Source" Binding="{Binding Source}"/>
-                            <DataGridTextColumn Header="Content" Width="500" Binding="{Binding Message}"/>
+                            <DataGridTextColumn Header="Content" Width="570" Binding="{Binding Message}"/>
                         </DataGrid.Columns>
                     </DataGrid>
                 </Grid>
