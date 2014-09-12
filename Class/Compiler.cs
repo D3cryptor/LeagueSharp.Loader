@@ -101,7 +101,7 @@ namespace LeagueSharp.Loader.Class
         {
             if (project != null)
             {
-                var extension = project.GetPropertyValue("OutputType").ToLower() == "exe"
+                var extension = project.GetPropertyValue("OutputType").ToLower().Contains("exe")
                     ? ".exe"
                     : (project.GetPropertyValue("OutputType").ToLower() == "library" ? ".dll" : string.Empty);
                 var pathDir = Path.GetDirectoryName(project.FullPath);
