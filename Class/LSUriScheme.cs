@@ -2,9 +2,9 @@
 
 using System;
 using System.IO;
-using System.Linq;
 using System.Net;
 using System.Text;
+using System.Text.RegularExpressions;
 using LeagueSharp.Loader.Views;
 using MahApps.Metro.Controls;
 
@@ -59,38 +59,29 @@ namespace LeagueSharp.Loader.Class
 
         public static void HandleUrl(string url, MetroWindow window)
         {
-            url = url.Remove(0, FullName.Length);
-            url = WebUtility.UrlDecode(url);
+            url = WebUtility.UrlDecode(url.Remove(0, FullName.Length));
 
-            var urlSplit = url.Split('/');
-            var splitCount = url.Count(c => c == '/');
-
-            var baseUri = "https://github.com/";
-            for (var i = 1; i < splitCount; i++)
+            var r = Regex.Matches(url, "(project|profile)/([^/]*)/([^/]*)/([^/]*)/?");
+            foreach (Match m in r)
             {
-                baseUri += urlSplit[i] + "/";
-            }
+                var linkType = m.Groups[1].ToString();
+                var gitHubUser = m.Groups[2].ToString();
+                var repositoryName = m.Groups[3].ToString();
+                var assemblyName = m.Groups[4].ToString();
 
-            switch (urlSplit[0])
-            {
-                case "profile":
-                    //dosomeprofilestuff
-                    break;
+                switch (linkType)
+                {
+                    case "project":
+                        var w = new InstallerWindow { Owner = window };
+                        w.ListAssemblies(
+                            string.Format("https://github.com/{0}/{1}", gitHubUser, repositoryName), true,
+                            assemblyName != "" ? m.Groups[4].ToString() : null);
+                        w.ShowDialog();
+                        break;
 
-                case "project":
-                    var w = new InstallerWindow { Owner = window };
-                    switch (splitCount)
-                    {
-                        case 3:
-                            w.ListAssemblies(baseUri, true);
-                            w.ShowDialog();
-                            break;
-                        case 4:
-                            w.ListAssemblies(baseUri.Replace(urlSplit[3] + "/", ""), true, urlSplit[3]);
-                            w.ShowDialog();
-                            break;
-                    }
-                    break;
+                    case "profile":
+                        break;
+                }
             }
         }
     }

@@ -99,7 +99,7 @@ namespace LeagueSharp.Loader.Class
                 {
                     Project.SetProperty("PlatformTarget", PlatformTarget);
                 }
-                ProjectProperty outputPath = Project.GetProperty("OutputPath");
+                var outputPath = Project.GetProperty("OutputPath");
                 if (ResetOutputPath || outputPath == null || string.IsNullOrWhiteSpace(outputPath.EvaluatedValue))
                 {
                     Project.SetProperty("OutputPath", "bin\\" + Configuration);

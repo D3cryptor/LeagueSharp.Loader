@@ -13,22 +13,23 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <TabControl Margin="10" x:Name="installTabControl">
+        <TabControl Margin="3" x:Name="installTabControl" IsEnabled="{Binding AbleToList}">
             <TabItem Header="Search">
                 <Grid Background="#FFE5E5E5">
                     <Label Content="Select the assembly location: " HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="-1.333,0.174" Width="373"/>
                     <Button x:Name="Step1" IsEnabled="{Binding AbleToList}" Content="Next" Width="75" Margin="0,0,10,10" HorizontalAlignment="Right" Height="25" VerticalAlignment="Bottom" Click="Step1_Click"/>
-                    <RadioButton x:Name="LocalRadioButton" IsChecked="True" Content="Local" HorizontalAlignment="Left" Margin="10,45,0,0" VerticalAlignment="Top" Width="233"/>
-                    <RadioButton x:Name="SvnRadioButton" Content="Git" HorizontalAlignment="Left" Margin="10,114,0,0" VerticalAlignment="Top" Width="299"/>
-                    <ComboBox x:Name="SvnComboBox" ItemsSource="{Binding Config.KnownRepositories}" HorizontalAlignment="Left" Margin="10,137,0,0" VerticalAlignment="Top" Width="373" IsEditable="True" GotFocus="SvnComboBox_OnGotFocus" />
-                    <TextBox x:Name="PathTextBox" HorizontalAlignment="Left" Height="23" Margin="10,68,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="373" PreviewMouseLeftButtonDown="PathTextBox_PreviewMouseLeftButtonDown" GotFocus="PathTextBox_OnGotFocus"/>
+                    <RadioButton x:Name="LocalRadioButton" IsChecked="True" Content="Local" HorizontalAlignment="Left" Margin="10,38,0,0" VerticalAlignment="Top" Width="233"/>
+                    <RadioButton x:Name="SvnRadioButton" Content="Git" HorizontalAlignment="Left" Margin="10,105,0,0" VerticalAlignment="Top" Width="299"/>
+                    <RadioButton x:Name="InstalledRadioButton" Content="Installed" HorizontalAlignment="Left" Margin="10,172,0,0" VerticalAlignment="Top" Width="299"/>
+                    <ComboBox x:Name="SvnComboBox" ItemsSource="{Binding Config.KnownRepositories}" HorizontalAlignment="Left" Margin="10,128,0,0" VerticalAlignment="Top" Width="373" IsEditable="True" GotFocus="SvnComboBox_OnGotFocus" />
+                    <TextBox x:Name="PathTextBox" HorizontalAlignment="Left" Height="23" Margin="10,61,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="373" PreviewMouseLeftButtonDown="PathTextBox_PreviewMouseLeftButtonDown" GotFocus="PathTextBox_OnGotFocus"/>
 
                 </Grid>
             </TabItem>
             <TabItem Header="Select">
                 <Grid Background="#FFE5E5E5">
                     <Button x:Name="Step2" Content="Add" Width="75" Margin="0,0,10,10" HorizontalAlignment="Right" Height="25" VerticalAlignment="Bottom" Click="Step2_Click"/>
-                    <Button x:Name="Step2P" Content="Previous" HorizontalAlignment="Left" Margin="228,0,0,10" Width="75" RenderTransformOrigin="0.52,-0.68" Height="25" VerticalAlignment="Bottom" Click="Step2P_Click"/>
+                    <Button x:Name="Step2P" Content="Previous" HorizontalAlignment="Left" Margin="242,0,0,10" Width="75" RenderTransformOrigin="0.52,-0.68" Height="25" VerticalAlignment="Bottom" Click="Step2P_Click"/>
                     <DataGrid x:Name="MainDataGrid" 
                               Margin="10,10,10,40"
                               AutoGenerateColumns="False"

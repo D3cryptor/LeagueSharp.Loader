@@ -1,5 +1,6 @@
-﻿using System.Collections.Generic;
-using System.Windows;
+﻿#region
+
+using System.Collections.Generic;
 
 #region
 
@@ -7,6 +8,8 @@ using System;
 using System.IO;
 using LeagueSharp.Loader.Data;
 using SharpSvn;
+
+#endregion
 
 #endregion
 
@@ -94,7 +97,8 @@ namespace LeagueSharp.Loader.Class
 
                                 if (b1 && b2 && remoteVersion.Revision == localVersion.Revision)
                                 {
-                                    Utility.Log(LogStatus.Ok, "Updater", string.Format("Update not needed - {0}", url), log);
+                                    Utility.Log(
+                                        LogStatus.Ok, "Updater", string.Format("Update not needed - {0}", url), log);
                                     return dir;
                                 }
                             }
@@ -103,7 +107,7 @@ namespace LeagueSharp.Loader.Class
                         {
                             Utility.Log(LogStatus.Error, "Updater", string.Format("{0} - {1}", ex, url), log);
                         }
-                       
+
                         client.CheckOut(new Uri(url), dir);
                         client.Update(dir);
                         Utility.Log(LogStatus.Ok, "Updater", string.Format("Updated - {0}", url), log);
@@ -144,10 +148,7 @@ namespace LeagueSharp.Loader.Class
                     }
                 }
             }
-            catch (Exception)
-            {
-                
-            }
+            catch (Exception) { }
         }
     }
 }

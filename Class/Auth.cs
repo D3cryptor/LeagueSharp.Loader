@@ -25,6 +25,8 @@ namespace LeagueSharp.Loader.Class
 {
     internal static class Auth
     {
+        public static bool Authed { get; set; }
+
         public static Tuple<bool, string> Login(string user, string md5Password)
         {
             if (user == ":^)")

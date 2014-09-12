@@ -72,7 +72,9 @@ namespace LeagueSharp.Loader.Class
                     ProjectCollection.GlobalProjectCollection.UnregisterAllLoggers();
                     Utility.Log(
                         result ? LogStatus.Ok : LogStatus.Error, "Compiler",
-                        result ? string.Format("Compile - {0}", project.FullPath) : string.Format("Compile - Check ./logs/ for details - {0}", project.FullPath), log);
+                        result
+                            ? string.Format("Compile - {0}", project.FullPath)
+                            : string.Format("Compile - Check ./logs/ for details - {0}", project.FullPath), log);
 
                     if (!result && doLog && File.Exists(logfile))
                     {
@@ -107,7 +109,9 @@ namespace LeagueSharp.Loader.Class
                 var pathDir = Path.GetDirectoryName(project.FullPath);
                 if (!string.IsNullOrWhiteSpace(extension) && !string.IsNullOrWhiteSpace(pathDir))
                 {
-                    return Path.Combine(pathDir, project.GetPropertyValue("OutputPath"), (project.GetPropertyValue("AssemblyName") + extension));
+                    return Path.Combine(
+                        pathDir, project.GetPropertyValue("OutputPath"),
+                        (project.GetPropertyValue("AssemblyName") + extension));
                 }
             }
             return string.Empty;

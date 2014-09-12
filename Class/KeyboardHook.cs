@@ -27,17 +27,15 @@ namespace LeagueSharp.Loader.Class
 {
     internal static class KeyboardHook
     {
+        public delegate void OnKeyUp(int vKeyCode);
+
         private static readonly KeyboardProc _proc = HookProc;
         private static IntPtr _hHook = IntPtr.Zero;
 
-        public delegate void OnKeyUp(int vKeyCode);
         public static event OnKeyUp OnKeyUpTrigger;
 
         [ DllImport("user32.dll") ]
-        private static extern IntPtr SetWindowsHookEx(int idHook,
-            KeyboardProc callback,
-            IntPtr hInstance,
-            uint threadId);
+        private static extern IntPtr SetWindowsHookEx(int idHook, KeyboardProc callback, IntPtr hInstance, uint threadId);
 
         [ DllImport("user32.dll") ]
         private static extern bool UnhookWindowsHookEx(IntPtr hInstance);
@@ -68,12 +66,10 @@ namespace LeagueSharp.Loader.Class
         {
             if (code >= 0 && wParam == (IntPtr)0x101)
             {
-
                 if (OnKeyUpTrigger != null)
                 {
                     OnKeyUpTrigger(Marshal.ReadInt32(lParam));
                 }
-
             }
 
             return CallNextHookEx(_hHook, code, (int)wParam, lParam);

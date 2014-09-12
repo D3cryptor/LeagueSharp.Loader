@@ -42,17 +42,40 @@
       
     </GameSettings>
   </Settings>
-  <InstalledAssemblies>
+  
+  <SelectedProfile>
+    <Name>Default</Name>
     <InstalledAssemblies>
-      <InstallChecked>true</InstallChecked>
-      <InjectChecked>false</InjectChecked>
-      <DisplayName>LeagueSharp.Common</DisplayName>
-      <Name>LeagueSharp.Common</Name>
-      <PathToProjectFile>%AppData%\LeagueSharp\Repositories\8A7DEFD1\trunk\LeagueSharp.Common\LeagueSharp.Common\LeagueSharp.Common.csproj</PathToProjectFile>
-      <Description>No</Description>
-      <SvnUrl>https://github.com/LeagueSharp/LeagueSharpCommon</SvnUrl>
+      <LeagueSharpAssembly>
+        <InstallChecked>true</InstallChecked>
+        <InjectChecked>true</InjectChecked>
+        <Status>Ready</Status>
+        <DisplayName>LeagueSharp.Common</DisplayName>
+        <Name>LeagueSharp.Common</Name>
+        <PathToProjectFile>%AppData%\LeagueSharp\Repositories\8A7DEFD1\trunk\LeagueSharp.Common\LeagueSharp.Common\LeagueSharp.Common.csproj</PathToProjectFile>
+        <Description />
+        <SvnUrl>https://github.com/LeagueSharp/LeagueSharpCommon</SvnUrl>
+      </LeagueSharpAssembly>
     </InstalledAssemblies>
-  </InstalledAssemblies>
+  </SelectedProfile>
+  
+  <Profiles>
+    <Profiles>
+      <Name>Default</Name>
+      <InstalledAssemblies>
+        <LeagueSharpAssembly>
+          <InstallChecked>true</InstallChecked>
+          <InjectChecked>true</InjectChecked>
+          <Status>Ready</Status>
+          <DisplayName>LeagueSharp.Common</DisplayName>
+          <Name>LeagueSharp.Common</Name>
+          <PathToProjectFile>%AppData%\LeagueSharp\Repositories\8A7DEFD1\trunk\LeagueSharp.Common\LeagueSharp.Common\LeagueSharp.Common.csproj</PathToProjectFile>
+          <Description />
+          <SvnUrl>https://github.com/LeagueSharp/LeagueSharpCommon</SvnUrl>
+        </LeagueSharpAssembly>
+      </InstalledAssemblies>
+      </Profiles>
+  </Profiles>
   <KnownRepositories>
     <KnownRepositories>https://github.com/Lizzaran/LeagueSharp</KnownRepositories>
     <KnownRepositories>https://github.com/LeagueSharp/LeagueSharpCommon</KnownRepositories>

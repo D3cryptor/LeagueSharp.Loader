@@ -1,6 +1,4 @@
-﻿using System.Windows;
-
-#region
+﻿#region
 
 using System;
 using System.Collections.Generic;
@@ -50,7 +48,9 @@ namespace LeagueSharp.Loader.Data
     public static class Directories
     {
         public static readonly string RepositoryDir =
-            System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "LeagueSharp", "Repositories") + "\\";
+            System.IO.Path.Combine(
+                Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "LeagueSharp", "Repositories") +
+            "\\";
 
         public static readonly string AssembliesDir =
             System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Assemblies") + "\\";
@@ -65,20 +65,17 @@ namespace LeagueSharp.Loader.Data
     [ XmlRoot(Namespace = "", IsNullable = false) ]
     public class Config : INotifyPropertyChanged
     {
-        private ObservableCollection<LeagueSharpAssembly> _installedAssemblies;
-        private ObservableCollection<string> _knownRepositories;
-
-        private ConfigSettings _settings;
-        private bool _updateOnLoad = false;
-        private bool _install = true;
         private bool _firstRun = true;
+        private bool _install = true;
+        private ObservableCollection<string> _knownRepositories;
+        private ObservableCollection<Profile> _profiles;
+        private Profile _selectedProfile;
+        private ConfigSettings _settings;
+        private bool _updateOnLoad;
 
         public bool FirstRun
         {
-            get
-            {
-                return _firstRun;
-            }
+            get { return _firstRun; }
             set
             {
                 _firstRun = value;
@@ -88,10 +85,7 @@ namespace LeagueSharp.Loader.Data
 
         public bool Install
         {
-            get
-            {
-                return _install;
-            }
+            get { return _install; }
             set
             {
                 _install = value;
@@ -123,14 +117,24 @@ namespace LeagueSharp.Loader.Data
             }
         }
 
-        [ XmlArrayItem("InstalledAssemblies", IsNullable = true) ]
-        public ObservableCollection<LeagueSharpAssembly> InstalledAssemblies
+        public Profile SelectedProfile
         {
-            get { return _installedAssemblies; }
+            get { return _selectedProfile; }
             set
             {
-                _installedAssemblies = value;
-                OnPropertyChanged("InstalledAssemblies");
+                _selectedProfile = value;
+                OnPropertyChanged("SelectedProfile");
+            }
+        }
+
+        [ XmlArrayItem("Profiles", IsNullable = true) ]
+        public ObservableCollection<Profile> Profiles
+        {
+            get { return _profiles; }
+            set
+            {
+                _profiles = value;
+                OnPropertyChanged("Profiles");
             }
         }
 

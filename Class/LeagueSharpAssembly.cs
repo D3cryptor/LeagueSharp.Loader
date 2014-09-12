@@ -1,6 +1,4 @@
-﻿using System.Windows;
-
-#region
+﻿#region
 
 using System;
 using System.Collections.Generic;
@@ -78,6 +76,7 @@ namespace LeagueSharp.Loader.Class
     {
         private string _displayName = "";
         private bool _injectChecked;
+        private bool _installChecked;
         private string _pathToProjectFile;
         private ProjectFile _pf;
         private Project _project;
@@ -97,14 +96,9 @@ namespace LeagueSharp.Loader.Class
             Status = AssemblyStatus.Ready;
         }
 
-        private bool _installChecked;
-
         public bool InstallChecked
         {
-            get
-            {
-                return _installChecked;
-            }
+            get { return _installChecked; }
             set
             {
                 _installChecked = value;
@@ -160,7 +154,8 @@ namespace LeagueSharp.Loader.Class
                 }
                 else
                 {
-                    _pathToProjectFile = value.Replace("%AppData%", Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData));
+                    _pathToProjectFile = value.Replace(
+                        "%AppData%", Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData));
                 }
             }
         }

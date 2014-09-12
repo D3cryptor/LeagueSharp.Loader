@@ -35,7 +35,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>icon_64x64.ico</ApplicationIcon>
+    <ApplicationIcon>Resources\icon_64x64.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Hardcodet.Wpf.TaskbarNotification">
@@ -79,6 +79,7 @@
     <Compile Include="Class\KeyboardHook.cs" />
     <Compile Include="Class\Injection.cs" />
     <Compile Include="Class\LSUriScheme.cs" />
+    <Compile Include="Class\Profile.cs" />
     <Compile Include="Class\Updater.cs" />
     <Compile Include="Data\Config.cs" />
     <Compile Include="Class\LeagueSharpAssembly.cs" />
@@ -133,8 +134,8 @@
     <Resource Include="Resources\Entypo-license.txt" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="icon_16x16.ico" />
-    <Resource Include="icon_64x64.ico" />
+    <Resource Include="Resources\icon_16x16.ico" />
+    <Resource Include="Resources\icon_64x64.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

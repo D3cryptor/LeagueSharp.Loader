@@ -1,24 +1,18 @@
-﻿using System.IO;
+﻿#region
+
+using System.Windows.Input;
+
+#region
+
+using System.Collections.ObjectModel;
+using System.IO;
 using System.Runtime.InteropServices;
-using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Windows.Forms;
-using System.Windows.Input;
 using System.Windows.Interop;
-using Microsoft.Win32;
-using Application = System.Windows.Application;
-using DataGrid = System.Windows.Controls.DataGrid;
-using KeyEventArgs = System.Windows.Input.KeyEventArgs;
-
-#region
-
 using System.Collections.Generic;
 using Microsoft.Build.Evaluation;
-
-#region
-
 using System;
 using System.ComponentModel;
 using System.Linq;
@@ -26,7 +20,6 @@ using System.Windows;
 using System.Windows.Controls;
 using LeagueSharp.Loader.Class;
 using LeagueSharp.Loader.Data;
-using MahApps.Metro.Controls;
 using MahApps.Metro.Controls.Dialogs;
 
 #endregion
@@ -54,18 +47,21 @@ namespace LeagueSharp.Loader.Views
 {
     public partial class MainWindow : INotifyPropertyChanged
     {
-        public Config Config { get; set; }
         private bool _working;
-        public bool Working { 
-            get { return _working; } 
-            set 
-            { 
+        public Config Config { get; set; }
+
+        public bool Working
+        {
+            get { return _working; }
+            set
+            {
                 _working = value;
                 OnPropertyChanged("Working");
-            } 
+            }
         }
 
         public Thread InjectThread { get; set; }
+        public event PropertyChangedEventHandler PropertyChanged;
 
         private void MainWindow_OnLoaded(object sender, RoutedEventArgs e)
         {
@@ -84,7 +80,7 @@ namespace LeagueSharp.Loader.Views
                     File.Delete(regFile);
                 }
             }
-            
+
             Browser.Visibility = Visibility.Hidden;
             DataContext = this;
 
@@ -100,22 +96,25 @@ namespace LeagueSharp.Loader.Views
                 OnLogin(Config.Username);
             }
 
-            PrepareAssemblies(Config.InstalledAssemblies, Config.FirstRun || Config.UpdateOnLoad, true);
+            PrepareAssemblies(Config.SelectedProfile.InstalledAssemblies, Config.FirstRun || Config.UpdateOnLoad, true);
             Config.FirstRun = false;
 
             //Used to reload the assemblies from inside the game.
             KeyboardHook.SetHook();
             KeyboardHook.OnKeyUpTrigger += KeyboardHookOnOnKeyUpTrigger;
 
-            InjectThread = new Thread((ThreadStart)(() =>
-            {
-                while (true)
+            InjectThread = new Thread(
+                () =>
                 {
-                    if(Config.Install)
-                        Injection.Pulse();
-                    Thread.Sleep(1000);
-                }
-            }));
+                    while (true)
+                    {
+                        if (Config.Install)
+                        {
+                            Injection.Pulse();
+                        }
+                        Thread.Sleep(1000);
+                    }
+                });
 
             InjectThread.Start();
         }
@@ -123,22 +122,26 @@ namespace LeagueSharp.Loader.Views
         protected override void OnSourceInitialized(EventArgs e)
         {
             base.OnSourceInitialized(e);
-            HwndSource source = PresentationSource.FromVisual(this) as HwndSource;
+            var source = PresentationSource.FromVisual(this) as HwndSource;
             source.AddHook(WndProc);
         }
+
 
         private IntPtr WndProc(IntPtr hwnd, int msg, IntPtr wParam, IntPtr lParam, ref bool handled)
         {
             if (msg == 32769)
             {
                 var lhwid = wParam;
-                Task.Factory.StartNew((Action)(() =>
-                {
-                    Injection.SendConfig(lhwid, Config);
-                    Task.Delay(1000);
-                    foreach (var assembly in Config.InstalledAssemblies.Where(a => a.InjectChecked))
-                        Injection.LoadAssembly(lhwid, assembly);
-                }));
+                Task.Factory.StartNew(
+                    () =>
+                    {
+                        Injection.SendConfig(lhwid, Config);
+                        Task.Delay(1000);
+                        foreach (var assembly in Config.SelectedProfile.InstalledAssemblies.Where(a => a.InjectChecked))
+                        {
+                            Injection.LoadAssembly(lhwid, assembly);
+                        }
+                    });
             }
 
             if (msg == 74)
@@ -161,10 +164,14 @@ namespace LeagueSharp.Loader.Views
             if (vKeyCode == 0x74 || vKeyCode == 0x77)
             {
                 var hwnd = Injection.GetLeagueWnd();
-                var targetAssemblies = Config.InstalledAssemblies.Where(a => a.InjectChecked || a.Type == AssemblyType.Library).ToList();
+                var targetAssemblies =
+                    Config.SelectedProfile.InstalledAssemblies.Where(
+                        a => a.InjectChecked || a.Type == AssemblyType.Library).ToList();
 
                 foreach (var assembly in targetAssemblies)
+                {
                     Injection.UnloadAssembly(hwnd, assembly);
+                }
 
                 if (vKeyCode == 0x77)
                 {
@@ -185,9 +192,11 @@ namespace LeagueSharp.Loader.Views
                         }
                     }
                 }
-                
+
                 foreach (var assembly in targetAssemblies)
+                {
                     Injection.LoadAssembly(hwnd, assembly);
+                }
 
                 Injection.SendConfig(hwnd, Config);
             }
@@ -201,7 +210,7 @@ namespace LeagueSharp.Loader.Views
                     this.ShowLoginAsync(
                         "LeagueSharp", "Sign in",
                         new LoginDialogSettings { ColorScheme = MetroDialogOptions.ColorScheme });
-            
+
             var loginResult = new Tuple<bool, string>(false, "Cancel button pressed");
             if (result != null)
             {
@@ -254,7 +263,13 @@ namespace LeagueSharp.Loader.Views
             Utility.MapClassToXmlFile(typeof(Config), Config, "config.xml");
             KeyboardHook.UnHook();
             InjectThread.Abort();
-            SvnUpdater.ClearUnusedRepos(Config.InstalledAssemblies.ToList());
+            var allAssemblies = new List<LeagueSharpAssembly>();
+            foreach (var profile in Config.Profiles)
+            {
+                allAssemblies.AddRange(profile.InstalledAssemblies.ToList());
+            }
+
+            SvnUpdater.ClearUnusedRepos(allAssemblies);
         }
 
         private void InstalledAssembliesDataGrid_OnContextMenuOpening(object sender, ContextMenuEventArgs e)
@@ -291,13 +306,13 @@ namespace LeagueSharp.Loader.Views
             }
 
             Working = true;
+            var leagueSharpAssemblies = assemblies as IList<LeagueSharpAssembly> ?? assemblies.ToList();
 
             var bgWorker = new BackgroundWorker();
             bgWorker.DoWork += delegate
             {
                 var updatedSvnUrls = new List<string>();
 
-                var leagueSharpAssemblies = assemblies as IList<LeagueSharpAssembly> ?? assemblies.ToList();
                 foreach (var assembly in leagueSharpAssemblies)
                 {
                     if (assembly.Type == AssemblyType.Library)
@@ -338,7 +353,6 @@ namespace LeagueSharp.Loader.Views
                 ProjectCollection.GlobalProjectCollection.UnloadAllProjects();
                 Working = false;
             };
-
             bgWorker.RunWorkerAsync();
         }
 
@@ -348,18 +362,19 @@ namespace LeagueSharp.Loader.Views
             {
                 return;
             }
-             
 
             var remove = InstalledAssembliesDataGrid.SelectedItems.Cast<LeagueSharpAssembly>().ToList();
-
             DeleteWithConfirmation(remove);
-            
         }
 
         private async void DeleteWithConfirmation(IEnumerable<LeagueSharpAssembly> asemblies)
         {
-            var result = await this.ShowMessageAsync("Uninstall", "Are you sure you want to uninstall selected assemblies?", MessageDialogStyle.AffirmativeAndNegative);
-            
+            var result =
+                await
+                    this.ShowMessageAsync(
+                        "Uninstall", "Are you sure you want to uninstall selected assemblies?",
+                        MessageDialogStyle.AffirmativeAndNegative);
+
             if (result == MessageDialogResult.Negative)
             {
                 return;
@@ -367,7 +382,7 @@ namespace LeagueSharp.Loader.Views
 
             foreach (var ee in asemblies)
             {
-                Config.InstalledAssemblies.Remove(ee);
+                Config.SelectedProfile.InstalledAssemblies.Remove(ee);
             }
         }
 
@@ -390,8 +405,14 @@ namespace LeagueSharp.Loader.Views
             {
                 return;
             }
+
             var selectedAssembly = (LeagueSharpAssembly)InstalledAssembliesDataGrid.SelectedItems[0];
-            
+            if (selectedAssembly.SvnUrl.ToLower().StartsWith("https://github.com"))
+            {
+                var user = selectedAssembly.SvnUrl.Remove(0, 19);
+                Clipboard.SetText(
+                    string.Format(LSUriScheme.FullName + "project/{0}/{1}/", user, selectedAssembly.Name));
+            }
         }
 
         private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
@@ -439,13 +460,14 @@ namespace LeagueSharp.Loader.Views
             var searchText = SearchTextBox.Text;
             if (searchText.Trim() == "")
             {
-                InstalledAssembliesDataGrid.ItemsSource = Config.InstalledAssemblies;
+                SearchTextBox.Visibility = Visibility.Hidden;
+                InstalledAssembliesDataGrid.ItemsSource = Config.SelectedProfile.InstalledAssemblies;
             }
             else
             {
                 var searchAssemblies = new List<LeagueSharpAssembly>();
 
-                foreach (var assembly in Config.InstalledAssemblies)
+                foreach (var assembly in Config.SelectedProfile.InstalledAssemblies)
                 {
                     try
                     {
@@ -461,14 +483,13 @@ namespace LeagueSharp.Loader.Views
                     catch (Exception)
                     {
                         searchAssemblies.Clear();
-                        searchAssemblies.AddRange(Config.InstalledAssemblies);
+                        searchAssemblies.AddRange(Config.SelectedProfile.InstalledAssemblies);
                         break;
                     }
                 }
 
                 InstalledAssembliesDataGrid.ItemsSource = searchAssemblies;
             }
-            
         }
 
         private void MainWindow_OnActivated(object sender, EventArgs e)
@@ -482,14 +503,113 @@ namespace LeagueSharp.Loader.Views
         }
 
 
-        public event PropertyChangedEventHandler PropertyChanged;
-
         private void OnPropertyChanged(string propertyName)
         {
             if (PropertyChanged != null)
             {
                 PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
             }
+        }
+
+        private void RemoveProfileMenuItem_OnClick(object sender, RoutedEventArgs e)
+        {
+            if (Config.Profiles.Count > 1)
+            {
+                Config.Profiles.RemoveAt(ProfilesButton.SelectedIndex);
+                Config.SelectedProfile = Config.Profiles.First();
+            }
+            else
+            {
+                Config.SelectedProfile.InstalledAssemblies = new ObservableCollection<LeagueSharpAssembly>();
+                Config.SelectedProfile.Name = "Default";
+            }
+        }
+
+        private void NewProfileMenuItem_OnClick(object sender, RoutedEventArgs e)
+        {
+            Config.Profiles.Add(
+                new Profile
+                {
+                    InstalledAssemblies = new ObservableCollection<LeagueSharpAssembly>(),
+                    Name = "New profile"
+                });
+
+            Config.SelectedProfile = Config.Profiles.Last();
+        }
+
+        private async void ShowProfileNameChangeDialog()
+        {
+            var result = await this.ShowInputAsync("Rename", "Insert the new name for the profile");
+
+            if (!string.IsNullOrEmpty(result))
+            {
+                Config.SelectedProfile.Name = result;
+            }
+        }
+
+        private void EditProfileMenuItem_OnClick(object sender, RoutedEventArgs e)
+        {
+            ShowProfileNameChangeDialog();
+        }
+
+        private void ProfilesButton_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (e.AddedItems.Count <= 0 || e.RemovedItems.Count <= 0)
+            {
+                return;
+            }
+
+            var oldProfile = (Profile)e.RemovedItems[0];
+            var newProfile = (Profile)e.AddedItems[0];
+            if (Injection.IsInjected)
+            {
+                var hwnd = Injection.GetLeagueWnd();
+
+                foreach (var assembly in oldProfile.InstalledAssemblies.Where(a => a.InjectChecked))
+                {
+                    Injection.UnloadAssembly(hwnd, assembly);
+                }
+
+                var assembliesToLoad =
+                    newProfile.InstalledAssemblies.Where(a => a.InjectChecked || a.Type == AssemblyType.Library);
+
+                //Recompile the assemblies:
+                foreach (var assembly in assembliesToLoad)
+                {
+                    if (assembly.Type == AssemblyType.Library)
+                    {
+                        assembly.Compile();
+                    }
+                }
+
+                foreach (var assembly in assembliesToLoad)
+                {
+                    if (assembly.Type != AssemblyType.Library)
+                    {
+                        assembly.Compile();
+                    }
+                }
+
+                foreach (var assembly in assembliesToLoad)
+                {
+                    Injection.LoadAssembly(hwnd, assembly);
+                }
+            }
+            else
+            {
+                PrepareAssemblies(Config.SelectedProfile.InstalledAssemblies, false, true);
+            }
+            TextBoxBase_OnTextChanged(null, null);
+        }
+
+        private void MainWindow_OnKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                SearchTextBox.Visibility = Visibility.Visible;
+            }
+
+            SearchTextBox.Focus();
         }
     }
 }

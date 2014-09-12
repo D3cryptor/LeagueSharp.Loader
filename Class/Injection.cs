@@ -21,9 +21,7 @@ using System;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Reflection;
 using System.Runtime.InteropServices;
-using System.Windows;
 using LeagueSharp.Loader.Data;
 
 #endregion
@@ -42,6 +40,21 @@ namespace LeagueSharp.Loader.Class
             ResolveInjectDLL();
         }
 
+        public static bool IsInjected
+        {
+            get
+            {
+                var leagueProcess = GetLeagueProcess();
+                if (leagueProcess != null)
+                {
+                    return
+                        leagueProcess.Modules.Cast<ProcessModule>()
+                            .Any(processModule => processModule.ModuleName == "LeagueSharp.Core.dll");
+                }
+                return false;
+            }
+        }
+
         [ DllImport("kernel32.dll") ]
         public static extern IntPtr LoadLibrary(string dllToLoad);
 
@@ -49,10 +62,10 @@ namespace LeagueSharp.Loader.Class
         public static extern IntPtr GetProcAddress(IntPtr hModule, string procedureName);
 
         [ DllImport("user32.dll", CharSet = CharSet.Auto) ]
-        public static extern IntPtr SendMessage(IntPtr hWnd,
-            uint Msg,
-            IntPtr wParam,
-            ref COPYDATASTRUCT lParam);
+        public static extern IntPtr SendMessage(IntPtr hWnd, uint Msg, IntPtr wParam, ref COPYDATASTRUCT lParam);
+
+        [ DllImport("user32.dll", CharSet = CharSet.Auto) ]
+        public static extern IntPtr PostMessage(IntPtr hWnd, uint Msg, IntPtr wParam, ref COPYDATASTRUCT lParam);
 
         [ DllImport("user32.dll", SetLastError = true) ]
         public static extern IntPtr FindWindow(IntPtr ZeroOnly, string lpWindowName);
@@ -70,8 +83,7 @@ namespace LeagueSharp.Loader.Class
                 return;
             }
             injectDLL =
-                Marshal.GetDelegateForFunctionPointer(procAddress, typeof(InjectDLLDelegate)) as
-                    InjectDLLDelegate;
+                Marshal.GetDelegateForFunctionPointer(procAddress, typeof(InjectDLLDelegate)) as InjectDLLDelegate;
         }
 
         public static IntPtr GetLeagueWnd()
@@ -89,24 +101,15 @@ namespace LeagueSharp.Loader.Class
             return null;
         }
 
-        public static bool Pulse()
+        public static void Pulse()
         {
             var leagueProcess = GetLeagueProcess();
-            if (leagueProcess != null)
+            if (leagueProcess != null && !IsInjected)
             {
-                var flag = leagueProcess.Modules.Cast<ProcessModule>().Any(processModule => processModule.ModuleName == "LeagueSharp.Core.dll");
-                if (!flag)
-                {
-                    var num = injectDLL(
-                        leagueProcess.Id,
-                        Path.GetDirectoryName(Assembly.GetEntryAssembly().Location) +
-                        "\\Assemblies\\System\\LeagueSharp.Core.dll")
-                        ? 1
-                        : 0;
-                    return true;
-                }
+                var num = injectDLL(leagueProcess.Id, Path.Combine(Directories.LibrariesDir, "LeagueSharp.Core.dll"))
+                    ? 1
+                    : 0;
             }
-            return false;
         }
 
         public static void LoadAssembly(IntPtr wnd, LeagueSharpAssembly assembly)
@@ -131,16 +134,13 @@ namespace LeagueSharp.Loader.Class
 
         public static void SendConfig(IntPtr wnd, Config config)
         {
-            var str = string.Format("{0}{1}{2}{3}", (config.Settings.GameSettings[0].SelectedValue == "True") ? "1" : "0",
+            var str = string.Format(
+                "{0}{1}{2}{3}", (config.Settings.GameSettings[0].SelectedValue == "True") ? "1" : "0",
                 (config.Settings.GameSettings[3].SelectedValue == "True") ? "1" : "0",
                 (config.Settings.GameSettings[1].SelectedValue == "True") ? "1" : "0",
                 (config.Settings.GameSettings[2].SelectedValue == "True") ? "2" : "0");
 
-            var lParam = new COPYDATASTRUCT {
-                cbData = 2,
-                dwData = str.Length * 2 + 2,
-                lpData = str
-            };
+            var lParam = new COPYDATASTRUCT { cbData = 2, dwData = str.Length * 2 + 2, lpData = str };
             SendMessage(wnd, 74U, IntPtr.Zero, ref lParam);
         }
 

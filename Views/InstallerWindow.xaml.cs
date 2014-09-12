@@ -1,6 +1,4 @@
-﻿using System.Collections.ObjectModel;
-
-#region
+﻿#region
 
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -10,7 +8,6 @@ using System.Windows.Forms;
 using System.Windows.Input;
 using LeagueSharp.Loader.Class;
 using LeagueSharp.Loader.Data;
-using MahApps.Metro.Controls;
 using MahApps.Metro.Controls.Dialogs;
 using TextBox = System.Windows.Controls.TextBox;
 
@@ -37,8 +34,16 @@ namespace LeagueSharp.Loader.Views
 {
     public partial class InstallerWindow : INotifyPropertyChanged
     {
+        private bool _ableToList = true;
         private List<LeagueSharpAssembly> _foundAssemblies = new List<LeagueSharpAssembly>();
         private ProgressDialogController controller;
+
+        public InstallerWindow()
+        {
+            InitializeComponent();
+            DataContext = this;
+        }
+
         public List<LeagueSharpAssembly> FoundAssemblies
         {
             get { return _foundAssemblies; }
@@ -48,14 +53,10 @@ namespace LeagueSharp.Loader.Views
                 OnPropertyChanged("FoundAssemblies");
             }
         }
-        private bool _ableToList = true;
 
         public bool AbleToList
         {
-            get
-            {
-                return _ableToList;
-            }
+            get { return _ableToList; }
             set
             {
                 _ableToList = value;
@@ -63,16 +64,14 @@ namespace LeagueSharp.Loader.Views
             }
         }
 
-        public InstallerWindow()
-        {
-            InitializeComponent();
-            DataContext = this;
-        }
+        public event PropertyChangedEventHandler PropertyChanged;
 
-        public async void ShowProgress()
+        public async void ShowProgress(string location, bool isSvn, string autoInstallName = null)
         {
             controller = await this.ShowProgressAsync("Updating...", "Downloading the required data.");
             controller.SetIndeterminate();
+
+            ListAssemblies(location, isSvn, autoInstallName);
         }
 
         public void ListAssemblies(string location, bool isSvn, string autoInstallName = null)
@@ -82,10 +81,7 @@ namespace LeagueSharp.Loader.Views
 
             if (!isSvn)
             {
-                bgWorker.DoWork += delegate
-                {
-                    FoundAssemblies = LeagueSharpAssemblies.GetAssemblies(location);
-                };
+                bgWorker.DoWork += delegate { FoundAssemblies = LeagueSharpAssemblies.GetAssemblies(location); };
             }
             else
             {
@@ -105,18 +101,18 @@ namespace LeagueSharp.Loader.Views
 
             bgWorker.RunWorkerCompleted += delegate
             {
+                if (controller != null)
+                {
+                    controller.CloseAsync();
+                    controller = null;
+                }
+
                 AbleToList = true;
                 System.Windows.Application.Current.Dispatcher.Invoke(() => installTabControl.SelectedIndex++);
                 if (autoInstallName != null)
                 {
                     InstallSelected();
                 }
-
-                if (controller != null)
-                {
-                    controller.CloseAsync();
-                }
-                
             };
 
             bgWorker.RunWorkerAsync();
@@ -132,8 +128,12 @@ namespace LeagueSharp.Loader.Views
                 {
                     if (assembly.Compile())
                     {
-                        if (((MainWindow) Owner).Config.InstalledAssemblies.All(a => a.Name != assembly.Name))
-                            ((MainWindow)Owner).Config.InstalledAssemblies.Add(assembly);
+                        if (
+                            ((MainWindow)Owner).Config.SelectedProfile.InstalledAssemblies.All(
+                                a => a.Name != assembly.Name))
+                        {
+                            ((MainWindow)Owner).Config.SelectedProfile.InstalledAssemblies.Add(assembly);
+                        }
                         amount--;
                     }
                 }
@@ -152,9 +152,21 @@ namespace LeagueSharp.Loader.Views
 
         private void Step1_Click(object sender, RoutedEventArgs e)
         {
-            ShowProgress();
-            ListAssemblies((SvnRadioButton.IsChecked == true) ? SvnComboBox.Text : PathTextBox.Text,
-                (SvnRadioButton.IsChecked == true));
+            if (InstalledRadioButton.IsChecked == true)
+            {
+                FoundAssemblies.Clear();
+                foreach (var profile in ((MainWindow)Owner).Config.Profiles)
+                {
+                    FoundAssemblies.AddRange(profile.InstalledAssemblies);
+                }
+                installTabControl.SelectedIndex++;
+            }
+            else
+            {
+                ShowProgress(
+                    (SvnRadioButton.IsChecked == true) ? SvnComboBox.Text : PathTextBox.Text,
+                    (SvnRadioButton.IsChecked == true));
+            }
         }
 
         private void Step2_Click(object sender, RoutedEventArgs e)
@@ -186,6 +198,7 @@ namespace LeagueSharp.Loader.Views
                     if (folderDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
                     {
                         textBox.Text = folderDialog.SelectedPath;
+                        LocalRadioButton.IsChecked = true;
                     }
                 }
             }
@@ -216,9 +229,7 @@ namespace LeagueSharp.Loader.Views
             }
             OnPropertyChanged("FoundAssemblies");
         }
-    
 
-        public event PropertyChangedEventHandler PropertyChanged;
 
         private void OnPropertyChanged(string propertyName)
         {
@@ -227,6 +238,5 @@ namespace LeagueSharp.Loader.Views
                 PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
             }
         }
-
-    }  
+    }
 }
