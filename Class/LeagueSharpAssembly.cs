@@ -221,7 +221,7 @@ namespace LeagueSharp.Loader.Class
             {
                 if (Project != null)
                 {
-                    return Project.GetPropertyValue("OutputType").ToLower() == "exe"
+                    return Project.GetPropertyValue("OutputType").ToLower().Contains("exe")
                         ? AssemblyType.Executable
                         : AssemblyType.Library;
                 }
