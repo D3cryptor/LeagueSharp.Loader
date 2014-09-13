@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <Config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Install>true</Install>
   <FirstRun>true</FirstRun>
@@ -12,7 +13,6 @@
         </PosibleValues>
         <SelectedValue>False</SelectedValue>
       </GameSettings>
-
       <GameSettings>
         <Name>Debug Console</Name>
         <PosibleValues>
@@ -21,7 +21,6 @@
         </PosibleValues>
         <SelectedValue>False</SelectedValue>
       </GameSettings>
-
       <GameSettings>
         <Name>Display Enemy Tower Range</Name>
         <PosibleValues>
@@ -30,7 +29,6 @@
         </PosibleValues>
         <SelectedValue>False</SelectedValue>
       </GameSettings>
-      
       <GameSettings>
         <Name>Extended Zoom</Name>
         <PosibleValues>
@@ -39,10 +37,8 @@
         </PosibleValues>
         <SelectedValue>False</SelectedValue>
       </GameSettings>
-      
     </GameSettings>
   </Settings>
-  
   <SelectedProfile>
     <Name>Default</Name>
     <InstalledAssemblies>
@@ -58,7 +54,6 @@
       </LeagueSharpAssembly>
     </InstalledAssemblies>
   </SelectedProfile>
-  
   <Profiles>
     <Profiles>
       <Name>Default</Name>
@@ -74,7 +69,7 @@
           <SvnUrl>https://github.com/LeagueSharp/LeagueSharpCommon</SvnUrl>
         </LeagueSharpAssembly>
       </InstalledAssemblies>
-      </Profiles>
+    </Profiles>
   </Profiles>
   <KnownRepositories>
     <KnownRepositories>https://github.com/Lizzaran/LeagueSharp</KnownRepositories>
