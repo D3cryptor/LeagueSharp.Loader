@@ -50,7 +50,7 @@
                               CanUserAddRows="False"
                               AutoGenerateColumns="False"
                               ContextMenuOpening="InstalledAssembliesDataGrid_OnContextMenuOpening"
-                              ItemsSource="{Binding Config.SelectedProfile.InstalledAssemblies}">
+                              ItemsSource="{Binding Config.SelectedProfile.InstalledAssemblies, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
                         <DataGrid.ContextMenu>
                             <ContextMenu>
                                 <MenuItem x:Name="UpdateAndCompileMenuItem" Header="Update and Compile" Click="UpdateAndCompileMenuItem_OnClick">
