@@ -1,10 +1,6 @@
-﻿using System.Windows.Forms;
+﻿#region
+
 using System.Windows.Navigation;
-using Application = System.Windows.Application;
-using Clipboard = System.Windows.Clipboard;
-using DataGrid = System.Windows.Controls.DataGrid;
-using KeyEventArgs = System.Windows.Input.KeyEventArgs;
-using WebBrowser = System.Windows.Controls.WebBrowser;
 
 #region
 
@@ -34,6 +30,8 @@ using MahApps.Metro.Controls.Dialogs;
 
 #endregion
 
+#endregion
+
 /*
     Copyright (C) 2014 LeagueSharp
 
@@ -55,6 +53,8 @@ namespace LeagueSharp.Loader.Views
 {
     public partial class MainWindow : INotifyPropertyChanged
     {
+        public BackgroundWorker BgWorker = new BackgroundWorker();
+        public bool BgWorkerCancelled;
         private bool _working;
         public Config Config { get; set; }
 
@@ -91,6 +91,7 @@ namespace LeagueSharp.Loader.Views
 
             Browser.Visibility = Visibility.Hidden;
             DataContext = this;
+            GeneralSettingsItem.IsSelected = true;
 
             LogsDataGrid.ItemsSource = Logs.MainLog.Items;
 
@@ -181,8 +182,18 @@ namespace LeagueSharp.Loader.Views
 
         private void KeyboardHookOnOnKeyUpTrigger(int vKeyCode)
         {
-            //F5 & F8
-            if (vKeyCode == 0x74 || vKeyCode == 0x77)
+            if (!Injection.IsInjected)
+            {
+                return;
+            }
+
+            var reloadVKey =
+                KeyInterop.VirtualKeyFromKey(Config.Hotkeys.SelectedHotkeys.First(h => h.Name == "Reload").Hotkey);
+            var reloadAndCompileVKey =
+                KeyInterop.VirtualKeyFromKey(
+                    Config.Hotkeys.SelectedHotkeys.First(h => h.Name == "CompileAndReload").Hotkey);
+            
+            if (vKeyCode == reloadVKey || vKeyCode == reloadAndCompileVKey)
             {
                 var hwnd = Injection.GetLeagueWnd();
                 var targetAssemblies =
@@ -194,7 +205,7 @@ namespace LeagueSharp.Loader.Views
                     Injection.UnloadAssembly(hwnd, assembly);
                 }
 
-                if (vKeyCode == 0x77)
+                if (vKeyCode == reloadAndCompileVKey)
                 {
                     //Recompile the assemblies:
                     foreach (var assembly in targetAssemblies)
@@ -279,11 +290,20 @@ namespace LeagueSharp.Loader.Views
             window.ShowDialog();
         }
 
-        private void MainWindow_OnClosing(object sender, CancelEventArgs e)
+        public void MainWindow_OnClosing(object sender, CancelEventArgs e)
         {
+            if (BgWorker.IsBusy)
+            {
+                BgWorker.CancelAsync();
+                e.Cancel = true;
+                Hide();
+                return;
+            }
+
             Utility.MapClassToXmlFile(typeof(Config), Config, "config.xml");
             KeyboardHook.UnHook();
             InjectThread.Abort();
+
             var allAssemblies = new List<LeagueSharpAssembly>();
             foreach (var profile in Config.Profiles)
             {
@@ -328,9 +348,9 @@ namespace LeagueSharp.Loader.Views
 
             Working = true;
             var leagueSharpAssemblies = assemblies as IList<LeagueSharpAssembly> ?? assemblies.ToList();
-
-            var bgWorker = new BackgroundWorker();
-            bgWorker.DoWork += delegate
+            BgWorker = new BackgroundWorker();
+            BgWorker.WorkerSupportsCancellation = true;
+            BgWorker.DoWork += delegate
             {
                 var updatedSvnUrls = new List<string>();
 
@@ -349,6 +369,11 @@ namespace LeagueSharp.Loader.Views
                             assembly.Compile();
                         }
                     }
+                    if (BgWorker.CancellationPending)
+                    {
+                        BgWorkerCancelled = true;
+                        break;
+                    }
                 }
 
                 foreach (var assembly in leagueSharpAssemblies)
@@ -366,15 +391,24 @@ namespace LeagueSharp.Loader.Views
                             assembly.Compile();
                         }
                     }
+                    if (BgWorker.CancellationPending)
+                    {
+                        BgWorkerCancelled = true;
+                        break;
+                    }
                 }
             };
 
-            bgWorker.RunWorkerCompleted += delegate
+            BgWorker.RunWorkerCompleted += delegate
             {
                 ProjectCollection.GlobalProjectCollection.UnloadAllProjects();
                 Working = false;
+                if (BgWorkerCancelled)
+                {
+                    Close();
+                }
             };
-            bgWorker.RunWorkerAsync();
+            BgWorker.RunWorkerAsync();
         }
 
         private void RemoveMenuItem_OnClick(object sender, RoutedEventArgs e)
@@ -431,18 +465,8 @@ namespace LeagueSharp.Loader.Views
             if (selectedAssembly.SvnUrl.ToLower().StartsWith("https://github.com"))
             {
                 var user = selectedAssembly.SvnUrl.Remove(0, 19);
-                Clipboard.SetText(
-                    string.Format(LSUriScheme.FullName + "project/{0}/{1}/", user, selectedAssembly.Name));
+                Clipboard.SetText(string.Format(LSUriScheme.FullName + "project/{0}/{1}/", user, selectedAssembly.Name));
             }
-        }
-
-        private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
-        {
-            Config.Username = "";
-            Config.Password = "";
-            MainWindow_OnClosing(null, null);
-            System.Diagnostics.Process.Start(Application.ResourceAssembly.Location);
-            Environment.Exit(0);
         }
 
         private void TrayIcon_OnTrayMouseDoubleClick(object sender, RoutedEventArgs e)
@@ -481,7 +505,6 @@ namespace LeagueSharp.Loader.Views
             var searchText = SearchTextBox.Text;
             if (searchText.Trim() == "")
             {
-                SearchTextBox.Visibility = Visibility.Hidden;
                 InstalledAssembliesDataGrid.ItemsSource = Config.SelectedProfile.InstalledAssemblies;
             }
             else
@@ -628,16 +651,6 @@ namespace LeagueSharp.Loader.Views
             TextBoxBase_OnTextChanged(null, null);
         }
 
-        private void MainWindow_OnKeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.Key == Key.Enter)
-            {
-                SearchTextBox.Visibility = Visibility.Visible;
-            }
-
-            SearchTextBox.Focus();
-        }
-
         private void GameSettingsDataGrid_OnMouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             var item = ((DataGrid)sender).SelectedItem;
@@ -680,6 +693,12 @@ namespace LeagueSharp.Loader.Views
                     }
                 }
             }
+        }
+
+        private void TreeView_OnSelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
+        {
+            var name = (string)((TreeViewItem)((System.Windows.Controls.TreeView)sender).SelectedItem).Header;
+            SettingsFrame.Content = Activator.CreateInstance(null, "LeagueSharp.Loader.Views.Settings." + name).Unwrap();
         }
     }
 }

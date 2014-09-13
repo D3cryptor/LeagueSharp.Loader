@@ -1,4 +1,10 @@
-﻿#region
+﻿using System.Windows.Forms;
+
+#region
+
+using System.Windows.Input;
+
+#region
 
 using System;
 using System.Collections.Generic;
@@ -6,6 +12,8 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Xml.Serialization;
 using LeagueSharp.Loader.Class;
+
+#endregion
 
 #endregion
 
@@ -66,6 +74,8 @@ namespace LeagueSharp.Loader.Data
     public class Config : INotifyPropertyChanged
     {
         private bool _firstRun = true;
+        private Hotkeys _hotkeys;
+
         private bool _install = true;
         private ObservableCollection<string> _knownRepositories;
         private ObservableCollection<Profile> _profiles;
@@ -117,6 +127,16 @@ namespace LeagueSharp.Loader.Data
             }
         }
 
+        public Hotkeys Hotkeys
+        {
+            get { return _hotkeys; }
+            set
+            {
+                _hotkeys = value;
+                OnPropertyChanged("Hotkeys");
+            }
+        }
+
         public Profile SelectedProfile
         {
             get { return _selectedProfile; }
@@ -165,7 +185,6 @@ namespace LeagueSharp.Loader.Data
     public class ConfigSettings : INotifyPropertyChanged
     {
         private ObservableCollection<GameSettings> _gameSettings;
-
 
         [ XmlArrayItem("GameSettings", IsNullable = true) ]
         public ObservableCollection<GameSettings> GameSettings
@@ -224,6 +243,79 @@ namespace LeagueSharp.Loader.Data
                 OnPropertyChanged("SelectedValue");
             }
         }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        private void OnPropertyChanged(string propertyName)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+
+    [ XmlType(AnonymousType = true) ]
+    public class Hotkeys : INotifyPropertyChanged
+    {
+        private ObservableCollection<HotkeyEntry> _selectedHotkeys;
+
+        [ XmlArrayItem("SelectedHotkeys", IsNullable = true) ]
+        public ObservableCollection<HotkeyEntry> SelectedHotkeys
+        {
+            get { return _selectedHotkeys; }
+            set
+            {
+                _selectedHotkeys = value;
+                OnPropertyChanged("Hotkeys");
+            }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        private void OnPropertyChanged(string propertyName)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+
+    public class HotkeyEntry : INotifyPropertyChanged
+    {
+        private Key _hotkey;
+        private string _name;
+
+        public string Name
+        {
+            get { return _name; }
+            set
+            {
+                _name = value;
+                OnPropertyChanged("Name");
+            }
+        }
+
+        public string Description { get; set; }
+
+        public Key Hotkey
+        {
+            get { return _hotkey; }
+            set
+            {
+                _hotkey = value;
+                OnPropertyChanged("Hotkey");
+                OnPropertyChanged("HotkeyString");
+            }
+        }
+
+        public string HotkeyString
+        {
+            get { return _hotkey.ToString(); }
+        }
+
+        public Key DefaultKey { get; set; }
 
         public event PropertyChangedEventHandler PropertyChanged;
 
