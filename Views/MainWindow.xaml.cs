@@ -1,4 +1,10 @@
-﻿using System.Windows.Navigation;
+﻿using System.Windows.Forms;
+using System.Windows.Navigation;
+using Application = System.Windows.Application;
+using Clipboard = System.Windows.Clipboard;
+using DataGrid = System.Windows.Controls.DataGrid;
+using KeyEventArgs = System.Windows.Input.KeyEventArgs;
+using WebBrowser = System.Windows.Controls.WebBrowser;
 
 #region
 
@@ -119,6 +125,20 @@ namespace LeagueSharp.Loader.Views
                 });
 
             InjectThread.Start();
+
+            Config.PropertyChanged += ConfigOnPropertyChanged;
+            foreach (var gameSetting in Config.Settings.GameSettings)
+            {
+                gameSetting.PropertyChanged += GameSettingOnPropertyChanged;
+            }
+        }
+
+        private void GameSettingOnPropertyChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
+        {
+            if (Injection.IsInjected)
+            {
+                Injection.SendConfig(IntPtr.Zero, Config);
+            }
         }
 
         protected override void OnSourceInitialized(EventArgs e)
@@ -127,7 +147,6 @@ namespace LeagueSharp.Loader.Views
             var source = PresentationSource.FromVisual(this) as HwndSource;
             source.AddHook(WndProc);
         }
-
 
         private IntPtr WndProc(IntPtr hwnd, int msg, IntPtr wParam, IntPtr lParam, ref bool handled)
         {
@@ -638,15 +657,27 @@ namespace LeagueSharp.Loader.Views
             wb.InvokeScript("execScript", new Object[] { script, "JavaScript" });
         }
 
-
-        private void ToggleButton_OnChecked(object sender, RoutedEventArgs e)
+        private void ConfigOnPropertyChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
         {
-            if (!Config.Install && Injection.IsInjected)
+            if (propertyChangedEventArgs.PropertyName == "Install")
             {
-                var hwnd = Injection.GetLeagueWnd();
-                foreach (var assembly in Config.SelectedProfile.InstalledAssemblies.Where(a => a.InjectChecked))
+                if (Injection.IsInjected)
                 {
-                    Injection.UnloadAssembly(hwnd, assembly);
+                    var hwnd = Injection.GetLeagueWnd();
+                    if (!Config.Install)
+                    {
+                        foreach (var assembly in Config.SelectedProfile.InstalledAssemblies.Where(a => a.InjectChecked))
+                        {
+                            Injection.UnloadAssembly(hwnd, assembly);
+                        }
+                    }
+                    else
+                    {
+                        foreach (var assembly in Config.SelectedProfile.InstalledAssemblies.Where(a => a.InjectChecked))
+                        {
+                            Injection.LoadAssembly(hwnd, assembly);
+                        }
+                    }
                 }
             }
         }

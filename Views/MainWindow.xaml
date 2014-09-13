@@ -260,8 +260,8 @@
 
                         </DataGrid.Columns>
                     </DataGrid>
-                    <CheckBox IsChecked="{Binding Config.UpdateOnLoad, UpdateSourceTrigger=PropertyChanged}" Content="Update the assemblies at the start" HorizontalAlignment="Left" Margin="10,0,0,33" Height="18" VerticalAlignment="Bottom"/>
-                    <CheckBox Content="Inject" HorizontalAlignment="Left" Margin="10,0,0,10" Width="169" IsChecked="{Binding Config.Install, UpdateSourceTrigger=PropertyChanged}" Height="18" VerticalAlignment="Bottom" Checked="ToggleButton_OnChecked"/>
+                    <CheckBox IsChecked="{Binding Config.UpdateOnLoad, UpdateSourceTrigger=PropertyChanged}" Content="Update the assemblies at the start" Margin="10,0,90,33" Height="18" VerticalAlignment="Bottom"/>
+                    <CheckBox Content="Inject" Margin="10,0,90,10" IsChecked="{Binding Config.Install, UpdateSourceTrigger=PropertyChanged}" Height="18" VerticalAlignment="Bottom"/>
                 </Grid>
             </TabItem>
         </TabControl>

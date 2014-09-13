@@ -134,6 +134,7 @@ namespace LeagueSharp.Loader.Class
 
         public static void SendConfig(IntPtr wnd, Config config)
         {
+            wnd = wnd != IntPtr.Zero ? wnd : GetLeagueWnd();
             var str = string.Format(
                 "{0}{1}{2}{3}", (config.Settings.GameSettings[0].SelectedValue == "True") ? "1" : "0",
                 (config.Settings.GameSettings[3].SelectedValue == "True") ? "1" : "0",
