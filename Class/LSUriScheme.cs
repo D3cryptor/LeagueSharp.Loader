@@ -62,10 +62,12 @@ namespace LeagueSharp.Loader.Class
                         {
                             var subKey = registryKey
                                 .CreateSubKey("open");
+
                             if (subKey != null)
                             {
                                 var key = subKey
                                     .CreateSubKey("command");
+
                                 if (key != null)
                                 {
                                     key
@@ -83,11 +85,7 @@ namespace LeagueSharp.Loader.Class
             }
             else
             {
-                var p = new Process();
-                p.StartInfo.FileName = Directories.LoaderFilePath;
-                p.StartInfo.Verb = "runas";
-                p.StartInfo.Arguments = "addregkey";
-                p.Start();
+                new Process { StartInfo = { FileName = Directories.LoaderFilePath, Verb = "runas", Arguments = "addregkey" } }.Start();
             }
             
         }
