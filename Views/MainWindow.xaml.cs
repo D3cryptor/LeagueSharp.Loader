@@ -75,24 +75,13 @@ namespace LeagueSharp.Loader.Views
         {
             Utility.CreateFileFromResource("config.xml", "LeagueSharp.Loader.Resources.config.xml");
             Config = ((Config)Utility.MapXmlFileToClass(typeof(Config), "config.xml"));
-
-            if (Config.FirstRun)
-            {
-                LSUriScheme.CreateRegFile("lsURIScheme.reg");
-            }
-            else
-            {
-                var regFile = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "lsURIScheme.reg");
-                if (File.Exists(regFile))
-                {
-                    File.Delete(regFile);
-                }
-            }
-
+            
             Browser.Visibility = Visibility.Hidden;
             DataContext = this;
             GeneralSettingsItem.IsSelected = true;
 
+            LSUriScheme.CreateRegistryKeys();
+           
             LogsDataGrid.ItemsSource = Logs.MainLog.Items;
 
             //Try to login with the saved credentials.
@@ -165,18 +154,6 @@ namespace LeagueSharp.Loader.Views
                         }
                     });
             }
-
-            if (msg == 74)
-            {
-                var url = (Injection.COPYDATASTRUCT)Marshal.PtrToStructure(lParam, typeof(Injection.COPYDATASTRUCT));
-                if (url.lpData.StartsWith(LSUriScheme.FullName))
-                {
-                    Activate();
-                    Show();
-                    LSUriScheme.HandleUrl(url.lpData, this);
-                }
-            }
-
             return IntPtr.Zero;
         }
 
@@ -538,10 +515,10 @@ namespace LeagueSharp.Loader.Views
 
         private void MainWindow_OnActivated(object sender, EventArgs e)
         {
-            var text = System.Windows.Clipboard.GetText();
+            var text = Clipboard.GetText();
             if (text.StartsWith(LSUriScheme.FullName))
             {
-                System.Windows.Clipboard.SetText("");
+                Clipboard.SetText("");
                 LSUriScheme.HandleUrl(text, this);
             }
         }

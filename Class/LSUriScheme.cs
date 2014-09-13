@@ -1,13 +1,5 @@
 ﻿#region
 
-using System;
-using System.IO;
-using System.Net;
-using System.Text;
-using System.Text.RegularExpressions;
-using LeagueSharp.Loader.Views;
-using MahApps.Metro.Controls;
-
 /*
     Copyright (C) 2014 LeagueSharp
 
@@ -24,6 +16,14 @@ using MahApps.Metro.Controls;
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
+using System;
+using System.Net;
+using System.Text.RegularExpressions;
+using System.Windows;
+using LeagueSharp.Loader.Data;
+using LeagueSharp.Loader.Views;
+using MahApps.Metro.Controls;
+using Microsoft.Win32;
 
 #endregion
 
@@ -38,23 +38,45 @@ namespace LeagueSharp.Loader.Class
             get { return Name + "://"; }
         }
 
-        public static void CreateRegFile(string fileName)
+        public static void CreateRegistryKeys()
         {
-            var regFileContents = Utility.ReadResourceString("LeagueSharp.Loader.Resources.CreateScheme.reg");
-
-            regFileContents = regFileContents.Replace(
-                "%leaguesharploader%",
-                Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "LeagueSharp.Loader.exe").Replace(@"\", @"\\"));
-            regFileContents = regFileContents.Replace("%name%", Name);
-
-            using (
-                var writer = new StreamWriter(
-                    Path.Combine(AppDomain.CurrentDomain.BaseDirectory, fileName), false, Encoding.Unicode))
+            try
             {
-                writer.Write(regFileContents);
-            }
+                var lsKey = Registry.ClassesRoot.CreateSubKey(Name);
+                if (lsKey != null)
+                {
+                    lsKey.SetValue("URL Protocol", "", RegistryValueKind.String);
 
-            System.Diagnostics.Process.Start(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, fileName));
+                    var defaultIconKey = lsKey.CreateSubKey("DefaultIcon");
+                    if (defaultIconKey != null)
+                    {
+                        defaultIconKey.SetValue(
+                            "", string.Format("\"{0}\", 0", Directories.LoaderFilePath), RegistryValueKind.String);
+                    }
+
+                    var registryKey = lsKey.CreateSubKey("shell");
+                    if (registryKey != null)
+                    {
+                        var subKey = registryKey
+                            .CreateSubKey("open");
+                        if (subKey != null)
+                        {
+                            var key = subKey
+                                .CreateSubKey("command");
+                            if (key != null)
+                            {
+                                key
+                                    .SetValue(
+                                        "", string.Format("\"{0}\" %1", Directories.LoaderFilePath), RegistryValueKind.String);
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.ToString());
+            }
         }
 
         public static void HandleUrl(string url, MetroWindow window)

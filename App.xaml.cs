@@ -1,9 +1,11 @@
 ﻿#region
 
 using System;
+using System.Runtime.InteropServices;
 using System.Threading;
 using System.Windows;
 using LeagueSharp.Loader.Class;
+using Microsoft.Win32;
 
 #endregion
 
@@ -13,6 +15,11 @@ namespace LeagueSharp.Loader
     public partial class App : Application {
         private Mutex _mutex;
 
+        [DllImport("user32.dll")]
+        static extern bool SetForegroundWindow(IntPtr hWnd);
+
+        [DllImport("user32.dll")]
+        static extern bool ShowWindow(IntPtr hWnd, int nCmdShow);
         protected override void OnStartup(StartupEventArgs e)
         {
             bool createdNew;
@@ -24,12 +31,9 @@ namespace LeagueSharp.Loader
                     var wnd = Injection.FindWindow(IntPtr.Zero, "LeagueSharp");
                     if (wnd != IntPtr.Zero)
                     {
-                        var str = e.Args[0];
-                        if (str != null)
-                        {
-                            var lParam = new Injection.COPYDATASTRUCT { cbData = 1, dwData = str.Length * 2 + 2, lpData = str };
-                            Injection.SendMessage(wnd, 74U, IntPtr.Zero, ref lParam);
-                        }
+                        Clipboard.SetText(e.Args[0]);
+                        ShowWindow(wnd, 5);
+                        SetForegroundWindow(wnd);
                     }
                 }
 

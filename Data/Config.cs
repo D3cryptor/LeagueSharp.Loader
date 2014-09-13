@@ -1,4 +1,5 @@
-﻿using System.Windows.Forms;
+﻿using System.IO;
+using System.Windows.Forms;
 
 #region
 
@@ -55,17 +56,20 @@ namespace LeagueSharp.Loader.Data
 {
     public static class Directories
     {
+        public static readonly string LoaderFilePath = Path.Combine(
+            AppDomain.CurrentDomain.BaseDirectory, "Leaguesharp.Loader.exe");
+
         public static readonly string RepositoryDir =
-            System.IO.Path.Combine(
+            Path.Combine(
                 Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "LeagueSharp", "Repositories") +
             "\\";
 
         public static readonly string AssembliesDir =
-            System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Assemblies") + "\\";
+            Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Assemblies") + "\\";
 
-        public static readonly string LibrariesDir = System.IO.Path.Combine(AssembliesDir, "System") + "\\";
+        public static readonly string LibrariesDir = Path.Combine(AssembliesDir, "System") + "\\";
 
-        public static readonly string LogsDir = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Logs") +
+        public static readonly string LogsDir = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Logs") +
                                                 "\\";
     }
 

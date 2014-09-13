@@ -152,7 +152,6 @@
     </Compile>
     <None Include="packages.config" />
     <AppDesigner Include="Properties\" />
-    <EmbeddedResource Include="Resources\CreateScheme.reg" />
     <Resource Include="Resources\Entypo.ttf" />
   </ItemGroup>
   <ItemGroup>
