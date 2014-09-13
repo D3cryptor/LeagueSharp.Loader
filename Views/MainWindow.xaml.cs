@@ -80,7 +80,11 @@ namespace LeagueSharp.Loader.Views
             DataContext = this;
             GeneralSettingsItem.IsSelected = true;
 
-            LSUriScheme.CreateRegistryKeys();
+            if (Config.FirstRun)
+            {
+                LSUriScheme.CreateRegistryKeys(false);
+            }
+            
            
             LogsDataGrid.ItemsSource = Logs.MainLog.Items;
 

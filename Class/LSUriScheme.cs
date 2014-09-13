@@ -17,6 +17,7 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 using System;
+using System.Diagnostics;
 using System.Net;
 using System.Text.RegularExpressions;
 using System.Windows;
@@ -38,45 +39,57 @@ namespace LeagueSharp.Loader.Class
             get { return Name + "://"; }
         }
 
-        public static void CreateRegistryKeys()
+        public static void CreateRegistryKeys(bool admin)
         {
-            try
+            if (admin)
             {
-                var lsKey = Registry.ClassesRoot.CreateSubKey(Name);
-                if (lsKey != null)
+                try
                 {
-                    lsKey.SetValue("URL Protocol", "", RegistryValueKind.String);
-
-                    var defaultIconKey = lsKey.CreateSubKey("DefaultIcon");
-                    if (defaultIconKey != null)
+                    var lsKey = Registry.ClassesRoot.CreateSubKey(Name);
+                    if (lsKey != null)
                     {
-                        defaultIconKey.SetValue(
-                            "", string.Format("\"{0}\", 0", Directories.LoaderFilePath), RegistryValueKind.String);
-                    }
+                        lsKey.SetValue("URL Protocol", "", RegistryValueKind.String);
 
-                    var registryKey = lsKey.CreateSubKey("shell");
-                    if (registryKey != null)
-                    {
-                        var subKey = registryKey
-                            .CreateSubKey("open");
-                        if (subKey != null)
+                        var defaultIconKey = lsKey.CreateSubKey("DefaultIcon");
+                        if (defaultIconKey != null)
                         {
-                            var key = subKey
-                                .CreateSubKey("command");
-                            if (key != null)
+                            defaultIconKey.SetValue(
+                                "", string.Format("\"{0}\", 0", Directories.LoaderFilePath), RegistryValueKind.String);
+                        }
+
+                        var registryKey = lsKey.CreateSubKey("shell");
+                        if (registryKey != null)
+                        {
+                            var subKey = registryKey
+                                .CreateSubKey("open");
+                            if (subKey != null)
                             {
-                                key
-                                    .SetValue(
-                                        "", string.Format("\"{0}\" %1", Directories.LoaderFilePath), RegistryValueKind.String);
+                                var key = subKey
+                                    .CreateSubKey("command");
+                                if (key != null)
+                                {
+                                    key
+                                        .SetValue(
+                                            "", string.Format("\"{0}\" %1", Directories.LoaderFilePath), RegistryValueKind.String);
+                                }
                             }
                         }
                     }
                 }
+                catch (Exception e)
+                {
+                    MessageBox.Show(e.ToString());
+                }
             }
-            catch (Exception e)
+            else
             {
-                MessageBox.Show(e.ToString());
+                var p = new Process();
+                p.StartInfo.FileName = Directories.LoaderFilePath;
+                p.StartInfo.Verb = "runas";
+                p.StartInfo.Arguments = "addregkey";
+                p.Start();
             }
+            
         }
 
         public static void HandleUrl(string url, MetroWindow window)

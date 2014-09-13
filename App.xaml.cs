@@ -20,6 +20,7 @@ namespace LeagueSharp.Loader
 
         [DllImport("user32.dll")]
         static extern bool ShowWindow(IntPtr hWnd, int nCmdShow);
+
         protected override void OnStartup(StartupEventArgs e)
         {
             bool createdNew;
@@ -31,9 +32,16 @@ namespace LeagueSharp.Loader
                     var wnd = Injection.FindWindow(IntPtr.Zero, "LeagueSharp");
                     if (wnd != IntPtr.Zero)
                     {
-                        Clipboard.SetText(e.Args[0]);
-                        ShowWindow(wnd, 5);
-                        SetForegroundWindow(wnd);
+                        if (e.Args[0] == "addregkey")
+                        {
+                            LSUriScheme.CreateRegistryKeys(true);
+                        }
+                        else
+                        {
+                            Clipboard.SetText(e.Args[0]);
+                            ShowWindow(wnd, 5);
+                            SetForegroundWindow(wnd);
+                        }
                     }
                 }
 
