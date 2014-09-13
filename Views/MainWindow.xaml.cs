@@ -1,4 +1,6 @@
-﻿#region
+﻿using System.Windows.Navigation;
+
+#region
 
 using System.Windows.Input;
 
@@ -547,6 +549,11 @@ namespace LeagueSharp.Loader.Views
             }
         }
 
+        private void ProfilesButton_OnMouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            ShowProfileNameChangeDialog();
+        }
+
         private void EditProfileMenuItem_OnClick(object sender, RoutedEventArgs e)
         {
             ShowProfileNameChangeDialog();
@@ -610,6 +617,38 @@ namespace LeagueSharp.Loader.Views
             }
 
             SearchTextBox.Focus();
+        }
+
+        private void GameSettingsDataGrid_OnMouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            var item = ((DataGrid)sender).SelectedItem;
+            if (item != null)
+            {
+                ((GameSettings)item).SelectedValue = ((GameSettings)item).SelectedValue ==
+                                                     ((GameSettings)item).PosibleValues[0]
+                    ? ((GameSettings)item).PosibleValues[1]
+                    : ((GameSettings)item).PosibleValues[0];
+            }
+        }
+
+        private void Browser_OnLoadCompleted(object sender, NavigationEventArgs e)
+        {
+            var script = "document.body.style.overflow ='hidden'";
+            var wb = (WebBrowser)sender;
+            wb.InvokeScript("execScript", new Object[] { script, "JavaScript" });
+        }
+
+
+        private void ToggleButton_OnChecked(object sender, RoutedEventArgs e)
+        {
+            if (!Config.Install && Injection.IsInjected)
+            {
+                var hwnd = Injection.GetLeagueWnd();
+                foreach (var assembly in Config.SelectedProfile.InstalledAssemblies.Where(a => a.InjectChecked))
+                {
+                    Injection.UnloadAssembly(hwnd, assembly);
+                }
+            }
         }
     }
 }

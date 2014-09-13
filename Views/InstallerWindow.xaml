@@ -3,12 +3,14 @@
                       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                       xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
                       Title="Assembly installer" 
-                      Height="353" 
-                      Width="427"
+                      Height="322.494" 
+                      Width="398.673"
                       ResizeMode="NoResize" 
                       WindowStartupLocation="CenterOwner" 
                       ShowInTaskbar="False"
-                      Loaded="InstallerWindow_OnLoaded">
+                      Loaded="InstallerWindow_OnLoaded"
+                      BorderThickness="1"
+                      BorderBrush="DeepSkyBlue">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
@@ -16,20 +18,20 @@
         <TabControl Margin="3" x:Name="installTabControl" IsEnabled="{Binding AbleToList}">
             <TabItem Header="Search">
                 <Grid Background="#FFE5E5E5">
-                    <Label Content="Select the assembly location: " HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="-1.333,0.174" Width="373"/>
+                    <Label Content="Select the assembly location: " Margin="10,10,10,0" VerticalAlignment="Top" RenderTransformOrigin="-1.333,0.174"/>
                     <Button x:Name="Step1" IsEnabled="{Binding AbleToList}" Content="Next" Width="75" Margin="0,0,10,10" HorizontalAlignment="Right" Height="25" VerticalAlignment="Bottom" Click="Step1_Click"/>
-                    <RadioButton x:Name="LocalRadioButton" IsChecked="True" Content="Local" HorizontalAlignment="Left" Margin="10,38,0,0" VerticalAlignment="Top" Width="233"/>
-                    <RadioButton x:Name="SvnRadioButton" Content="Git" HorizontalAlignment="Left" Margin="10,105,0,0" VerticalAlignment="Top" Width="299"/>
-                    <RadioButton x:Name="InstalledRadioButton" Content="Installed" HorizontalAlignment="Left" Margin="10,172,0,0" VerticalAlignment="Top" Width="299"/>
-                    <ComboBox x:Name="SvnComboBox" ItemsSource="{Binding Config.KnownRepositories}" HorizontalAlignment="Left" Margin="10,128,0,0" VerticalAlignment="Top" Width="373" IsEditable="True" GotFocus="SvnComboBox_OnGotFocus" />
-                    <TextBox x:Name="PathTextBox" HorizontalAlignment="Left" Height="23" Margin="10,61,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="373" PreviewMouseLeftButtonDown="PathTextBox_PreviewMouseLeftButtonDown" GotFocus="PathTextBox_OnGotFocus"/>
+                    <RadioButton x:Name="LocalRadioButton" IsChecked="True" Content="Local" Margin="10,38,98,0" VerticalAlignment="Top"/>
+                    <RadioButton x:Name="SvnRadioButton" Content="Git" Margin="10,105,98,0" VerticalAlignment="Top"/>
+                    <RadioButton x:Name="InstalledRadioButton" Content="Installed" Margin="10,172,98,0" VerticalAlignment="Top"/>
+                    <ComboBox x:Name="SvnComboBox" ItemsSource="{Binding Config.KnownRepositories}" Margin="10,128,10,0" VerticalAlignment="Top" IsEditable="True" GotFocus="SvnComboBox_OnGotFocus" />
+                    <TextBox x:Name="PathTextBox" Height="23" Margin="10,61,10,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" PreviewMouseLeftButtonDown="PathTextBox_PreviewMouseLeftButtonDown" GotFocus="PathTextBox_OnGotFocus"/>
 
                 </Grid>
             </TabItem>
             <TabItem Header="Select">
                 <Grid Background="#FFE5E5E5">
                     <Button x:Name="Step2" Content="Add" Width="75" Margin="0,0,10,10" HorizontalAlignment="Right" Height="25" VerticalAlignment="Bottom" Click="Step2_Click"/>
-                    <Button x:Name="Step2P" Content="Previous" HorizontalAlignment="Left" Margin="242,0,0,10" Width="75" RenderTransformOrigin="0.52,-0.68" Height="25" VerticalAlignment="Bottom" Click="Step2P_Click"/>
+                    <Button x:Name="Step2P" Content="Previous" Margin="0,0,90,10" RenderTransformOrigin="0.52,-0.68" Height="25" VerticalAlignment="Bottom" Click="Step2P_Click" HorizontalAlignment="Right" Width="75"/>
                     <DataGrid x:Name="MainDataGrid" 
                               Margin="10,10,10,40"
                               AutoGenerateColumns="False"
@@ -39,7 +41,8 @@
                         <DataGrid.Columns>
                             <DataGridCheckBoxColumn Binding="{Binding InstallChecked, UpdateSourceTrigger=PropertyChanged}"
                                                     EditingElementStyle="{DynamicResource MetroDataGridCheckBox}"
-                                                    ElementStyle="{DynamicResource MetroDataGridCheckBox}"/>
+                                                    ElementStyle="{DynamicResource MetroDataGridCheckBox}"
+                                                    Width="30"/>
                             <DataGridTextColumn Header="Name" Width="150" Binding="{Binding Name}" IsReadOnly="True" />
                             <DataGridTextColumn Header="Type" Binding="{Binding Type}" IsReadOnly="True"/>
                             <DataGridTextColumn Header="Description"  Binding="{Binding Description}" IsReadOnly="True" Width="*"/>
