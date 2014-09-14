@@ -3,7 +3,7 @@
                       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                       xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
                       Title="Assembly installer" 
-                      Height="322.494" 
+                      Height="307.241" 
                       Width="398.673"
                       ResizeMode="NoResize" 
                       WindowStartupLocation="CenterOwner" 
@@ -18,13 +18,18 @@
         <TabControl Margin="3" x:Name="installTabControl" IsEnabled="{Binding AbleToList}">
             <TabItem Header="Search">
                 <Grid Background="#FFE5E5E5">
-                    <Label Content="Select the assembly location: " Margin="10,10,10,0" VerticalAlignment="Top" RenderTransformOrigin="-1.333,0.174"/>
-                    <Button x:Name="Step1" IsEnabled="{Binding AbleToList}" Content="Next" Width="75" Margin="0,0,10,10" HorizontalAlignment="Right" Height="25" VerticalAlignment="Bottom" Click="Step1_Click"/>
-                    <RadioButton x:Name="LocalRadioButton" IsChecked="True" Content="Local" Margin="10,38,98,0" VerticalAlignment="Top"/>
-                    <RadioButton x:Name="SvnRadioButton" Content="Git" Margin="10,105,98,0" VerticalAlignment="Top"/>
-                    <RadioButton x:Name="InstalledRadioButton" Content="Installed" Margin="10,172,98,0" VerticalAlignment="Top"/>
-                    <ComboBox x:Name="SvnComboBox" ItemsSource="{Binding Config.KnownRepositories}" Margin="10,128,10,0" VerticalAlignment="Top" IsEditable="True" GotFocus="SvnComboBox_OnGotFocus" />
-                    <TextBox x:Name="PathTextBox" Height="23" Margin="10,61,10,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" PreviewMouseLeftButtonDown="PathTextBox_PreviewMouseLeftButtonDown" GotFocus="PathTextBox_OnGotFocus"/>
+                    <StackPanel Margin="-10,0,0,0">
+                        <Label Content="Select the assembly location: " VerticalAlignment="Top" RenderTransformOrigin="-1.333,0.174" Margin="10,10,0,0"/>
+                        <RadioButton x:Name="LocalRadioButton" IsChecked="True" Content="Local" VerticalAlignment="Top" Margin="26,12,0,0"/>
+                        <TextBox x:Name="PathTextBox" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" PreviewMouseLeftButtonDown="PathTextBox_PreviewMouseLeftButtonDown" GotFocus="PathTextBox_OnGotFocus" Margin="60,5,10,0"/>
+
+                        <RadioButton x:Name="SvnRadioButton" Content="Git" VerticalAlignment="Top" Margin="26,10,0,0"/>
+                        <ComboBox x:Name="SvnComboBox" ItemsSource="{Binding Config.KnownRepositories}" VerticalAlignment="Top" IsEditable="True" GotFocus="SvnComboBox_OnGotFocus" Margin="60,5,10,0" />
+
+                        <RadioButton x:Name="InstalledRadioButton" Content="Installed" VerticalAlignment="Top" Margin="26,10,0,0"/>
+                        <Button x:Name="Step1" IsEnabled="{Binding AbleToList}" Content="Next" Height="25" Click="Step1_Click" Margin="0,10,10,0" RenderTransformOrigin="-0.711,0.266" HorizontalAlignment="Right" Width="55"/>
+
+                    </StackPanel>
 
                 </Grid>
             </TabItem>

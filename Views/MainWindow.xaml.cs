@@ -1,4 +1,6 @@
-﻿#region
+﻿using System.Windows.Data;
+
+#region
 
 using System.Windows.Navigation;
 
@@ -85,7 +87,6 @@ namespace LeagueSharp.Loader.Views
                 LSUriScheme.CreateRegistryKeys(false);
             }
             
-           
             LogsDataGrid.ItemsSource = Logs.MainLog.Items;
 
             //Try to login with the saved credentials.
@@ -125,6 +126,8 @@ namespace LeagueSharp.Loader.Views
             {
                 gameSetting.PropertyChanged += GameSettingOnPropertyChanged;
             }
+
+            Updater.Update();
         }
 
         private void GameSettingOnPropertyChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
@@ -484,37 +487,16 @@ namespace LeagueSharp.Loader.Views
         private void TextBoxBase_OnTextChanged(object sender, TextChangedEventArgs e)
         {
             var searchText = SearchTextBox.Text;
-            if (searchText.Trim() == "")
+            var view = CollectionViewSource.GetDefaultView(Config.SelectedProfile.InstalledAssemblies);
+            view.Filter = obj =>
             {
-                InstalledAssembliesDataGrid.ItemsSource = Config.SelectedProfile.InstalledAssemblies;
-            }
-            else
-            {
-                var searchAssemblies = new List<LeagueSharpAssembly>();
+                var assembly = obj as LeagueSharpAssembly;
+                var nameMatch = Regex.Match(assembly.Name, searchText, RegexOptions.IgnoreCase);
+                var displayNameMatch = Regex.Match(assembly.DisplayName, searchText, RegexOptions.IgnoreCase);
+                var svnNameMatch = Regex.Match(assembly.SvnUrl, searchText, RegexOptions.IgnoreCase);
 
-                foreach (var assembly in Config.SelectedProfile.InstalledAssemblies)
-                {
-                    try
-                    {
-                        var nameMatch = Regex.Match(assembly.Name, searchText, RegexOptions.IgnoreCase);
-                        var displayNameMatch = Regex.Match(assembly.DisplayName, searchText, RegexOptions.IgnoreCase);
-                        var svnNameMatch = Regex.Match(assembly.SvnUrl, searchText, RegexOptions.IgnoreCase);
-
-                        if (displayNameMatch.Success || nameMatch.Success || svnNameMatch.Success)
-                        {
-                            searchAssemblies.Add(assembly);
-                        }
-                    }
-                    catch (Exception)
-                    {
-                        searchAssemblies.Clear();
-                        searchAssemblies.AddRange(Config.SelectedProfile.InstalledAssemblies);
-                        break;
-                    }
-                }
-
-                InstalledAssembliesDataGrid.ItemsSource = searchAssemblies;
-            }
+                return displayNameMatch.Success || nameMatch.Success || svnNameMatch.Success;
+            };
         }
 
         private void MainWindow_OnActivated(object sender, EventArgs e)

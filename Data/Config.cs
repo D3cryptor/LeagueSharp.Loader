@@ -56,6 +56,7 @@ namespace LeagueSharp.Loader.Data
 {
     public static class Directories
     {
+        public static readonly string CurrentDirectory = AppDomain.CurrentDomain.BaseDirectory;
         public static readonly string LoaderFilePath = Path.Combine(
             AppDomain.CurrentDomain.BaseDirectory, "Leaguesharp.Loader.exe");
 

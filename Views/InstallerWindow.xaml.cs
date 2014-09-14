@@ -238,5 +238,6 @@ namespace LeagueSharp.Loader.Views
                 PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
             }
         }
+
     }
 }
