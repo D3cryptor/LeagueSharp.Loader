@@ -127,7 +127,6 @@ namespace LeagueSharp.Loader.Views
                 gameSetting.PropertyChanged += GameSettingOnPropertyChanged;
             }
 
-            Updater.Update();
         }
 
         private void GameSettingOnPropertyChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
