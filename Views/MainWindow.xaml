@@ -16,8 +16,10 @@
                       ShowIconOnTitleBar="False"
                       StateChanged="MainWindow_OnStateChanged"
                       BorderThickness="1"
-                      BorderBrush="DeepSkyBlue">
-    
+                      BorderBrush="DeepSkyBlue"
+                      SaveWindowPosition="True">
+
+
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
