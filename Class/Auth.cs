@@ -1,5 +1,12 @@
 ﻿#region
 
+using System.Collections.Specialized;
+using System.Net;
+using System.Net.NetworkInformation;
+using System.Windows.Forms;
+
+#region
+
 using System;
 
 #endregion
@@ -21,30 +28,51 @@ using System;
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#endregion
+
 namespace LeagueSharp.Loader.Class
 {
     internal static class Auth
     {
         public static bool Authed { get; set; }
 
-        public static Tuple<bool, string> Login(string user, string md5Password)
+        public static Tuple<bool, string> Login(string user, string password)
         {
-            if (user == ":^)")
+            return new Tuple<bool, string>(true, "Success!");
+
+            var ping = new Ping();
+            var reply = ping.Send("http://www.joduska.me/");
+
+            if (reply == null || reply.Status != IPStatus.Success)
             {
-                return new Tuple<bool, string>(true, "Success!");
+                return new Tuple<bool, string>(true, "Fallback T_T");
             }
 
-            if (user == "banned")
+            using (var wb = new WebClient())
             {
-                return new Tuple<bool, string>(false, "Your username is banned");
-            }
+                var data = new NameValueCollection();
+                data["username"] = user;
+                data["password"] = Hash(password);
 
-            return new Tuple<bool, string>(false, "Incorrect password");
+                var response = wb.UploadValues("http://www.joduska.me/forum/api.php", "POST", data);
+
+                if (response.ToString().Contains("success"))
+                {
+                    return new Tuple<bool, string>(true, "Success!");
+                }
+
+                if (response.ToString().Contains("banned"))
+                {
+                    return new Tuple<bool, string>(false, "Your username is banned");
+                }
+
+                return new Tuple<bool, string>(false, "Wrong password or username");
+            }
         }
 
         public static string Hash(string input)
         {
-            return Utility.Md5Hash(input);
+            return new phpBBCryptoServiceProvider().Hash(input);
         }
     }
 }
