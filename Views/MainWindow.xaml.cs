@@ -92,6 +92,8 @@ namespace LeagueSharp.Loader.Views
                 Environment.Exit(0);
             }
 
+            Updater.Update();
+
             if (Config.FirstRun)
             {
                 LSUriScheme.CreateRegistryKeys(false);
