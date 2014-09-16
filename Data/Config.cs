@@ -66,9 +66,11 @@ namespace LeagueSharp.Loader.Data
             "\\";
 
         public static readonly string AssembliesDir =
-            Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Assemblies") + "\\";
+            Path.Combine(
+                Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "LeagueSharp", "Assemblies") +
+            "\\";
 
-        public static readonly string LibrariesDir = Path.Combine(AssembliesDir, "System") + "\\";
+        public static readonly string CoreDirectory = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "System") + "\\";
 
         public static readonly string LogsDir = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Logs") +
                                                 "\\";

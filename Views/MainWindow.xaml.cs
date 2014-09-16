@@ -86,7 +86,7 @@ namespace LeagueSharp.Loader.Views
             DataContext = this;
             GeneralSettingsItem.IsSelected = true;
 
-            if (!File.Exists(Path.Combine(Directories.LibrariesDir, "Leaguesharp.Core.dll")))
+            if (!File.Exists(Path.Combine(Directories.CoreDirectory, "Leaguesharp.Core.dll")))
             {
                 System.Windows.Forms.MessageBox.Show("Couldn't find Leaguesharp.Core.dll");
                 Environment.Exit(0);

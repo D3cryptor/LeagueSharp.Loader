@@ -164,7 +164,7 @@ namespace LeagueSharp.Loader.Class
         {
             get
             {
-                return (Type == AssemblyType.Library ? Directories.LibrariesDir : Directories.AssembliesDir) +
+                return (Type == AssemblyType.Library ? Directories.CoreDirectory : Directories.AssembliesDir) +
                        Path.GetFileName(Compiler.GetOutputFilePath(Project));
             }
         }
@@ -191,7 +191,7 @@ namespace LeagueSharp.Loader.Class
                         {
                             Configuration = "Release",
                             PlatformTarget = "x86",
-                            ReferencesPath = Directories.LibrariesDir,
+                            ReferencesPath = Directories.CoreDirectory,
                             UpdateReferences = true,
                             PostbuildEvent = true,
                             PrebuildEvent = true,
@@ -280,7 +280,7 @@ namespace LeagueSharp.Loader.Class
             {
                 var result = Utility.OverwriteFile(
                     Compiler.GetOutputFilePath(Project),
-                    (Type == AssemblyType.Library ? Directories.LibrariesDir : Directories.AssembliesDir) + "\\" +
+                    (Type == AssemblyType.Library ? Directories.CoreDirectory : Directories.AssembliesDir) + "\\" +
                     Path.GetFileName(Compiler.GetOutputFilePath(Project)));
 
                 Utility.ClearDirectory(Compiler.GetOutputFilePath(Project));

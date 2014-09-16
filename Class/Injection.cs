@@ -78,7 +78,7 @@ namespace LeagueSharp.Loader.Class
 
         private static void ResolveInjectDLL()
         {
-            var hModule = LoadLibrary(Path.Combine(Directories.LibrariesDir, "LeagueSharp.Bootstrap.dll"));
+            var hModule = LoadLibrary(Path.Combine(Directories.CoreDirectory, "LeagueSharp.Bootstrap.dll"));
             if (!(hModule != IntPtr.Zero))
             {
                 return;
@@ -112,7 +112,7 @@ namespace LeagueSharp.Loader.Class
             var leagueProcess = GetLeagueProcess();
             if (leagueProcess != null && !IsInjected)
             {
-                var num = injectDLL(leagueProcess.Id, Path.Combine(Directories.LibrariesDir, "LeagueSharp.Core.dll"))
+                var num = injectDLL(leagueProcess.Id, Path.Combine(Directories.CoreDirectory, "LeagueSharp.Core.dll"))
                     ? 1
                     : 0;
             }
@@ -122,7 +122,7 @@ namespace LeagueSharp.Loader.Class
         {
             if (assembly.Type != AssemblyType.Library)
             {
-                var str = string.Format("load \"{0}\"", Path.GetFileName(assembly.PathToBinary));
+                var str = string.Format("load \"{0}\"", assembly.PathToBinary);
                 var lParam = new COPYDATASTRUCT { cbData = 1, dwData = str.Length * 2 + 2, lpData = str };
                 SendMessage(wnd, 74U, IntPtr.Zero, ref lParam);
             }
