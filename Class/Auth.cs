@@ -4,6 +4,7 @@ using System.Collections.Specialized;
 using System.IO;
 using System.Net;
 using System.Text;
+using System.Windows;
 
 #region
 
@@ -35,7 +36,7 @@ namespace LeagueSharp.Loader.Class
     internal static class Auth
     {
         public static bool Authed { get; set; }
-
+        public const string AuthServer = "www.website.com";
         public static Tuple<bool, string> Login(string user, string hash)
         {
             return new Tuple<bool, string>(true, "Success!");
@@ -47,28 +48,29 @@ namespace LeagueSharp.Loader.Class
 
             try
             {
-                using (var wb = new WebClient())
+                var wr = WebRequest.Create("http://" + AuthServer + "/forum/api.php?request=login");
+                var content = "username=" + WebUtility.UrlEncode(user) + "&password=" + hash;
+                var data = Encoding.UTF8.GetBytes(content);
+                wr.Timeout = 2000;
+                wr.ContentLength = data.Length;
+                wr.Method = "POST";
+                wr.ContentType = "application/x-www-form-urlencoded";
+                var dataStream = wr.GetRequestStream();
+                dataStream.Write(data, 0, data.Length);
+                dataStream.Close();
+                var response = wr.GetResponse();
+
+                using (var stream = response.GetResponseStream())
                 {
-                    var data = new NameValueCollection();
-
-                    data["username"] = user;
-                    data["password"] = hash;
-
-                    var response = wb.UploadValues("http://www.joduska.me/forum/api.php?request=login", "POST", data);
-
-                    using (Stream stream = new MemoryStream(response))
+                    var reader = new StreamReader(stream, Encoding.UTF8);
+                    var responseString = reader.ReadToEnd();
+                    if (responseString.Contains("success"))
                     {
-                        var reader = new StreamReader(stream, Encoding.UTF8);
-                        var responseString = reader.ReadToEnd();
-
-                        if (responseString.Contains("success"))
-                        {
-                            return new Tuple<bool, string>(true, "Success!");
-                        }
+                        return new Tuple<bool, string>(true, "Success!");
                     }
+               }
 
-                    return new Tuple<bool, string>(false, "Wrong password or username");
-                }
+                return new Tuple<bool, string>(false, "Wrong password or username, register at http://" + AuthServer); 
             }
             catch (Exception e)
             {

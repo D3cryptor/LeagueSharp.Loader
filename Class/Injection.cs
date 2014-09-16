@@ -47,9 +47,15 @@ namespace LeagueSharp.Loader.Class
                 var leagueProcess = GetLeagueProcess();
                 if (leagueProcess != null)
                 {
-                    return
+                    try
+                    {
+                        return
                         leagueProcess.Modules.Cast<ProcessModule>()
                             .Any(processModule => processModule.ModuleName == "LeagueSharp.Core.dll");
+                    }
+                    catch (Exception)
+                    {
+                    }
                 }
                 return false;
             }

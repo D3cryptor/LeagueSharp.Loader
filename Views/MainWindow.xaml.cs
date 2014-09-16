@@ -1,4 +1,8 @@
 ﻿using System.Windows.Data;
+using System.Windows.Forms;
+using Clipboard = System.Windows.Clipboard;
+using DataGrid = System.Windows.Controls.DataGrid;
+using WebBrowser = System.Windows.Controls.WebBrowser;
 
 #region
 
@@ -82,6 +86,12 @@ namespace LeagueSharp.Loader.Views
             DataContext = this;
             GeneralSettingsItem.IsSelected = true;
 
+            if (!File.Exists(Path.Combine(Directories.LibrariesDir, "Leaguesharp.Core.dll")))
+            {
+                System.Windows.Forms.MessageBox.Show("Couldn't find Leaguesharp.Core.dll");
+                Environment.Exit(0);
+            }
+
             if (Config.FirstRun)
             {
                 LSUriScheme.CreateRegistryKeys(false);
@@ -115,7 +125,7 @@ namespace LeagueSharp.Loader.Views
                         {
                             Injection.Pulse();
                         }
-                        Thread.Sleep(1000);
+                        Thread.Sleep(3000);
                     }
                 });
 
@@ -224,25 +234,32 @@ namespace LeagueSharp.Loader.Views
                 await
                     this.ShowLoginAsync(
                         "LeagueSharp", "Sign in",
-                        new LoginDialogSettings { ColorScheme = MetroDialogOptions.ColorScheme });
+                        new LoginDialogSettings { ColorScheme = MetroDialogOptions.ColorScheme, NegativeButtonVisibility = Visibility.Visible});
 
             var loginResult = new Tuple<bool, string>(false, "Cancel button pressed");
             if (result != null)
             {
                 var hash = Auth.Hash(result.Password);
 
-                Config.Username = result.Username;
-                Config.Password = hash;
-
                 loginResult = Auth.Login(result.Username, hash);
             }
 
             if (result != null && loginResult.Item1)
             {
+                //Save the login credentials
+                Config.Username = result.Username;
+                Config.Password = Auth.Hash(result.Password);
+
                 OnLogin(result.Username);
             }
             else
             {
+                if (result == null)
+                {
+                    MainWindow_OnClosing(null, null);
+                    Environment.Exit(0);
+                }
+
                 ShowAfterLoginDialog(string.Format("Failed to login: {0}", loginResult.Item2), true);
                 Utility.Log(
                     LogStatus.Error, "Login",
@@ -275,7 +292,7 @@ namespace LeagueSharp.Loader.Views
 
         public void MainWindow_OnClosing(object sender, CancelEventArgs e)
         {
-            if (BgWorker.IsBusy)
+            if (BgWorker.IsBusy && e != null)
             {
                 BgWorker.CancelAsync();
                 e.Cancel = true;
