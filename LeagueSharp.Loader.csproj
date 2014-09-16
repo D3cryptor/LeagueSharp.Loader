@@ -106,7 +106,6 @@
     <Compile Include="Data\Log.cs" />
     <Compile Include="Class\SvnUpdater.cs" />
     <Compile Include="Class\Utility.cs" />
-    <Compile Include="Class\phpBBCryptoServiceProvider.cs" />
     <Compile Include="Views\Settings\Hotkeys.xaml.cs">
       <DependentUpon>Hotkeys.xaml</DependentUpon>
     </Compile>

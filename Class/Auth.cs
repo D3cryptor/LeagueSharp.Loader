@@ -1,9 +1,9 @@
 ﻿#region
 
 using System.Collections.Specialized;
+using System.IO;
 using System.Net;
-using System.Net.NetworkInformation;
-using System.Windows.Forms;
+using System.Text;
 
 #region
 
@@ -36,43 +36,46 @@ namespace LeagueSharp.Loader.Class
     {
         public static bool Authed { get; set; }
 
-        public static Tuple<bool, string> Login(string user, string password)
+        public static Tuple<bool, string> Login(string user, string hash)
         {
-            return new Tuple<bool, string>(true, "Success!");
-
-            var ping = new Ping();
-            var reply = ping.Send("http://www.joduska.me/");
-
-            if (reply == null || reply.Status != IPStatus.Success)
+            if (user == null || hash == null)
             {
-                return new Tuple<bool, string>(true, "Fallback T_T");
+                return new Tuple<bool, string>(false, "Password or username is empty");
             }
 
-            using (var wb = new WebClient())
+            try
             {
-                var data = new NameValueCollection();
-                data["username"] = user;
-                data["password"] = Hash(password);
-
-                var response = wb.UploadValues("http://www.joduska.me/forum/api.php", "POST", data);
-
-                if (response.ToString().Contains("success"))
+                using (var wb = new WebClient())
                 {
-                    return new Tuple<bool, string>(true, "Success!");
-                }
+                    var data = new NameValueCollection();
+                    data["username"] = user;
+                    data["password"] = hash;
 
-                if (response.ToString().Contains("banned"))
-                {
-                    return new Tuple<bool, string>(false, "Your username is banned");
-                }
+                    var response = wb.UploadValues("http://www.joduska.me/forum/api.php?request=login", "POST", data);
 
-                return new Tuple<bool, string>(false, "Wrong password or username");
+                    using (Stream stream = new MemoryStream(response))
+                    {
+                        var reader = new StreamReader(stream, Encoding.UTF8);
+                        var responseString = reader.ReadToEnd();
+
+                        if (responseString.Contains("success"))
+                        {
+                            return new Tuple<bool, string>(true, "Success!");
+                        }
+                    }
+
+                    return new Tuple<bool, string>(false, "Wrong password or username");
+                }
+            }
+            catch (Exception e)
+            {
+                return new Tuple<bool, string>(true, "Fallback T_T");
             }
         }
 
         public static string Hash(string input)
         {
-            return new phpBBCryptoServiceProvider().Hash(input);
+            return Utility.Md5Hash(input);
         }
     }
 }
