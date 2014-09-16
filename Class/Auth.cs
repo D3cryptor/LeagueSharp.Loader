@@ -50,6 +50,7 @@ namespace LeagueSharp.Loader.Class
                 using (var wb = new WebClient())
                 {
                     var data = new NameValueCollection();
+
                     data["username"] = user;
                     data["password"] = hash;
 
