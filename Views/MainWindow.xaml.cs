@@ -309,7 +309,7 @@ namespace LeagueSharp.Loader.Views
             {
                 allAssemblies.AddRange(profile.InstalledAssemblies.ToList());
             }
-
+            Utility.ClearDirectory(Directories.AssembliesDir);
             SvnUpdater.ClearUnusedRepos(allAssemblies);
         }
 
