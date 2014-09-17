@@ -1,3 +1,4 @@
+    <repo>https://github.com/LeagueSharp/LeagueSharpCommon</repo>
     <repo>https://github.com/Areidz/Leaguesharp</repo>
     <repo>https://github.com/DangerousMindLoL/league-sharp</repo>
     <repo>https://github.com/Beaving/LeagueSharp</repo>
