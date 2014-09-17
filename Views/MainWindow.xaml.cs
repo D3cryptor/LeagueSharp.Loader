@@ -1,5 +1,6 @@
 ﻿using System.Windows.Data;
 using System.Windows.Forms;
+using Hardcodet.Wpf.TaskbarNotification;
 using Clipboard = System.Windows.Clipboard;
 using DataGrid = System.Windows.Controls.DataGrid;
 using WebBrowser = System.Windows.Controls.WebBrowser;
@@ -62,6 +63,7 @@ namespace LeagueSharp.Loader.Views
         public BackgroundWorker BgWorker = new BackgroundWorker();
         public bool BgWorkerCancelled;
         private bool _working;
+
         public Config Config { get; set; }
 
         public bool Working
@@ -71,6 +73,7 @@ namespace LeagueSharp.Loader.Views
             {
                 _working = value;
                 OnPropertyChanged("Working");
+                InstalledAssembliesDataGrid.Items.Refresh();
             }
         }
 
@@ -93,6 +96,18 @@ namespace LeagueSharp.Loader.Views
             }
 
             Updater.Update();
+            Updater.GetPositories(
+                delegate(List<string> list)
+                {
+                    if (list.Count > 0)
+                    {
+                        Config.KnownRepositories.Clear();
+                        foreach (var repo in list)
+                        {
+                            Config.KnownRepositories.Add(repo);
+                        }
+                    }
+                });
 
             if (Config.FirstRun)
             {
@@ -111,9 +126,10 @@ namespace LeagueSharp.Loader.Views
                 OnLogin(Config.Username);
             }
 
-            PrepareAssemblies(Config.SelectedProfile.InstalledAssemblies, Config.FirstRun || Config.UpdateOnLoad, true);
             Config.FirstRun = false;
 
+            PrepareAssemblies(Config.SelectedProfile.InstalledAssemblies, Config.FirstRun || Config.UpdateOnLoad, true);
+            
             //Used to reload the assemblies from inside the game.
             KeyboardHook.SetHook();
             KeyboardHook.OnKeyUpTrigger += KeyboardHookOnOnKeyUpTrigger;
@@ -132,13 +148,11 @@ namespace LeagueSharp.Loader.Views
                 });
 
             InjectThread.Start();
-
             Config.PropertyChanged += ConfigOnPropertyChanged;
             foreach (var gameSetting in Config.Settings.GameSettings)
             {
                 gameSetting.PropertyChanged += GameSettingOnPropertyChanged;
             }
-
         }
 
         private void GameSettingOnPropertyChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
@@ -165,7 +179,7 @@ namespace LeagueSharp.Loader.Views
                     () =>
                     {
                         Injection.SendConfig(lhwid, Config);
-                        Task.Delay(1000);
+                        Thread.Sleep(1500);
                         foreach (var assembly in Config.SelectedProfile.InstalledAssemblies.Where(a => a.InjectChecked))
                         {
                             Injection.LoadAssembly(lhwid, assembly);
@@ -350,6 +364,7 @@ namespace LeagueSharp.Loader.Views
 
             Working = true;
             var leagueSharpAssemblies = assemblies as IList<LeagueSharpAssembly> ?? assemblies.ToList();
+
             BgWorker = new BackgroundWorker();
             BgWorker.WorkerSupportsCancellation = true;
             BgWorker.DoWork += delegate
@@ -481,17 +496,21 @@ namespace LeagueSharp.Loader.Views
             }
         }
 
-        private void MainWindow_OnStateChanged(object sender, EventArgs e)
-        {
-            if (WindowState == WindowState.Minimized)
-            {
-                Hide();
-            }
-        }
-
         private void TrayMenuClose_OnClick(object sender, RoutedEventArgs e)
         {
             Close();
+        }
+
+        private void TrayMenuHide_OnClick(object sender, RoutedEventArgs e)
+        {
+            if (Visibility == Visibility.Visible)
+            {
+                Hide();
+            }
+            else
+            {
+                Show();
+            }
         }
 
         private void TrayIcon_OnTrayLeftMouseUp(object sender, RoutedEventArgs e)
@@ -526,7 +545,6 @@ namespace LeagueSharp.Loader.Views
                 LSUriScheme.HandleUrl(text, this);
             }
         }
-
 
         private void OnPropertyChanged(string propertyName)
         {
@@ -630,18 +648,6 @@ namespace LeagueSharp.Loader.Views
                 PrepareAssemblies(Config.SelectedProfile.InstalledAssemblies, false, true);
             }
             TextBoxBase_OnTextChanged(null, null);
-        }
-
-        private void GameSettingsDataGrid_OnMouseDoubleClick(object sender, MouseButtonEventArgs e)
-        {
-            var item = ((DataGrid)sender).SelectedItem;
-            if (item != null)
-            {
-                ((GameSettings)item).SelectedValue = ((GameSettings)item).SelectedValue ==
-                                                     ((GameSettings)item).PosibleValues[0]
-                    ? ((GameSettings)item).PosibleValues[1]
-                    : ((GameSettings)item).PosibleValues[0];
-            }
         }
 
         private void Browser_OnLoadCompleted(object sender, NavigationEventArgs e)

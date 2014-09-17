@@ -15,7 +15,10 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#region
+
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.IO.Compression;
@@ -26,11 +29,17 @@ using System.Text.RegularExpressions;
 using System.Windows;
 using LeagueSharp.Loader.Data;
 
+#endregion
+
 namespace LeagueSharp.Loader.Class
 {
     internal static class Updater
     {
-        public const string VersionCheckURL = "https://raw.githubusercontent.com/joduskame/LeagueSharp/master/VersionCheck.txt";
+        public delegate void RepositoriesUpdateDelegate(List<string> list);
+
+        public const string VersionCheckURL =
+            "https://raw.githubusercontent.com/joduskame/LeagueSharp/master/VersionCheck.txt";
+
         public static int VersionToInt(this Version version)
         {
             return version.Major * 10000000 + version.Minor * 10000 + version.Build * 100 + version.Revision;
@@ -50,16 +59,16 @@ namespace LeagueSharp.Loader.Class
                         var vR = Regex.Matches(data, "<version>(.*)</version>");
                         if (vR.Count > 0)
                         {
-                             var v = Version.Parse(vR[0].Groups[1].ToString());
-                             if (Assembly.GetEntryAssembly().GetName().Version.VersionToInt() < v.VersionToInt())
-                             {
+                            var v = Version.Parse(vR[0].Groups[1].ToString());
+                            if (Assembly.GetEntryAssembly().GetName().Version.VersionToInt() < v.VersionToInt())
+                            {
                                 return new Tuple<bool, string>(true, url);
-                             }
+                            }
                         }
                     }
                 }
             }
-            catch 
+            catch
             {
                 return new Tuple<bool, string>(false, "");
             }
@@ -117,6 +126,24 @@ namespace LeagueSharp.Loader.Class
                     MessageBox.Show("Couldnt download the update: " + e);
                 }
             }
+        }
+
+        public static void GetPositories(RepositoriesUpdateDelegate del)
+        {
+            var wb = new WebClient();
+
+            wb.DownloadStringCompleted += delegate(object sender, DownloadStringCompletedEventArgs args)
+            {
+                var result = new List<string>();
+                var matches = Regex.Matches(args.Result, "<repo>(.*)</repo>");
+                foreach (Match match in matches)
+                {
+                    result.Add(match.Groups[1].ToString());
+                }
+                del(result);
+            };
+
+            wb.DownloadStringAsync(new Uri("https://raw.githubusercontent.com/LeagueSharp/LeagueSharpLoader/master/Updates/Repositories.txt"));
         }
     }
 }

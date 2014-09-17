@@ -22,6 +22,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
+using System.Threading.Tasks;
 using LeagueSharp.Loader.Data;
 
 #endregion
@@ -32,6 +33,10 @@ namespace LeagueSharp.Loader.Class
     {
         [ UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet = CharSet.Unicode) ]
         public delegate bool InjectDLLDelegate(int processId, string path);
+
+        public delegate void OnInjectDelegate(EventArgs args);
+
+        public static event OnInjectDelegate OnInject;
 
         private static InjectDLLDelegate injectDLL;
 
@@ -115,6 +120,10 @@ namespace LeagueSharp.Loader.Class
                 var num = injectDLL(leagueProcess.Id, Path.Combine(Directories.CoreDirectory, "LeagueSharp.Core.dll"))
                     ? 1
                     : 0;
+                if (OnInject != null)
+                {
+                    OnInject(new EventArgs());
+                }
             }
         }
 

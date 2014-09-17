@@ -54,6 +54,7 @@
                         </DataGrid.Columns>
                     </DataGrid>
                     <Button Content="Select all" HorizontalAlignment="Left" Margin="10,0,0,10" Width="75" Height="25" VerticalAlignment="Bottom" Click="SelectAllButton_Click"/>
+                    <Button Content="Unselect all" HorizontalAlignment="Left" Margin="90,0,0,10" Width="86" Height="25" VerticalAlignment="Bottom" Click="UnselectAllButton_Click"/>
                 </Grid>
             </TabItem>
         </TabControl>

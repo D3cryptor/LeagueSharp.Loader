@@ -33,13 +33,11 @@ namespace LeagueSharp.Loader.Class
 {
     internal static class Auth
     {
-        public const string AuthServer = "www.website.com";
+        public const string AuthServer = "www.joduska.me";
         public static bool Authed { get; set; }
 
         public static Tuple<bool, string> Login(string user, string hash)
         {
-            return new Tuple<bool, string>(true, "Success!");
-
             if (user == null || hash == null)
             {
                 return new Tuple<bool, string>(false, "Password or username is empty");

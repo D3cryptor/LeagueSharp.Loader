@@ -48,6 +48,7 @@ namespace LeagueSharp.Loader.Views.Settings
             ((MainWindow)DataContext).Config.Username = "";
             ((MainWindow)DataContext).Config.Password = "";
             ((MainWindow)DataContext).MainWindow_OnClosing(null, null);
+
             System.Diagnostics.Process.Start(Application.ResourceAssembly.Location);
             Environment.Exit(0);
         }

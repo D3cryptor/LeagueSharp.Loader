@@ -14,7 +14,6 @@
                       Closing="MainWindow_OnClosing"
                       Icon="../Resources/icon_64x64.ico"
                       ShowIconOnTitleBar="False"
-                      StateChanged="MainWindow_OnStateChanged"
                       BorderThickness="1"
                       BorderBrush="DeepSkyBlue"
                       SaveWindowPosition="True">
@@ -38,7 +37,8 @@
                                     IconSource="../Resources/icon_16x16.ico">
                         <tb:TaskbarIcon.ContextMenu>
                             <ContextMenu Style="{x:Null}">
-                                <MenuItem x:Name="TrayMenuClose" Header="Close" Click="TrayMenuClose_OnClick"/>
+                                <MenuItem Header="Hide" Click="TrayMenuHide_OnClick"/>
+                                <MenuItem Header="Close" Click="TrayMenuClose_OnClick"/>
                             </ContextMenu>
                         </tb:TaskbarIcon.ContextMenu>
                     </tb:TaskbarIcon>
@@ -212,7 +212,6 @@
                     <Button x:Name="InstallButton" Content="Install new assembly" Margin="0,10,10,0" VerticalAlignment="Top" RenderTransformOrigin="1.08,-0.48" Click="InstallButton_Click" HorizontalAlignment="Right" Width="131"/>
                     <TextBox x:Name="SearchTextBox" Height="23" Margin="186,10,299,0" TextWrapping="Wrap" VerticalAlignment="Top" TextChanged="TextBoxBase_OnTextChanged" />
                     <Controls:ProgressRing IsActive="{Binding Working}" HorizontalAlignment="Right" Margin="0,0,29,29" VerticalAlignment="Bottom" Width="64" Height="56"/>
-
                 </Grid>
             </TabItem>
             <TabItem Header="Log" HorizontalAlignment="Left" Height="36" VerticalAlignment="Top" Width="60">

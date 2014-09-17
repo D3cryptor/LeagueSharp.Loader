@@ -1,0 +1,12 @@
+    <repo>https://github.com/Lizzaran/LeagueSharp</repo>
+    <repo>https://github.com/LeagueSharp/LeagueSharpCommon</repo>
+    <repo>https://github.com/Esk0r/LeagueSharp</repo>
+    <repo>https://github.com/RoachxD/LeagueSharp</repo>
+    <repo>https://github.com/trelli/LeagueSharp</repo>
+    <repo>https://github.com/detuks/LeagueSharp</repo>
+    <repo>https://github.com/Chogart/LeagueSharp</repo>
+    <repo>https://github.com/Irvinee/leaguesharp</repo>
+    <repo>https://github.com/TC-Crew/L-Assemblies</repo>
+    <repo>https://github.com/jasteph/LeagueSharp</repo>
+    <repo>https://github.com/Xionanx/Leaguesharp-Projects</repo>
+    <repo>https://github.com/BotHappy/Ecko</repo>

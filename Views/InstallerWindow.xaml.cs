@@ -230,7 +230,15 @@ namespace LeagueSharp.Loader.Views
             OnPropertyChanged("FoundAssemblies");
         }
 
-
+        private void UnselectAllButton_Click(object sender, RoutedEventArgs e)
+        {
+            foreach (var assembly in FoundAssemblies)
+            {
+                assembly.InstallChecked = false;
+            }
+            OnPropertyChanged("FoundAssemblies");
+        }
+        
         private void OnPropertyChanged(string propertyName)
         {
             if (PropertyChanged != null)
