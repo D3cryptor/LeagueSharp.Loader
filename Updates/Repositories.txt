@@ -4,7 +4,7 @@
     <repo>https://github.com/Beaving/LeagueSharp</repo>
     <repo>https://github.com/OnlyTheBest/LeagueSharp</repo>
     <repo>https://github.com/fueledbyflux/LeagueSharp-Public</repo>
-    <repo>https://github.com/blm95/LeagueSharp</repo>
+    <repo>https://github.com/blm95/LeagueSharp2</repo>
     <repo>https://github.com/detuks/LeagueSharp</repo>
     <repo>https://github.com/Snorflake/SFScripts</repo>
     <repo>https://github.com/FlapperDoodlez/LeagueSharp</repo>
