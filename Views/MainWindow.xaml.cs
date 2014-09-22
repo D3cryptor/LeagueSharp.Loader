@@ -96,7 +96,7 @@ namespace LeagueSharp.Loader.Views
             }
 
             Updater.Update();
-            Updater.GetPositories(
+            Updater.GetRepositories(
                 delegate(List<string> list)
                 {
                     if (list.Count > 0)

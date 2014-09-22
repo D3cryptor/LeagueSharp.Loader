@@ -128,7 +128,7 @@ namespace LeagueSharp.Loader.Class
             }
         }
 
-        public static void GetPositories(RepositoriesUpdateDelegate del)
+        public static void GetRepositories(RepositoriesUpdateDelegate del)
         {
             var wb = new WebClient();
 
