@@ -70,6 +70,7 @@ namespace LeagueSharp.Loader.Class
 
                     var result = project.Build();
                     ProjectCollection.GlobalProjectCollection.UnregisterAllLoggers();
+                    ProjectCollection.GlobalProjectCollection.UnloadAllProjects();
                     Utility.Log(
                         result ? LogStatus.Ok : LogStatus.Error, "Compiler",
                         result

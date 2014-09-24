@@ -183,28 +183,7 @@ namespace LeagueSharp.Loader.Class
                     return _project;
                 }
 
-                if (File.Exists(PathToProjectFile))
-                {
-                    try
-                    {
-                        _pf = new ProjectFile(PathToProjectFile, Logs.MainLog)
-                        {
-                            Configuration = "Release",
-                            PlatformTarget = "x86",
-                            ReferencesPath = Directories.CoreDirectory,
-                            UpdateReferences = true,
-                            PostbuildEvent = true,
-                            PrebuildEvent = true,
-                            ResetOutputPath = true
-                        };
-                        _pf.Change();
-                        _project = _pf.Project;
-                    }
-                    catch (Exception e)
-                    {
-                        Utility.Log(LogStatus.Error, "Builder", "Error: " + e, Logs.MainLog);
-                    }
-                }
+                RefreshProject();
 
                 return _project;
             }
@@ -256,6 +235,32 @@ namespace LeagueSharp.Loader.Class
 
         public event PropertyChangedEventHandler PropertyChanged;
 
+        public void RefreshProject()
+        {
+            if (File.Exists(PathToProjectFile))
+            {
+                try
+                {
+                    _pf = new ProjectFile(PathToProjectFile, Logs.MainLog)
+                    {
+                        Configuration = "Release",
+                        PlatformTarget = "x86",
+                        ReferencesPath = Directories.CoreDirectory,
+                        UpdateReferences = true,
+                        PostbuildEvent = true,
+                        PrebuildEvent = true,
+                        ResetOutputPath = true
+                    };
+                    _pf.Change();
+                    _project = _pf.Project;
+                }
+                catch (Exception e)
+                {
+                    Utility.Log(LogStatus.Error, "Builder", "Error: " + e, Logs.MainLog);
+                }
+            }
+        }
+
         public void Update()
         {
             if (Status == AssemblyStatus.Updating || SvnUrl == "")
@@ -275,7 +280,7 @@ namespace LeagueSharp.Loader.Class
         {
             Status = AssemblyStatus.Compiling;
             OnPropertyChanged("Version");
-
+            RefreshProject();
             if (Compiler.Compile(Project, Path.Combine(Directories.LogsDir, Name + ".txt"), Logs.MainLog))
             {
                 var result = Utility.OverwriteFile(

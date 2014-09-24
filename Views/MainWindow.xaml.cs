@@ -326,6 +326,7 @@ namespace LeagueSharp.Loader.Views
                 allAssemblies.AddRange(profile.InstalledAssemblies.ToList());
             }
             Utility.ClearDirectory(Directories.AssembliesDir);
+            Utility.ClearDirectory(Directories.LogsDir);
             SvnUpdater.ClearUnusedRepos(allAssemblies);
         }
 
@@ -483,6 +484,26 @@ namespace LeagueSharp.Loader.Views
             {
                 var user = selectedAssembly.SvnUrl.Remove(0, 19);
                 Clipboard.SetText(string.Format(LSUriScheme.FullName + "project/{0}/{1}/", user, selectedAssembly.Name));
+            }
+        }
+
+        private void LogItem_OnClick(object sender, RoutedEventArgs e)
+        {
+            if (InstalledAssembliesDataGrid.SelectedItems.Count <= 0)
+            {
+                return;
+            }
+
+            var selectedAssembly = (LeagueSharpAssembly)InstalledAssembliesDataGrid.SelectedItems[0];
+            var logFile = Path.Combine(Directories.LogsDir,
+                "Error - " + Path.GetFileName(selectedAssembly.Name + ".txt"));
+            if (File.Exists(logFile))
+            {
+                System.Diagnostics.Process.Start(logFile);
+            }
+            else
+            {
+                System.Windows.MessageBox.Show("Log file not found");
             }
         }
 

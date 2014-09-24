@@ -54,6 +54,7 @@ namespace LeagueSharp.Loader.Class
             try
             {
                 _log = log;
+                
                 if (File.Exists(file))
                 {
                     var projects = ProjectCollection.GlobalProjectCollection.GetLoadedProjects(file);
