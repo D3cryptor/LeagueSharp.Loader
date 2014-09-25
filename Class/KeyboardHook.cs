@@ -1,4 +1,6 @@
-﻿#region
+﻿using System.Collections.Generic;
+
+#region
 
 using System;
 using System.Diagnostics;
@@ -28,10 +30,10 @@ namespace LeagueSharp.Loader.Class
     internal static class KeyboardHook
     {
         public delegate void OnKeyUp(int vKeyCode);
-
+        public static List<int> HookedKeys = new List<int>(); 
         private static readonly KeyboardProc _proc = HookProc;
         private static IntPtr _hHook = IntPtr.Zero;
-
+        
         public static event OnKeyUp OnKeyUpTrigger;
 
         [ DllImport("user32.dll") ]
@@ -66,7 +68,7 @@ namespace LeagueSharp.Loader.Class
         {
             if (code >= 0 && wParam == (IntPtr)0x101)
             {
-                if (OnKeyUpTrigger != null)
+                if (OnKeyUpTrigger != null && HookedKeys.Contains(Marshal.ReadInt32(lParam)))
                 {
                     OnKeyUpTrigger(Marshal.ReadInt32(lParam));
                 }

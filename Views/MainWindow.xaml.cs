@@ -133,6 +133,13 @@ namespace LeagueSharp.Loader.Views
             //Used to reload the assemblies from inside the game.
             KeyboardHook.SetHook();
             KeyboardHook.OnKeyUpTrigger += KeyboardHookOnOnKeyUpTrigger;
+            KeyboardHook.HookedKeys.Add(KeyInterop.VirtualKeyFromKey(Config.Hotkeys.SelectedHotkeys.First(h => h.Name == "Reload").Hotkey));
+            KeyboardHook.HookedKeys.Add(KeyInterop.VirtualKeyFromKey(Config.Hotkeys.SelectedHotkeys.First(h => h.Name == "CompileAndReload").Hotkey));
+
+            foreach (var hk in Config.Hotkeys.SelectedHotkeys)
+            {
+                hk.PropertyChanged += hk_PropertyChanged;
+            }
 
             InjectThread = new Thread(
                 () =>
@@ -153,6 +160,11 @@ namespace LeagueSharp.Loader.Views
             {
                 gameSetting.PropertyChanged += GameSettingOnPropertyChanged;
             }
+        }
+
+        void hk_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            KeyboardHook.HookedKeys.Add(KeyInterop.VirtualKeyFromKey(((HotkeyEntry)sender).Hotkey));
         }
 
         private void GameSettingOnPropertyChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
@@ -201,7 +213,7 @@ namespace LeagueSharp.Loader.Views
             var reloadAndCompileVKey =
                 KeyInterop.VirtualKeyFromKey(
                     Config.Hotkeys.SelectedHotkeys.First(h => h.Name == "CompileAndReload").Hotkey);
-            
+
             if (vKeyCode == reloadVKey || vKeyCode == reloadAndCompileVKey)
             {
                 var hwnd = Injection.GetLeagueWnd();
@@ -292,6 +304,11 @@ namespace LeagueSharp.Loader.Views
             {
                 ShowLoginDialog();
             }
+        }
+
+        private async void ShowTextMessage(string title, string message)
+        {
+            await this.ShowMessageAsync(title, message);
         }
 
         private void OnLogin(string username)
@@ -484,6 +501,7 @@ namespace LeagueSharp.Loader.Views
             {
                 var user = selectedAssembly.SvnUrl.Remove(0, 19);
                 Clipboard.SetText(string.Format(LSUriScheme.FullName + "project/{0}/{1}/", user, selectedAssembly.Name));
+                ShowTextMessage("Share", "Assembly url copied to the clipboard");
             }
         }
 
@@ -503,7 +521,7 @@ namespace LeagueSharp.Loader.Views
             }
             else
             {
-                System.Windows.MessageBox.Show("Log file not found");
+                ShowTextMessage("Error", "Log file not found");
             }
         }
 
