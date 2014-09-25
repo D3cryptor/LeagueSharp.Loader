@@ -1,4 +1,8 @@
-﻿#region
+﻿using System.Text.RegularExpressions;
+using System.Windows.Controls;
+using System.Windows.Data;
+
+#region
 
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -247,5 +251,17 @@ namespace LeagueSharp.Loader.Views
             }
         }
 
+        private void TextBoxBase_OnTextChanged(object sender, TextChangedEventArgs e)
+        {
+            var searchText = ((TextBox)sender).Text;
+            var view = CollectionViewSource.GetDefaultView(FoundAssemblies);
+            view.Filter = obj =>
+            {
+                var assembly = obj as LeagueSharpAssembly;
+                var nameMatch = Regex.Match(assembly.Name, searchText, RegexOptions.IgnoreCase);
+
+                return nameMatch.Success;
+            };
+        }
     }
 }

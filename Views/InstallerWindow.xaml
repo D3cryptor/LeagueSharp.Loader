@@ -3,8 +3,8 @@
                       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                       xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
                       Title="Assembly installer" 
-                      Height="307.241" 
-                      Width="398.673"
+                      Height="357.241" 
+                      Width="411.673"
                       ResizeMode="NoResize" 
                       WindowStartupLocation="CenterOwner" 
                       ShowInTaskbar="False"
@@ -38,7 +38,7 @@
                     <Button x:Name="Step2" Content="Add" Width="75" Margin="0,0,10,10" HorizontalAlignment="Right" Height="25" VerticalAlignment="Bottom" Click="Step2_Click"/>
                     <Button x:Name="Step2P" Content="Previous" Margin="0,0,90,10" RenderTransformOrigin="0.52,-0.68" Height="25" VerticalAlignment="Bottom" Click="Step2P_Click" HorizontalAlignment="Right" Width="75"/>
                     <DataGrid x:Name="MainDataGrid" 
-                              Margin="10,10,10,40"
+                              Margin="10,41,10,40"
                               AutoGenerateColumns="False"
                               CanUserAddRows="False"
                               ItemsSource="{Binding FoundAssemblies}"
@@ -55,6 +55,7 @@
                     </DataGrid>
                     <Button Content="Select all" HorizontalAlignment="Left" Margin="10,0,0,10" Width="75" Height="25" VerticalAlignment="Bottom" Click="SelectAllButton_Click"/>
                     <Button Content="Unselect all" HorizontalAlignment="Left" Margin="90,0,0,10" Width="86" Height="25" VerticalAlignment="Bottom" Click="UnselectAllButton_Click"/>
+                    <TextBox HorizontalAlignment="Left" Height="23" Margin="10,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" TextChanged="TextBoxBase_OnTextChanged"/>
                 </Grid>
             </TabItem>
         </TabControl>
