@@ -726,5 +726,10 @@ namespace LeagueSharp.Loader.Views
             var name = (string)((TreeViewItem)((System.Windows.Controls.TreeView)sender).SelectedItem).Header;
             SettingsFrame.Content = Activator.CreateInstance(null, "LeagueSharp.Loader.Views.Settings." + name).Unwrap();
         }
+
+        private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
+        {
+            PrepareAssemblies(Config.SelectedProfile.InstalledAssemblies, true, true);
+        }
     }
 }
