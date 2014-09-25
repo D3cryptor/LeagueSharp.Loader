@@ -17,13 +17,31 @@
                       BorderThickness="1"
                       BorderBrush="DeepSkyBlue"
                       SaveWindowPosition="True">
-
+    <Controls:MetroWindow.RightWindowCommands>
+        <Controls:WindowCommands>
+            <Button Cursor="Hand" x:Name="SettingsButton" Click="SettingsButton_OnClick">
+                <StackPanel Orientation="Horizontal">
+                    <Rectangle Width="14"
+                               Height="14"
+                               Fill="{Binding RelativeSource={RelativeSource AncestorType=Button},
+                                              Path=Foreground}">
+                        <Rectangle.OpacityMask>
+                            <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_settings}" />
+                        </Rectangle.OpacityMask>
+                    </Rectangle>
+                    <TextBlock Margin="4 0 0 0"
+                               VerticalAlignment="Center"
+                               Text="Settings" />
+                </StackPanel>
+            </Button>
+        </Controls:WindowCommands>
+    </Controls:MetroWindow.RightWindowCommands>
 
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <TabControl Margin="3" Grid.ColumnSpan="2" >
+        <TabControl Margin="3" Grid.ColumnSpan="2" x:Name="MainTabControl" >
             <TabItem Header="News">
                 <Grid Background="#FFE5E5E5">
                     <Grid.ColumnDefinitions>
@@ -230,31 +248,13 @@
                     <Button Content="Update all" HorizontalAlignment="Left" Margin="10,0,0,10" Width="75" Height="25" VerticalAlignment="Bottom" Click="ButtonBase_OnClick"/>
                 </Grid>
             </TabItem>
-            <TabItem Header="Log" HorizontalAlignment="Left" Height="36" VerticalAlignment="Top" Width="60">
-                <Grid Background="#FFE5E5E5">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition/>
-                    </Grid.ColumnDefinitions>
-                    <DataGrid x:Name="LogsDataGrid" 
-                              Margin="10" 
-                              ItemsSource="{Binding Logs.MainLog.Items}"
-                              AutoGenerateColumns="False"
-                              CanUserAddRows="False">
-
-                        <DataGrid.Columns>
-                            <DataGridTextColumn Header="Status" Binding="{Binding Status}"/>
-                            <DataGridTextColumn Header="Source" Binding="{Binding Source}"/>
-                            <DataGridTextColumn Header="Content" Width="*" Binding="{Binding Message}"/>
-                        </DataGrid.Columns>
-                    </DataGrid>
-                </Grid>
-            </TabItem>
-            <TabItem Header="Settings" Height="36" VerticalAlignment="Top" Width="109" HorizontalAlignment="Right">
+            <TabItem x:Name="SettingsTabItem" Header="Settings" Height="36" VerticalAlignment="Top" Width="109" HorizontalAlignment="Right">
                 <Grid Background="#FFE5E5E5">
                     <ContentControl x:Name="SettingsFrame" Margin="167,10,10,10" />
                     <TreeView Margin="10,10,0,10" HorizontalAlignment="Left" Width="152" SelectedItemChanged="TreeView_OnSelectedItemChanged" >
                         <TreeViewItem x:Name="GeneralSettingsItem" Header="General"/>
                         <TreeViewItem Header="Hotkeys"/>
+                        <TreeViewItem Header="Log"/>
                     </TreeView>
                 </Grid>
             </TabItem>

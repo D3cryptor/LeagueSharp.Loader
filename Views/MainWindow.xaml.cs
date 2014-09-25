@@ -114,8 +114,6 @@ namespace LeagueSharp.Loader.Views
                 LSUriScheme.CreateRegistryKeys(false);
             }
             
-            LogsDataGrid.ItemsSource = Logs.MainLog.Items;
-
             //Try to login with the saved credentials.
             if (!Auth.Login(Config.Username, Config.Password).Item1)
             {
@@ -160,6 +158,8 @@ namespace LeagueSharp.Loader.Views
             {
                 gameSetting.PropertyChanged += GameSettingOnPropertyChanged;
             }
+
+            SettingsTabItem.Visibility = Visibility.Hidden;
         }
 
         void hk_PropertyChanged(object sender, PropertyChangedEventArgs e)
@@ -730,6 +730,11 @@ namespace LeagueSharp.Loader.Views
         private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
         {
             PrepareAssemblies(Config.SelectedProfile.InstalledAssemblies, true, true);
+        }
+
+        private void SettingsButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            MainTabControl.SelectedIndex = 2;
         }
     }
 }
