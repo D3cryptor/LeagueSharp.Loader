@@ -224,9 +224,9 @@
                         </Controls:SplitButton.ContextMenu>
                     </Controls:SplitButton>
 
-                    <Button x:Name="InstallButton" Content="Install new assembly" Margin="0,10,10,0" VerticalAlignment="Top" RenderTransformOrigin="1.08,-0.48" Click="InstallButton_Click" HorizontalAlignment="Right" Width="131"/>
-                    <TextBox x:Name="SearchTextBox" Height="23" Margin="186,10,299,0" TextWrapping="Wrap" VerticalAlignment="Top" TextChanged="TextBoxBase_OnTextChanged" />
-                    <Controls:ProgressRing IsActive="{Binding Working}" HorizontalAlignment="Right" Margin="0,0,29,29" VerticalAlignment="Bottom" Width="64" Height="56"/>
+                    <Button x:Name="InstallButton" Content="Install new assembly" Margin="0,0,10,10" RenderTransformOrigin="1.08,-0.48" Click="InstallButton_Click" HorizontalAlignment="Right" Width="131" Height="25" VerticalAlignment="Bottom"/>
+                    <TextBox x:Name="SearchTextBox" Height="23" Margin="429,10,10,0" TextWrapping="Wrap" VerticalAlignment="Top" TextChanged="TextBoxBase_OnTextChanged" />
+                    <Controls:ProgressRing IsActive="{Binding Working}" HorizontalAlignment="Right" Margin="0,0,22,50" VerticalAlignment="Bottom" Width="64" Height="56"/>
                     <Button Content="Update all" HorizontalAlignment="Left" Margin="10,0,0,10" Width="75" Height="25" VerticalAlignment="Bottom" Click="ButtonBase_OnClick"/>
                 </Grid>
             </TabItem>
