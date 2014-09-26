@@ -134,7 +134,7 @@ namespace LeagueSharp.Loader.Views
                     {
                         if (
                             ((MainWindow)Owner).Config.SelectedProfile.InstalledAssemblies.All(
-                                a => a.Name != assembly.Name))
+                                a => a.Name != assembly.Name || a.SvnUrl != assembly.SvnUrl))
                         {
                             ((MainWindow)Owner).Config.SelectedProfile.InstalledAssemblies.Add(assembly);
                         }

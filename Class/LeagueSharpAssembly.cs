@@ -77,7 +77,7 @@ namespace LeagueSharp.Loader.Class
         private string _displayName = "";
         private bool _injectChecked;
         private bool _installChecked;
-        private string _pathToProjectFile;
+        private string _pathToProjectFile = "";
         private ProjectFile _pf;
         private Project _project;
         private string _svnUrl;
@@ -163,9 +163,9 @@ namespace LeagueSharp.Loader.Class
         public string PathToBinary
         {
             get
-            {
-                return (Type == AssemblyType.Library ? Directories.CoreDirectory : Directories.AssembliesDir) +
-                       Path.GetFileName(Compiler.GetOutputFilePath(Project));
+            { 
+                return Path.Combine((Type == AssemblyType.Library ? Directories.CoreDirectory : Directories.AssembliesDir)
+                      , (Type == AssemblyType.Library ? "" : PathToProjectFile.GetHashCode().ToString("X")) + Path.GetFileName(Compiler.GetOutputFilePath(Project)));
             }
         }
 
@@ -284,9 +284,7 @@ namespace LeagueSharp.Loader.Class
             if (Compiler.Compile(Project, Path.Combine(Directories.LogsDir, Name + ".txt"), Logs.MainLog))
             {
                 var result = Utility.OverwriteFile(
-                    Compiler.GetOutputFilePath(Project),
-                    (Type == AssemblyType.Library ? Directories.CoreDirectory : Directories.AssembliesDir) + "\\" +
-                    Path.GetFileName(Compiler.GetOutputFilePath(Project)));
+                    Compiler.GetOutputFilePath(Project), PathToBinary);
 
                 Utility.ClearDirectory(Compiler.GetOutputFilePath(Project));
                 Utility.ClearDirectory(Path.Combine(Project.DirectoryPath, "bin"));
