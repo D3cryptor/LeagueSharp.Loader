@@ -55,3 +55,5 @@
     <repo>https://github.com/Dibes/LeagueSharp</repo>
     <repo>https://github.com/DarkAzazel/LeagueSharp</repo>
     <repo>https://github.com/princer007/LeagueSharp</repo>
+    <repo>https://github.com/zUsername/LeagueSharp</repo>
+    <repo>https://github.com/MadScripts/LeagueSharp</repo>
