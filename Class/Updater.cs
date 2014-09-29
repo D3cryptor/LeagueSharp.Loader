@@ -29,6 +29,7 @@ using System.Text.RegularExpressions;
 using System.Threading;
 using System.Windows;
 using LeagueSharp.Loader.Data;
+using LeagueSharp.Loader.Views;
 
 #endregion
 
@@ -40,6 +41,8 @@ namespace LeagueSharp.Loader.Class
 
         public const string VersionCheckURL =
             "https://raw.githubusercontent.com/joduskame/LeagueSharp/master/VersionCheck.txt";
+
+        public static string SetupFile = Path.Combine(Directories.CurrentDirectory, "LeagueSharp-update.exe");
 
         public static int VersionToInt(this Version version)
         {
@@ -80,47 +83,26 @@ namespace LeagueSharp.Loader.Class
         public static void Update()
         {
             var result = GetVersionInfo();
-            var setupFile = Path.Combine(Directories.CurrentDirectory, "LeagueSharp-update.exe");
 
             try
             {
-                if (File.Exists(setupFile))
+                if (File.Exists(SetupFile))
                 {
                     Thread.Sleep(1000);
-                    File.Delete(setupFile);
+                    File.Delete(SetupFile);
                 }
             }
             catch (Exception e)
             {
-                MessageBox.Show("Could not delete setup file, please delete it manually and restart LeagueSharp");
+                MessageBox.Show("Could not delete update file, please delete it manually and restart LeagueSharp");
                 Environment.Exit(0);
             }
 
             if (result.Item1)
             {
-                MessageBox.Show("New version available.");
-
-                try
-                {
-                    using (var webClient = new WebClient())
-                    {
-                        try
-                        {
-                            webClient.DownloadFile(result.Item2, setupFile);
-                            new Process { StartInfo = { FileName = setupFile, Arguments = "/VERYSILENT /DIR=\"" + Directories.CurrentDirectory + "\"" } }.Start();
-                        }
-                        catch (Exception e)
-                        {
-                            MessageBox.Show("Could not download the update, please update manually: " + e);
-                            Environment.Exit(0);
-                        }
-                    }
-                }
-                catch (Exception e)
-                {
-                    MessageBox.Show("Could not download the update, please update manually: " + e);
-                    Environment.Exit(0);
-                }
+                var window = new UpdateWindow();
+                window.UpdateUrl = result.Item2;
+                window.ShowDialog();
             }
         }
 
