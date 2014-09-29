@@ -26,6 +26,7 @@ using System.Linq;
 using System.Net;
 using System.Reflection;
 using System.Text.RegularExpressions;
+using System.Threading;
 using System.Windows;
 using LeagueSharp.Loader.Data;
 
@@ -79,51 +80,46 @@ namespace LeagueSharp.Loader.Class
         public static void Update()
         {
             var result = GetVersionInfo();
-            var updateZip = Path.Combine(Directories.CurrentDirectory, "update.zip");
-            var updateDir = Path.Combine(Directories.CurrentDirectory, "update");
+            var setupFile = Path.Combine(Directories.CurrentDirectory, "LeagueSharp-setup.exe");
+
             try
             {
-                if (File.Exists(updateZip))
+                if (File.Exists(setupFile))
                 {
-                    File.Delete(updateZip);
-                }
-
-                if (Directory.Exists(updateDir))
-                {
-                    Utility.ClearDirectory(updateDir);
-                    Directory.Delete(updateDir);
+                    Thread.Sleep(1000);
+                    File.Delete(setupFile);
                 }
             }
             catch (Exception e)
             {
-                MessageBox.Show("Could not delete old update files, please delete them manually: " + e);
+                MessageBox.Show("Could not delete setup file, please delete it manually and restart LeagueSharp");
                 Environment.Exit(0);
             }
 
             if (result.Item1)
             {
+                MessageBox.Show("New version available.");
+
                 try
                 {
                     using (var webClient = new WebClient())
                     {
-                        webClient.DownloadFile(result.Item2, updateZip);
-                        ZipFile.ExtractToDirectory(updateZip, updateDir);
-                        var batFileA = Directory.GetFiles(updateDir, "*.bat", SearchOption.AllDirectories);
-                        if (batFileA.Any())
+                        try
                         {
-                            Process.Start(batFileA.First());
-                            Environment.Exit(0);
+                            webClient.DownloadFile(result.Item2, setupFile);
+                            new Process { StartInfo = { FileName = setupFile, Arguments = "/VERYSILENT" } }.Start();
                         }
-                        else
+                        catch (Exception e)
                         {
-                            MessageBox.Show("Failed to update");
+                            MessageBox.Show("Could not download the update, please update manually: " + e);
                             Environment.Exit(0);
                         }
                     }
                 }
                 catch (Exception e)
                 {
-                    MessageBox.Show("Couldnt download the update: " + e);
+                    MessageBox.Show("Could not download the update, please update manually: " + e);
+                    Environment.Exit(0);
                 }
             }
         }
