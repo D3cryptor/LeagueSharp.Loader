@@ -80,7 +80,7 @@ namespace LeagueSharp.Loader.Class
         public static void Update()
         {
             var result = GetVersionInfo();
-            var setupFile = Path.Combine(Directories.CurrentDirectory, "LeagueSharp-setup.exe");
+            var setupFile = Path.Combine(Directories.CurrentDirectory, "LeagueSharp-update.exe");
 
             try
             {

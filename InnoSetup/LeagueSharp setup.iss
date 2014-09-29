@@ -14,7 +14,7 @@ DisableReadyPage=yes
 DisableStartupPrompt=yes
 DisableFinishedPage=yes
 OutputDir=Output\
-OutputBaseFilename=LeagueSharp-setup
+OutputBaseFilename=LeagueSharp-update
 PrivilegesRequired=admin
 
 [Files]
