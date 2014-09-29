@@ -2,7 +2,6 @@
 <repo>https://github.com/Areidz/Leaguesharp</repo>
 <repo>https://github.com/DangerousMindLoL/league-sharp</repo>
 <repo>https://github.com/Beaving/LeagueSharp</repo>
-<repo>https://github.com/OnlyTheBest/LeagueSharp</repo>
 <repo>https://github.com/trees-software/leaguesharp</repo>
 <repo>https://github.com/fueledbyflux/LeagueSharp-Public</repo>
 <repo>https://github.com/blm95/LeagueSharp2</repo>
