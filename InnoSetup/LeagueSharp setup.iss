@@ -57,7 +57,7 @@ function InitializeSetup(): Boolean;
 begin
 	initwinversion();
 	msi31('3.1');
-	dotnetfx45(0);
+	dotnetfx45(1);
 	vcredist2013();
 	Result := true;
 end;
