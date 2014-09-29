@@ -60,3 +60,4 @@
 <repo>https://github.com/vihura/LeagueSharp</repo>
 <repo>https://github.com/InjectionDev/LeagueSharp/</repo>
 <repo>https://github.com/alrik94/LeagueSharp</repo>
+<repo>https://github.com/LXMedia1/Primes-Ultimate-Carry</repo>
