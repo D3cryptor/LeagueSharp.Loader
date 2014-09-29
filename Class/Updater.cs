@@ -107,7 +107,7 @@ namespace LeagueSharp.Loader.Class
                         try
                         {
                             webClient.DownloadFile(result.Item2, setupFile);
-                            new Process { StartInfo = { FileName = setupFile, Arguments = "/VERYSILENT" } }.Start();
+                            new Process { StartInfo = { FileName = setupFile, Arguments = "/VERYSILENT /DIR=\"" + Directories.CurrentDirectory + "\"" } }.Start();
                         }
                         catch (Exception e)
                         {

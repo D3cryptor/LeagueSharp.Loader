@@ -7,34 +7,37 @@
 [Setup]
 AppName={#MyAppName}
 AppVersion={#MyAppVersion}
+AppId={#MyAppName}
+DefaultDirName="{src}\LeagueSharp"
 Compression=lzma2
+DisableDirPage=true
 SolidCompression=yes
-CreateAppDir=no
 DisableReadyPage=yes
 DisableStartupPrompt=yes
 DisableFinishedPage=yes
+Uninstallable=no
 OutputDir=Output\
 OutputBaseFilename=LeagueSharp-update
 PrivilegesRequired=admin
 
 [Files]
 ;Loader
-Source: "..\bin\Release\*.exe"; Excludes: *.vshost.exe; DestDir: {src}; Flags: ignoreversion
-Source: "..\bin\Release\*.config"; Excludes: *.vshost.exe.config;  DestDir: {src}; Flags: ignoreversion
-Source: "..\bin\Release\*.dll"; DestDir: "{src}\bin\"; Flags: ignoreversion
+Source: "..\bin\Release\*.exe"; Excludes: *.vshost.exe; DestDir: {app}; Flags: ignoreversion
+Source: "..\bin\Release\*.config"; Excludes: *.vshost.exe.config;  DestDir: {app}; Flags: ignoreversion
+Source: "..\bin\Release\*.dll"; DestDir: "{app}\bin\"; Flags: ignoreversion
 
 ;System
-Source: "..\bin\Release\System\LeagueSharp.AppDomainManager.dll"; DestDir: "{src}\System\"; Flags: ignoreversion
-Source: "..\bin\Release\System\LeagueSharp.Bootstrap.dll"; DestDir: "{src}\System\"; Flags: ignoreversion
-Source: "..\bin\Release\System\Leaguesharp.Core.dll"; DestDir: "{src}\System\"; Flags: ignoreversion
-Source: "..\bin\Release\System\LeagueSharp.dll"; DestDir: "{src}\System\"; Flags: ignoreversion
-Source: "..\bin\Release\System\LeagueSharp.xml"; DestDir: "{src}\System\"; Flags: ignoreversion
-Source: "..\bin\Release\System\SharpDX.Direct3D9.dll"; DestDir: "{src}\System\"; Flags: ignoreversion
-Source: "..\bin\Release\System\SharpDX.dll"; DestDir: "{src}\System\"; Flags: ignoreversion
-Source: "..\bin\Release\System\SharpDX.Toolkit.dll"; DestDir: "{src}\System\"; Flags: ignoreversion
-Source: "..\bin\Release\System\SharpDX.Toolkit.Graphics.dll"; DestDir: "{src}\System\"; Flags: ignoreversion
-Source: "..\bin\Release\System\SharpDX.Toolkit.Graphics.xml"; DestDir: "{src}\System\"; Flags: ignoreversion
-Source: "..\bin\Release\System\SharpDX.Toolkit.xml"; DestDir: "{src}\System\"; Flags: ignoreversion
+Source: "..\bin\Release\System\LeagueSharp.AppDomainManager.dll"; DestDir: "{app}\System\"; Flags: ignoreversion
+Source: "..\bin\Release\System\LeagueSharp.Bootstrap.dll"; DestDir: "{app}\System\"; Flags: ignoreversion
+Source: "..\bin\Release\System\Leaguesharp.Core.dll"; DestDir: "{app}\System\"; Flags: ignoreversion
+Source: "..\bin\Release\System\LeagueSharp.dll"; DestDir: "{app}\System\"; Flags: ignoreversion
+Source: "..\bin\Release\System\LeagueSharp.xml"; DestDir: "{app}\System\"; Flags: ignoreversion
+Source: "..\bin\Release\System\SharpDX.Direct3D9.dll"; DestDir: "{app}\System\"; Flags: ignoreversion
+Source: "..\bin\Release\System\SharpDX.dll"; DestDir: "{app}\System\"; Flags: ignoreversion
+Source: "..\bin\Release\System\SharpDX.Toolkit.dll"; DestDir: "{app}\System\"; Flags: ignoreversion
+Source: "..\bin\Release\System\SharpDX.Toolkit.Graphics.dll"; DestDir: "{app}\System\"; Flags: ignoreversion
+Source: "..\bin\Release\System\SharpDX.Toolkit.Graphics.xml"; DestDir: "{app}\System\"; Flags: ignoreversion
+Source: "..\bin\Release\System\SharpDX.Toolkit.xml"; DestDir: "{app}\System\"; Flags: ignoreversion
 
 [Languages]
 Name: "en"; MessagesFile: "compiler:Default.isl"
@@ -50,7 +53,7 @@ Name: "de"; MessagesFile: "compiler:Languages\German.isl"
 #include "Scripts\products\vcredist2013.iss"
 
 [Run]
-Filename: {src}\{#MyAppExeName}; Flags: shellexec nowait; 
+Filename: {app}\{#MyAppExeName}; Flags: shellexec nowait; 
 
 [Code]
 function InitializeSetup(): Boolean;
