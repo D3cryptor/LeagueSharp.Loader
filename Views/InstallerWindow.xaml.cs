@@ -163,6 +163,7 @@ namespace LeagueSharp.Loader.Views
                 {
                     FoundAssemblies.AddRange(profile.InstalledAssemblies);
                 }
+                FoundAssemblies = FoundAssemblies.Distinct().ToList();
                 installTabControl.SelectedIndex++;
             }
             else

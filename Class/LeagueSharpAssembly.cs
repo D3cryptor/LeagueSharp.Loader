@@ -235,6 +235,15 @@ namespace LeagueSharp.Loader.Class
 
         public event PropertyChangedEventHandler PropertyChanged;
 
+        public override bool Equals(object obj)
+        {
+            if(obj is LeagueSharpAssembly)
+            {
+                return ((LeagueSharpAssembly)obj).PathToProjectFile == PathToProjectFile;
+            }
+            return false;
+        }
+
         public void RefreshProject()
         {
             if (File.Exists(PathToProjectFile))
