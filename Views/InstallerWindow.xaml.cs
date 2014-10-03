@@ -1,4 +1,5 @@
-﻿using System.Text.RegularExpressions;
+﻿using System.IO;
+using System.Text.RegularExpressions;
 using System.Windows.Controls;
 using System.Windows.Data;
 
@@ -92,7 +93,7 @@ namespace LeagueSharp.Loader.Views
                 bgWorker.DoWork += delegate
                 {
                     var updatedDir = SvnUpdater.Update(location, Logs.MainLog, Directories.RepositoryDir);
-                    FoundAssemblies = LeagueSharpAssemblies.GetAssemblies(updatedDir, location);
+                    FoundAssemblies = LeagueSharpAssemblies.GetAssemblies(Path.Combine(updatedDir, "trunk" ), location);
                     foreach (var assembly in FoundAssemblies)
                     {
                         if (autoInstallName != null && assembly.Name.ToLower() == autoInstallName.ToLower())
