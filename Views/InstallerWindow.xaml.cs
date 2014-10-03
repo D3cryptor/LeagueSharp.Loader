@@ -256,12 +256,20 @@ namespace LeagueSharp.Loader.Views
         {
             var searchText = ((TextBox)sender).Text;
             var view = CollectionViewSource.GetDefaultView(FoundAssemblies);
+            searchText = searchText.Replace("*", "(.*)");
             view.Filter = obj =>
             {
-                var assembly = obj as LeagueSharpAssembly;
-                var nameMatch = Regex.Match(assembly.Name, searchText, RegexOptions.IgnoreCase);
+                try
+                {
+                    var assembly = obj as LeagueSharpAssembly;
+                    var nameMatch = Regex.Match(assembly.Name, searchText, RegexOptions.IgnoreCase);
 
-                return nameMatch.Success;
+                    return nameMatch.Success;
+                }
+                catch (System.Exception)
+                {
+                    return true;
+                }
             };
         }
     }

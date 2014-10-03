@@ -564,14 +564,22 @@ namespace LeagueSharp.Loader.Views
         {
             var searchText = SearchTextBox.Text;
             var view = CollectionViewSource.GetDefaultView(Config.SelectedProfile.InstalledAssemblies);
+            searchText = searchText.Replace("*", "(.*)");
             view.Filter = obj =>
             {
-                var assembly = obj as LeagueSharpAssembly;
-                var nameMatch = Regex.Match(assembly.Name, searchText, RegexOptions.IgnoreCase);
-                var displayNameMatch = Regex.Match(assembly.DisplayName, searchText, RegexOptions.IgnoreCase);
-                var svnNameMatch = Regex.Match(assembly.SvnUrl, searchText, RegexOptions.IgnoreCase);
+                try
+                {
+                    var assembly = obj as LeagueSharpAssembly;
+                    var nameMatch = Regex.Match(assembly.Name, searchText, RegexOptions.IgnoreCase);
+                    var displayNameMatch = Regex.Match(assembly.DisplayName, searchText, RegexOptions.IgnoreCase);
+                    var svnNameMatch = Regex.Match(assembly.SvnUrl, searchText, RegexOptions.IgnoreCase);
 
-                return displayNameMatch.Success || nameMatch.Success || svnNameMatch.Success;
+                    return displayNameMatch.Success || nameMatch.Success || svnNameMatch.Success;
+                }
+                catch (Exception)
+                {
+                    return true;
+                }
             };
         }
 
