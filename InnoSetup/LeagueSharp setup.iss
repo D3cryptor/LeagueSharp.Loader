@@ -51,6 +51,7 @@ Name: "de"; MessagesFile: "compiler:Languages\German.isl"
 #include "Scripts\products\dotnetfxversion.iss"
 #include "Scripts\products\msi31.iss"
 #include "Scripts\products\dotnetfx45.iss"
+#include "Scripts\products\vcredist2010.iss"
 #include "Scripts\products\vcredist2013.iss"
 
 [Run]
@@ -62,6 +63,7 @@ begin
 	initwinversion();
 	msi31('3.1');
 	dotnetfx45(1);
+	vcredist2010();
 	vcredist2013();
 	Result := true;
 end;
