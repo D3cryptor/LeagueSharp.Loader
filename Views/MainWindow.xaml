@@ -249,7 +249,7 @@
                     <Button Content="Compile all" HorizontalAlignment="Left" Margin="90,0,0,10" Width="75" Height="25" VerticalAlignment="Bottom" Click="CompileAll_OnClick"/>
                 </Grid>
             </TabItem>
-            <TabItem x:Name="SettingsTabItem" Header="Settings" Height="36" VerticalAlignment="Top" Width="109" HorizontalAlignment="Right">
+            <TabItem x:Name="SettingsTabItem" Header="Settings" Height="36" VerticalAlignment="Top">
                 <Grid Background="#FFE5E5E5">
                     <ContentControl x:Name="SettingsFrame" Margin="167,10,10,10" />
                     <TreeView Margin="10,10,0,10" HorizontalAlignment="Left" Width="152" SelectedItemChanged="TreeView_OnSelectedItemChanged" >

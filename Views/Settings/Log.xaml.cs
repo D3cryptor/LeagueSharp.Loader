@@ -26,5 +26,10 @@ namespace LeagueSharp.Loader.Views.Settings
             InitializeComponent();
             LogsDataGrid.ItemsSource = Logs.MainLog.Items;
         }
+
+        private void OpenFolderButton_Click(object sender, RoutedEventArgs e)
+        {
+            System.Diagnostics.Process.Start(Directories.LogsDir);
+        }
     }
 }
