@@ -62,6 +62,7 @@ namespace LeagueSharp.Loader.Views
     {
         public BackgroundWorker BgWorker = new BackgroundWorker();
         public bool BgWorkerCancelled;
+        public bool FirstTimeActivated = true;
         private bool _working;
 
         public Config Config { get; set; }
@@ -126,8 +127,6 @@ namespace LeagueSharp.Loader.Views
 
             Config.FirstRun = false;
 
-            PrepareAssemblies(Config.SelectedProfile.InstalledAssemblies, Config.FirstRun || Config.UpdateOnLoad, true);
-            
             //Used to reload the assemblies from inside the game.
             KeyboardHook.SetHook();
             KeyboardHook.OnKeyUpTrigger += KeyboardHookOnOnKeyUpTrigger;
@@ -585,6 +584,12 @@ namespace LeagueSharp.Loader.Views
 
         private void MainWindow_OnActivated(object sender, EventArgs e)
         {
+            if (FirstTimeActivated)
+            {
+                FirstTimeActivated = false;
+                PrepareAssemblies(Config.SelectedProfile.InstalledAssemblies, Config.FirstRun || Config.UpdateOnLoad, true);
+            }
+
             var text = Clipboard.GetText();
             if (text.StartsWith(LSUriScheme.FullName))
             {
@@ -629,7 +634,9 @@ namespace LeagueSharp.Loader.Views
 
         private async void ShowProfileNameChangeDialog()
         {
-            var result = await this.ShowInputAsync("Rename", "Insert the new name for the profile");
+            var result = await this.ShowInputAsync("Rename", "Insert the new name for the profile", new MetroDialogSettings { 
+            DefaultText = Config.SelectedProfile.Name,
+            });
 
             if (!string.IsNullOrEmpty(result))
             {
@@ -735,9 +742,14 @@ namespace LeagueSharp.Loader.Views
             SettingsFrame.Content = Activator.CreateInstance(null, "LeagueSharp.Loader.Views.Settings." + name).Unwrap();
         }
 
-        private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
+        private void UpdateAll_OnClick(object sender, RoutedEventArgs e)
         {
             PrepareAssemblies(Config.SelectedProfile.InstalledAssemblies, true, true);
+        }
+
+        private void CompileAll_OnClick(object sender, RoutedEventArgs e)
+        {
+            PrepareAssemblies(Config.SelectedProfile.InstalledAssemblies, false, true);
         }
 
         private void SettingsButton_OnClick(object sender, RoutedEventArgs e)
