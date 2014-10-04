@@ -17,6 +17,18 @@
         <Hotkey>F8</Hotkey>
         <DefaultKey>F8</DefaultKey>
       </SelectedHotkeys>
+      <SelectedHotkeys>
+        <Name>ShowMenuPress</Name>
+        <Description>Shows the menu (Press)</Description>
+        <Hotkey>LeftShift</Hotkey>
+        <DefaultKey>LeftShift</DefaultKey>
+      </SelectedHotkeys>
+      <SelectedHotkeys>
+        <Name>ShowMenuToggle</Name>
+        <Description>Shows the menu (Toggle)</Description>
+        <Hotkey>F9</Hotkey>
+        <DefaultKey>F9</DefaultKey>
+      </SelectedHotkeys>
     </SelectedHotkeys>
   </Hotkeys>
   <Settings>
