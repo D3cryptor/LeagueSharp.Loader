@@ -222,5 +222,23 @@ namespace LeagueSharp.Loader.Class
 
             return sb.ToString();
         }
+
+        public static string Md5Checksum(string filePath)
+        {
+            try
+            {
+                using (var md5 = MD5.Create())
+                {
+                    using (var stream = File.OpenRead(filePath))
+                    {
+                        return BitConverter.ToString(md5.ComputeHash(stream)).Replace("-", "").ToLower();
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                return "-1";
+            }
+        }
     }
 }

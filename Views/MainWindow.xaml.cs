@@ -96,7 +96,7 @@ namespace LeagueSharp.Loader.Views
                 Environment.Exit(0);
             }
 
-            Updater.Update();
+            Updater.UpdateLoader();
             Updater.GetRepositories(
                 delegate(List<string> list)
                 {

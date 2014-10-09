@@ -115,7 +115,7 @@ namespace LeagueSharp.Loader.Class
         public static void Pulse()
         {
             var leagueProcess = GetLeagueProcess();
-            if (leagueProcess != null && !IsInjected)
+            if (leagueProcess != null && !IsInjected && Updater.UpdateCore(leagueProcess.Modules[0].FileName))
             {
                 var num = injectDLL(leagueProcess.Id, Path.Combine(Directories.CoreDirectory, "LeagueSharp.Core.dll"))
                     ? 1

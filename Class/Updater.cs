@@ -30,6 +30,8 @@ using System.Threading;
 using System.Windows;
 using LeagueSharp.Loader.Data;
 using LeagueSharp.Loader.Views;
+using System.Runtime.Serialization;
+using System.Runtime.Serialization.Json;
 
 #endregion
 
@@ -39,36 +41,44 @@ namespace LeagueSharp.Loader.Class
     {
         public delegate void RepositoriesUpdateDelegate(List<string> list);
 
-        public const string VersionCheckURL =
-            "https://raw.githubusercontent.com/joduskame/LeagueSharp/master/VersionCheck.txt";
-
+        public const string VersionCheckURL = "http://www.joduska.me/deploy/update.php?action=vcheck";
+        public const string CoreVersionCheckURL = "http://www.joduska.me/deploy/update.php?action=lcheck&lmd5={0}";
+        public static string UpdateZip = Path.Combine(Directories.CoreDirectory, "update.zip");
         public static string SetupFile = Path.Combine(Directories.CurrentDirectory, "LeagueSharp-update.exe");
+
+        public static int LastCoreUpdateTry = 0;
 
         public static int VersionToInt(this Version version)
         {
             return version.Major * 10000000 + version.Minor * 10000 + version.Build * 100 + version.Revision;
         }
 
-        public static Tuple<bool, string> GetVersionInfo()
+        [DataContract]
+        internal class UpdateInfo
+        {
+            [DataMember]
+            internal bool valid;
+
+            [DataMember]
+            internal string url;
+
+            [DataMember]
+            internal string version;
+        }
+
+        public static Tuple<bool, string> GetLoaderVersionInfo()
         {
             try
             {
                 using (var client = new WebClient())
                 {
-                    var data = client.DownloadString(VersionCheckURL);
-                    var updateurl = Regex.Matches(data, "<url>(.*)</url>");
-                    if (updateurl.Count > 0)
+                    var data = client.DownloadData(VersionCheckURL);
+                    var ser = new DataContractJsonSerializer(typeof(UpdateInfo));
+                    var updateInfo = (UpdateInfo)ser.ReadObject(new MemoryStream(data));
+                    var v = Version.Parse(updateInfo.version);
+                    if (Assembly.GetEntryAssembly().GetName().Version.VersionToInt() < v.VersionToInt())
                     {
-                        var url = updateurl[0].Groups[1].ToString();
-                        var vR = Regex.Matches(data, "<version>(.*)</version>");
-                        if (vR.Count > 0)
-                        {
-                            var v = Version.Parse(vR[0].Groups[1].ToString());
-                            if (Assembly.GetEntryAssembly().GetName().Version.VersionToInt() < v.VersionToInt())
-                            {
-                                return new Tuple<bool, string>(true, url);
-                            }
-                        }
+                       return new Tuple<bool, string>(true, updateInfo.url);
                     }
                 }
             }
@@ -80,9 +90,9 @@ namespace LeagueSharp.Loader.Class
             return new Tuple<bool, string>(false, "");
         }
 
-        public static void Update()
+        public static void UpdateLoader()
         {
-            var result = GetVersionInfo();
+            var result = GetLoaderVersionInfo();
 
             try
             {
@@ -104,6 +114,83 @@ namespace LeagueSharp.Loader.Class
                 window.UpdateUrl = result.Item2;
                 window.ShowDialog();
             }
+        }
+
+        public static bool UpdateCore(string LeagueOfLegendsFilePath)
+        {
+            if (Environment.TickCount - LastCoreUpdateTry < 30000)
+            {
+                return false;
+            }
+
+            LastCoreUpdateTry = Environment.TickCount;
+
+            try
+            {
+                var leagueMd5 = Utility.Md5Checksum(LeagueOfLegendsFilePath);
+                var wr = WebRequest.Create(string.Format(CoreVersionCheckURL, leagueMd5));
+                wr.Timeout = 2000;
+                wr.Method = "GET";
+                var response = wr.GetResponse();
+
+                using (var stream = response.GetResponseStream())
+                {
+                    if (stream != null)
+                    {
+                        var ser = new DataContractJsonSerializer(typeof(UpdateInfo));
+                        var updateInfo = (UpdateInfo)ser.ReadObject(stream);
+                            
+                        if(updateInfo.version == "0")
+                        {
+                            MessageBox.Show("\"League Of Legends.exe\" version not supported " + leagueMd5);
+                            return false;
+                        }
+
+                        if (updateInfo.version != Utility.Md5Checksum(Path.Combine(Directories.CoreDirectory, "LeagueSharp.Core.dll"))) //Update needed
+                        {
+                            try
+                            {
+                                if (File.Exists(UpdateZip))
+                                {
+                                    File.Delete(UpdateZip);
+                                    Thread.Sleep(500);
+                                }
+
+                                using (var webClient = new WebClient())
+                                {
+                                    webClient.DownloadFile(updateInfo.url, UpdateZip);
+                                    using (var archive = ZipFile.OpenRead(UpdateZip))
+                                    {
+                                        foreach (var entry in archive.Entries)
+                                        {
+                                             entry.ExtractToFile(Path.Combine(Directories.CoreDirectory, entry.FullName), true);
+                                         }
+                                    }
+                                }
+                            }
+                            catch(Exception e)
+                            {
+                                MessageBox.Show("Failed to download: " + e);
+                                return false;
+                            }
+                            finally
+                            {
+                                if (File.Exists(UpdateZip))
+                                {
+                                    File.Delete(UpdateZip);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            catch(Exception e)
+            {
+                //MessageBox.Show(e.ToString());
+                return File.Exists(Path.Combine(Directories.CoreDirectory, "LeagueSharp.Core.dll"));
+            }
+
+            return File.Exists(Path.Combine(Directories.CoreDirectory, "LeagueSharp.Core.dll"));
         }
 
         public static void GetRepositories(RepositoriesUpdateDelegate del)
