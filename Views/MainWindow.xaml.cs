@@ -84,7 +84,17 @@ namespace LeagueSharp.Loader.Views
         private void MainWindow_OnLoaded(object sender, RoutedEventArgs e)
         {
             Utility.CreateFileFromResource("config.xml", "LeagueSharp.Loader.Resources.config.xml");
-            Config = ((Config)Utility.MapXmlFileToClass(typeof(Config), "config.xml"));
+
+            try
+            {
+                Config = ((Config)Utility.MapXmlFileToClass(typeof(Config), "config.xml"));
+            }
+            catch(Exception)
+            {
+                File.Delete(Path.Combine(Directories.CurrentDirectory, "config.xml"));
+                System.Windows.MessageBox.Show("Couldn't load config.xml");
+                Environment.Exit(0);
+            }
             
             Browser.Visibility = Visibility.Hidden;
             DataContext = this;
@@ -92,11 +102,12 @@ namespace LeagueSharp.Loader.Views
 
             if (!File.Exists(Path.Combine(Directories.CoreDirectory, "Leaguesharp.Core.dll")))
             {
-                System.Windows.Forms.MessageBox.Show("Couldn't find Leaguesharp.Core.dll");
+                System.Windows.MessageBox.Show("Couldn't find Leaguesharp.Core.dll");
                 Environment.Exit(0);
             }
 
             Updater.UpdateLoader();
+
             Updater.GetRepositories(
                 delegate(List<string> list)
                 {

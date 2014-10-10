@@ -38,12 +38,7 @@ namespace LeagueSharp.Loader.Class
 
         public static event OnInjectDelegate OnInject;
 
-        private static InjectDLLDelegate injectDLL;
-
-        static Injection()
-        {
-            ResolveInjectDLL();
-        }
+        private static InjectDLLDelegate injectDLL = null;
 
         public static bool IsInjected
         {
@@ -117,9 +112,15 @@ namespace LeagueSharp.Loader.Class
             var leagueProcess = GetLeagueProcess();
             if (leagueProcess != null && !IsInjected && Updater.UpdateCore(leagueProcess.Modules[0].FileName))
             {
+                if (injectDLL == null)
+                {
+                    ResolveInjectDLL();
+                }
+
                 var num = injectDLL(leagueProcess.Id, Path.Combine(Directories.CoreDirectory, "LeagueSharp.Core.dll"))
                     ? 1
                     : 0;
+
                 if (OnInject != null)
                 {
                     OnInject(new EventArgs());
