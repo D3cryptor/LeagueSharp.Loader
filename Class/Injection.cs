@@ -111,21 +111,27 @@ namespace LeagueSharp.Loader.Class
         public static void Pulse()
         {
             var leagueProcess = GetLeagueProcess();
-            if (leagueProcess != null && !IsInjected && Updater.UpdateCore(leagueProcess.Modules[0].FileName))
+            try
             {
-                if (injectDLL == null)
+                if (leagueProcess != null && !IsInjected && Updater.UpdateCore(leagueProcess.Modules[0].FileName))
                 {
-                    ResolveInjectDLL();
-                }
+                    if (injectDLL == null)
+                    {
+                        ResolveInjectDLL();
+                    }
 
-                var num = injectDLL(leagueProcess.Id, Directories.CoreFilePath)
-                    ? 1
-                    : 0;
+                    var num = injectDLL(leagueProcess.Id, Directories.CoreFilePath)
+                        ? 1
+                        : 0;
 
-                if (OnInject != null)
-                {
-                    OnInject(EventArgs.Empty);
+                    if (OnInject != null)
+                    {
+                        OnInject(EventArgs.Empty);
+                    }
                 }
+            }
+            catch
+            {
             }
         }
 
