@@ -8,6 +8,7 @@ using System.Reflection;
 using System.Xml.Serialization;
 using LeagueSharp.Loader.Data;
 using Microsoft.Build.Evaluation;
+using System.Windows;
 
 #endregion
 
@@ -244,6 +245,11 @@ namespace LeagueSharp.Loader.Class
             return false;
         }
 
+        public override int GetHashCode()
+        {
+            return PathToProjectFile.GetHashCode();
+        }
+
         public void RefreshProject()
         {
             if (File.Exists(PathToProjectFile))
@@ -279,8 +285,15 @@ namespace LeagueSharp.Loader.Class
 
             Status = AssemblyStatus.Updating;
             OnPropertyChanged("Version");
-
-            SvnUpdater.Update(SvnUrl, Logs.MainLog, Directories.RepositoryDir);
+            try
+            {
+                SvnUpdater.Update(SvnUrl, Logs.MainLog, Directories.RepositoryDir);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.ToString());
+            }
+            
 
             Status = AssemblyStatus.Ready;
         }

@@ -45,8 +45,8 @@ namespace LeagueSharp.Loader.Views.Settings
 
         private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
         {
-            ((MainWindow)DataContext).Config.Username = "";
-            ((MainWindow)DataContext).Config.Password = "";
+            Config.Instance.Username = "";
+            Config.Instance.Password = "";
             ((MainWindow)DataContext).MainWindow_OnClosing(null, null);
 
             System.Diagnostics.Process.Start(Application.ResourceAssembly.Location);

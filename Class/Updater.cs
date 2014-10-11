@@ -102,7 +102,7 @@ namespace LeagueSharp.Loader.Class
                     File.Delete(SetupFile);
                 }
             }
-            catch (Exception e)
+            catch
             {
                 MessageBox.Show("Could not delete update file, please delete it manually and restart LeagueSharp");
                 Environment.Exit(0);
@@ -146,7 +146,7 @@ namespace LeagueSharp.Loader.Class
                             return false;
                         }
 
-                        if (updateInfo.version != Utility.Md5Checksum(Path.Combine(Directories.CoreDirectory, "LeagueSharp.Core.dll"))) //Update needed
+                        if (updateInfo.version != Utility.Md5Checksum(Directories.CoreFilePath)) //Update needed
                         {
                             try
                             {
@@ -187,10 +187,10 @@ namespace LeagueSharp.Loader.Class
             catch(Exception e)
             {
                 //MessageBox.Show(e.ToString());
-                return File.Exists(Path.Combine(Directories.CoreDirectory, "LeagueSharp.Core.dll"));
+                return File.Exists(Directories.CoreFilePath);
             }
 
-            return File.Exists(Path.Combine(Directories.CoreDirectory, "LeagueSharp.Core.dll"));
+            return File.Exists(Directories.CoreFilePath);
         }
 
         public static void GetRepositories(RepositoriesUpdateDelegate del)

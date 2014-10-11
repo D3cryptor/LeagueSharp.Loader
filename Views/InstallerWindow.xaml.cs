@@ -134,10 +134,10 @@ namespace LeagueSharp.Loader.Views
                     if (assembly.Compile())
                     {
                         if (
-                            ((MainWindow)Owner).Config.SelectedProfile.InstalledAssemblies.All(
+                            Config.Instance.SelectedProfile.InstalledAssemblies.All(
                                 a => a.Name != assembly.Name || a.SvnUrl != assembly.SvnUrl))
                         {
-                            ((MainWindow)Owner).Config.SelectedProfile.InstalledAssemblies.Add(assembly);
+                            Config.Instance.SelectedProfile.InstalledAssemblies.Add(assembly);
                         }
                         amount--;
                     }
@@ -160,7 +160,7 @@ namespace LeagueSharp.Loader.Views
             if (InstalledRadioButton.IsChecked == true)
             {
                 FoundAssemblies.Clear();
-                foreach (var profile in ((MainWindow)Owner).Config.Profiles)
+                foreach (var profile in Config.Instance.Profiles)
                 {
                     FoundAssemblies.AddRange(profile.InstalledAssemblies);
                 }
@@ -212,7 +212,7 @@ namespace LeagueSharp.Loader.Views
 
         private void InstallerWindow_OnLoaded(object sender, RoutedEventArgs e)
         {
-            SvnComboBox.ItemsSource = ((MainWindow)Owner).Config.KnownRepositories;
+            SvnComboBox.ItemsSource = Config.Instance.KnownRepositories;
         }
 
         private void SvnComboBox_OnGotFocus(object sender, RoutedEventArgs e)

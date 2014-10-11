@@ -51,10 +51,11 @@ namespace LeagueSharp.Loader.Class
                     {
                         return
                         leagueProcess.Modules.Cast<ProcessModule>()
-                            .Any(processModule => processModule.ModuleName == "LeagueSharp.Core.dll");
+                            .Any(processModule => processModule.ModuleName == Path.GetFileName(Directories.CoreFilePath));
                     }
-                    catch (Exception)
+                    catch (Exception e)
                     {
+                        Utility.Log(LogStatus.Error, "Injector", string.Format("Error - {0}", e.ToString()), Logs.MainLog);
                     }
                 }
                 return false;
@@ -78,7 +79,7 @@ namespace LeagueSharp.Loader.Class
 
         private static void ResolveInjectDLL()
         {
-            var hModule = LoadLibrary(Path.Combine(Directories.CoreDirectory, "LeagueSharp.Bootstrap.dll"));
+            var hModule = LoadLibrary(Directories.BootstrapFilePath);
             if (!(hModule != IntPtr.Zero))
             {
                 return;
@@ -117,13 +118,13 @@ namespace LeagueSharp.Loader.Class
                     ResolveInjectDLL();
                 }
 
-                var num = injectDLL(leagueProcess.Id, Path.Combine(Directories.CoreDirectory, "LeagueSharp.Core.dll"))
+                var num = injectDLL(leagueProcess.Id, Directories.CoreFilePath)
                     ? 1
                     : 0;
 
                 if (OnInject != null)
                 {
-                    OnInject(new EventArgs());
+                    OnInject(EventArgs.Empty);
                 }
             }
         }
@@ -148,14 +149,14 @@ namespace LeagueSharp.Loader.Class
             }
         }
 
-        public static void SendConfig(IntPtr wnd, Config config)
+        public static void SendConfig(IntPtr wnd)
         {
             wnd = wnd != IntPtr.Zero ? wnd : GetLeagueWnd();
             var str = string.Format(
-                "{0}{1}{2}{3}", (config.Settings.GameSettings[0].SelectedValue == "True") ? "1" : "0",
-                (config.Settings.GameSettings[3].SelectedValue == "True") ? "1" : "0",
-                (config.Settings.GameSettings[1].SelectedValue == "True") ? "1" : "0",
-                (config.Settings.GameSettings[2].SelectedValue == "True") ? "2" : "0");
+                "{0}{1}{2}{3}", (Config.Instance.Settings.GameSettings[0].SelectedValue == "True") ? "1" : "0",
+                (Config.Instance.Settings.GameSettings[3].SelectedValue == "True") ? "1" : "0",
+                (Config.Instance.Settings.GameSettings[1].SelectedValue == "True") ? "1" : "0",
+                (Config.Instance.Settings.GameSettings[2].SelectedValue == "True") ? "2" : "0");
 
             var lParam = new COPYDATASTRUCT { cbData = 2, dwData = str.Length * 2 + 2, lpData = str };
             SendMessage(wnd, 74U, IntPtr.Zero, ref lParam);

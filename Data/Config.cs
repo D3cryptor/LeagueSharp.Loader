@@ -56,24 +56,17 @@ namespace LeagueSharp.Loader.Data
 {
     public static class Directories
     {
-        public static readonly string CurrentDirectory = AppDomain.CurrentDomain.BaseDirectory;
-        public static readonly string LoaderFilePath = Path.Combine(
-            AppDomain.CurrentDomain.BaseDirectory, "Leaguesharp.Loader.exe");
+        public static readonly string CurrentDirectory = AppDomain.CurrentDomain.BaseDirectory + "\\";
+        public static readonly string AppDataDirectory = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "LeagueSharp") + "\\";
+        public static readonly string RepositoryDir = Path.Combine(Directories.AppDataDirectory, "Repositories") + "\\";
+        public static readonly string AssembliesDir = Path.Combine(Directories.AppDataDirectory, "Assemblies") + "\\";
+        public static readonly string CoreDirectory = Path.Combine(Directories.CurrentDirectory, "System") + "\\";
+        public static readonly string LogsDir = Path.Combine(Directories.CurrentDirectory, "Logs") + "\\";
 
-        public static readonly string RepositoryDir =
-            Path.Combine(
-                Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "LeagueSharp", "Repositories") +
-            "\\";
-
-        public static readonly string AssembliesDir =
-            Path.Combine(
-                Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "LeagueSharp", "Assemblies") +
-            "\\";
-
-        public static readonly string CoreDirectory = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "System") + "\\";
-
-        public static readonly string LogsDir = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Logs") +
-                                                "\\";
+        public static readonly string LoaderFilePath = Path.Combine(Directories.CurrentDirectory, "Leaguesharp.Loader.exe");
+        public static readonly string ConfigFilePath = Path.Combine(Directories.CurrentDirectory, "config.xml");
+        public static readonly string CoreFilePath = Path.Combine(Directories.CoreDirectory, "Leaguesharp.Core.dll");
+        public static readonly string BootstrapFilePath = Path.Combine(Directories.CoreDirectory, "Leaguesharp.Bootstrap.dll");
     }
 
     [ XmlType(AnonymousType = true) ]
@@ -89,6 +82,9 @@ namespace LeagueSharp.Loader.Data
         private Profile _selectedProfile;
         private ConfigSettings _settings;
         private bool _updateOnLoad;
+
+        [ XmlIgnore ]
+        public static Config Instance;
 
         public bool FirstRun
         {

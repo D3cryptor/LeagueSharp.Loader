@@ -19,6 +19,23 @@
                       SaveWindowPosition="True">
     <Controls:MetroWindow.RightWindowCommands>
         <Controls:WindowCommands>
+            
+            <Button Cursor="Hand" x:Name="WebsiteButton" Click="WebsiteButton_OnClick">
+                <StackPanel Orientation="Horizontal">
+                    <Rectangle Width="14"
+                               Height="14"
+                               Fill="{Binding RelativeSource={RelativeSource AncestorType=Button},
+                                              Path=Foreground}">
+                        <Rectangle.OpacityMask>
+                            <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_browser}" />
+                        </Rectangle.OpacityMask>
+                    </Rectangle>
+                    <TextBlock Margin="4 0 0 0"
+                               VerticalAlignment="Center"
+                               Text="Website" />
+                </StackPanel>
+            </Button>
+            
             <Button Cursor="Hand" x:Name="SettingsButton" Click="SettingsButton_OnClick">
                 <StackPanel Orientation="Horizontal">
                     <Rectangle Width="14"
