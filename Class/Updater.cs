@@ -32,7 +32,7 @@ using LeagueSharp.Loader.Data;
 using LeagueSharp.Loader.Views;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Json;
-
+using Hardcodet.Wpf.TaskbarNotification;
 #endregion
 
 namespace LeagueSharp.Loader.Class
@@ -45,7 +45,7 @@ namespace LeagueSharp.Loader.Class
         public const string CoreVersionCheckURL = "http://www.joduska.me/deploy/update.php?action=lcheck&lmd5={0}";
         public static string UpdateZip = Path.Combine(Directories.CoreDirectory, "update.zip");
         public static string SetupFile = Path.Combine(Directories.CurrentDirectory, "LeagueSharp-update.exe");
-
+        public static MainWindow MainWindow;
         public static int LastCoreUpdateTry = 0;
 
         public static int VersionToInt(this Version version)
@@ -148,6 +148,8 @@ namespace LeagueSharp.Loader.Class
 
                         if (updateInfo.version != Utility.Md5Checksum(Directories.CoreFilePath)) //Update needed
                         {
+                            MainWindow.TrayIcon.ShowBalloonTip("Updating", "Updating LeagueSharp.Core...", BalloonIcon.Info);
+
                             try
                             {
                                 if (File.Exists(UpdateZip))

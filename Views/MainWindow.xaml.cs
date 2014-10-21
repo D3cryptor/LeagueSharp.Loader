@@ -103,7 +103,7 @@ namespace LeagueSharp.Loader.Views
                 System.Windows.MessageBox.Show(string.Format("Couldn't find {0}", Path.GetFileName(Directories.CoreFilePath)));
                 Environment.Exit(0);
             }
-
+            Updater.MainWindow = this;
             Updater.UpdateLoader();
 
             Updater.GetRepositories(
