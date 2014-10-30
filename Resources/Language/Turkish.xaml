@@ -3,113 +3,113 @@
     xmlns:system="clr-namespace:System;assembly=mscorlib">
 
     <!-- MainWindow TopBar -->
-    <system:String x:Key="Website">Website</system:String>
-    <system:String x:Key="Settings">Settings</system:String>
+    <system:String x:Key="Website">Web sitesi</system:String>
+    <system:String x:Key="Settings">Ayarlar</system:String>
 
     <!-- MainWindow Tabs -->
-    <system:String x:Key="News">News</system:String>
-    <system:String x:Key="Assemblies">Assemblies</system:String>
+    <system:String x:Key="News">Haberler</system:String>
+    <system:String x:Key="Assemblies">Assemblyler</system:String>
 
     <!-- MainWindow Profile selector -->
-    <system:String x:Key="DefaultProfile">Default</system:String>
+    <system:String x:Key="DefaultProfile">Varsayılan</system:String>
 
     <!-- MainWindow Assemblies datagrid columns -->
-    <system:String x:Key="ColumnName">Name</system:String>
-    <system:String x:Key="ColumnType">Type</system:String>
-    <system:String x:Key="ColumnVersion">Version</system:String>
-    <system:String x:Key="ColumnLocation">Location</system:String>
-    <system:String x:Key="ColumnDescription">Description</system:String>
+    <system:String x:Key="ColumnName">İsim</system:String>
+    <system:String x:Key="ColumnType">Tür</system:String>
+    <system:String x:Key="ColumnVersion">Versiyon</system:String>
+    <system:String x:Key="ColumnLocation">Konum</system:String>
+    <system:String x:Key="ColumnDescription">Açıklama</system:String>
 
     <!-- MainWindow Assemblies datagrid Menu -->
-    <system:String x:Key="MenuUpdateAndCompile">Update and Compile</system:String>
-    <system:String x:Key="MenuRemove">Remove</system:String>
+    <system:String x:Key="MenuUpdateAndCompile">Güncelle ve Derle</system:String>
+    <system:String x:Key="MenuRemove">Kaldır</system:String>
     <system:String x:Key="MenuGitub">GitHub</system:String>
-    <system:String x:Key="MenuShare">Share</system:String>
-    <system:String x:Key="MenuViewLog">View Log</system:String>
+    <system:String x:Key="MenuShare">Paylaş</system:String>
+    <system:String x:Key="MenuViewLog">Kayıt Göürntüle</system:String>
 
 	<!-- MainWindow Profiles Menu -->
-    <system:String x:Key="NewProfile">New</system:String>
-    <system:String x:Key="ChangeName">Change Name</system:String>
-    <system:String x:Key="DeleteProfile">Delete</system:String>
+    <system:String x:Key="NewProfile">Yeni</system:String>
+    <system:String x:Key="ChangeName">Yeniden Adlandır</system:String>
+    <system:String x:Key="DeleteProfile">Sil</system:String>
 	
     <!-- MainWindow Buttons -->
-    <system:String x:Key="UpdateAll">Update All</system:String>
-    <system:String x:Key="CompileAll">Compile All</system:String>
-    <system:String x:Key="InstallNewAssembly">Install New Assembly</system:String>
+    <system:String x:Key="UpdateAll">Hepsini Güncelle</system:String>
+    <system:String x:Key="CompileAll">Hepsini Derle</system:String>
+    <system:String x:Key="InstallNewAssembly">Yeni Assembly Yükle</system:String>
 
     <!-- InstallerWindow Title -->
-    <system:String x:Key="AssemblyInstaller">Assembly Installer</system:String>
+    <system:String x:Key="AssemblyInstaller">Assembly Yükleyici</system:String>
 
     <!-- InstallerWindow Tabs -->
-    <system:String x:Key="Search">Search</system:String>
-    <system:String x:Key="Select">Select</system:String>
+    <system:String x:Key="Search">Ara</system:String>
+    <system:String x:Key="Select">Seç</system:String>
 
     <!-- InstallerWindow Search tab -->
-    <system:String x:Key="SelectAssembliesText">Select the location of the assembly:</system:String>
-    <system:String x:Key="Local">Local</system:String>
+    <system:String x:Key="SelectAssembliesText">Assembly Konumunu Seç:</system:String>
+    <system:String x:Key="Local">Yerel</system:String>
     <system:String x:Key="Github">GitHub</system:String>
-    <system:String x:Key="Installed">Installed</system:String>
-    <system:String x:Key="Next">Next</system:String>
+    <system:String x:Key="Installed">Yüklendi</system:String>
+    <system:String x:Key="Next">Sonraki</system:String>
 
     <!-- InstallerWindow Select tab -->
-    <system:String x:Key="SelectAll">Select All</system:String>
-    <system:String x:Key="DeselectAll">Deselect All</system:String>
-    <system:String x:Key="Previous">Previous</system:String>
-    <system:String x:Key="Add">Add</system:String>
+    <system:String x:Key="SelectAll">Hepsini Seç</system:String>
+    <system:String x:Key="DeselectAll">Seçimleri Geri Al</system:String>
+    <system:String x:Key="Previous">Önceki</system:String>
+    <system:String x:Key="Add">Ekle</system:String>
 
     <!-- Settings General -->
-    <system:String x:Key="General">General</system:String>
-    <system:String x:Key="GameSettings">Game Settings</system:String>
+    <system:String x:Key="General">Genel</system:String>
+    <system:String x:Key="GameSettings">Oyun Ayarları</system:String>
     <system:String x:Key="Anti-AFK">Anti-AFK</system:String>
     <system:String x:Key="Debug Console">Debug Console</system:String>
-    <system:String x:Key="Display Enemy Tower Range">Display enemy tower range</system:String>
-    <system:String x:Key="Extended Zoom">Extended Zoom</system:String>
-    <system:String x:Key="UpdateOnStart">Update assemblies on start</system:String>
-    <system:String x:Key="Inject">Inject</system:String>
-    <system:String x:Key="Logout">Logout</system:String>
-    <system:String x:Key="DefaultHotkeys">Restore</system:String>
-	<system:String x:Key="Language">Language</system:String>
+    <system:String x:Key="Display Enemy Tower Range">Düşman Kule Menzilini Göster</system:String>
+    <system:String x:Key="Extended Zoom">Genişletilmiş Zoom</system:String>
+    <system:String x:Key="UpdateOnStart">Assemblyleri Her Başlangıçta Güncelle</system:String>
+    <system:String x:Key="Inject">Enjekte Et</system:String>
+    <system:String x:Key="Logout">Çıkış</system:String>
+    <system:String x:Key="DefaultHotkeys">Geri Yükle</system:String>
+	<system:String x:Key="Language">Dil</system:String>
 	
     <!-- Settings Hotkeys -->
-    <system:String x:Key="Hotkeys">Hotkeys</system:String>
-    <system:String x:Key="Hotkey">Hotkey</system:String>
-    <system:String x:Key="Reload the assemblies">Reload the assemblies</system:String>
-    <system:String x:Key="Recompile and reload the assemblies">Recompile and reload the assemblies</system:String>
-    <system:String x:Key="Shows the menu (Press)">Shows the menu (Press)</system:String>
-    <system:String x:Key="Shows the menu (Toggle)">Show the menu (Toggle)</system:String>
+    <system:String x:Key="Hotkeys">Kısayollar</system:String>
+    <system:String x:Key="Hotkey">Kısayol Tuşu</system:String>
+    <system:String x:Key="Reload the assemblies">Assemblyleri Yeniden Yükle</system:String>
+    <system:String x:Key="Recompile and reload the assemblies">Assemblyleri Yeniden Derle ve Yeniden Yükle</system:String>
+    <system:String x:Key="Shows the menu (Press)">Menü Tuşu(Basılı tutunca)</system:String>
+    <system:String x:Key="Shows the menu (Toggle)">Menü Tuşu (Geçiş)</system:String>
 
     <!-- Settings Log -->
-    <system:String x:Key="Log">Log</system:String>
-    <system:String x:Key="Status">Status</system:String>
-    <system:String x:Key="Source">Source</system:String>
-    <system:String x:Key="Content">Content</system:String>
-    <system:String x:Key="OpenFolder">Open Folder</system:String>
+    <system:String x:Key="Log">Kayıt</system:String>
+    <system:String x:Key="Status">Durum</system:String>
+    <system:String x:Key="Source">Kaynak</system:String>
+    <system:String x:Key="Content">İçerik</system:String>
+    <system:String x:Key="OpenFolder">Klasörü Aç</system:String>
 
     <!-- UpdateWindow -->
-    <system:String x:Key="UpdatingLeagueSharp">Updating LeagueSharp</system:String>
-    <system:String x:Key="Updating">Updating...</system:String>
-    <system:String x:Key="UpdateText">Downloaded {0} KB from {1} KB.</system:String>
+    <system:String x:Key="UpdatingLeagueSharp">LeagueSharp Güncelleniyor</system:String>
+    <system:String x:Key="Updating">Güncelleniyor</system:String>
+    <system:String x:Key="UpdateText">Yüklendi  {1} KB ın {0} KB ı</system:String>
 
     <!-- Errors and other strings -->
-    <system:String x:Key="WrongAuth">Wrong password or username, register at {0}</system:String>
-    <system:String x:Key="AuthEmpty">Password or username is empty</system:String>
-    <system:String x:Key="FailedToDelete">Could not delete update file, please delete it manually and restart LeagueSharp</system:String>
-    <system:String x:Key="WrongVersion">League Of Legends version not supported. Hash:</system:String>
-    <system:String x:Key="FailedToDownload">Failed to download.</system:String>
-    <system:String x:Key="FailedToLogin">Failed to login: {0}</system:String>
-    <system:String x:Key="Login">Login</system:String>
+    <system:String x:Key="WrongAuth">Yanlış Şifre veya Kullancı Adı, {0} dan kayıt olun</system:String>
+    <system:String x:Key="AuthEmpty">Kullanıcı Adı veya Şifreyi Girmediniz</system:String>
+    <system:String x:Key="FailedToDelete">Silme işlemi başarısız, Lütfen silme işlemini manuel olarak yapıp LeagueSharp ı yeniden başlatın</system:String>
+    <system:String x:Key="WrongVersion">League Of Legends versiyonu desteklenmiyor. Hash:</system:String>
+    <system:String x:Key="FailedToDownload">İndirme Başarısız.</system:String>
+    <system:String x:Key="FailedToLogin">Giriş Başarısız: {0}</system:String>
+    <system:String x:Key="Login">Giriş</system:String>
     <system:String x:Key="LoginError">Failed to sign in as {0}: {1}</system:String>
-    <system:String x:Key="Uninstall">Uninstall</system:String>
-    <system:String x:Key="UninstallConfirm">Are you sure you want to uninstall selected assemblies?</system:String>
-    <system:String x:Key="ConfigWriteError">Could not write to config.xml</system:String>
-    <system:String x:Key="ShareText">Assembly url copied to the clipboard</system:String>
-    <system:String x:Key="LogNotFound">Log file not found</system:String>
-    <system:String x:Key="NewProfile2">New profile</system:String>
-    <system:String x:Key="Rename">Rename</system:String>
-    <system:String x:Key="RenameText">Insert the new name for the profile</system:String>
-    <system:String x:Key="DownloadingData">Downloading the required data.</system:String>
-    <system:String x:Key="Installer">Installer</system:String>
-    <system:String x:Key="SuccessfullyInstalled">Selected assemblies successfully installed.</system:String>
-    <system:String x:Key="ErrorInstalling">There was an error while trying to install some of the assemblies, check the log for more details.</system:String>
+    <system:String x:Key="Uninstall">Kladır</system:String>
+    <system:String x:Key="UninstallConfirm">Seçili Assemblyleri kaldırmak istediğinize emin misiniz?</system:String>
+    <system:String x:Key="ConfigWriteError">Dosyayı yazamadı config.xml</system:String>
+    <system:String x:Key="ShareText">Assembly bağlantısı kopyalandı</system:String>
+    <system:String x:Key="LogNotFound">Kayıt dosyası bulunamadı</system:String>
+    <system:String x:Key="NewProfile2">Yeni profil</system:String>
+    <system:String x:Key="Rename">Yeniden adlandır</system:String>
+    <system:String x:Key="RenameText">Profil için yeni isim girin</system:String>
+    <system:String x:Key="DownloadingData">Gerekli veri indiriliyor.</system:String>
+    <system:String x:Key="Installer">Yükleyici</system:String>
+    <system:String x:Key="SuccessfullyInstalled">Seçili Assembly ler başarıyla yüklendi</system:String>
+    <system:String x:Key="ErrorInstalling">Bazı Assemblyleri yüklerken bir hata oluştu, detaylar için kayıtları kontrol edin.</system:String>
 
 </ResourceDictionary>
