@@ -121,7 +121,7 @@
                                         </Canvas>
                                     </MenuItem.Icon>
                                 </MenuItem>
-                                <MenuItem x:Name="GithubItem" Header="{DynamicResource MenuGithub}" Click="GithubItem_OnClick">
+                                <MenuItem x:Name="GithubItem" Header="{DynamicResource Github}" Click="GithubItem_OnClick">
                                     <MenuItem.Icon>
                                         <Canvas Width="10"
                                         Height="15"
