@@ -1,0 +1,115 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:system="clr-namespace:System;assembly=mscorlib">
+
+    <!-- MainWindow TopBar -->
+    <system:String x:Key="Website">Webbsida</system:String>
+    <system:String x:Key="Settings">Inställningar</system:String>
+
+    <!-- MainWindow Tabs -->
+    <system:String x:Key="News">Nyheter</system:String>
+    <system:String x:Key="Assemblies">Assemblies</system:String>
+
+    <!-- MainWindow Profile selector -->
+    <system:String x:Key="DefaultProfile">Default</system:String>
+
+    <!-- MainWindow Assemblies datagrid columns -->
+    <system:String x:Key="ColumnName">Namn</system:String>
+    <system:String x:Key="ColumnType">Typ</system:String>
+    <system:String x:Key="ColumnVersion">Version</system:String>
+    <system:String x:Key="ColumnLocation">Plats</system:String>
+    <system:String x:Key="ColumnDescription">Beskrivning</system:String>
+
+    <!-- MainWindow Assemblies datagrid Menu -->
+    <system:String x:Key="MenuUpdateAndCompile">Uppdatera och utarbeta</system:String>
+    <system:String x:Key="MenuRemove">Ta bort</system:String>
+    <system:String x:Key="MenuGitub">GitHub</system:String>
+    <system:String x:Key="MenuShare">Dela</system:String>
+    <system:String x:Key="MenuViewLog">Visa logg</system:String>
+
+    <!-- MainWindow Profiles Menu -->
+    <system:String x:Key="NewProfile">Ny</system:String>
+    <system:String x:Key="ChangeName">Byt namn</system:String>
+    <system:String x:Key="DeleteProfile">Ta bort</system:String>
+
+    <!-- MainWindow Buttons -->
+    <system:String x:Key="UpdateAll">Uppdatera Alla</system:String>
+    <system:String x:Key="CompileAll">Utarbeta Alla</system:String>
+    <system:String x:Key="InstallNewAssembly">Installera Ny Assembly</system:String>
+
+    <!-- InstallerWindow Title -->
+    <system:String x:Key="AssemblyInstaller">Assembly Installerare</system:String>
+
+    <!-- InstallerWindow Tabs -->
+    <system:String x:Key="Search">Sök</system:String>
+    <system:String x:Key="Select">Välj</system:String>
+
+    <!-- InstallerWindow Search tab -->
+    <system:String x:Key="SelectAssembliesText">Markera platsen för monteringen:</system:String>
+    <system:String x:Key="Local">Lokal</system:String>
+    <system:String x:Key="Github">GitHub</system:String>
+    <system:String x:Key="Installed">Installerad</system:String>
+    <system:String x:Key="Next">Nästa</system:String>
+
+    <!-- InstallerWindow Select tab -->
+    <system:String x:Key="SelectAll">Välj alla</system:String>
+    <system:String x:Key="DeselectAll">Välj bort alla</system:String>
+    <system:String x:Key="Previous">Föregående</system:String>
+    <system:String x:Key="Add">Lägg till</system:String>
+
+    <!-- Settings General -->
+    <system:String x:Key="General">Allmänt</system:String>
+    <system:String x:Key="GameSettings">Spel Inställningar</system:String>
+    <system:String x:Key="Anti-AFK">Anti-AFK</system:String>
+    <system:String x:Key="Debug Console">Felsökningskonsolen</system:String>
+    <system:String x:Key="Visa motståndar tornets räckvidd">Display enemy tower range</system:String>
+    <system:String x:Key="Extended Zoom">Utökad zoom</system:String>
+    <system:String x:Key="UpdateOnStart">Uppdatera assemblierna vid start</system:String>
+    <system:String x:Key="Inject">Injektera</system:String>
+    <system:String x:Key="Logout">Logga ut</system:String>
+    <system:String x:Key="DefaultHotkeys">Återställ</system:String>
+    <system:String x:Key="Language">Språk</system:String>
+
+    <!-- Settings Hotkeys -->
+    <system:String x:Key="Hotkeys">Snabbtangenter</system:String>
+    <system:String x:Key="Hotkey">Snabbtangent</system:String>
+    <system:String x:Key="Reload the assemblies">Ladda om assemblierna</system:String>
+    <system:String x:Key="Recompile and reload the assemblies">Kompilera och ladda om assemblierna</system:String>
+    <system:String x:Key="Shows the menu (Press)">Visar menyn (Tryck)</system:String>
+    <system:String x:Key="Shows the menu (Toggle)">Visar menyn (Tryckt)</system:String>
+
+    <!-- Settings Log -->
+    <system:String x:Key="Log">Logga</system:String>
+    <system:String x:Key="Status">Status</system:String>
+    <system:String x:Key="Source">Källa</system:String>
+    <system:String x:Key="Content">Innehåll</system:String>
+    <system:String x:Key="OpenFolder">Öppna mapp</system:String>
+
+    <!-- UpdateWindow -->
+    <system:String x:Key="UpdatingLeagueSharp">Uppdaterar LeagueSharp</system:String>
+    <system:String x:Key="Updating">Uppdaterar...</system:String>
+    <system:String x:Key="UpdateText">Nedladdad {0} KB från {1} KB.</system:String>
+
+    <!-- Errors and other strings -->
+    <system:String x:Key="WrongAuth">Fel lösenord eller användarnamn, Registera dig på {0}</system:String>
+    <system:String x:Key="AuthEmpty">Lösenord eller användarnamn är tom</system:String>
+    <system:String x:Key="FailedToDelete">Kunde inte radera filen uppdatering, vänligen ta bort den manuellt och starta om LeagueSharp</system:String>
+    <system:String x:Key="WrongVersion">League Of Legends verionen stöds inte. Hash:</system:String>
+    <system:String x:Key="FailedToDownload">Uppdateringen misslyckad.</system:String>
+    <system:String x:Key="FailedToLogin">Misslyckad att logga in: {0}</system:String>
+    <system:String x:Key="Login">Login</system:String>
+    <system:String x:Key="LoginError">Det gick inte att logga in som {0}: {1}</system:String>
+    <system:String x:Key="Uninstall">Avinstallera</system:String>
+    <system:String x:Key="UninstallConfirm">Är du säker på att du vill avinstallera valda assemblies?</system:String>
+    <system:String x:Key="ConfigWriteError">Det gick inte att skriva till config.xml</system:String>
+    <system:String x:Key="ShareText">Assembly url kopieras till Urklipp</system:String>
+    <system:String x:Key="LogNotFound">Log filen kunde inte hittas</system:String>
+    <system:String x:Key="NewProfile2">Ny profil</system:String>
+    <system:String x:Key="Rename">Byt namn</system:String>
+    <system:String x:Key="RenameText">Sätt i det nya namn på profilen</system:String>
+    <system:String x:Key="DownloadingData">Laddar hem de nödvändiga uppgifterna.</system:String>
+    <system:String x:Key="Installer">Installerare</system:String>
+    <system:String x:Key="SuccessfullyInstalled">Dom valda assemblies har installerats.</system:String>
+    <system:String x:Key="ErrorInstalling">Det uppstog ett fel installationen av assemblier, kontrollera loggen för mer information.</system:String>
+
+</ResourceDictionary>
