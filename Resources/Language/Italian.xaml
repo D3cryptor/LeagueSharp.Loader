@@ -1,0 +1,115 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:system="clr-namespace:System;assembly=mscorlib">
+
+    <!-- MainWindow TopBar -->
+    <system:String x:Key="Website">Pagina Web</system:String>
+    <system:String x:Key="Settings">Impostazioni</system:String>
+
+    <!-- MainWindow Tabs -->
+    <system:String x:Key="News">Notizie</system:String>
+    <system:String x:Key="Assemblies">Assemblies</system:String>
+
+    <!-- MainWindow Profile selector -->
+    <system:String x:Key="DefaultProfile">Contumacia</system:String>
+
+    <!-- MainWindow Assemblies datagrid columns -->
+    <system:String x:Key="ColumnName">Nome</system:String>
+    <system:String x:Key="ColumnType">Tipo</system:String>
+    <system:String x:Key="ColumnVersion">Versione</system:String>
+    <system:String x:Key="ColumnLocation">Percorso</system:String>
+    <system:String x:Key="ColumnDescription">Descrizione</system:String>
+
+    <!-- MainWindow Assemblies datagrid Menu -->
+    <system:String x:Key="MenuUpdateAndCompile">Aggiorna e Compila</system:String>
+    <system:String x:Key="MenuRemove">Rimuovi</system:String>
+    <system:String x:Key="MenuGitub">GitHub</system:String>
+    <system:String x:Key="MenuShare">Condividi</system:String>
+    <system:String x:Key="MenuViewLog">Mostra Log</system:String>
+
+    <!-- MainWindow Profiles Menu -->
+    <system:String x:Key="NewProfile">Nuovo</system:String>
+    <system:String x:Key="ChangeName">Cambia Nome</system:String>
+    <system:String x:Key="DeleteProfile">Elimina</system:String>
+
+    <!-- MainWindow Buttons -->
+    <system:String x:Key="UpdateAll">Aggiorna Tutto</system:String>
+    <system:String x:Key="CompileAll">Compila Tutto</system:String>
+    <system:String x:Key="InstallNewAssembly">Installa Nuova Assembly</system:String>
+
+    <!-- InstallerWindow Title -->
+    <system:String x:Key="AssemblyInstaller">Assembly Installer</system:String>
+
+    <!-- InstallerWindow Tabs -->
+    <system:String x:Key="Search">Cerca</system:String>
+    <system:String x:Key="Select">Seleziona</system:String>
+
+    <!-- InstallerWindow Search tab -->
+    <system:String x:Key="SelectAssembliesText">Seleziona il percorso dell'assembly:</system:String>
+    <system:String x:Key="Local">Locale</system:String>
+    <system:String x:Key="Github">GitHub</system:String>
+    <system:String x:Key="Installed">Installato</system:String>
+    <system:String x:Key="Next">Avanti</system:String>
+
+    <!-- InstallerWindow Select tab -->
+    <system:String x:Key="SelectAll">Seleziona Tutto</system:String>
+    <system:String x:Key="DeselectAll">Deseleziona Tutto</system:String>
+    <system:String x:Key="Previous">Indietro</system:String>
+    <system:String x:Key="Add">Aggiungi</system:String>
+
+    <!-- Settings General -->
+    <system:String x:Key="General">Generale</system:String>
+    <system:String x:Key="GameSettings">Impostazioni Gioco</system:String>
+    <system:String x:Key="Anti-AFK">Anti-AFK</system:String>
+    <system:String x:Key="Debug Console">Spidocchiare  Console</system:String>
+    <system:String x:Key="Display Enemy Tower Range">Mostra Range torri nemiche</system:String>
+    <system:String x:Key="Extended Zoom">Zoom Esteso</system:String>
+    <system:String x:Key="UpdateOnStart">Aggiorna assemblies all'avvio</system:String>
+    <system:String x:Key="Inject">Inject</system:String>
+    <system:String x:Key="Logout">Disconnettersi</system:String>
+    <system:String x:Key="DefaultHotkeys">Ripristina</system:String>
+    <system:String x:Key="Language">Lingua</system:String>
+
+    <!-- Settings Hotkeys -->
+    <system:String x:Key="Hotkeys">Hotkeys</system:String>
+    <system:String x:Key="Hotkey">Hotkey</system:String>
+    <system:String x:Key="Reload the assemblies">Ricarica le assemblies</system:String>
+    <system:String x:Key="Recompile and reload the assemblies">Ricompila e ricarica le assemblies</system:String>
+    <system:String x:Key="Shows the menu (Press)">Mostra il menu(premuto)</system:String>
+    <system:String x:Key="Shows the menu (Toggle)">Mostra il menu(Toggle)</system:String>
+
+    <!-- Settings Log -->
+    <system:String x:Key="Log">Log</system:String>
+    <system:String x:Key="Status">Stato</system:String>
+    <system:String x:Key="Source">Source</system:String>
+    <system:String x:Key="Content">Contenuto</system:String>
+    <system:String x:Key="OpenFolder">Apri Cartella</system:String>
+
+    <!-- UpdateWindow -->
+    <system:String x:Key="UpdatingLeagueSharp">Aggiornando LeagueSharp</system:String>
+    <system:String x:Key="Updating">Aggiornando...</system:String>
+    <system:String x:Key="UpdateText">Scaricati {0} KB di {1} KB.</system:String>
+
+    <!-- Errors and other strings -->
+    <system:String x:Key="WrongAuth">Password o Username errati, crea un account su {0}</system:String>
+    <system:String x:Key="AuthEmpty">Password o Username vuoti</system:String>
+    <system:String x:Key="FailedToDelete">Impossibile cancellare il file di aggiornamento, per favore cancellalo manualmente e riavvia LeagueSharp</system:String>
+    <system:String x:Key="WrongVersion">Versione di League Of Legends non supportata. Hash:</system:String>
+    <system:String x:Key="FailedToDownload">Scaricamento fallito.</system:String>
+    <system:String x:Key="FailedToLogin">Login fallito: {0}</system:String>
+    <system:String x:Key="Login">Login</system:String>
+    <system:String x:Key="LoginError">Fallito il login come {0}: {1}</system:String>
+    <system:String x:Key="Uninstall">Rimuovi</system:String>
+    <system:String x:Key="UninstallConfirm">Sei sicuro di voler rimuovere le assemblies selezionate?</system:String>
+    <system:String x:Key="ConfigWriteError">Impossibile scrivere nel file config.xml</system:String>
+    <system:String x:Key="ShareText">Url dell'assembly copiata</system:String>
+    <system:String x:Key="LogNotFound">File di log non trovato</system:String>
+    <system:String x:Key="NewProfile2">Nuovo profilo</system:String>
+    <system:String x:Key="Rename">Rinomina</system:String>
+    <system:String x:Key="RenameText">Inserire il nuovo nome per il profilo</system:String>
+    <system:String x:Key="DownloadingData">Scaricamento dei dati necessari</system:String>
+    <system:String x:Key="Installer">Installer</system:String>
+    <system:String x:Key="SuccessfullyInstalled">Assemblies selezionate installate correttamente.</system:String>
+    <system:String x:Key="ErrorInstalling">Si e' verificato un errore durante l'installazione di alcune assemblies, controlla i log per maggiori informazioni.</system:String>
+
+</ResourceDictionary>

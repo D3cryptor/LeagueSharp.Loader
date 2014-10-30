@@ -71,14 +71,15 @@ namespace LeagueSharp.Loader.Views.Settings
             ((ComboBox)sender).Items.Clear();
             ((ComboBox)sender).Items.Add("Chinese");
             ((ComboBox)sender).Items.Add("English");
-            ((ComboBox)sender).Items.Add("French");
             ((ComboBox)sender).Items.Add("German");
+            ((ComboBox)sender).Items.Add("Spanish");
+            ((ComboBox)sender).Items.Add("Russian");
+            ((ComboBox)sender).Items.Add("Portuguese");
+            ((ComboBox)sender).Items.Add("Italian");
+            ((ComboBox)sender).Items.Add("French");
             ((ComboBox)sender).Items.Add("Korean");
             ((ComboBox)sender).Items.Add("Polish");
-            ((ComboBox)sender).Items.Add("Portuguese");
             ((ComboBox)sender).Items.Add("Romanian");
-            ((ComboBox)sender).Items.Add("Russian");
-            ((ComboBox)sender).Items.Add("Spanish");
             ((ComboBox)sender).Items.Add("Turkish");
             ((ComboBox)sender).Items.Add("Vietnamese");
         }
