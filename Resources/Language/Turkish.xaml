@@ -98,8 +98,8 @@
     <system:String x:Key="FailedToDownload">İndirme Başarısız.</system:String>
     <system:String x:Key="FailedToLogin">Giriş Başarısız: {0}</system:String>
     <system:String x:Key="Login">Giriş</system:String>
-    <system:String x:Key="LoginError">Failed to sign in as {0}: {1}</system:String>
-    <system:String x:Key="Uninstall">Kladır</system:String>
+    <system:String x:Key="LoginError">{0} Olarak giriş başarısız: {1}</system:String>
+    <system:String x:Key="Uninstall">Kaldır</system:String>
     <system:String x:Key="UninstallConfirm">Seçili Assemblyleri kaldırmak istediğinize emin misiniz?</system:String>
     <system:String x:Key="ConfigWriteError">Dosyayı yazamadı config.xml</system:String>
     <system:String x:Key="ShareText">Assembly bağlantısı kopyalandı</system:String>
