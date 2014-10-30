@@ -3,113 +3,113 @@
     xmlns:system="clr-namespace:System;assembly=mscorlib">
 
     <!-- MainWindow TopBar -->
-    <system:String x:Key="Website">Website</system:String>
-    <system:String x:Key="Settings">Settings</system:String>
+    <system:String x:Key="Website">网站</system:String>
+    <system:String x:Key="Settings">设置</system:String>
 
     <!-- MainWindow Tabs -->
-    <system:String x:Key="News">News</system:String>
-    <system:String x:Key="Assemblies">Assemblies</system:String>
+    <system:String x:Key="News">新闻</system:String>
+    <system:String x:Key="Assemblies">脚本</system:String>
 
     <!-- MainWindow Profile selector -->
-    <system:String x:Key="DefaultProfile">Default</system:String>
+    <system:String x:Key="DefaultProfile">默认</system:String>
 
     <!-- MainWindow Assemblies datagrid columns -->
-    <system:String x:Key="ColumnName">Name</system:String>
-    <system:String x:Key="ColumnType">Type</system:String>
-    <system:String x:Key="ColumnVersion">Version</system:String>
-    <system:String x:Key="ColumnLocation">Location</system:String>
-    <system:String x:Key="ColumnDescription">Description</system:String>
+    <system:String x:Key="ColumnName">名称</system:String>
+    <system:String x:Key="ColumnType">类型</system:String>
+    <system:String x:Key="ColumnVersion">版本</system:String>
+    <system:String x:Key="ColumnLocation">位置</system:String>
+    <system:String x:Key="ColumnDescription">描述</system:String>
 
     <!-- MainWindow Assemblies datagrid Menu -->
-    <system:String x:Key="MenuUpdateAndCompile">Update and Compile</system:String>
-    <system:String x:Key="MenuRemove">Remove</system:String>
+    <system:String x:Key="MenuUpdateAndCompile">升级并编译</system:String>
+    <system:String x:Key="MenuRemove">清除</system:String>
     <system:String x:Key="MenuGitub">GitHub</system:String>
-    <system:String x:Key="MenuShare">Share</system:String>
-    <system:String x:Key="MenuViewLog">View Log</system:String>
+    <system:String x:Key="MenuShare">分享 </system:String>
+    <system:String x:Key="MenuViewLog">查看日志</system:String>
 
 	<!-- MainWindow Profiles Menu -->
-    <system:String x:Key="NewProfile">New</system:String>
-    <system:String x:Key="ChangeName">Change Name</system:String>
-    <system:String x:Key="DeleteProfile">Delete</system:String>
+    <system:String x:Key="NewProfile">新的</system:String>
+    <system:String x:Key="ChangeName">更改名称</system:String>
+    <system:String x:Key="DeleteProfile">删除</system:String>
 	
     <!-- MainWindow Buttons -->
-    <system:String x:Key="UpdateAll">Update All</system:String>
-    <system:String x:Key="CompileAll">Compile All</system:String>
-    <system:String x:Key="InstallNewAssembly">Install New Assembly</system:String>
+    <system:String x:Key="UpdateAll">升级所有</system:String>
+    <system:String x:Key="CompileAll">编译所有</system:String>
+    <system:String x:Key="InstallNewAssembly">下载新脚本</system:String>
 
     <!-- InstallerWindow Title -->
-    <system:String x:Key="AssemblyInstaller">Assembly Installer</system:String>
+    <system:String x:Key="AssemblyInstaller">脚本安装</system:String>
 
     <!-- InstallerWindow Tabs -->
-    <system:String x:Key="Search">Search</system:String>
-    <system:String x:Key="Select">Select</system:String>
+    <system:String x:Key="Search">搜索</system:String>
+    <system:String x:Key="Select">选择</system:String>
 
     <!-- InstallerWindow Search tab -->
-    <system:String x:Key="SelectAssembliesText">Select the location of the assembly:</system:String>
-    <system:String x:Key="Local">Local</system:String>
+    <system:String x:Key="SelectAssembliesText">选择脚本位置:</system:String>
+    <system:String x:Key="Local">本地</system:String>
     <system:String x:Key="Github">GitHub</system:String>
-    <system:String x:Key="Installed">Installed</system:String>
-    <system:String x:Key="Next">Next</system:String>
+    <system:String x:Key="Installed">已安装</system:String>
+    <system:String x:Key="Next">下一步</system:String>
 
     <!-- InstallerWindow Select tab -->
-    <system:String x:Key="SelectAll">Select All</system:String>
-    <system:String x:Key="DeselectAll">Deselect All</system:String>
-    <system:String x:Key="Previous">Previous</system:String>
-    <system:String x:Key="Add">Add</system:String>
+    <system:String x:Key="SelectAll">选择所有</system:String>
+    <system:String x:Key="DeselectAll">删除所有</system:String>
+    <system:String x:Key="Previous">上一步</system:String>
+    <system:String x:Key="Add">添加</system:String>
 
     <!-- Settings General -->
-    <system:String x:Key="General">General</system:String>
-    <system:String x:Key="GameSettings">Game Settings</system:String>
-    <system:String x:Key="Anti-AFK">Anti-AFK</system:String>
-    <system:String x:Key="Debug Console">Debug Console</system:String>
-    <system:String x:Key="Display Enemy Tower Range">Display enemy tower range</system:String>
-    <system:String x:Key="Extended Zoom">Extended Zoom</system:String>
-    <system:String x:Key="UpdateOnStart">Update assemblies on start</system:String>
-    <system:String x:Key="Inject">Inject</system:String>
-    <system:String x:Key="Logout">Logout</system:String>
-    <system:String x:Key="DefaultHotkeys">Restore</system:String>
-	<system:String x:Key="Language">Language</system:String>
+    <system:String x:Key="General">常规</system:String>
+    <system:String x:Key="GameSettings">热键</system:String>
+    <system:String x:Key="Anti-AFK">防挂机</system:String>
+    <system:String x:Key="Debug Console">Debug模式</system:String>
+    <system:String x:Key="Display Enemy Tower Range">显示敌方防御塔范围</system:String>
+    <system:String x:Key="Extended Zoom">无限视距</system:String>
+    <system:String x:Key="UpdateOnStart">开启前升级脚本</system:String>
+    <system:String x:Key="Inject">注入</system:String>
+    <system:String x:Key="Logout">退出</system:String>
+    <system:String x:Key="DefaultHotkeys">恢复</system:String>
+    <system:String x:Key="Language">语言</system:String>
 	
     <!-- Settings Hotkeys -->
-    <system:String x:Key="Hotkeys">Hotkeys</system:String>
-    <system:String x:Key="Hotkey">Hotkey</system:String>
-    <system:String x:Key="Reload the assemblies">Reload the assemblies</system:String>
-    <system:String x:Key="Recompile and reload the assemblies">Recompile and reload the assemblies</system:String>
-    <system:String x:Key="Shows the menu (Press)">Shows the menu (Press)</system:String>
-    <system:String x:Key="Shows the menu (Toggle)">Show the menu (Toggle)</system:String>
+    <system:String x:Key="Hotkeys">热键</system:String>
+    <system:String x:Key="Hotkey">热键</system:String>
+    <system:String x:Key="Reload the assemblies">重载脚本</system:String>
+    <system:String x:Key="Recompile and reload the assemblies">重新编译加载脚本</system:String>
+    <system:String x:Key="Shows the menu (Press)">显示菜单(按键)</system:String>
+    <system:String x:Key="Shows the menu (Toggle)">显示菜单(开关)</system:String>
 
     <!-- Settings Log -->
-    <system:String x:Key="Log">Log</system:String>
-    <system:String x:Key="Status">Status</system:String>
-    <system:String x:Key="Source">Source</system:String>
-    <system:String x:Key="Content">Content</system:String>
-    <system:String x:Key="OpenFolder">Open Folder</system:String>
+    <system:String x:Key="Log">日志</system:String>
+    <system:String x:Key="Status">状态</system:String>
+    <system:String x:Key="Source">来源</system:String>
+    <system:String x:Key="Content">内容</system:String>
+    <system:String x:Key="OpenFolder">打开文件夹</system:String>
 
     <!-- UpdateWindow -->
-    <system:String x:Key="UpdatingLeagueSharp">Updating LeagueSharp</system:String>
-    <system:String x:Key="Updating">Updating...</system:String>
-    <system:String x:Key="UpdateText">Downloaded {0} KB from {1} KB.</system:String>
+    <system:String x:Key="UpdatingLeagueSharp">升级LeagueSharp</system:String>
+    <system:String x:Key="Updating">升级中...</system:String>
+    <system:String x:Key="UpdateText">已下载{0}KB，总共{1}KB.</system:String>
 
     <!-- Errors and other strings -->
-    <system:String x:Key="WrongAuth">Wrong password or username, register at {0}</system:String>
-    <system:String x:Key="AuthEmpty">Password or username is empty</system:String>
-    <system:String x:Key="FailedToDelete">Could not delete update file, please delete it manually and restart LeagueSharp</system:String>
-    <system:String x:Key="WrongVersion">League Of Legends version not supported. Hash:</system:String>
-    <system:String x:Key="FailedToDownload">Failed to download.</system:String>
-    <system:String x:Key="FailedToLogin">Failed to login: {0}</system:String>
-    <system:String x:Key="Login">Login</system:String>
-    <system:String x:Key="LoginError">Failed to sign in as {0}: {1}</system:String>
-    <system:String x:Key="Uninstall">Uninstall</system:String>
-    <system:String x:Key="UninstallConfirm">Are you sure you want to uninstall selected assemblies?</system:String>
-    <system:String x:Key="ConfigWriteError">Could not write to config.xml</system:String>
-    <system:String x:Key="ShareText">Assembly url copied to the clipboard</system:String>
-    <system:String x:Key="LogNotFound">Log file not found</system:String>
-    <system:String x:Key="NewProfile2">New profile</system:String>
-    <system:String x:Key="Rename">Rename</system:String>
-    <system:String x:Key="RenameText">Insert the new name for the profile</system:String>
-    <system:String x:Key="DownloadingData">Downloading the required data.</system:String>
-    <system:String x:Key="Installer">Installer</system:String>
-    <system:String x:Key="SuccessfullyInstalled">Selected assemblies successfully installed.</system:String>
-    <system:String x:Key="ErrorInstalling">There was an error while trying to install some of the assemblies, check the log for more details.</system:String>
+    <system:String x:Key="WrongAuth">错误账户或密码，请注册 {0}</system:String>
+    <system:String x:Key="AuthEmpty">账户或密码为空</system:String>
+    <system:String x:Key="FailedToDelete">无法删除升级文件，请手动删除并重启Leaguesharp</system:String>
+    <system:String x:Key="WrongVersion">英雄联盟版本不支持  Md5:</system:String>
+    <system:String x:Key="FailedToDownload">下载失败</system:String>
+    <system:String x:Key="FailedToLogin">登录失败: {0}</system:String>
+    <system:String x:Key="Login">登陆</system:String>
+    <system:String x:Key="LoginError">登陆失败 {0}: {1}</system:String>
+    <system:String x:Key="Uninstall">卸载</system:String>
+    <system:String x:Key="UninstallConfirm">是否确定卸载选定脚本？</system:String>
+    <system:String x:Key="ConfigWriteError">无法写入config.xml</system:String>
+    <system:String x:Key="ShareText">脚本链接复制到剪贴板</system:String>
+    <system:String x:Key="LogNotFound">找不到日志文件</system:String>
+    <system:String x:Key="NewProfile2">新的简介</system:String>
+    <system:String x:Key="Rename">重命名</system:String>
+    <system:String x:Key="RenameText">为简介添加新的名字</system:String>
+    <system:String x:Key="DownloadingData">下载所需数据中</system:String>
+    <system:String x:Key="Installer">安装程序</system:String>
+    <system:String x:Key="SuccessfullyInstalled">选定脚本安装成功</system:String>
+    <system:String x:Key="ErrorInstalling">在安装某个脚本时发生了一个错误，请检查日志，获取更多信息</system:String>
 
 </ResourceDictionary>
