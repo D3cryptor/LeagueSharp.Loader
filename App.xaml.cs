@@ -64,9 +64,6 @@ namespace LeagueSharp.Loader
                 var lid = Thread.CurrentThread.CurrentCulture.ToString().Contains("-") ? Thread.CurrentThread.CurrentCulture.ToString().Split('-')[0].ToUpperInvariant() : Thread.CurrentThread.CurrentCulture.ToString().ToUpperInvariant();
                 switch (lid)
                 {
-                    case "IT":
-                        dict.Source = new Uri("..\\Resources\\Language\\Italian.xaml", UriKind.Relative);
-                        break;
                     case "DE":
                         dict.Source = new Uri("..\\Resources\\Language\\German.xaml", UriKind.Relative);
                         break;
