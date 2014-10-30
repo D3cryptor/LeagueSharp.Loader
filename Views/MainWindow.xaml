@@ -32,7 +32,7 @@
                     </Rectangle>
                     <TextBlock Margin="4 0 0 0"
                                VerticalAlignment="Center"
-                               Text="Website" />
+                               Text="{DynamicResource Website}" />
                 </StackPanel>
             </Button>
             
@@ -48,7 +48,7 @@
                     </Rectangle>
                     <TextBlock Margin="4 0 0 0"
                                VerticalAlignment="Center"
-                               Text="Settings" />
+                               Text="{DynamicResource Settings}" />
                 </StackPanel>
             </Button>
         </Controls:WindowCommands>
@@ -59,7 +59,7 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <TabControl Margin="3" Grid.ColumnSpan="2" x:Name="MainTabControl" >
-            <TabItem Header="News">
+            <TabItem Header="{DynamicResource News}">
                 <Grid Background="#FFE5E5E5">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
@@ -80,7 +80,7 @@
                     <WebBrowser LoadCompleted="Browser_OnLoadCompleted" x:Name="Browser" Visibility="Visible" Margin="10" Source="http://www.joduska.me/deploy/news.php" Grid.ColumnSpan="2"/>
                 </Grid>
             </TabItem>
-            <TabItem Header="Assemblies">
+            <TabItem Header="{DynamicResource Assemblies}">
                 <Grid Background="#FFE5E5E5" Margin="0,2,0,-2">
                     <DataGrid x:Name="InstalledAssembliesDataGrid" 
                               Margin="10,41,10,40" 
@@ -91,7 +91,7 @@
                                >
                         <DataGrid.ContextMenu>
                             <ContextMenu>
-                                <MenuItem x:Name="UpdateAndCompileMenuItem" Header="Update and Compile" Click="UpdateAndCompileMenuItem_OnClick">
+                                <MenuItem x:Name="UpdateAndCompileMenuItem" Header="{DynamicResource MenuUpdateAndCompile}" Click="UpdateAndCompileMenuItem_OnClick">
                                     <MenuItem.Icon>
                                         <Canvas Width="10"
                                         Height="15"
@@ -106,7 +106,7 @@
                                         </Canvas>
                                     </MenuItem.Icon>
                                 </MenuItem>
-                                <MenuItem x:Name="RemoveMenuItem" Header="Remove" Click="RemoveMenuItem_OnClick">
+                                <MenuItem x:Name="RemoveMenuItem" Header="{DynamicResource MenuRemove}" Click="RemoveMenuItem_OnClick">
                                     <MenuItem.Icon>
                                         <Canvas Width="10"
                                         Height="15"
@@ -121,7 +121,7 @@
                                         </Canvas>
                                     </MenuItem.Icon>
                                 </MenuItem>
-                                <MenuItem x:Name="GithubItem" Header="Github" Click="GithubItem_OnClick">
+                                <MenuItem x:Name="GithubItem" Header="{DynamicResource MenuGithub}" Click="GithubItem_OnClick">
                                     <MenuItem.Icon>
                                         <Canvas Width="10"
                                         Height="15"
@@ -136,7 +136,7 @@
                                         </Canvas>
                                     </MenuItem.Icon>
                                 </MenuItem>
-                                <MenuItem x:Name="ShareItem" Header="Share" Click="ShareItem_OnClick">
+                                <MenuItem x:Name="ShareItem" Header="{DynamicResource MenuShare}" Click="ShareItem_OnClick">
                                     <MenuItem.Icon>
                                         <Canvas Width="10"
                                         Height="15"
@@ -151,7 +151,7 @@
                                         </Canvas>
                                     </MenuItem.Icon>
                                 </MenuItem>
-                                <MenuItem x:Name="LogItem" Header="View Log" Click="LogItem_OnClick">
+                                <MenuItem x:Name="LogItem" Header="{DynamicResource MenuViewLog}" Click="LogItem_OnClick">
                                     <MenuItem.Icon>
                                         <Canvas Width="10"
                                         Height="15"
@@ -174,10 +174,10 @@
                                                     ElementStyle="{DynamicResource MetroDataGridCheckBox}"
                                                     Width="35"
                                                     />
-                            <DataGridTextColumn Header="Name" Width="200" Binding="{Binding DisplayName, UpdateSourceTrigger=PropertyChanged}"/>
-                            <DataGridTextColumn Header="Type" Width="75" Binding="{Binding Type}" IsReadOnly="True"/>
-                            <DataGridTextColumn Header="Version" Width="110" Binding="{Binding Version}" IsReadOnly="True"/>
-                            <DataGridTextColumn Header="Location" Width="*" Binding="{Binding Location}" IsReadOnly="True"/>
+                            <DataGridTextColumn Header="{DynamicResource ColumnName}" Width="200" Binding="{Binding DisplayName, UpdateSourceTrigger=PropertyChanged}"/>
+                            <DataGridTextColumn Header="{DynamicResource ColumnType}" Width="75" Binding="{Binding Type}" IsReadOnly="True"/>
+                            <DataGridTextColumn Header="{DynamicResource ColumnVersion}" Width="110" Binding="{Binding Version}" IsReadOnly="True"/>
+                            <DataGridTextColumn Header="{DynamicResource ColumnLocation}" Width="*" Binding="{Binding Location}" IsReadOnly="True"/>
                         </DataGrid.Columns>
                     </DataGrid>
                     <Controls:SplitButton
@@ -208,7 +208,7 @@
                         </Controls:SplitButton.Icon>
                         <Controls:SplitButton.ContextMenu>
                             <ContextMenu>
-                                <MenuItem Header="New" Click="NewProfileMenuItem_OnClick">
+                                <MenuItem Header="{DynamicResource NewProfile}" Click="NewProfileMenuItem_OnClick">
                                     <MenuItem.Icon>
                                         <Canvas Width="10"
                                         Height="15"
@@ -224,7 +224,7 @@
                                     </MenuItem.Icon>
                                 </MenuItem>
 
-                                <MenuItem Header="Change Name" Click="EditProfileMenuItem_OnClick">
+                                <MenuItem Header="{DynamicResource ChangeName}" Click="EditProfileMenuItem_OnClick">
                                     <MenuItem.Icon>
                                         <Canvas Width="10"
                                         Height="15"
@@ -240,7 +240,7 @@
                                     </MenuItem.Icon>
                                 </MenuItem>
 
-                                <MenuItem Header="Delete" Click="RemoveProfileMenuItem_OnClick">
+                                <MenuItem Header="{DynamicResource DeleteProfile}" Click="RemoveProfileMenuItem_OnClick">
                                     <MenuItem.Icon>
                                         <Canvas Width="10"
                                         Height="15"
@@ -259,20 +259,20 @@
                         </Controls:SplitButton.ContextMenu>
                     </Controls:SplitButton>
 
-                    <Button x:Name="InstallButton" Content="Install new assembly" Margin="0,0,10,10" RenderTransformOrigin="1.08,-0.48" Click="InstallButton_Click" HorizontalAlignment="Right" Width="131" Height="25" VerticalAlignment="Bottom"/>
+                    <Button x:Name="InstallButton"  Content="{DynamicResource InstallNewAssembly}" Margin="0,0,10,10" Click="InstallButton_Click" HorizontalAlignment="Right" Width="181" Height="25" VerticalAlignment="Bottom"/>
                     <TextBox x:Name="SearchTextBox" Height="23" Margin="0,10,10,0" TextWrapping="Wrap" VerticalAlignment="Top" TextChanged="TextBoxBase_OnTextChanged" HorizontalAlignment="Right" Width="181" />
                     <Controls:ProgressRing IsActive="{Binding Working}" HorizontalAlignment="Right" Margin="0,0,22,50" VerticalAlignment="Bottom" Width="64" Height="56"/>
-                    <Button Content="Update all" HorizontalAlignment="Left" Margin="10,0,0,10" Width="75" Height="25" VerticalAlignment="Bottom" Click="UpdateAll_OnClick"/>
-                    <Button Content="Compile all" HorizontalAlignment="Left" Margin="90,0,0,10" Width="75" Height="25" VerticalAlignment="Bottom" Click="CompileAll_OnClick"/>
+                    <Button Content="{DynamicResource UpdateAll}" HorizontalAlignment="Left" Margin="10,0,0,10" Width="108" Height="25" VerticalAlignment="Bottom" Click="UpdateAll_OnClick"/>
+                    <Button Content="{DynamicResource CompileAll}" HorizontalAlignment="Left" Margin="123,0,0,10" Width="110" Height="25" VerticalAlignment="Bottom" Click="CompileAll_OnClick"/>
                 </Grid>
             </TabItem>
             <TabItem x:Name="SettingsTabItem" Header="Settings" Height="36" VerticalAlignment="Top">
                 <Grid Background="#FFE5E5E5">
                     <ContentControl x:Name="SettingsFrame" Margin="167,10,10,10" />
                     <TreeView Margin="10,10,0,10" HorizontalAlignment="Left" Width="152" SelectedItemChanged="TreeView_OnSelectedItemChanged" >
-                        <TreeViewItem x:Name="GeneralSettingsItem" Header="General"/>
-                        <TreeViewItem Header="Hotkeys"/>
-                        <TreeViewItem Header="Log"/>
+                        <TreeViewItem x:Name="GeneralSettingsItem" x:Uid="General" Header="{DynamicResource General}" />
+                        <TreeViewItem x:Uid="Hotkeys" Header="{DynamicResource Hotkeys}"/>
+                        <TreeViewItem x:Uid="Log" Header="{DynamicResource Log}"/>
                     </TreeView>
                 </Grid>
             </TabItem>

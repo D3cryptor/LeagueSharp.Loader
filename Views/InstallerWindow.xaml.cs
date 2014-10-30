@@ -73,9 +73,9 @@ namespace LeagueSharp.Loader.Views
 
         public async void ShowProgress(string location, bool isSvn, string autoInstallName = null)
         {
-            controller = await this.ShowProgressAsync("Updating...", "Downloading the required data.");
+            controller = await this.ShowProgressAsync(Utility.GetMultiLanguageText("Updating"), Utility.GetMultiLanguageText("DownloadingData"));
             controller.SetIndeterminate();
-
+            controller.SetCancelable(true);
             ListAssemblies(location, isSvn, autoInstallName);
         }
 
@@ -146,12 +146,11 @@ namespace LeagueSharp.Loader.Views
 
             if (amount == 0)
             {
-                AfterInstallMessage("Selected assemblies succesfully installed.", true);
+                AfterInstallMessage(Utility.GetMultiLanguageText("SuccessfullyInstalled"), true);
             }
             else
             {
-                AfterInstallMessage(
-                    "There was an error while trying to install some of the assemblies, check the log for more details.");
+                AfterInstallMessage(Utility.GetMultiLanguageText("ErrorInstalling"));
             }
         }
 
@@ -182,7 +181,7 @@ namespace LeagueSharp.Loader.Views
 
         private async void AfterInstallMessage(string msg, bool close = false)
         {
-            await this.ShowMessageAsync("Installer", msg);
+            await this.ShowMessageAsync(Utility.GetMultiLanguageText("Installer"), msg);
             if (close)
             {
                 Close();

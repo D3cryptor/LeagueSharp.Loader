@@ -2,7 +2,11 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Collections;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using LeagueSharp.Loader.Data;
+using System.IO;
 
 /*
     Copyright (C) 2014 LeagueSharp
@@ -51,6 +55,31 @@ namespace LeagueSharp.Loader.Views.Settings
 
             System.Diagnostics.Process.Start(Application.ResourceAssembly.Location);
             Environment.Exit(0);
+        }
+
+        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var selected = (string)e.AddedItems[0];
+            File.WriteAllText(Directories.LanguageFileFilePath, selected);
+            ((MainWindow)DataContext).MainWindow_OnClosing(null, null);
+            System.Diagnostics.Process.Start(Application.ResourceAssembly.Location);
+            Environment.Exit(0);
+        }
+
+        private void ComboBox_Loaded(object sender, RoutedEventArgs e)
+        {
+            ((ComboBox)sender).Items.Clear();
+            ((ComboBox)sender).Items.Add("Chinese");
+            ((ComboBox)sender).Items.Add("English");
+            ((ComboBox)sender).Items.Add("French");
+            ((ComboBox)sender).Items.Add("German");
+            ((ComboBox)sender).Items.Add("Korean");
+            ((ComboBox)sender).Items.Add("Polish");
+            ((ComboBox)sender).Items.Add("Portuguese");
+            ((ComboBox)sender).Items.Add("Russian");
+            ((ComboBox)sender).Items.Add("Spanish");
+            ((ComboBox)sender).Items.Add("Turkish");
+            ((ComboBox)sender).Items.Add("Vietnamese");
         }
     }
 }

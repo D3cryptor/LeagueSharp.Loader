@@ -9,11 +9,11 @@
     <Grid>
         <DataGrid x:Name="HotkeysDataGrid" Margin="0,0,0,30" ItemsSource="{Binding Config.Hotkeys.SelectedHotkeys}" AutoGenerateColumns="False" IsReadOnly="True">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Description" Binding="{Binding Description}" Width="*"/>
-                <DataGridTextColumn Header="HotKey" Binding="{Binding HotkeyString}" Width="100"/>
+                <DataGridTextColumn Header="{DynamicResource ColumnDescription}" Binding="{Binding DisplayDescription}" Width="*"/>
+                <DataGridTextColumn Header="{DynamicResource Hotkey}" Binding="{Binding HotkeyString}" Width="100"/>
             </DataGrid.Columns>
         </DataGrid>
-        <Button Content="Default" HorizontalAlignment="Left" Width="75" Height="25" VerticalAlignment="Bottom" Click="ButtonBase_OnClick"/>
+        <Button Content="{DynamicResource DefaultHotkeys}" HorizontalAlignment="Left" Width="115" Height="25" VerticalAlignment="Bottom" Click="ButtonBase_OnClick"/>
 
     </Grid>
 </UserControl>

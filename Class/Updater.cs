@@ -104,7 +104,7 @@ namespace LeagueSharp.Loader.Class
             }
             catch
             {
-                MessageBox.Show("Could not delete update file, please delete it manually and restart LeagueSharp");
+                MessageBox.Show(Utility.GetMultiLanguageText("FailedToDelete"));
                 Environment.Exit(0);
             }
 
@@ -142,13 +142,13 @@ namespace LeagueSharp.Loader.Class
                             
                         if(updateInfo.version == "0")
                         {
-                            MessageBox.Show("\"League Of Legends.exe\" version not supported " + leagueMd5);
+                            MessageBox.Show(Utility.GetMultiLanguageText("WrongVersion") + leagueMd5);
                             return false;
                         }
 
                         if (updateInfo.version != Utility.Md5Checksum(Directories.CoreFilePath)) //Update needed
                         {
-                            MainWindow.TrayIcon.ShowBalloonTip("Updating", "Updating LeagueSharp.Core...", BalloonIcon.Info);
+                            MainWindow.TrayIcon.ShowBalloonTip(Utility.GetMultiLanguageText("Updating"), "LeagueSharp.Core: " + Utility.GetMultiLanguageText("Updating"), BalloonIcon.Info);
 
                             try
                             {
@@ -166,13 +166,13 @@ namespace LeagueSharp.Loader.Class
                                         foreach (var entry in archive.Entries)
                                         {
                                              entry.ExtractToFile(Path.Combine(Directories.CoreDirectory, entry.FullName), true);
-                                         }
+                                        }
                                     }
                                 }
                             }
                             catch(Exception e)
                             {
-                                MessageBox.Show("Failed to download: " + e);
+                                MessageBox.Show(Utility.GetMultiLanguageText("FailedToDownload") + e);
                                 return false;
                             }
                             finally

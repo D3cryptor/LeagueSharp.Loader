@@ -67,6 +67,8 @@ namespace LeagueSharp.Loader.Data
         public static readonly string ConfigFilePath = Path.Combine(Directories.CurrentDirectory, "config.xml");
         public static readonly string CoreFilePath = Path.Combine(Directories.CoreDirectory, "Leaguesharp.Core.dll");
         public static readonly string BootstrapFilePath = Path.Combine(Directories.CoreDirectory, "Leaguesharp.Bootstrap.dll");
+        public static readonly string LanguageFileFilePath = Path.Combine(Directories.CurrentDirectory, "SelectedLanguage.xml");
+
     }
 
     [ XmlType(AnonymousType = true) ]
@@ -214,8 +216,15 @@ namespace LeagueSharp.Loader.Data
     public class GameSettings : INotifyPropertyChanged
     {
         private string _name;
+
         private List<string> _posibleValues;
         private string _selectedValue;
+
+        [XmlIgnore]    
+        public string DisplayName
+        {
+            get { return Utility.GetMultiLanguageText(_name); }
+        }
 
         public string Name
         {
@@ -298,6 +307,11 @@ namespace LeagueSharp.Loader.Data
                 _name = value;
                 OnPropertyChanged("Name");
             }
+        }
+
+        public string DisplayDescription
+        {
+            get { return Utility.GetMultiLanguageText(Description); }
         }
 
         public string Description { get; set; }

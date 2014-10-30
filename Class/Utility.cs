@@ -240,5 +240,10 @@ namespace LeagueSharp.Loader.Class
                 return "-1";
             }
         }
+
+        public static string GetMultiLanguageText(string key)
+        {
+            return App.Current.FindResource(key).ToString();
+        }
     }
 }

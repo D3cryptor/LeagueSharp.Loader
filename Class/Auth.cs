@@ -40,7 +40,7 @@ namespace LeagueSharp.Loader.Class
         {
             if (user == null || hash == null)
             {
-                return new Tuple<bool, string>(false, "Password or username is empty");
+                return new Tuple<bool, string>(false, Utility.GetMultiLanguageText("AuthEmpty"));
             }
 
             try
@@ -73,7 +73,7 @@ namespace LeagueSharp.Loader.Class
                     }
                 }
 
-                return new Tuple<bool, string>(false, "Wrong password or username, register at http://" + AuthServer);
+                return new Tuple<bool, string>(false, string.Format(Utility.GetMultiLanguageText("WrongAuth"), AuthServer));
             }
             catch (Exception e)
             {

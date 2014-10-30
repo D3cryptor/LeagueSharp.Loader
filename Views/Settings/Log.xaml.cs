@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using LeagueSharp.Loader.Data;
+using System.IO;
 
 namespace LeagueSharp.Loader.Views.Settings
 {
@@ -29,7 +30,10 @@ namespace LeagueSharp.Loader.Views.Settings
 
         private void OpenFolderButton_Click(object sender, RoutedEventArgs e)
         {
-            System.Diagnostics.Process.Start(Directories.LogsDir);
+            if (Directory.Exists(Directories.LogsDir))
+            {
+                System.Diagnostics.Process.Start(Directories.LogsDir);
+            }
         }
     }
 }

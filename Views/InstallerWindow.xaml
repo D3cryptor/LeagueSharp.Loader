@@ -2,7 +2,7 @@
                       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                       xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
-                      Title="Assembly installer" 
+                      Title="{DynamicResource AssemblyInstaller}" 
                       Height="357.241" 
                       Width="411.673"
                       ResizeMode="NoResize" 
@@ -16,27 +16,27 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <TabControl Margin="3" x:Name="installTabControl" IsEnabled="{Binding AbleToList}">
-            <TabItem Header="Search">
+            <TabItem Header="{DynamicResource Search}">
                 <Grid Background="#FFE5E5E5">
                     <StackPanel Margin="-10,0,0,0">
-                        <Label Content="Select the assembly location: " VerticalAlignment="Top" RenderTransformOrigin="-1.333,0.174" Margin="10,10,0,0"/>
-                        <RadioButton x:Name="LocalRadioButton" IsChecked="True" Content="Local" VerticalAlignment="Top" Margin="26,12,0,0"/>
+                        <Label Content="{DynamicResource SelectAssembliesText}" VerticalAlignment="Top" RenderTransformOrigin="-1.333,0.174" Margin="10,10,0,0"/>
+                        <RadioButton x:Name="LocalRadioButton" IsChecked="True" Content="{DynamicResource Local}" VerticalAlignment="Top" Margin="26,12,0,0"/>
                         <TextBox x:Name="PathTextBox" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" PreviewMouseLeftButtonDown="PathTextBox_PreviewMouseLeftButtonDown" GotFocus="PathTextBox_OnGotFocus" Margin="60,5,10,0"/>
 
-                        <RadioButton x:Name="SvnRadioButton" Content="Git" VerticalAlignment="Top" Margin="26,10,0,0"/>
+                        <RadioButton x:Name="SvnRadioButton" Content="{DynamicResource Github}" VerticalAlignment="Top" Margin="26,10,0,0"/>
                         <ComboBox x:Name="SvnComboBox" ItemsSource="{Binding Config.KnownRepositories}" VerticalAlignment="Top" IsEditable="True" GotFocus="SvnComboBox_OnGotFocus" Margin="60,5,10,0" />
 
-                        <RadioButton x:Name="InstalledRadioButton" Content="Installed" VerticalAlignment="Top" Margin="26,10,0,0"/>
-                        <Button x:Name="Step1" IsEnabled="{Binding AbleToList}" Content="Next" Height="25" Click="Step1_Click" Margin="0,10,10,0" RenderTransformOrigin="-0.711,0.266" HorizontalAlignment="Right" Width="55"/>
+                        <RadioButton x:Name="InstalledRadioButton" Content="{DynamicResource Installed}" VerticalAlignment="Top" Margin="26,10,0,0"/>
+                        <Button x:Name="Step1" IsEnabled="{Binding AbleToList}" Content="{DynamicResource Next}" Height="25" Click="Step1_Click" Margin="0,10,10,0" RenderTransformOrigin="-0.711,0.266" HorizontalAlignment="Right" Width="72"/>
 
                     </StackPanel>
 
                 </Grid>
             </TabItem>
-            <TabItem Header="Select">
+            <TabItem Header="{DynamicResource Select}">
                 <Grid Background="#FFE5E5E5">
-                    <Button x:Name="Step2" Content="Add" Width="75" Margin="0,0,10,10" HorizontalAlignment="Right" Height="25" VerticalAlignment="Bottom" Click="Step2_Click"/>
-                    <Button x:Name="Step2P" Content="Previous" Margin="0,0,90,10" RenderTransformOrigin="0.52,-0.68" Height="25" VerticalAlignment="Bottom" Click="Step2P_Click" HorizontalAlignment="Right" Width="75"/>
+                    <Button x:Name="Step2" Content="{DynamicResource Add}" Width="75" Margin="0,0,10,10" HorizontalAlignment="Right" Height="25" VerticalAlignment="Bottom" Click="Step2_Click"/>
+                    <Button x:Name="Step2P" Content="{DynamicResource Previous}" Margin="0,0,90,10" RenderTransformOrigin="0.52,-0.68" Height="25" VerticalAlignment="Bottom" Click="Step2P_Click" HorizontalAlignment="Right" Width="75"/>
                     <DataGrid x:Name="MainDataGrid" 
                               Margin="10,41,10,40"
                               AutoGenerateColumns="False"
@@ -48,13 +48,13 @@
                                                     EditingElementStyle="{DynamicResource MetroDataGridCheckBox}"
                                                     ElementStyle="{DynamicResource MetroDataGridCheckBox}"
                                                     Width="30"/>
-                            <DataGridTextColumn Header="Name" Width="150" Binding="{Binding Name}" IsReadOnly="True" />
-                            <DataGridTextColumn Header="Type" Binding="{Binding Type}" IsReadOnly="True"/>
-                            <DataGridTextColumn Header="Description"  Binding="{Binding Description}" IsReadOnly="True" Width="*"/>
+                            <DataGridTextColumn Header="{DynamicResource ColumnName}" Width="150" Binding="{Binding Name}" IsReadOnly="True" />
+                            <DataGridTextColumn Header="{DynamicResource ColumnType}" Binding="{Binding Type}" IsReadOnly="True"/>
+                            <DataGridTextColumn Header="{DynamicResource ColumnDescription}"  Binding="{Binding Description}" IsReadOnly="True" Width="*"/>
                         </DataGrid.Columns>
                     </DataGrid>
-                    <Button Content="Select all" HorizontalAlignment="Left" Margin="10,0,0,10" Width="75" Height="25" VerticalAlignment="Bottom" Click="SelectAllButton_Click"/>
-                    <Button Content="Unselect all" HorizontalAlignment="Left" Margin="90,0,0,10" Width="86" Height="25" VerticalAlignment="Bottom" Click="UnselectAllButton_Click"/>
+                    <Button Content="{DynamicResource SelectAll}" HorizontalAlignment="Left" Margin="10,0,0,10" Width="75" Height="25" VerticalAlignment="Bottom" Click="SelectAllButton_Click"/>
+                    <Button Content="{DynamicResource DeselectAll}" HorizontalAlignment="Left" Margin="90,0,0,10" Width="86" Height="25" VerticalAlignment="Bottom" Click="UnselectAllButton_Click"/>
                     <TextBox HorizontalAlignment="Left" Height="23" Margin="10,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="135" TextChanged="TextBoxBase_OnTextChanged"/>
                 </Grid>
             </TabItem>

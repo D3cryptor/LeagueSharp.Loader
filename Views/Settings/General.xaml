@@ -15,14 +15,14 @@
                 <TranslateTransform/>
             </TransformGroup>
         </Grid.RenderTransform>
-        <Button Content="Logout" RenderTransformOrigin="0.947,1.44" Height="25" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="75" Click="ButtonBase_OnClick"/>
-        <DataGrid Margin="0,0,0,46"
+        <Button Content="{DynamicResource Logout}" RenderTransformOrigin="0.947,1.44" Height="25" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="90" Click="ButtonBase_OnClick"/>
+        <DataGrid Margin="0,0,0,90"
     		x:Name="GameSettingsDataGrid"
     		CanUserAddRows="False"
     		AutoGenerateColumns="False"
     		ItemsSource="{Binding Config.Settings.GameSettings}" MouseDoubleClick="GameSettingsDataGrid_OnMouseDoubleClick">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Game Settings" Width="*" Binding="{Binding Name}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="{DynamicResource GameSettings}" Width="*" Binding="{Binding DisplayName}" IsReadOnly="True"/>
                 <DataGridComboBoxColumn Width="*">
                     <DataGridComboBoxColumn.ElementStyle>
                         <Style>
@@ -40,8 +40,10 @@
 
             </DataGrid.Columns>
         </DataGrid>
-        <CheckBox IsChecked="{Binding Config.UpdateOnLoad, UpdateSourceTrigger=PropertyChanged}" Content="Update the assemblies at the start" Margin="0,0,10,23" Height="18" VerticalAlignment="Bottom"/>
-        <CheckBox Content="Inject" Margin="0,0,10,0" IsChecked="{Binding Config.Install, UpdateSourceTrigger=PropertyChanged}" Height="18" VerticalAlignment="Bottom"/>
+        <CheckBox IsChecked="{Binding Config.UpdateOnLoad, UpdateSourceTrigger=PropertyChanged}" Content="{DynamicResource UpdateOnStart}" Margin="0,0,10,23" Height="18" VerticalAlignment="Bottom"/>
+        <CheckBox Content="{DynamicResource Inject}" Margin="0,0,10,0" IsChecked="{Binding Config.Install, UpdateSourceTrigger=PropertyChanged}" Height="18" VerticalAlignment="Bottom"/>
+        <ComboBox HorizontalAlignment="Left" Margin="70,0,0,46" Width="135" Height="26" VerticalAlignment="Bottom" Loaded="ComboBox_Loaded" Text="{DynamicResource Language}"  SelectionChanged="ComboBox_SelectionChanged" />
+        <Label Content="{DynamicResource Language}" HorizontalAlignment="Left" Margin="0,0,0,46" Height="23" VerticalAlignment="Bottom" Width="65"/>
 
     </Grid>
 </UserControl>

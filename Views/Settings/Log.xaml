@@ -16,11 +16,11 @@
                               CanUserAddRows="False" Margin="0,0,0,30">
 
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Status" Binding="{Binding Status}"/>
-                <DataGridTextColumn Header="Source" Binding="{Binding Source}"/>
-                <DataGridTextColumn Header="Content" Width="*" Binding="{Binding Message}"/>
+                <DataGridTextColumn Header="{DynamicResource Status}" Binding="{Binding Status}"/>
+                <DataGridTextColumn Header="{DynamicResource Source}" Binding="{Binding Source}"/>
+                <DataGridTextColumn Header="{DynamicResource Content}" Width="*" Binding="{Binding Message}"/>
             </DataGrid.Columns>
         </DataGrid>
-        <Button Content="Open folder" HorizontalAlignment="Left" Width="95" Height="25" VerticalAlignment="Bottom" Click="OpenFolderButton_Click"/>
+        <Button Content="{DynamicResource OpenFolder}" HorizontalAlignment="Left" Width="95" Height="25" VerticalAlignment="Bottom" Click="OpenFolderButton_Click"/>
     </Grid>
 </UserControl>

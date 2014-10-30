@@ -71,9 +71,5 @@ namespace LeagueSharp.Loader.Views
             Environment.Exit(0);
         }
 
-        private void UpdateProgressBar_OnMouseDoubleClick(object sender, MouseButtonEventArgs e)
-        {
-            Environment.Exit(0);
-        }
     }
 }

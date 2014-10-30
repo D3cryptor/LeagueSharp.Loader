@@ -65,6 +65,7 @@ namespace LeagueSharp.Loader.Views
         public bool FirstTimeActivated = true;
         private bool _working;
         public Config Config { get { return Config.Instance; } set { Config.Instance = value; } }
+        
         public bool Working
         {
             get { return _working; }
@@ -78,6 +79,11 @@ namespace LeagueSharp.Loader.Views
 
         public Thread InjectThread { get; set; }
         public event PropertyChangedEventHandler PropertyChanged;
+
+        public MainWindow()
+        {
+            
+        }
 
         private void MainWindow_OnLoaded(object sender, RoutedEventArgs e)
         {
@@ -93,7 +99,7 @@ namespace LeagueSharp.Loader.Views
                 System.Windows.MessageBox.Show("Couldn't load config.xml");
                 Environment.Exit(0);
             }
-            
+
             Browser.Visibility = Visibility.Hidden;
             DataContext = this;
             GeneralSettingsItem.IsSelected = true;
@@ -296,11 +302,11 @@ namespace LeagueSharp.Loader.Views
                     Environment.Exit(0);
                 }
 
-                ShowAfterLoginDialog(string.Format("Failed to login: {0}", loginResult.Item2), true);
+                ShowAfterLoginDialog(string.Format(Utility.GetMultiLanguageText("FailedToLogin"), loginResult.Item2), true);
                 Utility.Log(
-                    LogStatus.Error, "Login",
+                    LogStatus.Error, Utility.GetMultiLanguageText("Login"),
                     string.Format(
-                        "Failed to sign in as {0}: {1}", (result != null ? result.Username : "null"), loginResult.Item2),
+                        Utility.GetMultiLanguageText("LoginError"), (result != null ? result.Username : "null"), loginResult.Item2),
                     Logs.MainLog);
             }
         }
@@ -347,7 +353,7 @@ namespace LeagueSharp.Loader.Views
             }
             catch
             {
-                System.Windows.MessageBox.Show("Could not write to config.xml");
+                System.Windows.MessageBox.Show(Utility.GetMultiLanguageText("ConfigWriteError"));
             }
             
             KeyboardHook.UnHook();
@@ -479,7 +485,7 @@ namespace LeagueSharp.Loader.Views
             var result =
                 await
                     this.ShowMessageAsync(
-                        "Uninstall", "Are you sure you want to uninstall selected assemblies?",
+                        Utility.GetMultiLanguageText("Uninstall"), Utility.GetMultiLanguageText("UninstallConfirm"),
                         MessageDialogStyle.AffirmativeAndNegative);
 
             if (result == MessageDialogResult.Negative)
@@ -518,7 +524,7 @@ namespace LeagueSharp.Loader.Views
             {
                 var user = selectedAssembly.SvnUrl.Remove(0, 19);
                 Clipboard.SetText(string.Format(LSUriScheme.FullName + "project/{0}/{1}/", user, selectedAssembly.Name));
-                ShowTextMessage("Share", "Assembly url copied to the clipboard");
+                ShowTextMessage(Utility.GetMultiLanguageText("MenuShare"), Utility.GetMultiLanguageText("ShareText"));
             }
         }
 
@@ -538,7 +544,7 @@ namespace LeagueSharp.Loader.Views
             }
             else
             {
-                ShowTextMessage("Error", "Log file not found");
+                ShowTextMessage("Error", Utility.GetMultiLanguageText("LogNotFound"));
             }
         }
 
@@ -649,7 +655,7 @@ namespace LeagueSharp.Loader.Views
             else
             {
                 Config.Instance.SelectedProfile.InstalledAssemblies = new ObservableCollection<LeagueSharpAssembly>();
-                Config.Instance.SelectedProfile.Name = "Default";
+                Config.Instance.SelectedProfile.Name = Utility.GetMultiLanguageText("DefaultProfile");
             }
         }
 
@@ -659,7 +665,7 @@ namespace LeagueSharp.Loader.Views
                 new Profile
                 {
                     InstalledAssemblies = new ObservableCollection<LeagueSharpAssembly>(),
-                    Name = "New profile"
+                    Name = Utility.GetMultiLanguageText("NewProfile2")
                 });
 
             Config.Instance.SelectedProfile = Config.Instance.Profiles.Last();
@@ -667,7 +673,8 @@ namespace LeagueSharp.Loader.Views
 
         private async void ShowProfileNameChangeDialog()
         {
-            var result = await this.ShowInputAsync("Rename", "Insert the new name for the profile", new MetroDialogSettings { 
+            var result = await this.ShowInputAsync(Utility.GetMultiLanguageText("Rename"), Utility.GetMultiLanguageText("RenameText"), new MetroDialogSettings
+            { 
             DefaultText = Config.Instance.SelectedProfile.Name,
             });
 
@@ -750,7 +757,7 @@ namespace LeagueSharp.Loader.Views
 
         private void TreeView_OnSelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
-            var name = (string)((TreeViewItem)((System.Windows.Controls.TreeView)sender).SelectedItem).Header;
+            var name = (string)((TreeViewItem)((System.Windows.Controls.TreeView)sender).SelectedItem).Uid;
             SettingsFrame.Content = Activator.CreateInstance(null, "LeagueSharp.Loader.Views.Settings." + name).Unwrap();
         }
 
@@ -771,7 +778,7 @@ namespace LeagueSharp.Loader.Views
 
         private void WebsiteButton_OnClick(object sender, RoutedEventArgs e)
         {
-            System.Diagnostics.Process.Start("http://joduska.me");
+            System.Diagnostics.Process.Start("http://www.joduska.me");
         }
     }
 }
