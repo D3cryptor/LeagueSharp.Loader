@@ -76,6 +76,7 @@ namespace LeagueSharp.Loader.Views.Settings
             ((ComboBox)sender).Items.Add("Korean");
             ((ComboBox)sender).Items.Add("Polish");
             ((ComboBox)sender).Items.Add("Portuguese");
+            ((ComboBox)sender).Items.Add("Romanian");
             ((ComboBox)sender).Items.Add("Russian");
             ((ComboBox)sender).Items.Add("Spanish");
             ((ComboBox)sender).Items.Add("Turkish");
