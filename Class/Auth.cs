@@ -3,10 +3,14 @@
 using System.IO;
 using System.Net;
 using System.Text;
+using System.Windows;
 
 #region
 
 using System;
+using System.Net.Sockets;
+using System.Net.Security;
+using System.Security.Authentication;
 
 #endregion
 
@@ -33,7 +37,7 @@ namespace LeagueSharp.Loader.Class
 {
     internal static class Auth
     {
-        public const string AuthServer = "www.joduska.me";
+        public const string AuthServer = "5.196.9.111";
         public static bool Authed { get; set; }
 
         public static Tuple<bool, string> Login(string user, string hash)
@@ -45,35 +49,32 @@ namespace LeagueSharp.Loader.Class
 
             try
             {
-                var uri = "username=" + WebUtility.UrlEncode(user) + "&password=" + hash;
-                var dataBytes = Encoding.UTF8.GetBytes(uri);
-
-                var wr = WebRequest.Create("http://" + AuthServer + "/forum/api.php?request=login");
-                wr.Timeout = 2000;
-                wr.ContentLength = dataBytes.Length;
-                wr.Method = "POST";
-                wr.ContentType = "application/x-www-form-urlencoded";
-
-                var dataStream = wr.GetRequestStream();
-                dataStream.Write(dataBytes, 0, dataBytes.Length);
-                dataStream.Close();
-
-                var response = wr.GetResponse();
-
-                using (var stream = response.GetResponseStream())
+                using (var client = new TcpClient())
                 {
-                    if (stream != null)
+                    client.Connect(AuthServer, 8080);
+                    if(client.Connected)
                     {
-                        var responseString = new StreamReader(stream, Encoding.UTF8).ReadToEnd();
-
-                        if (responseString.Contains("success"))
+                        var stream = new SslStream(client.GetStream(), false,  new RemoteCertificateValidationCallback((sender, certificate, chain, policyErrors) => { return true; }), null);
+                        try
                         {
-                            return new Tuple<bool, string>(true, "Success!");
+                            stream.AuthenticateAsClient(AuthServer);
+                            stream.Write(System.Text.Encoding.UTF8.GetBytes("{\"action\" : \"ll\", \"user\" : \"" + user.Trim() + "\", \"pass\" : \"" + hash.Trim() + "\"}"));
+                            if(stream.ReadByte() == '1')
+                            {
+                                return new Tuple<bool, string>(true, "Success!");
+                            }
+                            else
+                            {
+                                return new Tuple<bool, string>(false, string.Format(Utility.GetMultiLanguageText("WrongAuth"), AuthServer));
+                            }
+                        }
+                        catch (AuthenticationException e)
+                        {
+                            return new Tuple<bool, string>(false, "Fallback T_T");
                         }
                     }
                 }
-
-                return new Tuple<bool, string>(false, string.Format(Utility.GetMultiLanguageText("WrongAuth"), AuthServer));
+                return new Tuple<bool, string>(true, "Fallback T_T");
             }
             catch (Exception e)
             {
