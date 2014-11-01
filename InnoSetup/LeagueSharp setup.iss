@@ -10,7 +10,6 @@ AppVersion={#MyAppVersion}
 AppId={#MyAppName}
 DefaultDirName="{src}\LeagueSharp"
 Compression=lzma2
-DisableDirPage=true
 SolidCompression=yes
 DisableReadyPage=no
 DisableReadyMemo=no
@@ -54,6 +53,7 @@ Name: "de"; MessagesFile: "compiler:Languages\German.isl"
 #include "Scripts\products\dotnetfx45.iss"
 #include "Scripts\products\vcredist2010.iss"
 #include "Scripts\products\vcredist2013.iss"
+#include "scripts\products\detectDirectX.iss"
 
 [Run]
 Filename: {app}\{#MyAppExeName}; Flags: shellexec nowait; 
@@ -66,5 +66,6 @@ begin
 	dotnetfx45(1);
 	vcredist2010();
 	vcredist2013();
+	directX();
 	Result := true;
 end;
