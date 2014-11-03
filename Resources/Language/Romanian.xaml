@@ -4,112 +4,112 @@
 
     <!-- MainWindow TopBar -->
     <system:String x:Key="Website">Website</system:String>
-    <system:String x:Key="Settings">Settings</system:String>
+    <system:String x:Key="Settings">Setari</system:String>
 
     <!-- MainWindow Tabs -->
-    <system:String x:Key="News">News</system:String>
-    <system:String x:Key="Assemblies">Assemblies</system:String>
+    <system:String x:Key="News">Noutati</system:String>
+    <system:String x:Key="Assemblies">Ansamble</system:String>
 
     <!-- MainWindow Profile selector -->
     <system:String x:Key="DefaultProfile">Default</system:String>
 
     <!-- MainWindow Assemblies datagrid columns -->
-    <system:String x:Key="ColumnName">Name</system:String>
-    <system:String x:Key="ColumnType">Type</system:String>
-    <system:String x:Key="ColumnVersion">Version</system:String>
-    <system:String x:Key="ColumnLocation">Location</system:String>
-    <system:String x:Key="ColumnDescription">Description</system:String>
+    <system:String x:Key="ColumnName">Nume</system:String>
+    <system:String x:Key="ColumnType">Tip</system:String>
+    <system:String x:Key="ColumnVersion">Versiune</system:String>
+    <system:String x:Key="ColumnLocation">Locatie</system:String>
+    <system:String x:Key="ColumnDescription">Descriptie</system:String>
 
     <!-- MainWindow Assemblies datagrid Menu -->
-    <system:String x:Key="MenuUpdateAndCompile">Update and Compile</system:String>
-    <system:String x:Key="MenuRemove">Remove</system:String>
+    <system:String x:Key="MenuUpdateAndCompile">Actualizeaza si Compila</system:String>
+    <system:String x:Key="MenuRemove">Elimina</system:String>
     <system:String x:Key="MenuGitub">GitHub</system:String>
-    <system:String x:Key="MenuShare">Share</system:String>
-    <system:String x:Key="MenuViewLog">View Log</system:String>
+    <system:String x:Key="MenuShare">Partajeaza</system:String>
+    <system:String x:Key="MenuViewLog">Arata Log</system:String>
 
-	<!-- MainWindow Profiles Menu -->
-    <system:String x:Key="NewProfile">New</system:String>
-    <system:String x:Key="ChangeName">Change Name</system:String>
-    <system:String x:Key="DeleteProfile">Delete</system:String>
-	
+    <!-- MainWindow Profiles Menu -->
+    <system:String x:Key="NewProfile">Nou</system:String>
+    <system:String x:Key="ChangeName">Schimba Nume</system:String>
+    <system:String x:Key="DeleteProfile">Sterge</system:String>
+
     <!-- MainWindow Buttons -->
-    <system:String x:Key="UpdateAll">Update All</system:String>
-    <system:String x:Key="CompileAll">Compile All</system:String>
-    <system:String x:Key="InstallNewAssembly">Install New Assembly</system:String>
+    <system:String x:Key="UpdateAll">Actualizeaza Tot</system:String>
+    <system:String x:Key="CompileAll">Compila Tot</system:String>
+    <system:String x:Key="InstallNewAssembly">Instalati nou ansamblu</system:String>
 
     <!-- InstallerWindow Title -->
-    <system:String x:Key="AssemblyInstaller">Assembly Installer</system:String>
+    <system:String x:Key="AssemblyInstaller">Instalator de ansamble</system:String>
 
     <!-- InstallerWindow Tabs -->
-    <system:String x:Key="Search">Search</system:String>
-    <system:String x:Key="Select">Select</system:String>
+    <system:String x:Key="Search">Cautati</system:String>
+    <system:String x:Key="Select">Selectati</system:String>
 
     <!-- InstallerWindow Search tab -->
-    <system:String x:Key="SelectAssembliesText">Select the location of the assembly:</system:String>
+    <system:String x:Key="SelectAssembliesText">Selectati locatia ansamblului:</system:String>
     <system:String x:Key="Local">Local</system:String>
     <system:String x:Key="Github">GitHub</system:String>
-    <system:String x:Key="Installed">Installed</system:String>
-    <system:String x:Key="Next">Next</system:String>
+    <system:String x:Key="Installed">Instalat</system:String>
+    <system:String x:Key="Next">Urmator</system:String>
 
     <!-- InstallerWindow Select tab -->
-    <system:String x:Key="SelectAll">Select All</system:String>
-    <system:String x:Key="DeselectAll">Deselect All</system:String>
-    <system:String x:Key="Previous">Previous</system:String>
-    <system:String x:Key="Add">Add</system:String>
+    <system:String x:Key="SelectAll">Selectati Toate</system:String>
+    <system:String x:Key="DeselectAll">Deselectati Toate</system:String>
+    <system:String x:Key="Previous">Precedent</system:String>
+    <system:String x:Key="Add">Adaugati</system:String>
 
     <!-- Settings General -->
     <system:String x:Key="General">General</system:String>
-    <system:String x:Key="GameSettings">Game Settings</system:String>
+    <system:String x:Key="GameSettings">Setari de joc</system:String>
     <system:String x:Key="Anti-AFK">Anti-AFK</system:String>
-    <system:String x:Key="Debug Console">Debug Console</system:String>
-    <system:String x:Key="Display Enemy Tower Range">Display enemy tower range</system:String>
+    <system:String x:Key="Debug Console">Console de Debug</system:String>
+    <system:String x:Key="Display Enemy Tower Range">Aratati Range-ul turetelor inamici</system:String>
     <system:String x:Key="Extended Zoom">Extended Zoom</system:String>
-    <system:String x:Key="UpdateOnStart">Update assemblies on start</system:String>
+    <system:String x:Key="UpdateOnStart">Actualizati ansamblurile la start</system:String>
     <system:String x:Key="Inject">Inject</system:String>
     <system:String x:Key="Logout">Logout</system:String>
-    <system:String x:Key="DefaultHotkeys">Restore</system:String>
-	<system:String x:Key="Language">Language</system:String>
-	
+    <system:String x:Key="DefaultHotkeys">Restabiliti Hotkey de default</system:String>
+    <system:String x:Key="Language">Limba</system:String>
+
     <!-- Settings Hotkeys -->
     <system:String x:Key="Hotkeys">Hotkeys</system:String>
     <system:String x:Key="Hotkey">Hotkey</system:String>
-    <system:String x:Key="Reload the assemblies">Reload the assemblies</system:String>
-    <system:String x:Key="Recompile and reload the assemblies">Recompile and reload the assemblies</system:String>
-    <system:String x:Key="Shows the menu (Press)">Shows the menu (Press)</system:String>
-    <system:String x:Key="Shows the menu (Toggle)">Show the menu (Toggle)</system:String>
+    <system:String x:Key="Reload the assemblies">Recompilati Ansamblurile</system:String>
+    <system:String x:Key="Recompile and reload the assemblies">Recompilati si reîncarcati Ansamblurile</system:String>
+    <system:String x:Key="Shows the menu (Press)">Aratati meniul (Press)</system:String>
+    <system:String x:Key="Shows the menu (Toggle)">Aratati meniul (Toggle)</system:String>
 
     <!-- Settings Log -->
     <system:String x:Key="Log">Log</system:String>
     <system:String x:Key="Status">Status</system:String>
-    <system:String x:Key="Source">Source</system:String>
-    <system:String x:Key="Content">Content</system:String>
-    <system:String x:Key="OpenFolder">Open Folder</system:String>
+    <system:String x:Key="Source">Sursa</system:String>
+    <system:String x:Key="Content">Continut</system:String>
+    <system:String x:Key="OpenFolder">Deschideti</system:String>
 
     <!-- UpdateWindow -->
-    <system:String x:Key="UpdatingLeagueSharp">Updating LeagueSharp</system:String>
-    <system:String x:Key="Updating">Updating...</system:String>
-    <system:String x:Key="UpdateText">Downloaded {0} KB from {1} KB.</system:String>
+    <system:String x:Key="UpdatingLeagueSharp">Actualizare Leaguesharp</system:String>
+    <system:String x:Key="Updating">Se actualizeaza...</system:String>
+    <system:String x:Key="UpdateText">Descarcat {0} KB din {1} KB.</system:String>
 
     <!-- Errors and other strings -->
-    <system:String x:Key="WrongAuth">Wrong password or username, register at {0}</system:String>
-    <system:String x:Key="AuthEmpty">Password or username is empty</system:String>
-    <system:String x:Key="FailedToDelete">Could not delete update file, please delete it manually and restart LeagueSharp</system:String>
-    <system:String x:Key="WrongVersion">League Of Legends version not supported. Hash:</system:String>
-    <system:String x:Key="FailedToDownload">Failed to download.</system:String>
-    <system:String x:Key="FailedToLogin">Failed to login: {0}</system:String>
+    <system:String x:Key="WrongAuth">Password sau Username gresit, inregistrativa pe {0}</system:String>
+    <system:String x:Key="AuthEmpty">Password sau username sunt goale</system:String>
+    <system:String x:Key="FailedToDelete">Nu sa putut sterge fisierul, va rugam sa il stergeti manual si sa restartati LeagueSharp</system:String>
+    <system:String x:Key="WrongVersion">Versiunea din League of Legends nu ieste suportata. Hash:</system:String>
+    <system:String x:Key="FailedToDownload">Download nereusit.</system:String>
+    <system:String x:Key="FailedToLogin">Login nereusit: {0}</system:String>
     <system:String x:Key="Login">Login</system:String>
-    <system:String x:Key="LoginError">Failed to sign in as {0}: {1}</system:String>
-    <system:String x:Key="Uninstall">Uninstall</system:String>
-    <system:String x:Key="UninstallConfirm">Are you sure you want to uninstall selected assemblies?</system:String>
-    <system:String x:Key="ConfigWriteError">Could not write to config.xml</system:String>
-    <system:String x:Key="ShareText">Assembly url copied to the clipboard</system:String>
-    <system:String x:Key="LogNotFound">Log file not found</system:String>
-    <system:String x:Key="NewProfile2">New profile</system:String>
-    <system:String x:Key="Rename">Rename</system:String>
-    <system:String x:Key="RenameText">Insert the new name for the profile</system:String>
-    <system:String x:Key="DownloadingData">Downloading the required data.</system:String>
-    <system:String x:Key="Installer">Installer</system:String>
-    <system:String x:Key="SuccessfullyInstalled">Selected assemblies successfully installed.</system:String>
-    <system:String x:Key="ErrorInstalling">There was an error while trying to install some of the assemblies, check the log for more details.</system:String>
+    <system:String x:Key="LoginError">Login nereusit ca {0}: {1}</system:String>
+    <system:String x:Key="Uninstall">Dezinstalati</system:String>
+    <system:String x:Key="UninstallConfirm">Sinteti sigur de a dezinstala aceste ansambluri ?</system:String>
+    <system:String x:Key="ConfigWriteError">Nu sa putut scrie pe Config.xml</system:String>
+    <system:String x:Key="ShareText">Urlul ansamblului copiat pe clipboard</system:String>
+    <system:String x:Key="LogNotFound">Fisierul de Log nu a fost gasit</system:String>
+    <system:String x:Key="NewProfile2">Nou profil</system:String>
+    <system:String x:Key="Rename">Redenumiti</system:String>
+    <system:String x:Key="RenameText">Introduceti noua denumire pentru profil</system:String>
+    <system:String x:Key="DownloadingData">Se downloadeaza datele necesare</system:String>
+    <system:String x:Key="Installer">Instalator</system:String>
+    <system:String x:Key="SuccessfullyInstalled">Ansamblele selectate au fost instalate corect.</system:String>
+    <system:String x:Key="ErrorInstalling">A aparut o eroare în timp ce încercati sa instalati unele dintre ansamble, verificati Logul pentru mai multe detalii.</system:String>
 
 </ResourceDictionary>
