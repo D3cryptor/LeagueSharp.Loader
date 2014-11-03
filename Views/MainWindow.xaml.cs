@@ -93,7 +93,7 @@ namespace LeagueSharp.Loader.Views
             {
                 Config.Instance = ((Config)Utility.MapXmlFileToClass(typeof(Config), Directories.ConfigFilePath));
             }
-            catch(Exception ee)
+            catch(Exception)
             {
                 File.Delete(Directories.ConfigFilePath);
                 System.Windows.MessageBox.Show("Couldn't load config.xml");

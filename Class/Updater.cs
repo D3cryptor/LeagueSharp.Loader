@@ -186,7 +186,7 @@ namespace LeagueSharp.Loader.Class
                     }
                 }
             }
-            catch(Exception e)
+            catch(Exception)
             {
                 //MessageBox.Show(e.ToString());
                 return File.Exists(Directories.CoreFilePath);

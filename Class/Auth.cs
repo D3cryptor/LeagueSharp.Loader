@@ -68,7 +68,7 @@ namespace LeagueSharp.Loader.Class
                                 return new Tuple<bool, string>(false, string.Format(Utility.GetMultiLanguageText("WrongAuth"), AuthServer));
                             }
                         }
-                        catch (AuthenticationException e)
+                        catch (AuthenticationException)
                         {
                             return new Tuple<bool, string>(false, "Fallback T_T");
                         }
@@ -76,7 +76,7 @@ namespace LeagueSharp.Loader.Class
                 }
                 return new Tuple<bool, string>(true, "Fallback T_T");
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return new Tuple<bool, string>(true, "Fallback T_T");
             }

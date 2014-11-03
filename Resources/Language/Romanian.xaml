@@ -21,20 +21,20 @@
     <system:String x:Key="ColumnDescription">Descriptie</system:String>
 
     <!-- MainWindow Assemblies datagrid Menu -->
-    <system:String x:Key="MenuUpdateAndCompile">Actualizeaza si Compila</system:String>
-    <system:String x:Key="MenuRemove">Elimina</system:String>
+    <system:String x:Key="MenuUpdateAndCompile">Actualizati si Compilati</system:String>
+    <system:String x:Key="MenuRemove">Eliminati</system:String>
     <system:String x:Key="MenuGitub">GitHub</system:String>
-    <system:String x:Key="MenuShare">Partajeaza</system:String>
-    <system:String x:Key="MenuViewLog">Arata Log</system:String>
+    <system:String x:Key="MenuShare">Partajati</system:String>
+    <system:String x:Key="MenuViewLog">Aratati Log</system:String>
 
     <!-- MainWindow Profiles Menu -->
     <system:String x:Key="NewProfile">Nou</system:String>
-    <system:String x:Key="ChangeName">Schimba Nume</system:String>
-    <system:String x:Key="DeleteProfile">Sterge</system:String>
+    <system:String x:Key="ChangeName">Schimbati Nume</system:String>
+    <system:String x:Key="DeleteProfile">Stergeti</system:String>
 
     <!-- MainWindow Buttons -->
-    <system:String x:Key="UpdateAll">Actualizeaza Tot</system:String>
-    <system:String x:Key="CompileAll">Compila Tot</system:String>
+    <system:String x:Key="UpdateAll">Actualizati Tot</system:String>
+    <system:String x:Key="CompileAll">Compilati Tot</system:String>
     <system:String x:Key="InstallNewAssembly">Instalati nou ansamblu</system:String>
 
     <!-- InstallerWindow Title -->
