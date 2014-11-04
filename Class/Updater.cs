@@ -41,8 +41,8 @@ namespace LeagueSharp.Loader.Class
     {
         public delegate void RepositoriesUpdateDelegate(List<string> list);
 
-        public const string VersionCheckURL = "http://www.joduska.me/deploy/update.php?action=vcheck";
-        public const string CoreVersionCheckURL = "http://www.joduska.me/deploy/update.php?action=lcheck&lmd5={0}";
+        public const string VersionCheckURL = "http://api.joduska.me/public/deploy/loader/version";
+        public const string CoreVersionCheckURL = "http://api.joduska.me/public/deploy/kernel/{0}";
         public static string UpdateZip = Path.Combine(Directories.CoreDirectory, "update.zip");
         public static string SetupFile = Path.Combine(Directories.CurrentDirectory, "LeagueSharp-update.exe");
         public static MainWindow MainWindow;
