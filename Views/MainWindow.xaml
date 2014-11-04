@@ -77,7 +77,7 @@
                             </ContextMenu>
                         </tb:TaskbarIcon.ContextMenu>
                     </tb:TaskbarIcon>
-                    <WebBrowser LoadCompleted="Browser_OnLoadCompleted" x:Name="Browser" Visibility="Visible" Margin="10" Source="http://www.joduska.me/deploy/news.php" Grid.ColumnSpan="2"/>
+                    <WebBrowser LoadCompleted="Browser_OnLoadCompleted" x:Name="Browser" Visibility="Visible" Margin="10" Source="http://api.joduska.me/public/news/html" Grid.ColumnSpan="2"/>
                 </Grid>
             </TabItem>
             <TabItem Header="{DynamicResource Assemblies}">
