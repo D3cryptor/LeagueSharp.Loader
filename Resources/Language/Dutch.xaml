@@ -21,7 +21,7 @@
     <system:String x:Key="ColumnDescription">Beschrijving</system:String>
 
     <!-- MainWindow Assemblies datagrid Menu -->
-    <system:String x:Key="MenuUpdateAndCompile">Bijwerken en aanmaken</system:String>
+    <system:String x:Key="MenuUpdateAndCompile">Update en Compileer</system:String>
     <system:String x:Key="MenuRemove">Verwijder</system:String>
     <system:String x:Key="MenuGitub">GitHub</system:String>
     <system:String x:Key="MenuShare">Deel</system:String>
@@ -33,8 +33,8 @@
     <system:String x:Key="DeleteProfile">Verwijder</system:String>
 
     <!-- MainWindow Buttons -->
-    <system:String x:Key="UpdateAll">Bijwerken alles</system:String>
-    <system:String x:Key="CompileAll">Maak alles</system:String>
+    <system:String x:Key="UpdateAll">Update Alles</system:String>
+    <system:String x:Key="CompileAll">Compileer Alles</system:String>
     <system:String x:Key="InstallNewAssembly">Installeer Nieuwe Assembly</system:String>
 
     <!-- InstallerWindow Title -->
