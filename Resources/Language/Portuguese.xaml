@@ -4,7 +4,7 @@
 
     <!-- MainWindow TopBar -->
     <system:String x:Key="Website">Página web</system:String>
-    <system:String x:Key="Settings">Configurção</system:String>
+    <system:String x:Key="Settings">Configuração</system:String>
 
     <!-- MainWindow Tabs -->
     <system:String x:Key="News">Notícias</system:String>
@@ -45,7 +45,7 @@
     <system:String x:Key="Select">Selecionar</system:String>
 
     <!-- InstallerWindow Search tab -->
-    <system:String x:Key="SelectAssembliesText">Seleciona a localização do assembly:</system:String>
+    <system:String x:Key="SelectAssembliesText">Selecionar a localização do assembly:</system:String>
     <system:String x:Key="Local">Disco Local</system:String>
     <system:String x:Key="Github">GitHub</system:String>
     <system:String x:Key="Installed">Instalados</system:String>
