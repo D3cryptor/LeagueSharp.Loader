@@ -45,7 +45,7 @@
     <system:String x:Key="Select">Wybierz</system:String>
 
     <!-- InstallerWindow Search tab -->
-    <system:String x:Key="SelectAssembliesText">Wybierz lokalizację skryptu:</system:String>
+    <system:String x:Key="SelectAssembliesText">Wybierz lokalizację skryptów:</system:String>
     <system:String x:Key="Local">Lokalny</system:String>
     <system:String x:Key="Github">GitHub</system:String>
     <system:String x:Key="Installed">Zainstalowane</system:String>
