@@ -11,13 +11,13 @@
     <system:String x:Key="Assemblies">Assemblies</system:String>
 
     <!-- MainWindow Profile selector -->
-    <system:String x:Key="DefaultProfile">Default</system:String>
+    <system:String x:Key="DefaultProfile">Standard</system:String>
 
     <!-- MainWindow Assemblies datagrid columns -->
     <system:String x:Key="ColumnName">Name</system:String>
-    <system:String x:Key="ColumnType">Art</system:String>
+    <system:String x:Key="ColumnType">Typ</system:String>
     <system:String x:Key="ColumnVersion">Version</system:String>
-    <system:String x:Key="ColumnLocation">Standort</system:String>
+    <system:String x:Key="ColumnLocation">Quelle</system:String>
     <system:String x:Key="ColumnDescription">Beschreibung</system:String>
 
     <!-- MainWindow Assemblies datagrid Menu -->
@@ -25,7 +25,7 @@
     <system:String x:Key="MenuRemove">Entfernen</system:String>
     <system:String x:Key="MenuGitub">GitHub</system:String>
     <system:String x:Key="MenuShare">Teilen</system:String>
-    <system:String x:Key="MenuViewLog">Logs ansehen</system:String>
+    <system:String x:Key="MenuViewLog">Logs</system:String>
 
     <!-- MainWindow Profiles Menu -->
     <system:String x:Key="NewProfile">Neu</system:String>
@@ -33,19 +33,19 @@
     <system:String x:Key="DeleteProfile">Löschen</system:String>
 
     <!-- MainWindow Buttons -->
-    <system:String x:Key="UpdateAll">Aktualisiere alles</system:String>
-    <system:String x:Key="CompileAll">Erstelle alles</system:String>
-    <system:String x:Key="InstallNewAssembly">Installiere eine neue Assembly</system:String>
+    <system:String x:Key="UpdateAll">Alle aktualisieren</system:String>
+    <system:String x:Key="CompileAll">Alle kompilieren</system:String>
+    <system:String x:Key="InstallNewAssembly">Assembly hinzufügen</system:String>
 
     <!-- InstallerWindow Title -->
-    <system:String x:Key="AssemblyInstaller">Assembly Installierer</system:String>
+    <system:String x:Key="AssemblyInstaller">Assemblies installieren</system:String>
 
     <!-- InstallerWindow Tabs -->
     <system:String x:Key="Search">Suche</system:String>
     <system:String x:Key="Select">Auswählen</system:String>
 
     <!-- InstallerWindow Search tab -->
-    <system:String x:Key="SelectAssembliesText">Wähle den Standort der Assembly:</system:String>
+    <system:String x:Key="SelectAssembliesText">Wähle die Quelle der Assembly:</system:String>
     <system:String x:Key="Local">Lokal</system:String>
     <system:String x:Key="Github">GitHub</system:String>
     <system:String x:Key="Installed">Installiert</system:String>
@@ -54,7 +54,7 @@
     <!-- InstallerWindow Select tab -->
     <system:String x:Key="SelectAll">Wähle alles aus</system:String>
     <system:String x:Key="DeselectAll">Wähle alles ab</system:String>
-    <system:String x:Key="Previous">Vorherig</system:String>
+    <system:String x:Key="Previous">Zurück</system:String>
     <system:String x:Key="Add">Hinzufügen</system:String>
 
     <!-- Settings General -->
@@ -64,8 +64,8 @@
     <system:String x:Key="Debug Console">Debug Konsole</system:String>
     <system:String x:Key="Display Enemy Tower Range">Zeige die gegnerische Turm Reichweite an</system:String>
     <system:String x:Key="Extended Zoom">Erweitere den Zoom</system:String>
-    <system:String x:Key="UpdateOnStart">Aktualisiere die Assemblies bei jedem start</system:String>
-    <system:String x:Key="Inject">Inject</system:String>
+    <system:String x:Key="UpdateOnStart">Aktualisiere die Assemblies bei jedem Spielstart</system:String>
+    <system:String x:Key="Inject">Aktiv</system:String>
     <system:String x:Key="Logout">Abmelden</system:String>
     <system:String x:Key="DefaultHotkeys">Wiederherstellen</system:String>
     <system:String x:Key="Language">Sprache</system:String>
@@ -74,9 +74,9 @@
     <system:String x:Key="Hotkeys">Hotkeys</system:String>
     <system:String x:Key="Hotkey">Hotkey</system:String>
     <system:String x:Key="Reload the assemblies">Lade die Assemblies neu</system:String>
-    <system:String x:Key="Recompile and reload the assemblies">Erstelle und lade die Assemblies neu</system:String>
-    <system:String x:Key="Shows the menu (Press)">Zeige das Menü an (Press)</system:String>
-    <system:String x:Key="Shows the menu (Toggle)">Zeige das Menü an (Toggle)</system:String>
+    <system:String x:Key="Recompile and reload the assemblies">Kompiliere und lade die Assemblies neu</system:String>
+    <system:String x:Key="Shows the menu (Press)">Zeigt das Menü an (Press)</system:String>
+    <system:String x:Key="Shows the menu (Toggle)">Zeigt das Menü an (Toggle)</system:String>
 
     <!-- Settings Log -->
     <system:String x:Key="Log">Log</system:String>
@@ -91,25 +91,24 @@
     <system:String x:Key="UpdateText">Downloaded {0} KB von {1} KB.</system:String>
 
     <!-- Errors and other strings -->
-    <system:String x:Key="WrongAuth">Falsches Passwort oder Username, registriere dich auf {0}.</system:String>
-    <system:String x:Key="AuthEmpty">Passwort oder Username ist nicht ausgefüllt.</system:String>
+    <system:String x:Key="WrongAuth">Falscher Nutzername oder Passwort, registriere dich auf {0}.</system:String>
+    <system:String x:Key="AuthEmpty">Die Eingabefelder dürfen nicht leer sein.</system:String>
     <system:String x:Key="FailedToDelete">Die Aktualisierungdatei konnte nicht gelöscht werden, lösche sie manuell und starte LeagueSharp neu.</system:String>
     <system:String x:Key="WrongVersion">Deine League of Legends Version wird nicht unterstützt, Hash:</system:String>
     <system:String x:Key="FailedToDownload">Download ist gescheitert.</system:String>
     <system:String x:Key="FailedToLogin">Anmeldung gescheitert: {0}</system:String>
     <system:String x:Key="Login">Anmelden</system:String>
     <system:String x:Key="LoginError">Anmeldung als {0}: {1} gescheitert</system:String>
-    <system:String x:Key="Uninstall">Deinstalliere</system:String>
-    <system:String x:Key="UninstallConfirm">Bist du dir sicher, dass du die ausgewählte Assembly löschen willst?</system:String>
-    <system:String x:Key="ConfigWriteError">Konnte nicht in die config.xml Datei schreiben.</system:String>
-    <system:String x:Key="ShareText">Assembly link wurde in den Zwischenspeicher gelegt.</system:String>
-    <system:String x:Key="LogNotFound">Logdatei wurde nicht gefunden.</system:String>
+    <system:String x:Key="Uninstall">Entfernen</system:String>
+    <system:String x:Key="UninstallConfirm">Bist du dir sicher, dass du die ausgewählte Assembly entfernen willst?</system:String>
+    <system:String x:Key="ConfigWriteError">Die config.xml Datei konnte nicht geschrieben werden.</system:String>
+    <system:String x:Key="ShareText">Die Assembly URL wurde im Zwischenspeicher abgelegt.</system:String>
+    <system:String x:Key="LogNotFound">Die Logdatei wurde nicht gefunden.</system:String>
     <system:String x:Key="NewProfile2">Neues Profil</system:String>
     <system:String x:Key="Rename">Umbennen</system:String>
     <system:String x:Key="RenameText">Gebe den neuen Profilnamen ein.</system:String>
-    <system:String x:Key="DownloadingData">Lade die benötigten Datein runter.</system:String>
-    <system:String x:Key="Installer">Installierer</system:String>
-    <system:String x:Key="SuccessfullyInstalled">Ausgewählte Assembly wurde erfolgreich installiert.</system:String>
-    <system:String x:Key="ErrorInstalling">Es gab einen Fehler beim installieren der Assemblies, bitte überprüfte die Logdatei.</system:String>
-
+    <system:String x:Key="DownloadingData">Die benötigten Daten werden heruntergeladen.</system:String>
+    <system:String x:Key="Installer">Assemblies installieren</system:String>
+    <system:String x:Key="SuccessfullyInstalled">Die ausgewählten Assemblies wurden erfolgreich installiert.</system:String>
+    <system:String x:Key="ErrorInstalling">Es gab einen Fehler beim der Installation der Assemblies, bitte überprüfte die Logdatei.</system:String>
 </ResourceDictionary>
