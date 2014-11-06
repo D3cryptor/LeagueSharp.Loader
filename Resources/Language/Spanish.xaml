@@ -113,4 +113,9 @@
     <system:String x:Key="SuccessfullyInstalled">Los ensamblados seleccionados fueron correctamente instalados.</system:String>
     <system:String x:Key="ErrorInstalling">Ocurrió un error al instalar los ensamblados, revisa los archivos de error para más información.</system:String>
 
+    <system:String x:Key="EnableDeveloper">Habilitar opciones de desarrolador</system:String>
+    <system:String x:Key="Developer">Desarrolador</system:String>
+    <system:String x:Key="New">Nuevo</system:String>
+    <system:String x:Key="Edit">Editar</system:String>
+    <system:String x:Key="Clone">Clonar</system:String>
 </ResourceDictionary>

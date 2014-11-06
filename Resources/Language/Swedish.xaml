@@ -112,4 +112,9 @@
     <system:String x:Key="SuccessfullyInstalled">Dom valda assemblies har installerats.</system:String>
     <system:String x:Key="ErrorInstalling">Det uppstog ett fel installationen av assemblier, kontrollera loggen för mer information.</system:String>
 
+    <system:String x:Key="EnableDeveloper">Enable developer options</system:String>
+    <system:String x:Key="Developer">Developer</system:String>
+    <system:String x:Key="New">New</system:String>
+    <system:String x:Key="Edit">Edit</system:String>
+    <system:String x:Key="Clone">Clone</system:String>
 </ResourceDictionary>

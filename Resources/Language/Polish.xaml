@@ -112,4 +112,9 @@
     <system:String x:Key="SuccessfullyInstalled">Wybrane assemblies zostały pomyślnie zainstalowane.</system:String>
     <system:String x:Key="ErrorInstalling">Wystąpił błąd podczas próby zainstalowania niektórych skryptów lub bibliotek, sprawdź logi by dowiedzieć się więcej.</system:String>
 
+    <system:String x:Key="EnableDeveloper">Enable developer options</system:String>
+    <system:String x:Key="Developer">Developer</system:String>
+    <system:String x:Key="New">New</system:String>
+    <system:String x:Key="Edit">Edit</system:String>
+    <system:String x:Key="Clone">Clone</system:String>
 </ResourceDictionary>

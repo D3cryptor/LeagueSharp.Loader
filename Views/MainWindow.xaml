@@ -151,7 +151,7 @@
                                         </Canvas>
                                     </MenuItem.Icon>
                                 </MenuItem>
-                                <MenuItem Header="Developer" Visibility="Hidden" x:Name="DevMenu">
+                                <MenuItem Header="{DynamicResource Developer}" Visibility="Hidden" x:Name="DevMenu">
                                     <MenuItem.Icon>
                                         <Canvas Width="10"
                                         Height="15"
@@ -165,7 +165,7 @@
                                         Stretch="Fill" />
                                         </Canvas>
                                     </MenuItem.Icon>
-                                    <MenuItem x:Name="NewItem" Header="New" Click="NewItem_OnClick">
+                                    <MenuItem x:Name="NewItem" Header="{DynamicResource New}" Click="NewItem_OnClick">
                                         <MenuItem.Icon>
                                             <Canvas Width="10"
                                             Height="15"
@@ -180,7 +180,7 @@
                                             </Canvas>
                                         </MenuItem.Icon>
                                     </MenuItem>
-                                    <MenuItem x:Name="EditItem" Header="Edit" Click="EditItem_OnClick">
+                                    <MenuItem x:Name="EditItem" Header="{DynamicResource Edit}" Click="EditItem_OnClick">
                                         <MenuItem.Icon>
                                             <Canvas Width="10"
                                                         Height="15"
@@ -195,7 +195,7 @@
                                             </Canvas>
                                         </MenuItem.Icon>
                                     </MenuItem>
-                                    <MenuItem x:Name="CloneItem" Header="Clone" Click="CloneItem_OnClick">
+                                    <MenuItem x:Name="CloneItem" Header="{DynamicResource Clone}" Click="CloneItem_OnClick">
                                         <MenuItem.Icon>
                                             <Canvas Width="10"
                                                     Height="15"

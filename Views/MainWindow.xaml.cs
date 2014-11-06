@@ -308,7 +308,7 @@ namespace LeagueSharp.Loader.Views
             }
         }
 
-        private async void ShowTextMessage(string title, string message)
+        public async void ShowTextMessage(string title, string message)
         {
             await this.ShowMessageAsync(title, message);
         }
@@ -670,6 +670,15 @@ namespace LeagueSharp.Loader.Views
             if (FirstTimeActivated)
             {
                 FirstTimeActivated = false;
+
+                if (Config.Instance.LeagueOfLegendsExePath != null)
+                {
+                    var exe = Utility.GetLatestLeagueOfLegendsExePath(Config.Instance.LeagueOfLegendsExePath);
+                    if (exe != null)
+                    {
+                        Updater.UpdateCore(exe);
+                    }
+                }
 
                 var allAssemblies = new List<LeagueSharpAssembly>();
                 foreach (var profile in Config.Instance.Profiles)

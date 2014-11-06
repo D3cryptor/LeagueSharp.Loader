@@ -70,15 +70,6 @@ namespace LeagueSharp.Loader
                 Environment.Exit(0);
             }
 
-            if(Config.Instance.LeagueOfLegendsExePath != null)
-            {
-                var exe = Utility.GetLatestLeagueOfLegendsExePath(Config.Instance.LeagueOfLegendsExePath);
-                if(exe != null)
-                {
-                    Updater.UpdateCore(exe);
-                }
-            }
-
             //Load the language resources.
             var dict = new ResourceDictionary();
             

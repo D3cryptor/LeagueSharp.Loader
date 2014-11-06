@@ -112,4 +112,9 @@
     <system:String x:Key="SuccessfullyInstalled">Selected assemblies successfully installed.</system:String>
     <system:String x:Key="ErrorInstalling">There was an error while trying to install some of the assemblies, check the log for more details.</system:String>
 
+    <system:String x:Key="EnableDeveloper">Enable developer options</system:String>
+    <system:String x:Key="Developer">Developer</system:String>
+    <system:String x:Key="New">New</system:String>
+    <system:String x:Key="Edit">Edit</system:String>
+    <system:String x:Key="Clone">Clone</system:String>
 </ResourceDictionary>

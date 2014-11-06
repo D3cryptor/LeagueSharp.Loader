@@ -149,7 +149,11 @@ namespace LeagueSharp.Loader.Class
 
                         if (updateInfo.version != Utility.Md5Checksum(Directories.CoreFilePath)) //Update needed
                         {
-                            MainWindow.TrayIcon.ShowBalloonTip(Utility.GetMultiLanguageText("Updating"), "LeagueSharp.Core: " + Utility.GetMultiLanguageText("Updating"), BalloonIcon.Info);
+                            
+                            if (MainWindow != null)
+                            {
+                                MainWindow.TrayIcon.ShowBalloonTip(Utility.GetMultiLanguageText("Updating"), "LeagueSharp.Core: " + Utility.GetMultiLanguageText("Updating"), BalloonIcon.Info);
+                            }
 
                             try
                             {

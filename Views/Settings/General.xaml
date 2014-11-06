@@ -41,7 +41,7 @@
             </DataGrid.Columns>
         </DataGrid>
 
-        <CheckBox IsChecked="{Binding Config.ShowDevOptions, UpdateSourceTrigger=PropertyChanged}" Content="Show developer options" Margin="0,0,10,46" Height="18" VerticalAlignment="Bottom"/>
+        <CheckBox IsChecked="{Binding Config.ShowDevOptions, UpdateSourceTrigger=PropertyChanged}" Content="{DynamicResource EnableDeveloper}" Margin="0,0,10,46" Height="18" VerticalAlignment="Bottom"/>
         <CheckBox IsChecked="{Binding Config.UpdateOnLoad, UpdateSourceTrigger=PropertyChanged}" Content="{DynamicResource UpdateOnStart}" Margin="0,0,10,23" Height="18" VerticalAlignment="Bottom"/>
         <CheckBox Content="{DynamicResource Inject}" Margin="0,0,10,0" IsChecked="{Binding Config.Install, UpdateSourceTrigger=PropertyChanged}" Height="18" VerticalAlignment="Bottom"/>
         <ComboBox HorizontalAlignment="Left" Margin="70,0,0,69" Width="135" Height="26" VerticalAlignment="Bottom" Loaded="ComboBox_Loaded" Text="{DynamicResource Language}"  SelectionChanged="ComboBox_SelectionChanged" />
