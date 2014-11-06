@@ -104,7 +104,7 @@
     <system:String x:Key="ConfigWriteError">ไม่สามารถเขียนไปที่ config.xml</system:String>
     <system:String x:Key="ShareText">Assembly url ได้คัดลอกไปที่คลิปบอร์ด</system:String>
     <system:String x:Key="LogNotFound">ไม่พบ Log ไฟล์</system:String>
-    <system:String x:Key="NewProfile2">สร้างโปรไฟล์ใหม่</system:String>
+    <system:String x:Key="NewProfile2">โปรไฟล์ใหม่</system:String>
     <system:String x:Key="Rename">เปลี่ยนชื่อ</system:String>
     <system:String x:Key="RenameText">ใส่ชื่อใหม่สำหรับโปรไฟล์</system:String>
     <system:String x:Key="DownloadingData">กำลังดาวน์โหลดข้อมูลที่ต้องการ.</system:String>
