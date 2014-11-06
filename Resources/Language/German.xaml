@@ -111,4 +111,5 @@
     <system:String x:Key="Installer">Assemblies installieren</system:String>
     <system:String x:Key="SuccessfullyInstalled">Die ausgewählten Assemblies wurden erfolgreich installiert.</system:String>
     <system:String x:Key="ErrorInstalling">Es gab einen Fehler beim der Installation der Assemblies, bitte überprüfte die Logdatei.</system:String>
+    
 </ResourceDictionary>
