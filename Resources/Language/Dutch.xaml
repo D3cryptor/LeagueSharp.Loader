@@ -38,7 +38,7 @@
     <system:String x:Key="InstallNewAssembly">Installeer nieuwe assembly</system:String>
 
     <!-- InstallerWindow Title -->
-    <system:String x:Key="AssemblyInstaller">Assembly anstaller</system:String>
+    <system:String x:Key="AssemblyInstaller">Assembly installer</system:String>
 
     <!-- InstallerWindow Tabs -->
     <system:String x:Key="Search">Zoek</system:String>
@@ -59,12 +59,12 @@
 
     <!-- Settings General -->
     <system:String x:Key="General">Algemeen</system:String>
-    <system:String x:Key="GameSettings">Spel instelingen</system:String>
+    <system:String x:Key="GameSettings">Spel instellingen</system:String>
     <system:String x:Key="Anti-AFK">Anti-AFK</system:String>
     <system:String x:Key="Debug Console">Debug console</system:String>
     <system:String x:Key="Display Enemy Tower Range">Display enemy tower range</system:String>
     <system:String x:Key="Extended Zoom">Extended Zoom</system:String>
-    <system:String x:Key="UpdateOnStart">Update assemblies bij opstarten</system:String>
+    <system:String x:Key="UpdateOnStart">Update assemblies bij het opstarten</system:String>
     <system:String x:Key="Inject">Injecteer</system:String>
     <system:String x:Key="Logout">Log uit</system:String>
     <system:String x:Key="DefaultHotkeys">Herstel</system:String>
@@ -91,7 +91,7 @@
     <system:String x:Key="UpdateText">{0} KB van {1} KB gedownload.</system:String>
 
     <!-- Errors and other strings -->
-    <system:String x:Key="WrongAuth">Verkeerde wachwoord of gebruikersnaam, registreer op {0}</system:String>
+    <system:String x:Key="WrongAuth">Verkeerd wachwoord of gebruikersnaam, registreer bij {0}</system:String>
     <system:String x:Key="AuthEmpty">Wachtwoord of gebruikersnaam is leeg</system:String>
     <system:String x:Key="FailedToDelete">Kon update file niet verwijderen, verwijder het zelf en herstart LeagueSharp</system:String>
     <system:String x:Key="WrongVersion">Deze League of Legends versie is niet ondersteund. Hash:</system:String>
@@ -101,7 +101,7 @@
     <system:String x:Key="LoginError">Kon niet inloggen als {0}: {1}</system:String>
     <system:String x:Key="Uninstall">Verwijder</system:String>
     <system:String x:Key="UninstallConfirm">Weet je zeker dat je de geselecteerde assemblies wil installeren?</system:String>
-    <system:String x:Key="ConfigWriteError">Kan geen text schrijven naar config.xml</system:String>
+    <system:String x:Key="ConfigWriteError">Kon instellingen niet opslaan in config.xml</system:String>
     <system:String x:Key="ShareText">Assembly link gekopïeerd naar klembord</system:String>
     <system:String x:Key="LogNotFound">Logboek kon niet gevonden worden</system:String>
     <system:String x:Key="NewProfile2">Nieuw profiel</system:String>
