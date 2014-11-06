@@ -161,9 +161,13 @@ namespace LeagueSharp.Loader.Views
                 FoundAssemblies.Clear();
                 foreach (var profile in Config.Instance.Profiles)
                 {
-                    FoundAssemblies.AddRange(profile.InstalledAssemblies);
+                    foreach (var assembly in profile.InstalledAssemblies)
+	                {
+		                FoundAssemblies.Add(assembly.Copy());
+	                }
                 }
                 FoundAssemblies = FoundAssemblies.Distinct().ToList();
+                
                 installTabControl.SelectedIndex++;
             }
             else

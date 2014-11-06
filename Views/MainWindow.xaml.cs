@@ -87,23 +87,11 @@ namespace LeagueSharp.Loader.Views
 
         private void MainWindow_OnLoaded(object sender, RoutedEventArgs e)
         {
-            Utility.CreateFileFromResource(Directories.ConfigFilePath, "LeagueSharp.Loader.Resources.config.xml");
-
-            try
-            {
-                Config.Instance = ((Config)Utility.MapXmlFileToClass(typeof(Config), Directories.ConfigFilePath));
-            }
-            catch(Exception)
-            {
-                File.Delete(Directories.ConfigFilePath);
-                System.Windows.MessageBox.Show("Couldn't load config.xml");
-                Environment.Exit(0);
-            }
-
             Browser.Visibility = Visibility.Hidden;
             DataContext = this;
             GeneralSettingsItem.IsSelected = true;
-
+            DevMenu.Visibility = Config.ShowDevOptions ? Visibility.Visible : Visibility.Hidden;
+            DevMenu.Height = Config.ShowDevOptions ? DevMenu.Height : 0;
             if (!File.Exists(Directories.CoreFilePath))
             {
                 System.Windows.MessageBox.Show(string.Format("Couldn't find {0}", Path.GetFileName(Directories.CoreFilePath)));
@@ -510,6 +498,10 @@ namespace LeagueSharp.Loader.Views
             {
                 System.Diagnostics.Process.Start(selectedAssembly.SvnUrl);
             }
+            else if(Directory.Exists(Path.GetDirectoryName(selectedAssembly.PathToProjectFile)))
+            {
+                System.Diagnostics.Process.Start(Path.GetDirectoryName(selectedAssembly.PathToProjectFile));
+            }
         }
 
         private void ShareItem_OnClick(object sender, RoutedEventArgs e)
@@ -545,6 +537,67 @@ namespace LeagueSharp.Loader.Views
             else
             {
                 ShowTextMessage("Error", Utility.GetMultiLanguageText("LogNotFound"));
+            }
+        }
+
+        private void NewItem_OnClick(object sender, RoutedEventArgs e)
+        {
+            ShowNewAssemblyDialog();
+        }
+
+        private async void ShowNewAssemblyDialog()
+        {
+            var assemblyName = await this.ShowInputAsync("New Project", "Enter the new project name");
+
+            if(assemblyName != null)
+            {
+                assemblyName = Regex.Replace(assemblyName, @"[^A-Za-z0-9]+", "");
+            }
+            
+            if (!string.IsNullOrEmpty(assemblyName))
+            {
+                var leagueSharpAssembly = Utility.CreateEmptyAssembly(assemblyName);
+                if (leagueSharpAssembly != null)
+                {
+                    leagueSharpAssembly.Compile();
+                    Config.SelectedProfile.InstalledAssemblies.Add(leagueSharpAssembly);
+                }
+            }
+        }
+
+        private void EditItem_OnClick(object sender, RoutedEventArgs e)
+        {
+            if (InstalledAssembliesDataGrid.SelectedItems.Count <= 0)
+            {
+                return;
+            }
+
+            var selectedAssembly = (LeagueSharpAssembly)InstalledAssembliesDataGrid.SelectedItems[0];
+            if (File.Exists(selectedAssembly.PathToProjectFile))
+            {
+                System.Diagnostics.Process.Start(selectedAssembly.PathToProjectFile);
+            }
+        }
+
+        private void CloneItem_OnClick(object sender, RoutedEventArgs e)
+        {
+            if (InstalledAssembliesDataGrid.SelectedItems.Count <= 0)
+            {
+                return;
+            }
+            var selectedAssembly = (LeagueSharpAssembly)InstalledAssembliesDataGrid.SelectedItems[0];
+            try
+            {
+                var source = Path.GetDirectoryName(selectedAssembly.PathToProjectFile);
+                var destination = Path.Combine(Directories.LocalRepoDir, selectedAssembly.Name) + "_clone_" +  Environment.TickCount.GetHashCode().ToString("X");
+                Utility.CopyDirectory(source, destination);
+                var leagueSharpAssembly = new LeagueSharpAssembly(selectedAssembly.Name + "_clone", Path.Combine(destination, Path.GetFileName(selectedAssembly.PathToProjectFile)), "");
+                leagueSharpAssembly.Compile();
+                Config.SelectedProfile.InstalledAssemblies.Add(leagueSharpAssembly);
+            }
+            catch (Exception ex)
+            {
+                System.Windows.MessageBox.Show(ex.ToString());
             }
         }
 

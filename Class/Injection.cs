@@ -113,6 +113,7 @@ namespace LeagueSharp.Loader.Class
             var leagueProcess = GetLeagueProcess();
             try
             {
+                Config.Instance.LeagueOfLegendsExePath = leagueProcess.Modules[0].FileName;
                 if (leagueProcess != null && !IsInjected && Updater.UpdateCore(leagueProcess.Modules[0].FileName))
                 {
                     if (injectDLL == null)

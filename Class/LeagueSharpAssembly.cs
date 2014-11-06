@@ -9,6 +9,7 @@ using System.Xml.Serialization;
 using LeagueSharp.Loader.Data;
 using Microsoft.Build.Evaluation;
 using System.Windows;
+using System.Runtime.Serialization.Formatters.Binary;
 
 #endregion
 
@@ -72,7 +73,7 @@ namespace LeagueSharp.Loader.Class
         Compiling,
     }
 
-    [ XmlType(AnonymousType = true) ]
+    [ XmlType(AnonymousType = true), Serializable ]
     public class LeagueSharpAssembly : INotifyPropertyChanged
     {
         private string _displayName = "";
@@ -337,6 +338,11 @@ namespace LeagueSharp.Loader.Class
             {
                 PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
             }
+        }
+
+        public LeagueSharpAssembly Copy()
+        {
+            return new LeagueSharpAssembly(Name, PathToProjectFile, SvnUrl);
         }
     }
 }

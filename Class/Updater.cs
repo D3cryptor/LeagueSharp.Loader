@@ -33,6 +33,7 @@ using LeagueSharp.Loader.Views;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Json;
 using Hardcodet.Wpf.TaskbarNotification;
+using System.ComponentModel;
 #endregion
 
 namespace LeagueSharp.Loader.Class

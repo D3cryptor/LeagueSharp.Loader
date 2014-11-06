@@ -60,7 +60,7 @@ namespace LeagueSharp.Loader.Views.Settings
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             var selected = (string)e.AddedItems[0];
-            File.WriteAllText(Directories.LanguageFileFilePath, selected);
+            Config.Instance.SelectedLanguage = selected;
             ((MainWindow)DataContext).MainWindow_OnClosing(null, null);
             System.Diagnostics.Process.Start(Application.ResourceAssembly.Location);
             Environment.Exit(0);

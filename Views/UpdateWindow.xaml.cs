@@ -70,6 +70,5 @@ namespace LeagueSharp.Loader.Views
             new Process { StartInfo = { FileName = Updater.SetupFile, Arguments = "/VERYSILENT /DIR=\"" + Directories.CurrentDirectory + "\"" } }.Start();
             Environment.Exit(0);
         }
-
     }
 }

@@ -44,6 +44,7 @@ using Microsoft.Build.Evaluation;
 
 namespace LeagueSharp.Loader.Class
 {
+    [Serializable]
     internal class ProjectFile
     {
         public readonly Project Project;

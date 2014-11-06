@@ -63,12 +63,11 @@ namespace LeagueSharp.Loader.Data
         public static readonly string CoreDirectory = Path.Combine(Directories.CurrentDirectory, "System") + "\\";
         public static readonly string LogsDir = Path.Combine(Directories.CurrentDirectory, "Logs") + "\\";
 
+        public static readonly string LocalRepoDir = Path.Combine(Directories.CurrentDirectory, "LocalAssemblies") + "\\";
         public static readonly string LoaderFilePath = Path.Combine(Directories.CurrentDirectory, "Leaguesharp.Loader.exe");
         public static readonly string ConfigFilePath = Path.Combine(Directories.CurrentDirectory, "config.xml");
         public static readonly string CoreFilePath = Path.Combine(Directories.CoreDirectory, "Leaguesharp.Core.dll");
         public static readonly string BootstrapFilePath = Path.Combine(Directories.CoreDirectory, "Leaguesharp.Bootstrap.dll");
-        public static readonly string LanguageFileFilePath = Path.Combine(Directories.CurrentDirectory, "SelectedLanguage.xml");
-
     }
 
     [ XmlType(AnonymousType = true) ]
@@ -76,6 +75,9 @@ namespace LeagueSharp.Loader.Data
     public class Config : INotifyPropertyChanged
     {
         private bool _firstRun = true;
+        private bool _showDevOptions = false;
+        private string _selectedLanguage = null;
+        private string _leagueOfLegendsExePath = null;
         private Hotkeys _hotkeys;
 
         private bool _install = true;
@@ -88,6 +90,26 @@ namespace LeagueSharp.Loader.Data
         [ XmlIgnore ]
         public static Config Instance;
 
+        public string SelectedLanguage
+        {
+            get { return _selectedLanguage; }
+            set
+            {
+                _selectedLanguage = value;
+                OnPropertyChanged("SelectedLanguage");
+            }
+        }
+
+        public string LeagueOfLegendsExePath
+        {
+            get { return _leagueOfLegendsExePath; }
+            set
+            {
+                _leagueOfLegendsExePath = value;
+                OnPropertyChanged("LeagueOfLegendsExePath");
+            }
+        }
+
         public bool FirstRun
         {
             get { return _firstRun; }
@@ -98,6 +120,16 @@ namespace LeagueSharp.Loader.Data
             }
         }
 
+        public bool ShowDevOptions
+        {
+            get { return _showDevOptions; }
+            set
+            {
+                _showDevOptions = value;
+                OnPropertyChanged("ShowDevOptions");
+            }
+        }
+        
         public bool Install
         {
             get { return _install; }

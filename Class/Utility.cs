@@ -245,5 +245,87 @@ namespace LeagueSharp.Loader.Class
         {
             return App.Current.FindResource(key).ToString();
         }
+
+        public static void CopyDirectory(string sourcePath, string targetPath)
+        {
+            Directory.CreateDirectory(targetPath);
+            foreach (var dirPath in Directory.GetDirectories(sourcePath, "*",
+                    SearchOption.AllDirectories))
+                Directory.CreateDirectory(dirPath.Replace(sourcePath, targetPath));
+            foreach (var newPath in Directory.GetFiles(sourcePath, "*.*",
+                SearchOption.AllDirectories))
+                File.Copy(newPath, newPath.Replace(sourcePath, targetPath), true);
+        }
+
+        public static LeagueSharpAssembly CreateEmptyAssembly(string assemblyName)
+        {
+            try
+            {
+                var appconfig = Utility.ReadResourceString("LeagueSharp.Loader.Resources.DefaultProject.App.config");
+                var assemblyInfocs = Utility.ReadResourceString("LeagueSharp.Loader.Resources.DefaultProject.AssemblyInfo.cs");
+                var defaultProjectcsproj = Utility.ReadResourceString("LeagueSharp.Loader.Resources.DefaultProject.DefaultProject.csproj");
+                var programcs = Utility.ReadResourceString("LeagueSharp.Loader.Resources.DefaultProject.Program.cs");
+
+                var targetPath = Path.Combine(Directories.LocalRepoDir, assemblyName + Environment.TickCount.GetHashCode().ToString("X"));
+                Directory.CreateDirectory(targetPath);
+
+                programcs = programcs.Replace("{ProjectName}", assemblyName);
+                assemblyInfocs = assemblyInfocs.Replace("{ProjectName}", assemblyName);
+                defaultProjectcsproj = defaultProjectcsproj.Replace("{ProjectName}", assemblyName);
+                defaultProjectcsproj = defaultProjectcsproj.Replace("{SystemDirectory}", Directories.CoreDirectory);
+
+                File.WriteAllText(Path.Combine(targetPath, "App.config"), appconfig);
+                File.WriteAllText(Path.Combine(targetPath, "AssemblyInfo.cs"), assemblyInfocs);
+                File.WriteAllText(Path.Combine(targetPath, assemblyName + ".csproj"), defaultProjectcsproj);
+                File.WriteAllText(Path.Combine(targetPath, "Program.cs"), programcs);
+
+                return new LeagueSharpAssembly(assemblyName, Path.Combine(targetPath, assemblyName + ".csproj"), "");
+            }
+            catch (Exception)
+            {               
+                throw;
+                return null;
+            }
+        }
+
+        public static string GetLatestLeagueOfLegendsExePath(string lastKnownPath)
+        {
+            try 
+	        {
+                var dir = Path.GetFullPath(Path.Combine(Path.GetDirectoryName(lastKnownPath), "..\\..\\"));
+                if(Directory.Exists(dir))
+                {
+                    var versionPaths = Directory.GetDirectories(dir);
+                    var greatestVersionString = "";
+                    long greatestVersion = 0;
+
+                    foreach (var versionPath in versionPaths)
+	                {
+                        Version version;
+		                var isVersion = Version.TryParse(Path.GetFileName(versionPath), out version);
+                        if(isVersion)
+                        {
+                            var test = version.Build * Math.Pow(600, 4) + version.Major * Math.Pow(600, 3) + version.Minor * Math.Pow(600, 2) + version.Revision * Math.Pow(600, 1);
+                            if (test > greatestVersion)
+                            {
+                                greatestVersion = (long)test;
+                                greatestVersionString = Path.GetFileName(versionPath);
+                            }
+                        }
+	                }
+
+                    if(greatestVersion != 0)
+                    {
+                        var exe = Directory.GetFiles(Path.Combine(dir, greatestVersionString), "League of Legends.exe", SearchOption.AllDirectories);
+                        return exe.Length > 0 ? exe[0] : null;
+                    }
+                }
+	        }
+	        catch (Exception)
+	        {
+	        }
+
+            return null;
+        }
     }
 }

@@ -26,6 +26,11 @@ namespace LeagueSharp.Loader
 
         protected override void OnStartup(StartupEventArgs e)
         {
+            if(File.Exists(Updater.SetupFile))
+            {
+                Thread.Sleep(1000);
+            }
+
             bool createdNew;
             _mutex = new Mutex(true, @"LeagueSharp.Loader.Mutex", out createdNew);
             if (!createdNew)
@@ -52,12 +57,34 @@ namespace LeagueSharp.Loader
                 Environment.Exit(0);
             }
 
+            Utility.CreateFileFromResource(Directories.ConfigFilePath, "LeagueSharp.Loader.Resources.config.xml");
+
+            try
+            {
+                Config.Instance = ((Config)Utility.MapXmlFileToClass(typeof(Config), Directories.ConfigFilePath));
+            }
+            catch (Exception)
+            {
+                System.Windows.MessageBox.Show("Couldn't load config.xml.");
+                File.Delete(Directories.ConfigFilePath);
+                Environment.Exit(0);
+            }
+
+            if(Config.Instance.LeagueOfLegendsExePath != null)
+            {
+                var exe = Utility.GetLatestLeagueOfLegendsExePath(Config.Instance.LeagueOfLegendsExePath);
+                if(exe != null)
+                {
+                    Updater.UpdateCore(exe);
+                }
+            }
+
             //Load the language resources.
             var dict = new ResourceDictionary();
             
-            if (File.Exists(Directories.LanguageFileFilePath))
+            if (Config.Instance.SelectedLanguage != null)
             {
-                dict.Source = new Uri("..\\Resources\\Language\\" + File.ReadAllText(Directories.LanguageFileFilePath) + ".xaml", UriKind.Relative);
+                dict.Source = new Uri("..\\Resources\\Language\\" + Config.Instance.SelectedLanguage + ".xaml", UriKind.Relative);
             }
             else
             {

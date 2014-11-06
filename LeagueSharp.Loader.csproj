@@ -117,6 +117,8 @@
     <Compile Include="Data\Log.cs" />
     <Compile Include="Class\SvnUpdater.cs" />
     <Compile Include="Class\Utility.cs" />
+    <EmbeddedResource Include="Resources\DefaultProject\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Resources\DefaultProject\Program.cs" />
     <Compile Include="Views\Settings\Hotkeys.xaml.cs">
       <DependentUpon>Hotkeys.xaml</DependentUpon>
     </Compile>
@@ -234,6 +236,7 @@
     <None Include="packages.config" />
     <AppDesigner Include="Properties\" />
     <None Include="Properties\app.manifest" />
+    <EmbeddedResource Include="Resources\DefaultProject\App.config" />
     <Page Include="Resources\Language\Italian.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -272,6 +275,9 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\DefaultProject\DefaultProject.csproj" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
