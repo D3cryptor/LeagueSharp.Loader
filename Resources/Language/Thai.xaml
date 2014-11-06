@@ -1,0 +1,115 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:system="clr-namespace:System;assembly=mscorlib">
+
+    <!-- MainWindow TopBar -->
+    <system:String x:Key="Website">Website</system:String>
+    <system:String x:Key="Settings">ตั้งค่า</system:String>
+
+    <!-- MainWindow Tabs -->
+    <system:String x:Key="News">ข่าว</system:String>
+    <system:String x:Key="Assemblies">Assemblies</system:String>
+
+    <!-- MainWindow Profile selector -->
+    <system:String x:Key="DefaultProfile">ค่าเริ่มต้น</system:String>
+
+    <!-- MainWindow Assemblies datagrid columns -->
+    <system:String x:Key="ColumnName">ชื่อ</system:String>
+    <system:String x:Key="ColumnType">ประเภท</system:String>
+    <system:String x:Key="ColumnVersion">เวอร์ชั่น</system:String>
+    <system:String x:Key="ColumnLocation">Location</system:String>
+    <system:String x:Key="ColumnDescription">รายละเอียด</system:String>
+
+    <!-- MainWindow Assemblies datagrid Menu -->
+    <system:String x:Key="MenuUpdateAndCompile">อัพเดท และ คอมไพล์</system:String>
+    <system:String x:Key="MenuRemove">ลบ</system:String>
+    <system:String x:Key="MenuGitub">GitHub</system:String>
+    <system:String x:Key="MenuShare">แชร์</system:String>
+    <system:String x:Key="MenuViewLog">แสดง log</system:String>
+
+	<!-- MainWindow Profiles Menu -->
+    <system:String x:Key="NewProfile">ใหม่</system:String>
+    <system:String x:Key="ChangeName">เปลี่ยนชื่อ</system:String>
+    <system:String x:Key="DeleteProfile">ลบ</system:String>
+	
+    <!-- MainWindow Buttons -->
+    <system:String x:Key="UpdateAll">อัพเดททั้งหมด</system:String>
+    <system:String x:Key="CompileAll">คอมไพล์ทั้งหมด</system:String>
+    <system:String x:Key="InstallNewAssembly">ลง Assembly ใหม่</system:String>
+
+    <!-- InstallerWindow Title -->
+    <system:String x:Key="AssemblyInstaller">ตัวติดตั้ง Assembly</system:String>
+
+    <!-- InstallerWindow Tabs -->
+    <system:String x:Key="Search">คั้นหา</system:String>
+    <system:String x:Key="Select">เลือก</system:String>
+
+    <!-- InstallerWindow Search tab -->
+    <system:String x:Key="SelectAssembliesText">เลือกตำแหน่งที่ตั้งของ assembly:</system:String>
+    <system:String x:Key="Local">ภายในเครื่อง</system:String>
+    <system:String x:Key="Github">GitHub</system:String>
+    <system:String x:Key="Installed">Installed</system:String>
+    <system:String x:Key="Next">ถัดไป</system:String>
+
+    <!-- InstallerWindow Select tab -->
+    <system:String x:Key="SelectAll">เลือกทั้งหมด</system:String>
+    <system:String x:Key="DeselectAll">ไม่เลือกทั้งหมด</system:String>
+    <system:String x:Key="Previous">ย้อนกลับ</system:String>
+    <system:String x:Key="Add">เพิ่ม</system:String>
+
+    <!-- Settings General -->
+    <system:String x:Key="General">ทั้วไป</system:String>
+    <system:String x:Key="GameSettings">ตั้งค่าเกม</system:String>
+    <system:String x:Key="Anti-AFK">Anti-AFK</system:String>
+    <system:String x:Key="Debug Console">Debug Console</system:String>
+    <system:String x:Key="Display Enemy Tower Range">แสดงระยะป้อมฝ่ายตรงข้าม</system:String>
+    <system:String x:Key="Extended Zoom">ซูมออกไม่จำกัด</system:String>
+    <system:String x:Key="UpdateOnStart">อัพเดท Assemblies เมื่อเริ่มโปรแกรม</system:String>
+    <system:String x:Key="Inject">Inject</system:String>
+    <system:String x:Key="Logout">ออกจากระบบ</system:String>
+    <system:String x:Key="DefaultHotkeys">คืนค่าเริ่มต้น</system:String>
+    <system:String x:Key="Language">ภาษา</system:String>
+	
+    <!-- Settings Hotkeys -->
+    <system:String x:Key="Hotkeys">ปุ่มคีย์ลัด</system:String>
+    <system:String x:Key="Hotkey">ปุ่มคีย์ลัด</system:String>
+    <system:String x:Key="Reload the assemblies">โหลด Assemblies ใหม่</system:String>
+    <system:String x:Key="Recompile and reload the assemblies">คอมไพล์และโหลด Assemblies ใหม่</system:String>
+    <system:String x:Key="Shows the menu (Press)">แสดงเมนู (เมื่อกดค้าง)</system:String>
+    <system:String x:Key="Shows the menu (Toggle)">แสดงเมนู (กดเปิด-ปิด)</system:String>
+
+    <!-- Settings Log -->
+    <system:String x:Key="Log">Log</system:String>
+    <system:String x:Key="Status">Status</system:String>
+    <system:String x:Key="Source">Source</system:String>
+    <system:String x:Key="Content">Content</system:String>
+    <system:String x:Key="OpenFolder">เปิดโฟลเดอร์</system:String>
+
+    <!-- UpdateWindow -->
+    <system:String x:Key="UpdatingLeagueSharp">กำลังอัพเดทลีกชาป</system:String>
+    <system:String x:Key="Updating">กำลังอัพเดท...</system:String>
+    <system:String x:Key="UpdateText">ดาวน์โหลด {0} KB จาก {1} KB.</system:String>
+
+    <!-- Errors and other strings -->
+    <system:String x:Key="WrongAuth">ชื่อผู้ใช้หรือรหัสผ่านผิดพลาด, สมัครได้ที่ {0}</system:String>
+    <system:String x:Key="AuthEmpty">ไม่ได้กรอกรหัสผ่านหรือชื่อผู้ใช้</system:String>
+    <system:String x:Key="FailedToDelete">ไม่สามารถลบอัพเดทไฟล์ได้, กรุณาลบด้วยตนเองและเปิดลีกชาปใหม่</system:String>
+    <system:String x:Key="WrongVersion">เวอร์ชั่นของ League Of Legends ไม่สนับสนุน. Hash:</system:String>
+    <system:String x:Key="FailedToDownload">ดาวน์โหลดล้มเหลว.</system:String>
+    <system:String x:Key="FailedToLogin">เข้าสู่ระบบล้มเหลว: {0}</system:String>
+    <system:String x:Key="Login">เข้าสู่ระบบ</system:String>
+    <system:String x:Key="LoginError">ลงชื่อเข้าใช้ล้มเหลว ชื่อ {0}: {1}</system:String>
+    <system:String x:Key="Uninstall">ถอนการติดตั้ง</system:String>
+    <system:String x:Key="UninstallConfirm">คุณแน่ใจหรือไม่ที่ต้องการถอนการติดตั้ง assemblies ที่เลือก?</system:String>
+    <system:String x:Key="ConfigWriteError">ไม่สามารถเขียนไปที่ config.xml</system:String>
+    <system:String x:Key="ShareText">Assembly url ได้คัดลอกไปที่คลิปบอร์ด</system:String>
+    <system:String x:Key="LogNotFound">ไม่พบ Log ไฟล์</system:String>
+    <system:String x:Key="NewProfile2">สร้างโปรไฟล์ใหม่</system:String>
+    <system:String x:Key="Rename">เปลี่ยนชื่อ</system:String>
+    <system:String x:Key="RenameText">ใส่ชื่อใหม่สำหรับโปรไฟล์</system:String>
+    <system:String x:Key="DownloadingData">กำลังดาวน์โหลดข้อมูลที่ต้องการ.</system:String>
+    <system:String x:Key="Installer">ตัวติดตั้ง</system:String>
+    <system:String x:Key="SuccessfullyInstalled">ติดตั้ง assemblies ที่เลือกสำเร็จ.</system:String>
+    <system:String x:Key="ErrorInstalling">There was an error while trying to install some of the assemblies, check the log for more details.</system:String>
+
+</ResourceDictionary>
