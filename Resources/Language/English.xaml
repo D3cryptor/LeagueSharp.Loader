@@ -88,7 +88,7 @@
     <!-- UpdateWindow -->
     <system:String x:Key="UpdatingLeagueSharp">Updating LeagueSharp</system:String>
     <system:String x:Key="Updating">Updating...</system:String>
-    <system:String x:Key="UpdateText">Downloaded {0} KB from {1} KB.</system:String>
+    <system:String x:Key="UpdateText">Downloaded {0}/{1} KB.</system:String>
 
     <!-- Errors and other strings -->
     <system:String x:Key="WrongAuth">Wrong password or username, register at {0}</system:String>
