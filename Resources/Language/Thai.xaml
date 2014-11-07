@@ -111,5 +111,11 @@
     <system:String x:Key="Installer">ตัวติดตั้ง</system:String>
     <system:String x:Key="SuccessfullyInstalled">ติดตั้ง assemblies ที่เลือกสำเร็จ.</system:String>
     <system:String x:Key="ErrorInstalling">There was an error while trying to install some of the assemblies, check the log for more details.</system:String>
+	
+	<system:String x:Key="EnableDeveloper">เปิดใช้งานตัวเลือกผู้พัฒนา</system:String>
+    <system:String x:Key="Developer">ผู้พัฒนา</system:String>
+    <system:String x:Key="New">ใหม่</system:String>
+    <system:String x:Key="Edit">แก้ไข</system:String>
+    <system:String x:Key="Clone">โคลน</system:String>
 
 </ResourceDictionary>
