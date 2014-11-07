@@ -65,7 +65,7 @@ namespace LeagueSharp.Loader.Class
                             }
                             else
                             {
-                                return new Tuple<bool, string>(false, string.Format(Utility.GetMultiLanguageText("WrongAuth"), AuthServer));
+                                return new Tuple<bool, string>(false, string.Format(Utility.GetMultiLanguageText("WrongAuth"), "www.joduska.me"));
                             }
                         }
                         catch (AuthenticationException)
