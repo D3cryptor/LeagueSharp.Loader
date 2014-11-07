@@ -8,7 +8,7 @@
 
     <!-- MainWindow Tabs -->
     <system:String x:Key="News">Aktualności</system:String>
-    <system:String x:Key="Assemblies">Assembly</system:String>
+    <system:String x:Key="Assemblies">Skrypty</system:String>
 
     <!-- MainWindow Profile selector -->
     <system:String x:Key="DefaultProfile">Domyślny</system:String>
@@ -21,7 +21,7 @@
     <system:String x:Key="ColumnDescription">Opis</system:String>
 
     <!-- MainWindow Assemblies datagrid Menu -->
-    <system:String x:Key="MenuUpdateAndCompile">Zaktualizuj i Skompiluj</system:String>
+    <system:String x:Key="MenuUpdateAndCompile">Zaktualizuj i skompiluj</system:String>
     <system:String x:Key="MenuRemove">Usuń</system:String>
     <system:String x:Key="MenuGitub">GitHub</system:String>
     <system:String x:Key="MenuShare">Udostępnij</system:String>
@@ -30,32 +30,32 @@
 	<!-- MainWindow Profiles Menu -->
     <system:String x:Key="NewProfile">Nowy</system:String>
     <system:String x:Key="ChangeName">Zmień nazwę</system:String>
-    <system:String x:Key="DeleteProfile">Usuń Profil</system:String>
+    <system:String x:Key="DeleteProfile">Usuń profil</system:String>
 	
     <!-- MainWindow Buttons -->
-    <system:String x:Key="UpdateAll">Aktualizuj Wszystko</system:String>
-    <system:String x:Key="CompileAll">Skompiluj Wszystko</system:String>
-    <system:String x:Key="InstallNewAssembly">Zainstaluj Nowe Skrypty</system:String>
+    <system:String x:Key="UpdateAll">Aktualizuj wszystko</system:String>
+    <system:String x:Key="CompileAll">Skompiluj wszystko</system:String>
+    <system:String x:Key="InstallNewAssembly">Zainstaluj nowe skrypty</system:String>
 
     <!-- InstallerWindow Title -->
-    <system:String x:Key="AssemblyInstaller">Instalator</system:String>
+    <system:String x:Key="AssemblyInstaller">Instalator skryptów</system:String>
 
     <!-- InstallerWindow Tabs -->
-    <system:String x:Key="Search">Szukanie</system:String>
+    <system:String x:Key="Search">Szukaj</system:String>
     <system:String x:Key="Select">Wybierz</system:String>
 
     <!-- InstallerWindow Search tab -->
-    <system:String x:Key="SelectAssembliesText">Wybierz lokalizację dla Assembly:</system:String>
+    <system:String x:Key="SelectAssembliesText">Wybierz lokalizację skryptów:</system:String>
     <system:String x:Key="Local">Lokalny</system:String>
     <system:String x:Key="Github">GitHub</system:String>
-    <system:String x:Key="Installed">Zainstalowany</system:String>
+    <system:String x:Key="Installed">Zainstalowane</system:String>
     <system:String x:Key="Next">Dalej</system:String>
 
     <!-- InstallerWindow Select tab -->
     <system:String x:Key="SelectAll">Zaznacz wszystko</system:String>
     <system:String x:Key="DeselectAll">Odznacz wszystko</system:String>
     <system:String x:Key="Previous">Wróć</system:String>
-    <system:String x:Key="Add">Dodaj</system:String>
+    <system:String x:Key="Add">Zainstaluj</system:String>
 
     <!-- Settings General -->
     <system:String x:Key="General">Ogólne</system:String>
@@ -64,8 +64,8 @@
     <system:String x:Key="Debug Console">Konsola debugowania</system:String>
     <system:String x:Key="Display Enemy Tower Range">Wyświetlaj zasięg wrogich wież</system:String>
     <system:String x:Key="Extended Zoom">Zoom hack</system:String>
-    <system:String x:Key="UpdateOnStart">Aktualizuj assembly po każdym uruchomieniu L#</system:String>
-    <system:String x:Key="Inject">Inject</system:String>
+    <system:String x:Key="UpdateOnStart">Aktualizuj skrypty przy każdym uruchomieniu L#</system:String>
+    <system:String x:Key="Inject">Injectuj</system:String>
     <system:String x:Key="Logout">Wyloguj</system:String>
     <system:String x:Key="DefaultHotkeys">Przywróć</system:String>
 	<system:String x:Key="Language">Język</system:String>
@@ -75,7 +75,7 @@
     <system:String x:Key="Hotkey">Klawisz</system:String>
     <system:String x:Key="Reload the assemblies">Przeładuj skrypty</system:String>
     <system:String x:Key="Recompile and reload the assemblies">Rekompiluj i przeładuj skrypty</system:String>
-    <system:String x:Key="Shows the menu (Press)">Pokaż menu(Press)</system:String>
+    <system:String x:Key="Shows the menu (Press)">Pokaż menu (Press)</system:String>
     <system:String x:Key="Shows the menu (Toggle)">Pokaż menu (Toggle)</system:String>
 
     <!-- Settings Log -->
@@ -86,30 +86,30 @@
     <system:String x:Key="OpenFolder">Otwórz folder</system:String>
 
     <!-- UpdateWindow -->
-    <system:String x:Key="UpdatingLeagueSharp">Aktualizacja LeagueSharp</system:String>
+    <system:String x:Key="UpdatingLeagueSharp">Aktualizacja LeagueSharp'a</system:String>
     <system:String x:Key="Updating">Aktualizacja...</system:String>
     <system:String x:Key="UpdateText">Pobieranie {0} KB z {1} KB.</system:String>
 
     <!-- Errors and other strings -->
-    <system:String x:Key="WrongAuth">Zła nazwa użytkownika lub hasło, zarejestruj się {0}</system:String>
-    <system:String x:Key="AuthEmpty">Nazwa uyżytkownika lub hasło jest puste</system:String>
-    <system:String x:Key="FailedToDelete">Nie można usunąć pliku, należy usunąć go ręcznie i ponownie uruchomić LeagueSharp</system:String>
-    <system:String x:Key="WrongVersion">League Of Legends wersja nie obsługiwana. Hash:</system:String>
+    <system:String x:Key="WrongAuth">Zła nazwa użytkownika lub hasło, zarejestruj się na {0}</system:String>
+    <system:String x:Key="AuthEmpty">Nazwa użytkownika lub hasło jest puste</system:String>
+    <system:String x:Key="FailedToDelete">Nie można usunąć pliku aktualizacji, należy usunąć go ręcznie i ponownie uruchomić LeagueSharp</system:String>
+    <system:String x:Key="WrongVersion">Wersja League of Legends nie jest obsługiwana. Hash:</system:String>
     <system:String x:Key="FailedToDownload">Nie udało się pobrać.</system:String>
     <system:String x:Key="FailedToLogin">Nie udało się zalogować: {0}</system:String>
     <system:String x:Key="Login">Login</system:String>
     <system:String x:Key="LoginError">Nie można zalogować się jako {0}: {1}</system:String>
     <system:String x:Key="Uninstall">Odinstaluj</system:String>
-    <system:String x:Key="UninstallConfirm">Czy na pewno chcesz odinstalować podane assemblies?</system:String>
+    <system:String x:Key="UninstallConfirm">Czy na pewno chcesz odinstalować zaznaczone skrypty?</system:String>
     <system:String x:Key="ConfigWriteError">Nie można zapisać pliku config.xml</system:String>
-    <system:String x:Key="ShareText">Assembly url skopiowany do schowka</system:String>
+    <system:String x:Key="ShareText">URL skryptu skopiowany do schowka</system:String>
     <system:String x:Key="LogNotFound">Nie znaleziono pliku log</system:String>
     <system:String x:Key="NewProfile2">Nowy profil</system:String>
     <system:String x:Key="Rename">Zmień nazwę</system:String>
     <system:String x:Key="RenameText">Nazwij nowy profil</system:String>
     <system:String x:Key="DownloadingData">Pobieranie wymaganych danych.</system:String>
     <system:String x:Key="Installer">Instalator</system:String>
-    <system:String x:Key="SuccessfullyInstalled">Wybrane assemblies zostały pomyślnie zainstalowane.</system:String>
+    <system:String x:Key="SuccessfullyInstalled">Wybrane skrypty zostały pomyślnie zainstalowane.</system:String>
     <system:String x:Key="ErrorInstalling">Wystąpił błąd podczas próby zainstalowania niektórych skryptów lub bibliotek, sprawdź logi by dowiedzieć się więcej.</system:String>
 
     <system:String x:Key="EnableDeveloper">Enable developer options</system:String>
