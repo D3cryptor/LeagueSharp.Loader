@@ -94,7 +94,7 @@
     <system:String x:Key="WrongAuth">Wrong password or username, register at {0}</system:String>
     <system:String x:Key="AuthEmpty">Password or username is empty</system:String>
     <system:String x:Key="FailedToDelete">Could not delete update file, please delete it manually and restart LeagueSharp</system:String>
-    <system:String x:Key="WrongVersion">League Of Legends version not supported. Hash:</system:String>
+    <system:String x:Key="WrongVersion">League Of Legends version not supported, this usually means that League Of Legends updated and LeagueSharp didn't update yet. Check the forums for more information or wait for LeagueSharp to update. Hash:</system:String>
     <system:String x:Key="FailedToDownload">Failed to download.</system:String>
     <system:String x:Key="FailedToLogin">Failed to login: {0}</system:String>
     <system:String x:Key="Login">Login</system:String>

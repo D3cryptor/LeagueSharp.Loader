@@ -95,7 +95,7 @@
 	<system:String x:Key="WrongAuth">Usuario o contraseña incorrectos. Registrate en http://{0}</system:String>
 	<system:String x:Key="AuthEmpty">El usuario o contraseña está vacio</system:String>
 	<system:String x:Key="FailedToDelete">No se pudo eliminar el archivo de actualización. Por favor reinicia LeagueSharp manualmente.</system:String>
-	<system:String x:Key="WrongVersion">Versión de League Of Legends no soportada. Hash: </system:String>
+	<system:String x:Key="WrongVersion">Versión de League Of Legends no soportada. Este error normalmente significa que League Of Legends se ha actualizado y debido a ello LeagueSharp no está actualizado para esta versión. Espere a que LeagueSharp esté actualizado o visite los foros para mas información.  Hash: </system:String>
 	<system:String x:Key="FailedToDownload">Error en la descarga.</system:String>
 	<system:String x:Key="FailedToLogin">Error al iniciar sesión: {0}</system:String>
 	<system:String x:Key="Login">Iniciar sesión</system:String>
