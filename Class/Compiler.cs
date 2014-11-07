@@ -53,6 +53,11 @@ namespace LeagueSharp.Loader.Class
                 if (project != null)
                 {
                     var doLog = false;
+                    var logErrorFile = Path.Combine(Directories.LogsDir, ("Error - " + Path.GetFileName(logfile)));
+                    if (File.Exists(logErrorFile))
+                    {
+                        File.Delete(logErrorFile);
+                    }
                     if (!string.IsNullOrWhiteSpace(logfile))
                     {
                         var logDir = Path.GetDirectoryName(logfile);

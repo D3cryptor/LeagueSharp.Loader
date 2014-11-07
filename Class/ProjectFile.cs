@@ -1,4 +1,6 @@
-﻿#region
+﻿using System.Runtime.Serialization;
+
+#region
 
 using System;
 using System.IO;
@@ -58,8 +60,8 @@ namespace LeagueSharp.Loader.Class
                 
                 if (File.Exists(file))
                 {
-                    var projects = ProjectCollection.GlobalProjectCollection.GetLoadedProjects(file);
-                    Project = projects.Count == 0 ? new Project(file) : projects.First();
+                    ProjectCollection.GlobalProjectCollection.UnloadAllProjects();
+                    Project = new Project(file);
                 }
             }
             catch (Exception ex)
