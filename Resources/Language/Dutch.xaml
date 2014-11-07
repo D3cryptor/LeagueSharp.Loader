@@ -102,7 +102,7 @@
     <system:String x:Key="Uninstall">Verwijder</system:String>
     <system:String x:Key="UninstallConfirm">Weet je zeker dat je de geselecteerde assemblies wil installeren?</system:String>
     <system:String x:Key="ConfigWriteError">Kon instellingen niet opslaan in config.xml</system:String>
-    <system:String x:Key="ShareText">Assembly link gekopïeerd naar klembord</system:String>
+    <system:String x:Key="ShareText">Assembly link gekopieërd naar klembord</system:String>
     <system:String x:Key="LogNotFound">Logboek kon niet gevonden worden</system:String>
     <system:String x:Key="NewProfile2">Nieuw profiel</system:String>
     <system:String x:Key="Rename">Wijzig naam</system:String>
@@ -112,9 +112,9 @@
     <system:String x:Key="SuccessfullyInstalled">Geselecteerde assemblies zijn succesvol geïnstalleerd.</system:String>
     <system:String x:Key="ErrorInstalling">Er is een probleem opgetreden bij het installeren van de assemblies, controleer het logboek voor meer info.</system:String>
 
-    <system:String x:Key="EnableDeveloper">Enable developer options</system:String>
-    <system:String x:Key="Developer">Developer</system:String>
-    <system:String x:Key="New">New</system:String>
-    <system:String x:Key="Edit">Edit</system:String>
-    <system:String x:Key="Clone">Clone</system:String>
+    <system:String x:Key="EnableDeveloper">Activeer ontwikkelaars opties</system:String>
+    <system:String x:Key="Developer">Ontwikkelaar</system:String>
+    <system:String x:Key="New">Nieuw</system:String>
+    <system:String x:Key="Edit">Wijzig</system:String>
+    <system:String x:Key="Clone">Kopieer</system:String>
 </ResourceDictionary>
