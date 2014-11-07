@@ -1,4 +1,7 @@
-﻿#region
+﻿using System.Windows.Forms;
+using Application = System.Windows.Application;
+
+#region
 
 using System;
 using System.IO;
@@ -6,7 +9,6 @@ using System.Reflection;
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
-using System.Windows;
 using System.Xml.Serialization;
 using LeagueSharp.Loader.Data;
 using MessageBox = System.Windows.Forms.MessageBox;
@@ -213,7 +215,7 @@ namespace LeagueSharp.Loader.Class
         {
             var sb = new StringBuilder();
             HashAlgorithm algorithm = MD5.Create();
-            var h = algorithm.ComputeHash(Encoding.UTF8.GetBytes(s));
+            var h = algorithm.ComputeHash(Encoding.Default.GetBytes(s));
 
             foreach (var b in h)
             {
