@@ -82,9 +82,25 @@ namespace LeagueSharp.Loader.Class
             }
         }
 
+        private static string IPB_Clean_Password(string pass)
+        {
+            pass = pass.Replace("\xC3\x8A", "");
+            pass = pass.Replace("&", "&amp;");
+            pass = pass.Replace("\\", "&#092;");
+            pass = pass.Replace("!", "&#33;");
+            pass = pass.Replace("$", "&#036;");
+            pass = pass.Replace("\"", "&quot;");
+            pass = pass.Replace("\"", "&quot;");
+            pass = pass.Replace("<", "&lt;");
+            pass = pass.Replace(">", "&gt;");
+            pass = pass.Replace("'", "&#39;");
+
+            return pass;
+        }
+
         public static string Hash(string input)
         {
-            return Utility.Md5Hash(input);
+            return Utility.Md5Hash(IPB_Clean_Password(input));
         }
     }
 }
