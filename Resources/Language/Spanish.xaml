@@ -118,4 +118,16 @@
     <system:String x:Key="New">Nuevo</system:String>
     <system:String x:Key="Edit">Editar</system:String>
     <system:String x:Key="Clone">Clonar</system:String>
+
+    <system:String x:Key="Checking">Checking...</system:String>
+    <system:String x:Key="Updated">Actualizado</system:String>
+    <system:String x:Key="OUTDATED">DESACTUALIZADO</system:String>
+    <system:String x:Key="Unknown">Desconocido</system:String>
+    <system:String x:Key="UpdateStatus">Estado</system:String>
+
+    <system:String x:Key="LoaderUpdateFailed">Nose pudo descargar la actualización, por favor descarge la actualización manualmente. Error:</system:String>
+    <system:String x:Key="LeagueNotFound">No se pudo encontrar el archivo "League of Legends.exe", inicie una partida personalizada para conocer el estado de LeagueSharp.</system:String>
+    <system:String x:Key="UpdateSuccess">LeagueSharp actualizado con éxito para la versión de League of Legends instalada</system:String>
+    <system:String x:Key="UpdateUnknown">No se pudo obtener información acerca de la última versión de LeagueSharp, esto normalmente significa que www.joduska.me está inaccesible.</system:String>
+    <system:String x:Key="NotUpdateNeeded">LeagueSharp está actualizado para la versión de League of Legends instalada.</system:String>
 </ResourceDictionary>

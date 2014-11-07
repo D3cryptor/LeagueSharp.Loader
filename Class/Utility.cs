@@ -283,9 +283,9 @@ namespace LeagueSharp.Loader.Class
 
                 return new LeagueSharpAssembly(assemblyName, Path.Combine(targetPath, assemblyName + ".csproj"), "");
             }
-            catch (Exception)
-            {               
-                throw;
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
                 return null;
             }
         }
@@ -328,6 +328,11 @@ namespace LeagueSharp.Loader.Class
 	        }
 
             return null;
+        }
+
+        public static int VersionToInt(Version version)
+        {
+            return version.Major * 10000000 + version.Minor * 10000 + version.Build * 100 + version.Revision;
         }
     }
 }

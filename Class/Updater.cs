@@ -38,21 +38,14 @@ using System.ComponentModel;
 
 namespace LeagueSharp.Loader.Class
 {
-    internal static class Updater
+    internal class Updater
     {
         public delegate void RepositoriesUpdateDelegate(List<string> list);
-
         public const string VersionCheckURL = "http://api.joduska.me/public/deploy/loader/version";
         public const string CoreVersionCheckURL = "http://api.joduska.me/public/deploy/kernel/{0}";
         public static string UpdateZip = Path.Combine(Directories.CoreDirectory, "update.zip");
         public static string SetupFile = Path.Combine(Directories.CurrentDirectory, "LeagueSharp-update.exe");
         public static MainWindow MainWindow;
-        public static int LastCoreUpdateTry = 0;
-
-        public static int VersionToInt(this Version version)
-        {
-            return version.Major * 10000000 + version.Minor * 10000 + version.Build * 100 + version.Revision;
-        }
 
         [DataContract]
         internal class UpdateInfo
@@ -67,7 +60,7 @@ namespace LeagueSharp.Loader.Class
             internal string version;
         }
 
-        public static Tuple<bool, string> GetLoaderVersionInfo()
+        public static Tuple<bool, string> CheckLoaderVersion()
         {
             try
             {
@@ -77,7 +70,7 @@ namespace LeagueSharp.Loader.Class
                     var ser = new DataContractJsonSerializer(typeof(UpdateInfo));
                     var updateInfo = (UpdateInfo)ser.ReadObject(new MemoryStream(data));
                     var v = Version.Parse(updateInfo.version);
-                    if (Assembly.GetEntryAssembly().GetName().Version.VersionToInt() < v.VersionToInt())
+                    if (Utility.VersionToInt(Assembly.GetEntryAssembly().GetName().Version) < Utility.VersionToInt(v))
                     {
                        return new Tuple<bool, string>(true, updateInfo.url);
                     }
@@ -91,10 +84,8 @@ namespace LeagueSharp.Loader.Class
             return new Tuple<bool, string>(false, "");
         }
 
-        public static void UpdateLoader()
+        public static void UpdateLoader(Tuple<bool, string> versionCheckResult)
         {
-            var result = GetLoaderVersionInfo();
-
             try
             {
                 if (File.Exists(SetupFile))
@@ -109,28 +100,21 @@ namespace LeagueSharp.Loader.Class
                 Environment.Exit(0);
             }
 
-            if (result.Item1)
+            if (versionCheckResult.Item1)
             {
                 var window = new UpdateWindow();
-                window.UpdateUrl = result.Item2;
+                window.UpdateUrl = versionCheckResult.Item2;
                 window.ShowDialog();
             }
         }
 
-        public static bool UpdateCore(string LeagueOfLegendsFilePath)
+        public static Tuple<bool, bool?, string> UpdateCore(string LeagueOfLegendsFilePath, bool showMessages)
         {
-            if (Environment.TickCount - LastCoreUpdateTry < 30000)
-            {
-                return false;
-            }
-
-            LastCoreUpdateTry = Environment.TickCount;
-
             try
             {
                 var leagueMd5 = Utility.Md5Checksum(LeagueOfLegendsFilePath);
                 var wr = WebRequest.Create(string.Format(CoreVersionCheckURL, leagueMd5));
-                wr.Timeout = 2000;
+                wr.Timeout = 4000;
                 wr.Method = "GET";
                 var response = wr.GetResponse();
 
@@ -143,13 +127,18 @@ namespace LeagueSharp.Loader.Class
                             
                         if(updateInfo.version == "0")
                         {
-                            MessageBox.Show(Utility.GetMultiLanguageText("WrongVersion") + leagueMd5);
-                            return false;
+                            var message = Utility.GetMultiLanguageText("WrongVersion") + leagueMd5;
+
+                            if (showMessages)
+                            {
+                                MessageBox.Show(message);
+                            }
+
+                            return new Tuple<bool, bool?, string>(false, false, message);
                         }
 
                         if (updateInfo.version != Utility.Md5Checksum(Directories.CoreFilePath)) //Update needed
                         {
-                            
                             if (MainWindow != null)
                             {
                                 MainWindow.TrayIcon.ShowBalloonTip(Utility.GetMultiLanguageText("Updating"), "LeagueSharp.Core: " + Utility.GetMultiLanguageText("Updating"), BalloonIcon.Info);
@@ -174,11 +163,19 @@ namespace LeagueSharp.Loader.Class
                                         }
                                     }
                                 }
+
+                                return new Tuple<bool, bool?, string>(true, true, Utility.GetMultiLanguageText("UpdateSuccess"));
                             }
                             catch(Exception e)
                             {
-                                MessageBox.Show(Utility.GetMultiLanguageText("FailedToDownload") + e);
-                                return false;
+                                var message = Utility.GetMultiLanguageText("FailedToDownload") + e;
+
+                                if (showMessages)
+                                {
+                                    MessageBox.Show(message);
+                                }
+
+                                return new Tuple<bool, bool?, string>(false, false, message);
                             }
                             finally
                             {
@@ -194,10 +191,10 @@ namespace LeagueSharp.Loader.Class
             catch(Exception)
             {
                 //MessageBox.Show(e.ToString());
-                return File.Exists(Directories.CoreFilePath);
+                return new Tuple<bool, bool?, string>(File.Exists(Directories.CoreFilePath), null, Utility.GetMultiLanguageText("UpdateUnknown"));
             }
 
-            return File.Exists(Directories.CoreFilePath);
+            return new Tuple<bool, bool?, string>(File.Exists(Directories.CoreFilePath), true, Utility.GetMultiLanguageText("NotUpdateNeeded"));
         }
 
         public static void GetRepositories(RepositoriesUpdateDelegate del)

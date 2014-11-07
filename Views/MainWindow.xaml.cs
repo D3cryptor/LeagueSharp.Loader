@@ -60,12 +60,38 @@ namespace LeagueSharp.Loader.Views
 {
     public partial class MainWindow : INotifyPropertyChanged
     {
-        public BackgroundWorker BgWorker = new BackgroundWorker();
-        public bool BgWorkerCancelled;
+        public BackgroundWorker AssembliesWorker = new BackgroundWorker();
+        public BackgroundWorker UpdaterWorker = new BackgroundWorker();
+        public bool AssembliesWorkerCancelled;
         public bool FirstTimeActivated = true;
         private bool _working;
+        private bool _checkingForUpdates;
+        private string _statusString = "?";
+        private Tuple<bool, string> _loaderVersionCheckResult;
+
+        private string _updateMessage;
         public Config Config { get { return Config.Instance; } set { Config.Instance = value; } }
-        
+
+        public string StatusString
+        {
+            get { return Utility.GetMultiLanguageText("UpdateStatus") + ": " + _statusString; }
+            set
+            {
+                _statusString = value;
+                OnPropertyChanged("StatusString");
+            }
+        }
+
+        public bool CheckingForUpdates
+        {
+            get { return _checkingForUpdates; }
+            set
+            {
+                _checkingForUpdates = value;
+                OnPropertyChanged("CheckingForUpdates");
+            }
+        }
+
         public bool Working
         {
             get { return _working; }
@@ -80,11 +106,6 @@ namespace LeagueSharp.Loader.Views
         public Thread InjectThread { get; set; }
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public MainWindow()
-        {
-            
-        }
-
         private void MainWindow_OnLoaded(object sender, RoutedEventArgs e)
         {
             Browser.Visibility = Visibility.Hidden;
@@ -97,8 +118,9 @@ namespace LeagueSharp.Loader.Views
                 System.Windows.MessageBox.Show(string.Format("Couldn't find {0}", Path.GetFileName(Directories.CoreFilePath)));
                 Environment.Exit(0);
             }
+
             Updater.MainWindow = this;
-            Updater.UpdateLoader();
+            CheckForUpdates(true, true, false);
 
             Updater.GetRepositories(
                 delegate(List<string> list)
@@ -162,6 +184,71 @@ namespace LeagueSharp.Loader.Views
             }
 
             SettingsTabItem.Visibility = Visibility.Hidden;
+        }
+
+        private void CheckForUpdates(bool loader, bool core, bool showDialogOnFinish)
+        {
+            if (CheckingForUpdates)
+            {
+                return;
+            }
+            StatusString = Utility.GetMultiLanguageText("Checking");
+            _updateMessage = "";
+            CheckingForUpdates = true;
+            UpdaterWorker = new BackgroundWorker();
+
+            UpdaterWorker.DoWork += delegate
+            {
+                if (loader)
+                {
+                    _loaderVersionCheckResult = Updater.CheckLoaderVersion();
+                }
+
+                if (core)
+                {
+                    if (Config.Instance.LeagueOfLegendsExePath != null)
+                    {
+                        var exe = Utility.GetLatestLeagueOfLegendsExePath(Config.Instance.LeagueOfLegendsExePath);
+                        if (exe != null)
+                        {
+                            var updateResult = Updater.UpdateCore(exe, !showDialogOnFinish);
+                            _updateMessage = updateResult.Item3;
+                            switch (updateResult.Item2)
+                            {
+                                case true:
+                                    StatusString = Utility.GetMultiLanguageText("Updated") + " :^)";
+                                    break;
+                                case false:
+                                    StatusString = Utility.GetMultiLanguageText("OUTDATED");
+                                    break;
+                                default:
+                                    StatusString = Utility.GetMultiLanguageText("Unknown");
+                                    break;
+                            }
+                            
+                            return;
+                        }
+                    }
+                    StatusString = Utility.GetMultiLanguageText("Unknown");
+                    _updateMessage = Utility.GetMultiLanguageText("LeagueNotFound");
+                }
+            };
+
+            UpdaterWorker.RunWorkerCompleted += delegate
+            {
+                if (_loaderVersionCheckResult != null && _loaderVersionCheckResult.Item1)
+                {
+                    Updater.UpdateLoader(_loaderVersionCheckResult);
+                }
+
+                CheckingForUpdates = false;
+                if (showDialogOnFinish)
+                {
+                    ShowTextMessage(Utility.GetMultiLanguageText("UpdateStatus"), _updateMessage);
+                }
+            };
+
+            UpdaterWorker.RunWorkerAsync();
         }
 
         void hk_PropertyChanged(object sender, PropertyChangedEventArgs e)
@@ -301,6 +388,7 @@ namespace LeagueSharp.Loader.Views
 
         private async void ShowAfterLoginDialog(string message, bool showLoginDialog)
         {
+
             await this.ShowMessageAsync("Login", message);
             if (showLoginDialog)
             {
@@ -310,7 +398,10 @@ namespace LeagueSharp.Loader.Views
 
         public async void ShowTextMessage(string title, string message)
         {
+            var visibility = Browser.Visibility;
+            Browser.Visibility = Visibility.Hidden;
             await this.ShowMessageAsync(title, message);
+            Browser.Visibility = (visibility == Visibility.Hidden) ? Visibility.Hidden : Visibility.Visible;
         }
 
         private void OnLogin(string username)
@@ -327,9 +418,9 @@ namespace LeagueSharp.Loader.Views
 
         public void MainWindow_OnClosing(object sender, CancelEventArgs e)
         {
-            if (BgWorker.IsBusy && e != null)
+            if (AssembliesWorker.IsBusy && e != null)
             {
-                BgWorker.CancelAsync();
+                AssembliesWorker.CancelAsync();
                 e.Cancel = true;
                 Hide();
                 return;
@@ -394,9 +485,9 @@ namespace LeagueSharp.Loader.Views
             Working = true;
             var leagueSharpAssemblies = assemblies as IList<LeagueSharpAssembly> ?? assemblies.ToList();
 
-            BgWorker = new BackgroundWorker();
-            BgWorker.WorkerSupportsCancellation = true;
-            BgWorker.DoWork += delegate
+            AssembliesWorker = new BackgroundWorker();
+            AssembliesWorker.WorkerSupportsCancellation = true;
+            AssembliesWorker.DoWork += delegate
             {
                 var updatedSvnUrls = new List<string>();
 
@@ -415,9 +506,9 @@ namespace LeagueSharp.Loader.Views
                             assembly.Compile();
                         }
                     }
-                    if (BgWorker.CancellationPending)
+                    if (AssembliesWorker.CancellationPending)
                     {
-                        BgWorkerCancelled = true;
+                        AssembliesWorkerCancelled = true;
                         break;
                     }
                 }
@@ -437,24 +528,24 @@ namespace LeagueSharp.Loader.Views
                             assembly.Compile();
                         }
                     }
-                    if (BgWorker.CancellationPending)
+                    if (AssembliesWorker.CancellationPending)
                     {
-                        BgWorkerCancelled = true;
+                        AssembliesWorkerCancelled = true;
                         break;
                     }
                 }
             };
 
-            BgWorker.RunWorkerCompleted += delegate
+            AssembliesWorker.RunWorkerCompleted += delegate
             {
                 ProjectCollection.GlobalProjectCollection.UnloadAllProjects();
                 Working = false;
-                if (BgWorkerCancelled)
+                if (AssembliesWorkerCancelled)
                 {
                     Close();
                 }
             };
-            BgWorker.RunWorkerAsync();
+            AssembliesWorker.RunWorkerAsync();
         }
 
         private void RemoveMenuItem_OnClick(object sender, RoutedEventArgs e)
@@ -671,15 +762,6 @@ namespace LeagueSharp.Loader.Views
             {
                 FirstTimeActivated = false;
 
-                if (Config.Instance.LeagueOfLegendsExePath != null)
-                {
-                    var exe = Utility.GetLatestLeagueOfLegendsExePath(Config.Instance.LeagueOfLegendsExePath);
-                    if (exe != null)
-                    {
-                        Updater.UpdateCore(exe);
-                    }
-                }
-
                 var allAssemblies = new List<LeagueSharpAssembly>();
                 foreach (var profile in Config.Instance.Profiles)
                 {
@@ -785,13 +867,6 @@ namespace LeagueSharp.Loader.Views
             TextBoxBase_OnTextChanged(null, null);
         }
 
-        private void Browser_OnLoadCompleted(object sender, NavigationEventArgs e)
-        {
-            var script = "document.body.style.overflow ='hidden'";
-            var wb = (WebBrowser)sender;
-            wb.InvokeScript("execScript", new Object[] { script, "JavaScript" });
-        }
-
         private void ConfigOnPropertyChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
         {
             if (propertyChangedEventArgs.PropertyName == "Install")
@@ -819,7 +894,7 @@ namespace LeagueSharp.Loader.Views
 
         private void TreeView_OnSelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
-            var name = (string)((TreeViewItem)((System.Windows.Controls.TreeView)sender).SelectedItem).Uid;
+            var name = ((TreeViewItem)((System.Windows.Controls.TreeView)sender).SelectedItem).Uid;
             SettingsFrame.Content = Activator.CreateInstance(null, "LeagueSharp.Loader.Views.Settings." + name).Unwrap();
         }
 
@@ -838,9 +913,9 @@ namespace LeagueSharp.Loader.Views
             MainTabControl.SelectedIndex = 2;
         }
 
-        private void WebsiteButton_OnClick(object sender, RoutedEventArgs e)
+        private void StatusButton_OnClick(object sender, RoutedEventArgs e)
         {
-            System.Diagnostics.Process.Start("http://www.joduska.me");
+           CheckForUpdates(true, true, true);
         }
     }
 }

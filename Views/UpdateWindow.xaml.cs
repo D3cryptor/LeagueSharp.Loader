@@ -45,13 +45,13 @@ namespace LeagueSharp.Loader.Views
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Could not download the update, please update manually: " + ex);
+                    MessageBox.Show(Utility.GetMultiLanguageText("LoaderUpdateFailed") + ex);
                     Environment.Exit(0);
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Could not download the update, please update manually: " + ex);
+                MessageBox.Show(Utility.GetMultiLanguageText("LoaderUpdateFailed") + ex);
                 Environment.Exit(0);
             }
         }
@@ -67,6 +67,10 @@ namespace LeagueSharp.Loader.Views
 
         void webClient_DownloadFileCompleted(object sender, System.ComponentModel.AsyncCompletedEventArgs e)
         {
+            if (this.Parent != null)
+            {
+                ((MainWindow)this.Parent).MainWindow_OnClosing(null, null);
+            }
             new Process { StartInfo = { FileName = Updater.SetupFile, Arguments = "/VERYSILENT /DIR=\"" + Directories.CurrentDirectory + "\"" } }.Start();
             Environment.Exit(0);
         }

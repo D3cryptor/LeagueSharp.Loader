@@ -19,23 +19,23 @@
                       SaveWindowPosition="True">
     <Controls:MetroWindow.RightWindowCommands>
         <Controls:WindowCommands>
-            
-            <Button Cursor="Hand" x:Name="WebsiteButton" Click="WebsiteButton_OnClick">
-                <StackPanel Orientation="Horizontal">
+
+            <Button Cursor="Hand" x:Name="StatusButton" Click="StatusButton_OnClick">
+                <StackPanel Orientation="Horizontal" >
                     <Rectangle Width="14"
                                Height="14"
                                Fill="{Binding RelativeSource={RelativeSource AncestorType=Button},
                                               Path=Foreground}">
-                        <Rectangle.OpacityMask>
-                            <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_browser}" />
+                        <Rectangle.OpacityMask >
+                            <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_information_circle}" />
                         </Rectangle.OpacityMask>
                     </Rectangle>
                     <TextBlock Margin="4 0 0 0"
                                VerticalAlignment="Center"
-                               Text="{DynamicResource Website}" />
+                               Text="{Binding StatusString}"/>
                 </StackPanel>
             </Button>
-            
+
             <Button Cursor="Hand" x:Name="SettingsButton" Click="SettingsButton_OnClick">
                 <StackPanel Orientation="Horizontal">
                     <Rectangle Width="14"
@@ -77,7 +77,7 @@
                             </ContextMenu>
                         </tb:TaskbarIcon.ContextMenu>
                     </tb:TaskbarIcon>
-                    <WebBrowser LoadCompleted="Browser_OnLoadCompleted" x:Name="Browser" Visibility="Visible" Margin="10" Source="http://api.joduska.me/public/news/html" Grid.ColumnSpan="2"/>
+                  <WebBrowser x:Name="Browser" Visibility="Visible" Margin="10" Source="http://api.joduska.me/public/news/html" Grid.ColumnSpan="2"/>
                 </Grid>
             </TabItem>
             <TabItem Header="{DynamicResource Assemblies}">

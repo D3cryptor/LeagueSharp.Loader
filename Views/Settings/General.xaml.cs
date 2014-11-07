@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -59,11 +60,17 @@ namespace LeagueSharp.Loader.Views.Settings
 
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            var selected = (string)e.AddedItems[0];
-            Config.Instance.SelectedLanguage = selected;
-            ((MainWindow)DataContext).MainWindow_OnClosing(null, null);
-            System.Diagnostics.Process.Start(Application.ResourceAssembly.Location);
-            Environment.Exit(0);
+            if (e.AddedItems.Count > 0)
+            {
+                var selected = (string)e.AddedItems[0];
+                if (Config.Instance.SelectedLanguage != selected)
+                {
+                    Config.Instance.SelectedLanguage = selected;
+                    ((MainWindow)DataContext).MainWindow_OnClosing(null, null);
+                    System.Diagnostics.Process.Start(Application.ResourceAssembly.Location);
+                    Environment.Exit(0);
+                }
+            }
         }
 
         private void ComboBox_Loaded(object sender, RoutedEventArgs e)
@@ -86,6 +93,12 @@ namespace LeagueSharp.Loader.Views.Settings
             ((ComboBox)sender).Items.Add("Turkish");
             ((ComboBox)sender).Items.Add("Thai");
             ((ComboBox)sender).Items.Add("Vietnamese");
+            if (Config.Instance.SelectedLanguage != null)
+            {
+                ((ComboBox)sender).SelectedItem =
+                    ((ComboBox)sender).Items.Cast<string>()
+                        .FirstOrDefault(item => item == Config.Instance.SelectedLanguage);
+            }
         }
     }
 }
