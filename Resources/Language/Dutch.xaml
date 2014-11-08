@@ -21,7 +21,7 @@
     <system:String x:Key="ColumnDescription">Beschrijving</system:String>
 
     <!-- MainWindow Assemblies datagrid Menu -->
-    <system:String x:Key="MenuUpdateAndCompile">Update en compileer</system:String>
+    <system:String x:Key="MenuUpdateAndCompile">Update en Compileer</system:String>
     <system:String x:Key="MenuRemove">Verwijder</system:String>
     <system:String x:Key="MenuGitub">GitHub</system:String>
     <system:String x:Key="MenuShare">Deel</system:String>
@@ -29,12 +29,12 @@
 
     <!-- MainWindow Profiles Menu -->
     <system:String x:Key="NewProfile">Nieuw</system:String>
-    <system:String x:Key="ChangeName">Wijzig naam</system:String>
+    <system:String x:Key="ChangeName">Wijzig Naam</system:String>
     <system:String x:Key="DeleteProfile">Verwijder</system:String>
 
     <!-- MainWindow Buttons -->
-    <system:String x:Key="UpdateAll">Update alles</system:String>
-    <system:String x:Key="CompileAll">Compileer alles</system:String>
+    <system:String x:Key="UpdateAll">Update Alles</system:String>
+    <system:String x:Key="CompileAll">Compileer Alles</system:String>
     <system:String x:Key="InstallNewAssembly">Installeer nieuwe assembly</system:String>
 
     <!-- InstallerWindow Title -->
@@ -102,7 +102,7 @@
     <system:String x:Key="Uninstall">Verwijder</system:String>
     <system:String x:Key="UninstallConfirm">Weet je zeker dat je de geselecteerde assemblies wil installeren?</system:String>
     <system:String x:Key="ConfigWriteError">Kon instellingen niet opslaan in config.xml</system:String>
-    <system:String x:Key="ShareText">Assembly link gekopieërd naar klembord</system:String>
+    <system:String x:Key="ShareText">Assembly link gekopieerd naar klembord</system:String>
     <system:String x:Key="LogNotFound">Logboek kon niet gevonden worden</system:String>
     <system:String x:Key="NewProfile2">Nieuw profiel</system:String>
     <system:String x:Key="Rename">Wijzig naam</system:String>
@@ -119,16 +119,16 @@
     <system:String x:Key="Clone">Kopieer</system:String>
 
 
-    <system:String x:Key="Checking">Checking...</system:String>
-    <system:String x:Key="Updated">Updated</system:String>
-    <system:String x:Key="OUTDATED">OUTDATED</system:String>
-    <system:String x:Key="Unknown">Unknown</system:String>
+    <system:String x:Key="Checking">Controleren...</system:String>
+    <system:String x:Key="Updated">Bijgewerkt</system:String>
+    <system:String x:Key="OUTDATED">Verouderd</system:String>
+    <system:String x:Key="Unknown">Onbekend</system:String>
     <system:String x:Key="UpdateStatus">Status</system:String>
 
-    <system:String x:Key="LoaderUpdateFailed">Could not download the update, please update manually. Error:</system:String>
-    <system:String x:Key="LeagueNotFound">Could not resolve "League of Legends.exe" location, try starting a custom game.</system:String>
-    <system:String x:Key="UpdateSuccess">LeagueSharp has successfully updated for the installed league of legends version</system:String>
-    <system:String x:Key="UpdateUnknown">Couldn't determine if LeagueSharp is updated for the local League Of Legends version, this usually means that www.joduska.me is inaccessible.</system:String>
-    <system:String x:Key="NotUpdateNeeded">LeagueSharp is updated for the installed league of legends version.</system:String>
+    <system:String x:Key="LoaderUpdateFailed">Kon update niet downloaden, gelieve manueel te updaten. Fout:</system:String>
+    <system:String x:Key="LeagueNotFound">Kon "league of legends.exe" niet vinden, probeer een custom game te starten.</system:String>
+    <system:String x:Key="UpdateSuccess">LeagueSharp is succesvol bijgewerkt voor de laatste League of Legends versie.</system:String>
+    <system:String x:Key="UpdateUnknown">Kon niet controleren voor een update, waarschijnlijk is joduska.me onbereikbaar.</system:String>
+    <system:String x:Key="NotUpdateNeeded">LeagueSharp is up to date voor de laatste League of Legends versie.</system:String>
 
 </ResourceDictionary>
