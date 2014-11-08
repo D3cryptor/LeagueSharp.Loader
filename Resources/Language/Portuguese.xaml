@@ -113,22 +113,22 @@
     <system:String x:Key="SuccessfullyInstalled">Os assemblies selecionados foram corretamente instalados.</system:String>
     <system:String x:Key="ErrorInstalling">Ocorreu um erro ao instalar os assemblies, abra o ficheiro de erro para mais informações.</system:String>
 
-    <system:String x:Key="EnableDeveloper">Enable developer options</system:String>
-    <system:String x:Key="Developer">Developer</system:String>
-    <system:String x:Key="New">New</system:String>
-    <system:String x:Key="Edit">Edit</system:String>
-    <system:String x:Key="Clone">Clone</system:String>
+    <system:String x:Key="EnableDeveloper">Activar opções de desenvolvedor</system:String>
+    <system:String x:Key="Developer">desenvolvedor</system:String>
+    <system:String x:Key="New">Novo</system:String>
+    <system:String x:Key="Edit">Editar</system:String>
+    <system:String x:Key="Clone">Clonar</system:String>
 
-    <system:String x:Key="Checking">Checking...</system:String>
-    <system:String x:Key="Updated">Updated</system:String>
-    <system:String x:Key="OUTDATED">OUTDATED</system:String>
-    <system:String x:Key="Unknown">Unknown</system:String>
-    <system:String x:Key="UpdateStatus">Status</system:String>
+    <system:String x:Key="Checking">Verifando...</system:String>
+    <system:String x:Key="Updated">Actualizado</system:String>
+    <system:String x:Key="OUTDATED">Desactualizado</system:String>
+    <system:String x:Key="Unknown">Desconhecido</system:String>
+    <system:String x:Key="UpdateStatus">Estado</system:String>
 
-    <system:String x:Key="LoaderUpdateFailed">Could not download the update, please update manually. Error:</system:String>
-    <system:String x:Key="LeagueNotFound">Could not resolve "League of Legends.exe" location, try starting a custom game.</system:String>
-    <system:String x:Key="UpdateSuccess">LeagueSharp has successfully updated for the installed league of legends version</system:String>
-    <system:String x:Key="UpdateUnknown">Couldn't determine if LeagueSharp is updated for the local League Of Legends version, this usually means that www.joduska.me is inaccessible.</system:String>
-    <system:String x:Key="NotUpdateNeeded">LeagueSharp is updated for the installed league of legends version.</system:String>
+    <system:String x:Key="LoaderUpdateFailed">Não foi possível descarregar o update, por favor actualize manualmente. Erro:</system:String>
+    <system:String x:Key="LeagueNotFound">Não foi possível encontrar a localização do "League of Legends.exe", experimente começar uma partida personalizada.</system:String>
+    <system:String x:Key="UpdateSuccess">O LeagueSharp actualizou com sucesso para a versão do league of legends instalado.</system:String>
+    <system:String x:Key="UpdateUnknown">Não foi possível determinar se o LeagueSharp está actualizado para versão do league of legends instalado, normalmente isto quer dizer que www.joduska.me está inacessível.</system:String>
+    <system:String x:Key="NotUpdateNeeded">O LeagueSharp está actualizado para versão instalada do league of legends.</system:String>
 
 </ResourceDictionary>
