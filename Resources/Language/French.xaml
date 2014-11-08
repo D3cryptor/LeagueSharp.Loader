@@ -7,53 +7,53 @@
     <system:String x:Key="Settings">Paramètres</system:String>
 
     <!-- MainWindow Tabs -->
-    <system:String x:Key="News">Nouvelles</system:String>
+    <system:String x:Key="News">Nouveautés</system:String>
     <system:String x:Key="Assemblies">Assemblies</system:String>
 
     <!-- MainWindow Profile selector -->
-    <system:String x:Key="DefaultProfile">Défaut</system:String>
+    <system:String x:Key="DefaultProfile">Standard</system:String>
 
     <!-- MainWindow Assemblies datagrid columns -->
     <system:String x:Key="ColumnName">Nom</system:String>
     <system:String x:Key="ColumnType">Type</system:String>
     <system:String x:Key="ColumnVersion">Version</system:String>
-    <system:String x:Key="ColumnLocation">Location</system:String>
+    <system:String x:Key="ColumnLocation">Dépot</system:String>
     <system:String x:Key="ColumnDescription">Description</system:String>
 
     <!-- MainWindow Assemblies datagrid Menu -->
-    <system:String x:Key="MenuUpdateAndCompile">Mise à jour et compiler</system:String>
+    <system:String x:Key="MenuUpdateAndCompile">Mettre à jour et compiler</system:String>
     <system:String x:Key="MenuRemove">Supprimer</system:String>
     <system:String x:Key="MenuGitub">GitHub</system:String>
     <system:String x:Key="MenuShare">Partager</system:String>
-    <system:String x:Key="MenuViewLog">Journal des Log</system:String>
+    <system:String x:Key="MenuViewLog">Journal de log</system:String>
 
     <!-- MainWindow Profiles Menu -->
     <system:String x:Key="NewProfile">Nouveau</system:String>
-    <system:String x:Key="ChangeName">Changer le nom</system:String>
+    <system:String x:Key="ChangeName">Renommer</system:String>
     <system:String x:Key="DeleteProfile">Effacer</system:String>
 
     <!-- MainWindow Buttons -->
-    <system:String x:Key="UpdateAll">Metre tout a Jour</system:String>
-    <system:String x:Key="CompileAll">Tout Compiler</system:String>
-    <system:String x:Key="InstallNewAssembly">Installer une nouvelle Assembly</system:String>
+    <system:String x:Key="UpdateAll">Tout actualiser</system:String>
+    <system:String x:Key="CompileAll">Tout compiler</system:String>
+    <system:String x:Key="InstallNewAssembly">Installer une assembly</system:String>
 
     <!-- InstallerWindow Title -->
-    <system:String x:Key="AssemblyInstaller">Installer une Assembly</system:String>
+    <system:String x:Key="AssemblyInstaller">Installer une nouvelle assembly</system:String>
 
     <!-- InstallerWindow Tabs -->
-    <system:String x:Key="Search">Recherche</system:String>
-    <system:String x:Key="Select">Choisir</system:String>
+    <system:String x:Key="Search">Rechercher</system:String>
+    <system:String x:Key="Select">Selectionner</system:String>
 
     <!-- InstallerWindow Search tab -->
-    <system:String x:Key="SelectAssembliesText">Choisir la location de l'Assembly:</system:String>
+    <system:String x:Key="SelectAssembliesText">Où se trouve votre assembly ? :</system:String>
     <system:String x:Key="Local">Locale</system:String>
     <system:String x:Key="Github">GitHub</system:String>
-    <system:String x:Key="Installed">Installé</system:String>
-    <system:String x:Key="Next">Suivante</system:String>
+    <system:String x:Key="Installed">Installée</system:String>
+    <system:String x:Key="Next">Suivant</system:String>
 
     <!-- InstallerWindow Select tab -->
-    <system:String x:Key="SelectAll">Choisir tout</system:String>
-    <system:String x:Key="DeselectAll">tout désélectionner</system:String>
+    <system:String x:Key="SelectAll">Tout cocher</system:String>
+    <system:String x:Key="DeselectAll">Rien cocher</system:String>
     <system:String x:Key="Previous">Précédent</system:String>
     <system:String x:Key="Add">Ajouter</system:String>
 
@@ -62,72 +62,72 @@
     <system:String x:Key="GameSettings">Paramètres de jeu</system:String>
     <system:String x:Key="Anti-AFK">Anti-AFK</system:String>
     <system:String x:Key="Debug Console">Debug Console</system:String>
-    <system:String x:Key="Display Enemy Tower Range">Montrer la zone de la tour Ennemi</system:String>
-    <system:String x:Key="Extended Zoom">Augmenter le Zoom</system:String>
-    <system:String x:Key="UpdateOnStart">Mettre à jour les Assemblies au démarrage</system:String>
-    <system:String x:Key="Inject">Injecté</system:String>
+    <system:String x:Key="Display Enemy Tower Range">Voir portée des tourelles (ennemi)</system:String>
+    <system:String x:Key="Extended Zoom">Déverrouiller le zoom</system:String>
+    <system:String x:Key="UpdateOnStart">Mettre à jour les assemblies au démarrage</system:String>
+    <system:String x:Key="Inject">Injecter</system:String>
     <system:String x:Key="Logout">Déconnexion</system:String>
     <system:String x:Key="DefaultHotkeys">Restaurer</system:String>
     <system:String x:Key="Language">Langue</system:String>
 
     <!-- Settings Hotkeys -->
     <system:String x:Key="Hotkeys">Raccourcis Clavier</system:String>
-    <system:String x:Key="Hotkey">Raccourcis Clavier</system:String>
-    <system:String x:Key="Reload the assemblies">Recharger les Assemblies</system:String>
-    <system:String x:Key="Recompile and reload the assemblies">Recompiler et recharger les assemblies</system:String>
-    <system:String x:Key="Shows the menu (Press)">Montrer le menu (Press)</system:String>
+    <system:String x:Key="Hotkey">Raccourcis</system:String>
+    <system:String x:Key="Reload the assemblies">Recharger toutes les assemblies</system:String>
+    <system:String x:Key="Recompile and reload the assemblies">Recompiler et recharger toutes les assemblies</system:String>
+    <system:String x:Key="Shows the menu (Press)">Montrer le menu (Presser)</system:String>
     <system:String x:Key="Shows the menu (Toggle)">Montrer le menu (Basculer)</system:String>
 
     <!-- Settings Log -->
     <system:String x:Key="Log">Log</system:String>
-    <system:String x:Key="Status">Statues</system:String>
+    <system:String x:Key="Status">Status</system:String>
     <system:String x:Key="Source">Source</system:String>
-    <system:String x:Key="Content">Content</system:String>
-    <system:String x:Key="OpenFolder">Ouvrire le dossier</system:String>
+    <system:String x:Key="Content">Contenu</system:String>
+    <system:String x:Key="OpenFolder">Dossier log</system:String>
 
     <!-- UpdateWindow -->
-    <system:String x:Key="UpdatingLeagueSharp">Mise a jour de LeagueSharp</system:String>
-    <system:String x:Key="Updating">Misse à Jour...</system:String>
-    <system:String x:Key="UpdateText">Téléchargement {0} KB de {1} KB.</system:String>
+    <system:String x:Key="UpdatingLeagueSharp">Mise à jour de LeagueSharp</system:String>
+    <system:String x:Key="Updating">Mise à Jour...</system:String>
+    <system:String x:Key="UpdateText">Téléchargement de {0} KB sur {1} KB.</system:String>
 
     <!-- Errors and other strings -->
-    <system:String x:Key="WrongAuth">Mauvais mot de passe ou identifiant, s'enregistré à {0}</system:String>
-    <system:String x:Key="AuthEmpty">Mot de passe ou identifiant est vide</system:String>
-    <system:String x:Key="FailedToDelete">Impossible de supprimer le fichier mise à jour. S'il vous plaît supprimer manuellement et redémarrer LeagueSharp</system:String>
-    <system:String x:Key="WrongVersion">Version de League of Legends pas supportée. Hash:</system:String>
+    <system:String x:Key="WrongAuth">Mauvais mot de passe ou identifiant, veuillez vous enregistrer sur {0}</system:String>
+    <system:String x:Key="AuthEmpty">Mot de passe ou identifiant vide</system:String>
+    <system:String x:Key="FailedToDelete">Impossible de supprimer le fichier de mise à jour. Supprimez le manuellement et redémarrez LeagueSharp</system:String>
+    <system:String x:Key="WrongVersion">Version de League of Legends non supportée. Hash:</system:String>
     <system:String x:Key="FailedToDownload">Impossible de télécharger.</system:String>
-    <system:String x:Key="FailedToLogin">Impossible de login: {0}</system:String>
+    <system:String x:Key="FailedToLogin">Impossible de se connecter: {0}</system:String>
     <system:String x:Key="Login">Login</system:String>
-    <system:String x:Key="LoginError">Impossible de s'enregistré {0}: {1}</system:String>
-    <system:String x:Key="Uninstall">Uninstall</system:String>
-    <system:String x:Key="UninstallConfirm">Êtes-vous sûr de vouloir désinstaller l'ensembles sélectionnés?</system:String>
-    <system:String x:Key="ConfigWriteError">Ne pouvez pas écrire à config.xml</system:String>
-    <system:String x:Key="ShareText">L'Url de l'Assembly est copier</system:String>
-    <system:String x:Key="LogNotFound">Log file pas trouvé</system:String>
-    <system:String x:Key="NewProfile2">Nouveau profile</system:String>
+    <system:String x:Key="LoginError">Impossible de s'enregistrer {0}: {1}</system:String>
+    <system:String x:Key="Uninstall">Désinstaller</system:String>
+    <system:String x:Key="UninstallConfirm">Êtes-vous sûr de vouloir désinstaller la selection?</system:String>
+    <system:String x:Key="ConfigWriteError">Impossible d'écrire dans config.xml</system:String>
+    <system:String x:Key="ShareText">L'URL de l'assembly à bien été copiée</system:String>
+    <system:String x:Key="LogNotFound">Fichier de log non trouvé</system:String>
+    <system:String x:Key="NewProfile2">Nouveau profil</system:String>
     <system:String x:Key="Rename">Renommer</system:String>
     <system:String x:Key="RenameText">Insérer un nouveau nom</system:String>
-    <system:String x:Key="DownloadingData">Téléchargement des data requit.</system:String>
+    <system:String x:Key="DownloadingData">Téléchargement des données requises.</system:String>
     <system:String x:Key="Installer">Installer</system:String>
-    <system:String x:Key="SuccessfullyInstalled">Assemblies sélectionnés sont installés avec succès.</system:String>
-    <system:String x:Key="ErrorInstalling">TIl y avait une erreur pendant l'installation de ses assemblies, allez voir le log pour plus de détails.</system:String>
+    <system:String x:Key="SuccessfullyInstalled">Les assemblies sélectionnées ont été installées avec succès.</system:String>
+    <system:String x:Key="ErrorInstalling">Une erreur s'est produite pendant l'installation des assemblies, vérifiez les log pour plus de détails.</system:String>
 
-    <system:String x:Key="EnableDeveloper">Enable developer options</system:String>
-    <system:String x:Key="Developer">Developer</system:String>
-    <system:String x:Key="New">New</system:String>
-    <system:String x:Key="Edit">Edit</system:String>
-    <system:String x:Key="Clone">Clone</system:String>
+    <system:String x:Key="EnableDeveloper">Activer les options développeurs</system:String>
+    <system:String x:Key="Developer">Developpeur</system:String>
+    <system:String x:Key="New">Nouveau</system:String>
+    <system:String x:Key="Edit">Modifier</system:String>
+    <system:String x:Key="Clone">Cloner</system:String>
 
-    <system:String x:Key="Checking">Checking...</system:String>
-    <system:String x:Key="Updated">Updated</system:String>
-    <system:String x:Key="OUTDATED">OUTDATED</system:String>
-    <system:String x:Key="Unknown">Unknown</system:String>
+    <system:String x:Key="Checking">Verification...</system:String>
+    <system:String x:Key="Updated">Mis à jour</system:String>
+    <system:String x:Key="OUTDATED">Non à jour</system:String>
+    <system:String x:Key="Unknown">Inconnu</system:String>
     <system:String x:Key="UpdateStatus">Status</system:String>
 
-    <system:String x:Key="LoaderUpdateFailed">Could not download the update, please update manually. Error:</system:String>
-    <system:String x:Key="LeagueNotFound">Could not resolve "League of Legends.exe" location, try starting a custom game.</system:String>
-    <system:String x:Key="UpdateSuccess">LeagueSharp has successfully updated for the installed league of legends version</system:String>
-    <system:String x:Key="UpdateUnknown">Couldn't determine if LeagueSharp is updated for the local League Of Legends version, this usually means that www.joduska.me is inaccessible.</system:String>
-    <system:String x:Key="NotUpdateNeeded">LeagueSharp is updated for the installed league of legends version.</system:String>
+    <system:String x:Key="LoaderUpdateFailed">Impossible de télécharger la mise à jour, veuillez la faire manuellement. Erreur:</system:String>
+    <system:String x:Key="LeagueNotFound">Impossible de trouver "League of Legends.exe", essayez de lancer une partie personnalisée.</system:String>
+    <system:String x:Key="UpdateSuccess">LeagueSharp à bien été mis à jour pour la version de League of Legends installée.</system:String>
+    <system:String x:Key="UpdateUnknown">Impossible de vérifier si LeagueSharp à bien été mis à jour, www.joduska.me est probablement inaccessible.</system:String>
+    <system:String x:Key="NotUpdateNeeded">LeagueSharp est bien à jour pour la version de League of Legends installée.</system:String>
 
 </ResourceDictionary>
