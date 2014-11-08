@@ -25,7 +25,7 @@
     <system:String x:Key="MenuRemove">Kaldır</system:String>
     <system:String x:Key="MenuGitub">GitHub</system:String>
     <system:String x:Key="MenuShare">Paylaş</system:String>
-    <system:String x:Key="MenuViewLog">Kayıt Göürntüle</system:String>
+    <system:String x:Key="MenuViewLog">Kayıt Görüntüle</system:String>
 
 	<!-- MainWindow Profiles Menu -->
     <system:String x:Key="NewProfile">Yeni</system:String>
@@ -60,11 +60,11 @@
     <!-- Settings General -->
     <system:String x:Key="General">Genel</system:String>
     <system:String x:Key="GameSettings">Oyun Ayarları</system:String>
-    <system:String x:Key="Anti-AFK">Anti-AFK</system:String>
-    <system:String x:Key="Debug Console">Debug Console</system:String>
-    <system:String x:Key="Display Enemy Tower Range">Düşman Kule Menzilini Göster</system:String>
-    <system:String x:Key="Extended Zoom">Genişletilmiş Zoom</system:String>
-    <system:String x:Key="UpdateOnStart">Assemblyleri Her Başlangıçta Güncelle</system:String>
+    <system:String x:Key="Anti-AFK">LeaveBuster engelleyici</system:String>
+    <system:String x:Key="Debug Console">Hata ayıklama konsolu</system:String>
+    <system:String x:Key="Display Enemy Tower Range">Düşman kule menzilini göster</system:String>
+    <system:String x:Key="Extended Zoom">Genişletilmiş kamera</system:String>
+    <system:String x:Key="UpdateOnStart">Assemblyleri her başlangıçta güncelle</system:String>
     <system:String x:Key="Inject">Enjekte Et</system:String>
     <system:String x:Key="Logout">Çıkış</system:String>
     <system:String x:Key="DefaultHotkeys">Geri Yükle</system:String>
@@ -72,10 +72,10 @@
 	
     <!-- Settings Hotkeys -->
     <system:String x:Key="Hotkeys">Kısayollar</system:String>
-    <system:String x:Key="Hotkey">Kısayol Tuşu</system:String>
+    <system:String x:Key="Hotkey">Kısayol</system:String>
     <system:String x:Key="Reload the assemblies">Assemblyleri Yeniden Yükle</system:String>
-    <system:String x:Key="Recompile and reload the assemblies">Assemblyleri Yeniden Derle ve Yeniden Yükle</system:String>
-    <system:String x:Key="Shows the menu (Press)">Menü Tuşu(Basılı tutunca)</system:String>
+    <system:String x:Key="Recompile and reload the assemblies">Assemblyleri yeniden derle ve yeniden yükle</system:String>
+    <system:String x:Key="Shows the menu (Press)">Menü Tuşu (Basılı tutunca)</system:String>
     <system:String x:Key="Shows the menu (Toggle)">Menü Tuşu (Geçiş)</system:String>
 
     <!-- Settings Log -->
@@ -88,46 +88,46 @@
     <!-- UpdateWindow -->
     <system:String x:Key="UpdatingLeagueSharp">LeagueSharp Güncelleniyor</system:String>
     <system:String x:Key="Updating">Güncelleniyor</system:String>
-    <system:String x:Key="UpdateText">Yüklendi  {1} KB ın {0} KB ı</system:String>
+    <system:String x:Key="UpdateText">{1} KB'ın {0} KB'ı yüklendi.</system:String>
 
     <!-- Errors and other strings -->
-    <system:String x:Key="WrongAuth">Yanlış Şifre veya Kullancı Adı, {0} dan kayıt olun</system:String>
-    <system:String x:Key="AuthEmpty">Kullanıcı Adı veya Şifreyi Girmediniz</system:String>
-    <system:String x:Key="FailedToDelete">Silme işlemi başarısız, Lütfen silme işlemini manuel olarak yapıp LeagueSharp ı yeniden başlatın</system:String>
+    <system:String x:Key="WrongAuth">Yanlış şifre veya kullancı Adı, {0}'dan kayıt olun.</system:String>
+    <system:String x:Key="AuthEmpty">Kullanıcı adı veya şifreyi girmediniz.</system:String>
+    <system:String x:Key="FailedToDelete">Silme işlemi başarısız, lütfen silme işlemini el ile yapıp LeagueSharp'ı yeniden başlatın.</system:String>
     <system:String x:Key="WrongVersion">League Of Legends versiyonu desteklenmiyor. Hash:</system:String>
     <system:String x:Key="FailedToDownload">İndirme Başarısız.</system:String>
     <system:String x:Key="FailedToLogin">Giriş Başarısız: {0}</system:String>
     <system:String x:Key="Login">Giriş</system:String>
-    <system:String x:Key="LoginError">{0} Olarak giriş başarısız: {1}</system:String>
+    <system:String x:Key="LoginError">{0} olarak giriş başarısız: {1}</system:String>
     <system:String x:Key="Uninstall">Kaldır</system:String>
-    <system:String x:Key="UninstallConfirm">Seçili Assemblyleri kaldırmak istediğinize emin misiniz?</system:String>
-    <system:String x:Key="ConfigWriteError">Dosyayı yazamadı config.xml</system:String>
-    <system:String x:Key="ShareText">Assembly bağlantısı kopyalandı</system:String>
-    <system:String x:Key="LogNotFound">Kayıt dosyası bulunamadı</system:String>
+    <system:String x:Key="UninstallConfirm">Seçili assemblyleri kaldırmak istediğinize emin misiniz?</system:String>
+    <system:String x:Key="ConfigWriteError">config.xml dosyasına yazılamıyor.</system:String>
+    <system:String x:Key="ShareText">Assembly bağlantısı kopyalandı.</system:String>
+    <system:String x:Key="LogNotFound">Kayıt dosyası bulunamadı.</system:String>
     <system:String x:Key="NewProfile2">Yeni profil</system:String>
     <system:String x:Key="Rename">Yeniden adlandır</system:String>
     <system:String x:Key="RenameText">Profil için yeni isim girin</system:String>
     <system:String x:Key="DownloadingData">Gerekli veri indiriliyor.</system:String>
     <system:String x:Key="Installer">Yükleyici</system:String>
-    <system:String x:Key="SuccessfullyInstalled">Seçili Assembly ler başarıyla yüklendi</system:String>
-    <system:String x:Key="ErrorInstalling">Bazı Assemblyleri yüklerken bir hata oluştu, detaylar için kayıtları kontrol edin.</system:String>
+    <system:String x:Key="SuccessfullyInstalled">Seçili assemblyler başarıyla yüklendi.</system:String>
+    <system:String x:Key="ErrorInstalling">Bazı assemblyleri yüklerken hata oluştu, detaylar için kayıtları kontrol edin.</system:String>
 
-    <system:String x:Key="EnableDeveloper">Enable developer options</system:String>
-    <system:String x:Key="Developer">Developer</system:String>
-    <system:String x:Key="New">New</system:String>
-    <system:String x:Key="Edit">Edit</system:String>
-    <system:String x:Key="Clone">Clone</system:String>
+    <system:String x:Key="EnableDeveloper">Geliştirici seçeneklerini aç</system:String>
+    <system:String x:Key="Developer">Geliştirici</system:String>
+    <system:String x:Key="New">Yeni</system:String>
+    <system:String x:Key="Edit">Düzenle</system:String>
+    <system:String x:Key="Clone">Klonla</system:String>
 
-    <system:String x:Key="Checking">Checking...</system:String>
-    <system:String x:Key="Updated">Updated</system:String>
-    <system:String x:Key="OUTDATED">OUTDATED</system:String>
-    <system:String x:Key="Unknown">Unknown</system:String>
-    <system:String x:Key="UpdateStatus">Status</system:String>
+    <system:String x:Key="Checking">Kontrol ediliyor...</system:String>
+    <system:String x:Key="Updated">Güncellendi</system:String>
+    <system:String x:Key="OUTDATED">GÜNCEL DEĞİL</system:String>
+    <system:String x:Key="Unknown">Bilinmiyor</system:String>
+    <system:String x:Key="UpdateStatus">Durum</system:String>
 
-    <system:String x:Key="LoaderUpdateFailed">Could not download the update, please update manually. Error:</system:String>
-    <system:String x:Key="LeagueNotFound">Could not resolve "League of Legends.exe" location, try starting a custom game.</system:String>
-    <system:String x:Key="UpdateSuccess">LeagueSharp has successfully updated for the installed league of legends version</system:String>
-    <system:String x:Key="UpdateUnknown">Couldn't determine if LeagueSharp is updated for the local League Of Legends version, this usually means that www.joduska.me is inaccessible.</system:String>
-    <system:String x:Key="NotUpdateNeeded">LeagueSharp is updated for the installed league of legends version.</system:String>
+    <system:String x:Key="LoaderUpdateFailed">Güncelleme başarısız, lütfen el ile güncelleyin. Hata:</system:String>
+    <system:String x:Key="LeagueNotFound">"League of Legends.exe" bulunamıyor, özel oyun başlatmayı deneyin.</system:String>
+    <system:String x:Key="UpdateSuccess">LeagueSharp kurulu League of Legends versiyonuna göre başarıyla güncellendi.</system:String>
+    <system:String x:Key="UpdateUnknown">LeagueSharp'ın güncel olup olmadığı bilinmiyor, bu genellikle joduska.me erişilemiyor anlamına gelir.</system:String>
+    <system:String x:Key="NotUpdateNeeded">LeagueSharp kurulu League of Legends versiyonuna göre güncel.</system:String>
 
 </ResourceDictionary>
