@@ -117,5 +117,17 @@
     <system:String x:Key="New">ใหม่</system:String>
     <system:String x:Key="Edit">แก้ไข</system:String>
     <system:String x:Key="Clone">โคลน</system:String>
+	
+	<system:String x:Key="Checking">กำลังตรวจสอบ...</system:String>
+    <system:String x:Key="Updated">เวอร์ชั่นล่าสุด</system:String>
+    <system:String x:Key="OUTDATED">เวอร์ชั่นเก่า</system:String>
+	<system:String x:Key="Unknown">ไม่ทราบเวอร์ชั่น</system:String>
+	<system:String x:Key="UpdateStatus">สถานะ</system:String>
+	
+	<system:String x:Key="LoaderUpdateFailed">ไม่สามารถดาวน์โหลดอัพเดทได้, โปรดอัพพเดทด้วยตนเอง. ผิดพลาด: </system:String>
+    <system:String x:Key="LeagueNotFound">ไม่พบที่ตั้งของ "League of Legends.exe", กรุณาลองเริ่มคัสต้อมเกม</system:String>
+    <system:String x:Key="UpdateSuccess">ลีกชาปอัพเดทสำเร็จสำหรับ League of Legends เวอร์ชั่น</system:String>
+    <system:String x:Key="UpdateUnknown">Couldn't determine if LeagueSharp is updated for the local League Of Legends version, this usually means that www.joduska.me is inaccessible.</system:String>
+	<system:String x:Key="NotUpdateNeeded">ลีกชาปอัพเดทแล้วสำหรับ League of Legends เวอร์ชั่น</system:String>
 
 </ResourceDictionary>
