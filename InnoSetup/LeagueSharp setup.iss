@@ -55,6 +55,12 @@ Name: "de"; MessagesFile: "compiler:Languages\German.isl"
 #include "Scripts\products\vcredist2013.iss"
 #include "scripts\products\detectDirectX.iss"
 
+[Registry]
+Root: HKCR; Subkey: "ls"; ValueType: "string"; ValueData: "URL:Custom Protocol"; Flags: uninsdeletekey
+Root: HKCR; Subkey: "ls"; ValueType: "string"; ValueName: "URL Protocol"; ValueData: ""
+Root: HKCR; Subkey: "ls\DefaultIcon"; ValueType: "string"; ValueData: "{app}\{#MyAppExeName},0"
+Root: HKCR; Subkey: "ls\shell\open\command"; ValueType: "string"; ValueData: """{app}\{#MyAppExeName}"" ""%1"""
+
 [Run]
 Filename: {app}\{#MyAppExeName}; Flags: shellexec nowait; 
 

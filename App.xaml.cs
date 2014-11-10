@@ -40,16 +40,9 @@ namespace LeagueSharp.Loader
                     var wnd = Injection.FindWindow(IntPtr.Zero, "LeagueSharp");
                     if (wnd != IntPtr.Zero)
                     {
-                        if (e.Args[0] == "addregkey")
-                        {
-                            LSUriScheme.CreateRegistryKeys(true);
-                        }
-                        else
-                        {
-                            Clipboard.SetText(e.Args[0]);
-                            ShowWindow(wnd, 5);
-                            SetForegroundWindow(wnd);
-                        }
+                        Clipboard.SetText(e.Args[0]);
+                        ShowWindow(wnd, 5);
+                        SetForegroundWindow(wnd);
                     }
                 }
 

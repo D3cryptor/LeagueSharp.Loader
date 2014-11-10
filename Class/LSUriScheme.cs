@@ -39,57 +39,6 @@ namespace LeagueSharp.Loader.Class
             get { return Name + "://"; }
         }
 
-        public static void CreateRegistryKeys(bool admin)
-        {
-            if (admin)
-            {
-                try
-                {
-                    var lsKey = Registry.ClassesRoot.CreateSubKey(Name);
-                    if (lsKey != null)
-                    {
-                        lsKey.SetValue("URL Protocol", "", RegistryValueKind.String);
-
-                        var defaultIconKey = lsKey.CreateSubKey("DefaultIcon");
-                        if (defaultIconKey != null)
-                        {
-                            defaultIconKey.SetValue(
-                                "", string.Format("\"{0}\", 0", Directories.LoaderFilePath), RegistryValueKind.String);
-                        }
-
-                        var registryKey = lsKey.CreateSubKey("shell");
-                        if (registryKey != null)
-                        {
-                            var subKey = registryKey
-                                .CreateSubKey("open");
-
-                            if (subKey != null)
-                            {
-                                var key = subKey
-                                    .CreateSubKey("command");
-
-                                if (key != null)
-                                {
-                                    key
-                                        .SetValue(
-                                            "", string.Format("\"{0}\" %1", Directories.LoaderFilePath), RegistryValueKind.String);
-                                }
-                            }
-                        }
-                    }
-                }
-                catch (Exception e)
-                {
-                    MessageBox.Show(e.ToString());
-                }
-            }
-            else
-            {
-                new Process { StartInfo = { FileName = Directories.LoaderFilePath, Verb = "runas", Arguments = "addregkey" } }.Start();
-            }
-            
-        }
-
         public static void HandleUrl(string url, MetroWindow window)
         {
             url = WebUtility.UrlDecode(url.Remove(0, FullName.Length));

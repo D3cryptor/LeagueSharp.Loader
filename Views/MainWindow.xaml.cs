@@ -134,11 +134,6 @@ namespace LeagueSharp.Loader.Views
                         }
                     }
                 });
-
-            if (Config.Instance.FirstRun)
-            {
-                LSUriScheme.CreateRegistryKeys(false);
-            }
             
             //Try to login with the saved credentials.
             if (!Auth.Login(Config.Instance.Username, Config.Instance.Password).Item1)
