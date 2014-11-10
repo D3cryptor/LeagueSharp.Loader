@@ -10,7 +10,6 @@
 <repo>https://github.com/FlapperDoodlez/LeagueSharp</repo>
 <repo>https://github.com/TheKushStyle/LeagueSharp</repo>
 <repo>https://github.com/SephLeague/LeagueSharp</repo>
-<repo>https://github.com/Lizzaran/LeagueSharp</repo>
 <repo>https://github.com/MobbyGFX96/LeagueSharp/</repo>
 <repo>https://github.com/RoachxD/LeagueSharp</repo>
 <repo>https://github.com/Chogart/LeagueSharp</repo>
