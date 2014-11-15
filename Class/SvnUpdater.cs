@@ -85,7 +85,7 @@ namespace LeagueSharp.Loader.Class
                             client.CleanUp(dir);
                         }
 
-                        try
+                        /*try
                         {
                             if (Directory.Exists(dir))
                             {
@@ -106,7 +106,7 @@ namespace LeagueSharp.Loader.Class
                         catch (Exception ex)
                         {
                             Utility.Log(LogStatus.Error, "Updater", string.Format("{0} - {1}", ex, url), log);
-                        }
+                        }*/
 
                         client.CheckOut(new Uri(url), dir);
                         client.Update(dir);
