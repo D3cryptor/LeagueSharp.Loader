@@ -53,7 +53,7 @@
 
     <!-- InstallerWindow Select tab -->
     <system:String x:Key="SelectAll">Tout cocher</system:String>
-    <system:String x:Key="DeselectAll">Rien cocher</system:String>
+    <system:String x:Key="DeselectAll">Tout décocher</system:String>
     <system:String x:Key="Previous">Précédent</system:String>
     <system:String x:Key="Add">Ajouter</system:String>
 
@@ -62,7 +62,7 @@
     <system:String x:Key="GameSettings">Paramètres de jeu</system:String>
     <system:String x:Key="Anti-AFK">Anti-AFK</system:String>
     <system:String x:Key="Debug Console">Debug Console</system:String>
-    <system:String x:Key="Display Enemy Tower Range">Voir portée des tourelles (ennemi)</system:String>
+    <system:String x:Key="Display Enemy Tower Range">Voir la portée des tourelles (ennemi)</system:String>
     <system:String x:Key="Extended Zoom">Déverrouiller le zoom</system:String>
     <system:String x:Key="UpdateOnStart">Mettre à jour les assemblies au démarrage</system:String>
     <system:String x:Key="Inject">Injecter</system:String>
@@ -80,10 +80,10 @@
 
     <!-- Settings Log -->
     <system:String x:Key="Log">Log</system:String>
-    <system:String x:Key="Status">Status</system:String>
+    <system:String x:Key="Status">Statut</system:String>
     <system:String x:Key="Source">Source</system:String>
     <system:String x:Key="Content">Contenu</system:String>
-    <system:String x:Key="OpenFolder">Dossier log</system:String>
+    <system:String x:Key="OpenFolder">Dossier Logs</system:String>
 
     <!-- UpdateWindow -->
     <system:String x:Key="UpdatingLeagueSharp">Mise à jour de LeagueSharp</system:String>
@@ -102,7 +102,7 @@
     <system:String x:Key="Uninstall">Désinstaller</system:String>
     <system:String x:Key="UninstallConfirm">Êtes-vous sûr de vouloir désinstaller la selection?</system:String>
     <system:String x:Key="ConfigWriteError">Impossible d'écrire dans config.xml</system:String>
-    <system:String x:Key="ShareText">L'URL de l'assembly à bien été copiée</system:String>
+    <system:String x:Key="ShareText">L'URL de l'assembly a bien été copiée</system:String>
     <system:String x:Key="LogNotFound">Fichier de log non trouvé</system:String>
     <system:String x:Key="NewProfile2">Nouveau profil</system:String>
     <system:String x:Key="Rename">Renommer</system:String>
