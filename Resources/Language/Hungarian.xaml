@@ -1,0 +1,133 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:system="clr-namespace:System;assembly=mscorlib">
+
+    <!-- MainWindow TopBar -->
+    <system:String x:Key="Website">Weboldal</system:String>
+    <system:String x:Key="Settings">Beállítások</system:String>
+
+    <!-- MainWindow Tabs -->
+    <system:String x:Key="News">Hírek</system:String>
+    <system:String x:Key="Assemblies">Programok</system:String>
+
+    <!-- MainWindow Profile selector -->
+    <system:String x:Key="DefaultProfile">Alapprofil</system:String>
+
+    <!-- MainWindow Assemblies datagrid columns -->
+    <system:String x:Key="ColumnName">Név</system:String>
+    <system:String x:Key="ColumnType">Típus</system:String>
+    <system:String x:Key="ColumnVersion">Verzió</system:String>
+    <system:String x:Key="ColumnLocation">Hely</system:String>
+    <system:String x:Key="ColumnDescription">Leírás</system:String>
+
+    <!-- MainWindow Assemblies datagrid Menu -->
+    <system:String x:Key="MenuUpdateAndCompile">Frissítés és Összeállítás</system:String>
+    <system:String x:Key="MenuRemove">Törlés</system:String>
+    <system:String x:Key="MenuGitub">GitHub</system:String>
+    <system:String x:Key="MenuShare">Megosztás</system:String>
+    <system:String x:Key="MenuViewLog">Napló megtekintése</system:String>
+
+	<!-- MainWindow Profiles Menu -->
+    <system:String x:Key="NewProfile">Új</system:String>
+    <system:String x:Key="ChangeName">Átnevezés</system:String>
+    <system:String x:Key="DeleteProfile">Törlés</system:String>
+	
+    <!-- MainWindow Buttons -->
+    <system:String x:Key="UpdateAll">Mind Frissítése</system:String>
+    <system:String x:Key="CompileAll">Mind Összeállítása</system:String>
+    <system:String x:Key="InstallNewAssembly">Új Program Telepítése</system:String>
+
+    <!-- InstallerWindow Title -->
+    <system:String x:Key="AssemblyInstaller">Programtelepítő</system:String>
+
+    <!-- InstallerWindow Tabs -->
+    <system:String x:Key="Search">Keresés</system:String>
+    <system:String x:Key="Select">Kiválasztás</system:String>
+
+    <!-- InstallerWindow Search tab -->
+    <system:String x:Key="SelectAssembliesText">Válaszd ki a program helyét:</system:String>
+    <system:String x:Key="Local">Helyi</system:String>
+    <system:String x:Key="Github">GitHub</system:String>
+    <system:String x:Key="Installed">Előtelepített</system:String>
+    <system:String x:Key="Next">Következő</system:String>
+
+    <!-- InstallerWindow Select tab -->
+    <system:String x:Key="SelectAll">Összes kijelölése</system:String>
+    <system:String x:Key="DeselectAll">Összes kijelölésének megszüntetése</system:String>
+    <system:String x:Key="Previous">Előző</system:String>
+    <system:String x:Key="Add">Hozzáadás</system:String>
+
+    <!-- Settings General -->
+    <system:String x:Key="General">Általános</system:String>
+    <system:String x:Key="GameSettings">Játék Beállítások</system:String>
+    <system:String x:Key="Anti-AFK">Anti-AFK</system:String>
+    <system:String x:Key="Debug Console">Hibakeresési Konzol</system:String>
+    <system:String x:Key="Display Enemy Tower Range">Ellenséges torony tartomány kijelzése</system:String>
+    <system:String x:Key="Extended Zoom">Kiterjesztett Nagyítás</system:String>
+    <system:String x:Key="UpdateOnStart">Programok frissítése az induláskor</system:String>
+    <system:String x:Key="Inject">Betöltés</system:String>
+    <system:String x:Key="Logout">Kijelentkezés</system:String>
+    <system:String x:Key="DefaultHotkeys">Visszaállítás</system:String>
+	<system:String x:Key="Language">Nyelv</system:String>
+	
+    <!-- Settings Hotkeys -->
+    <system:String x:Key="Hotkeys">Gyorsbillentyűk</system:String>
+    <system:String x:Key="Hotkey">Gyorsbillentyű</system:String>
+    <system:String x:Key="Reload the assemblies">Programok újra-betöltése</system:String>
+    <system:String x:Key="Recompile and reload the assemblies">Programok frissítése majd újra-betöltése</system:String>
+    <system:String x:Key="Shows the menu (Press)">Megmutatja a menüt (Tartsa nyomva)</system:String>
+    <system:String x:Key="Shows the menu (Toggle)">Mutasd a menüt (Nyomja meg)</system:String>
+
+    <!-- Settings Log -->
+    <system:String x:Key="Log">Napló</system:String>
+    <system:String x:Key="Status">Státusz</system:String>
+    <system:String x:Key="Source">Forrás</system:String>
+    <system:String x:Key="Content">Tartalom</system:String>
+    <system:String x:Key="OpenFolder">Mappa megnyitása</system:String>
+
+    <!-- UpdateWindow -->
+    <system:String x:Key="UpdatingLeagueSharp">LeagueSharp frissítése</system:String>
+    <system:String x:Key="Updating">Frissítés...</system:String>
+    <system:String x:Key="UpdateText">Hátravan: {0}/{1} Kb.</system:String>
+
+    <!-- Errors and other strings -->
+    <system:String x:Key="WrongAuth">Rossz jelszó, vagy felhasználó, regisztrálj a {0} oldalon</system:String>
+    <system:String x:Key="AuthEmpty">A jelszó vagy felhasználónév mező üres</system:String>
+    <system:String x:Key="FailedToDelete">Nem sikerült törölni a frissítési fáljt, kérem törölje azt manuálisan, majd indítsa újra a LeagueSharp-ot.</system:String>
+    <system:String x:Key="WrongVersion">A League Of Legends verziója nem támogatott, ez általában azt jelenti, hogy a League Of Legends verzója frissebb míg a LeagueSharp elavult. Tekintsd meg a fórumot további információkért, vagy várj a LeagueSharp frissítésére. Hasítófüggvény: </system:String>
+    <system:String x:Key="FailedToDownload">Sikertelen letöltés.</system:String>
+    <system:String x:Key="FailedToLogin">Sikertelen bejelentkezés: {0}</system:String>
+    <system:String x:Key="Login">Bejelentkezés</system:String>
+    <system:String x:Key="LoginError">Sikertelen bejelentkezés mint, {0}: {1}</system:String>
+    <system:String x:Key="Uninstall">Eltávolítás</system:String>
+    <system:String x:Key="UninstallConfirm">Biztos benne, hogy törli a kiválasztott program(ok)-at?</system:String>
+    <system:String x:Key="ConfigWriteError">Nem lehet írni a config.xml-t</system:String>
+    <system:String x:Key="ShareText">Program linkje kimásolva a vágólapra</system:String>
+    <system:String x:Key="LogNotFound">Naplózási fálj nem található</system:String>
+    <system:String x:Key="NewProfile2">Új profil</system:String>
+    <system:String x:Key="Rename">Átnevezés</system:String>
+    <system:String x:Key="RenameText">Írja be az új profil nevét</system:String>
+    <system:String x:Key="DownloadingData">Szükséges adatok letöltése.</system:String>
+    <system:String x:Key="Installer">Telepítő</system:String>
+    <system:String x:Key="SuccessfullyInstalled">Kiválasztott programok sikeresen telepítve.</system:String>
+    <system:String x:Key="ErrorInstalling">Hiba lépett fel néhány program telepítése közben, tekintsd meg a naplót további részletekért.</system:String>
+
+    <system:String x:Key="EnableDeveloper">Fejlesztői lehetőségek engedélyezése</system:String>
+    <system:String x:Key="Developer">Fejlesztő</system:String>
+    <system:String x:Key="New">Új</system:String>
+    <system:String x:Key="Edit">Szerkesztés</system:String>
+    <system:String x:Key="Clone">Duplikálás</system:String>
+    
+	<system:String x:Key="Checking">Ellenőrzés...</system:String>
+    <system:String x:Key="Updated">Frissítve</system:String>
+    <system:String x:Key="OUTDATED">ELAVULT</system:String>
+	<system:String x:Key="Unknown">Ismeretlen</system:String>
+	<system:String x:Key="UpdateStatus">Státusz</system:String>
+	
+	<system:String x:Key="LoaderUpdateFailed">Sikertelen volt a frissítés letöltése, kérem frissítsen manuálisan. Hiba: </system:String>
+    <system:String x:Key="LeagueNotFound">Nem sikerült a "League of Legends.exe" helyét meghatározni, próbáljon meg egy egyéni játék-szobát elindítani.</system:String>
+    <system:String x:Key="UpdateSuccess">LeagueSharp sikeresen frissítve a jelenleg telepített league of legends verziójához.</system:String>
+    <system:String x:Key="UpdateUnknown">Nem sikerült meghatározni, hogy a LeagueSharp frissítve van e a jelenleg telepített League Of Legends verziójához, ez általában azt jelenti, hogy a www.joduska.me webkiszolgáló nem elérhető.</system:String>
+	<system:String x:Key="NotUpdateNeeded">LeagueSharp már frissítve van a jelenleg telepített league of legends verziójához.</system:String>
+
+</ResourceDictionary>
