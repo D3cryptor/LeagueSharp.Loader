@@ -102,7 +102,7 @@
     <system:String x:Key="Uninstall">Eltávolítás</system:String>
     <system:String x:Key="UninstallConfirm">Biztos benne, hogy törli a kiválasztott program(ok)-at?</system:String>
     <system:String x:Key="ConfigWriteError">Nem lehet írni a config.xml-t</system:String>
-    <system:String x:Key="ShareText">Program linkje kivásolva a vágólapra</system:String>
+    <system:String x:Key="ShareText">Program linkje kimásolva a vágólapra</system:String>
     <system:String x:Key="LogNotFound">Naplózási fálj nem található</system:String>
     <system:String x:Key="NewProfile2">Új profil</system:String>
     <system:String x:Key="Rename">Átnevezés</system:String>
