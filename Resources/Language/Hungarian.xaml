@@ -74,7 +74,7 @@
     <system:String x:Key="Hotkeys">Gyorsbillentyűk</system:String>
     <system:String x:Key="Hotkey">Gyorsbillentyű</system:String>
     <system:String x:Key="Reload the assemblies">Programok újra-betöltése</system:String>
-    <system:String x:Key="Recompile and reload the assemblies">Programok frissítése majd újra-betöltése Recompile and reload the assemblies</system:String>
+    <system:String x:Key="Recompile and reload the assemblies">Programok frissítése majd újra-betöltése</system:String>
     <system:String x:Key="Shows the menu (Press)">Megmutatja a menüt (Tartsa nyomva)</system:String>
     <system:String x:Key="Shows the menu (Toggle)">Mutasd a menüt (Nyomja meg)</system:String>
 
@@ -88,13 +88,13 @@
     <!-- UpdateWindow -->
     <system:String x:Key="UpdatingLeagueSharp">LeagueSharp frissítése</system:String>
     <system:String x:Key="Updating">Frissítés...</system:String>
-    <system:String x:Key="UpdateText">Hátravan: {0}/{1} KB.</system:String>
+    <system:String x:Key="UpdateText">Hátravan: {0}/{1} Kb.</system:String>
 
     <!-- Errors and other strings -->
     <system:String x:Key="WrongAuth">Rossz jelszó, vagy felhasználó, regisztrálj a {0} oldalon</system:String>
     <system:String x:Key="AuthEmpty">A jelszó vagy felhasználónév mező üres</system:String>
     <system:String x:Key="FailedToDelete">Nem sikerült törölni a frissítési fáljt, kérem törölje azt manuálisan, majd indítsa újra a LeagueSharp-ot.</system:String>
-    <system:String x:Key="WrongVersion">A League Of Legends verziója nem támogatott, ez általában azt jelenti, hogy a League Of Legends verzója frissebb míg a LeagueSharp elavult. Tekintsd meg a fórumot további információkért, vagy várj a LeagueSharp frissítésére. Hasítófüggvény:</system:String>
+    <system:String x:Key="WrongVersion">A League Of Legends verziója nem támogatott, ez általában azt jelenti, hogy a League Of Legends verzója frissebb míg a LeagueSharp elavult. Tekintsd meg a fórumot további információkért, vagy várj a LeagueSharp frissítésére. Hasítófüggvény: </system:String>
     <system:String x:Key="FailedToDownload">Sikertelen letöltés.</system:String>
     <system:String x:Key="FailedToLogin">Sikertelen bejelentkezés: {0}</system:String>
     <system:String x:Key="Login">Bejelentkezés</system:String>
