@@ -93,43 +93,43 @@
 
     <!-- Errors and other strings -->
     <system:String x:Key="WrongAuth">Неверный логин или пароль, зарегистрируйтесь в {0}</system:String>
-    <system:String x:Key="AuthEmpty">Логин или логин пусты</system:String>
+    <system:String x:Key="AuthEmpty">Логин или пароль пусты</system:String>
     <system:String x:Key="FailedToDelete">Невозможно удалить файл обновления, пожалуйста удалите файл вручную и перезагрузите LeagueSharp</system:String>
-    <system:String x:Key="WrongVersion">Не поддерживаемая версия League Of Legends. Hash:</system:String>
+    <system:String x:Key="WrongVersion">Не поддерживаемая версия League Of Legends. Хэш:</system:String>
     <system:String x:Key="FailedToDownload">Невозможно загрузить.</system:String>
     <system:String x:Key="FailedToLogin">Ошибка при авторизации: {0}</system:String>
     <system:String x:Key="Login">Логин</system:String>
     <system:String x:Key="LoginError">Ошибка при логине..</system:String>
-    <system:String x:Key="Uninstall">Uninstall</system:String>
-    <system:String x:Key="UninstallConfirm">Are you sure you want to uninstall selected assemblies?</system:String>
-    <system:String x:Key="ConfigWriteError">Could not write to config.xml</system:String>
-    <system:String x:Key="ShareText">Assembly url copied to the clipboard</system:String>
-    <system:String x:Key="LogNotFound">Log file not found</system:String>
-    <system:String x:Key="NewProfile2">New profile</system:String>
-    <system:String x:Key="Rename">Rename</system:String>
-    <system:String x:Key="RenameText">Insert the new name for the profile</system:String>
-    <system:String x:Key="DownloadingData">Downloading the required data.</system:String>
-    <system:String x:Key="Installer">Installer</system:String>
-    <system:String x:Key="SuccessfullyInstalled">Selected assemblies successfully installed.</system:String>
-    <system:String x:Key="ErrorInstalling">There was an error while trying to install some of the assemblies, check the log for more details.</system:String>
+    <system:String x:Key="Uninstall">Удаление</system:String>
+    <system:String x:Key="UninstallConfirm">Вы уверены, что хотите удалить данный скрипт?</system:String>
+    <system:String x:Key="ConfigWriteError">Не удалось записать файл config.xml</system:String>
+    <system:String x:Key="ShareText">Ссылка скопирована в буфер обмена</system:String>
+    <system:String x:Key="LogNotFound">Файлы логов не найдены</system:String>
+    <system:String x:Key="NewProfile2">Новый</system:String>
+    <system:String x:Key="Rename">Переименовать</system:String>
+    <system:String x:Key="RenameText">Введите имя нового профиля</system:String>
+    <system:String x:Key="DownloadingData">Загрузка необходимых данных.</system:String>
+    <system:String x:Key="Installer">Установщик</system:String>
+    <system:String x:Key="SuccessfullyInstalled">Выбранный скрипт успешно установлен.</system:String>
+    <system:String x:Key="ErrorInstalling">Произошла ошибка при установке, для получения подробной информации просмотрите файлы логов.</system:String>
 
-    <system:String x:Key="EnableDeveloper">Enable developer options</system:String>
-    <system:String x:Key="Developer">Developer</system:String>
-    <system:String x:Key="New">New</system:String>
-    <system:String x:Key="Edit">Edit</system:String>
-    <system:String x:Key="Clone">Clone</system:String>
+    <system:String x:Key="EnableDeveloper">Режим разработчика</system:String>
+    <system:String x:Key="Developer">Разработчик</system:String>
+    <system:String x:Key="New">Новый</system:String>
+    <system:String x:Key="Edit">Редактировать</system:String>
+    <system:String x:Key="Clone">Клонировать</system:String>
 
 
-    <system:String x:Key="Checking">Checking...</system:String>
-    <system:String x:Key="Updated">Updated</system:String>
-    <system:String x:Key="OUTDATED">OUTDATED</system:String>
-    <system:String x:Key="Unknown">Unknown</system:String>
-    <system:String x:Key="UpdateStatus">Status</system:String>
+    <system:String x:Key="Checking">Проверка...</system:String>
+    <system:String x:Key="Updated">Обновлён</system:String>
+    <system:String x:Key="OUTDATED">УСТАРЕЛ</system:String>
+    <system:String x:Key="Unknown">Неизвестно</system:String>
+    <system:String x:Key="UpdateStatus">Статус</system:String>
 
-    <system:String x:Key="LoaderUpdateFailed">Could not download the update, please update manually. Error:</system:String>
-    <system:String x:Key="LeagueNotFound">Could not resolve "League of Legends.exe" location, try starting a custom game.</system:String>
-    <system:String x:Key="UpdateSuccess">LeagueSharp has successfully updated for the installed league of legends version</system:String>
-    <system:String x:Key="UpdateUnknown">Couldn't determine if LeagueSharp is updated for the local League Of Legends version, this usually means that www.joduska.me is inaccessible.</system:String>
-    <system:String x:Key="NotUpdateNeeded">LeagueSharp is updated for the installed league of legends version.</system:String>
+    <system:String x:Key="LoaderUpdateFailed">Не удалось произвести обновление, обновите вручную. Ошибка:</system:String>
+    <system:String x:Key="LeagueNotFound">Не удалось определить местоположение "League of Legends.exe", попробуйте снова.</system:String>
+    <system:String x:Key="UpdateSuccess">LeagueSharp успешно обновился и соответствует версии игры.</system:String>
+    <system:String x:Key="UpdateUnknown">Не удалось сопоставить версии LeagueSharp и игрового клиента, вероятно, ресурс www.joduska.me недоступен.</system:String>
+    <system:String x:Key="NotUpdateNeeded">Версия LeagueSharp соответствует версии игры и не требует обновления.</system:String>
 
 </ResourceDictionary>
