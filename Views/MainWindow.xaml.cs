@@ -211,7 +211,7 @@ namespace LeagueSharp.Loader.Views
                             switch (updateResult.Item2)
                             {
                                 case true:
-                                    StatusString = Utility.GetMultiLanguageText("Updated") + " :^)";
+                                    StatusString = Utility.GetMultiLanguageText("Updated");
                                     break;
                                 case false:
                                     StatusString = Utility.GetMultiLanguageText("OUTDATED");
