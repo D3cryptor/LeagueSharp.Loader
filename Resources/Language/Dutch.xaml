@@ -100,7 +100,7 @@
     <system:String x:Key="Login">Log in</system:String>
     <system:String x:Key="LoginError">Kon niet inloggen als {0}: {1}</system:String>
     <system:String x:Key="Uninstall">Verwijder</system:String>
-    <system:String x:Key="UninstallConfirm">Weet je zeker dat je de geselecteerde assemblies wil installeren?</system:String>
+    <system:String x:Key="UninstallConfirm">Ben je zeker dat je de geselecteerde assembly wilt verwijderen?</system:String>
     <system:String x:Key="ConfigWriteError">Kon instellingen niet opslaan in config.xml</system:String>
     <system:String x:Key="ShareText">Assembly link gekopieerd naar klembord</system:String>
     <system:String x:Key="LogNotFound">Logboek kon niet gevonden worden</system:String>
