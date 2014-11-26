@@ -39,6 +39,7 @@ Source: "..\bin\Release\System\SharpDX.Toolkit.Graphics.dll"; DestDir: "{app}\Sy
 Source: "..\bin\Release\System\SharpDX.Toolkit.Graphics.xml"; DestDir: "{app}\System\"; Flags: ignoreversion
 Source: "..\bin\Release\System\SharpDX.Toolkit.xml"; DestDir: "{app}\System\"; Flags: ignoreversion
 Source: "..\bin\Release\System\clipper_library.dll"; DestDir: "{app}\System\"; Flags: ignoreversion
+Source: "..\translations\*.xml"; DestDir: "{app}\translations\"; Flags: ignoreversion
 
 [Languages]
 Name: "en"; MessagesFile: "compiler:Default.isl"

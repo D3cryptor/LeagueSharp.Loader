@@ -359,6 +359,30 @@ namespace LeagueSharp.Loader.Data
             }
         }
 
+        public byte HotkeyInt
+        {
+            get
+            {
+                if (Hotkey == Key.LeftShift || Hotkey == Key.RightShift)
+                {
+                    return 16;
+                }
+
+                if (Hotkey == Key.LeftAlt || Hotkey == Key.RightAlt)
+                {
+                    return 0x12;
+                }
+
+                if (Hotkey == Key.LeftCtrl || Hotkey == Key.RightCtrl)
+                {
+                    return 0x11;
+                }
+
+                return (byte)KeyInterop.VirtualKeyFromKey(Hotkey);
+            }
+            set { }
+        }
+
         public string HotkeyString
         {
             get { return _hotkey.ToString(); }

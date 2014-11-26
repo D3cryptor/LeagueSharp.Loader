@@ -249,6 +249,13 @@ namespace LeagueSharp.Loader.Views
         void hk_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             KeyboardHook.HookedKeys.Add(KeyInterop.VirtualKeyFromKey(((HotkeyEntry)sender).Hotkey));
+            try
+            {
+                Utility.MapClassToXmlFile(typeof(Config), Config.Instance, Directories.ConfigFilePath);
+            }
+            catch
+            {
+            }
         }
 
         private void GameSettingOnPropertyChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
