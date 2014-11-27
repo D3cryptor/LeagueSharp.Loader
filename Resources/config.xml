@@ -15,6 +15,7 @@
         <Name>CompileAndReload</Name>
         <Description>Recompile and reload the assemblies</Description>
         <Hotkey>F8</Hotkey>
+        <HotkeyInt>119</HotkeyInt>
         <DefaultKey>F8</DefaultKey>
       </SelectedHotkeys>
       <SelectedHotkeys>
@@ -27,6 +28,7 @@
         <Name>ShowMenuToggle</Name>
         <Description>Shows the menu (Toggle)</Description>
         <Hotkey>F9</Hotkey>
+        <HotkeyInt>120</HotkeyInt>
         <DefaultKey>F9</DefaultKey>
       </SelectedHotkeys>
     </SelectedHotkeys>
