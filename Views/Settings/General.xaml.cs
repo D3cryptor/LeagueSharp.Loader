@@ -56,18 +56,23 @@ namespace LeagueSharp.Loader.Views.Settings
 
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (e.AddedItems.Count > 0)
+            if (e.AddedItems.Count <= 0)
             {
-                var selected = (string) e.AddedItems[0];
-                if (Config.Instance.SelectedLanguage != selected &&
-                    (Config.Instance.SelectedLanguage != null && selected == "English"))
-                {
-                    Config.Instance.SelectedLanguage = selected;
-                    ((MainWindow) DataContext).MainWindow_OnClosing(null, null);
-                    Process.Start(Application.ResourceAssembly.Location);
-                    Environment.Exit(0);
-                }
+                return;
             }
+
+            var selected = (string) e.AddedItems[0];
+
+            if (Config.Instance.SelectedLanguage == selected ||
+                (Config.Instance.SelectedLanguage == null && selected == "English"))
+            {
+                return;
+            }
+
+            Config.Instance.SelectedLanguage = selected;
+            ((MainWindow) DataContext).MainWindow_OnClosing(null, null);
+            Process.Start(Application.ResourceAssembly.Location);
+            Environment.Exit(0);
         }
 
         private void ComboBox_Loaded(object sender, RoutedEventArgs e)
@@ -103,7 +108,6 @@ namespace LeagueSharp.Loader.Views.Settings
             if (((ComboBox) sender).SelectedIndex == -1)
             {
                 ((ComboBox) sender).SelectedIndex = 1;
-                Config.Instance.SelectedLanguage = "English";
             }
         }
     }
