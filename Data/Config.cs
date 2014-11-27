@@ -1,5 +1,4 @@
 ﻿using System.IO;
-using System.Windows.Forms;
 
 #region
 
@@ -57,38 +56,39 @@ namespace LeagueSharp.Loader.Data
     public static class Directories
     {
         public static readonly string CurrentDirectory = AppDomain.CurrentDomain.BaseDirectory + "\\";
-        public static readonly string AppDataDirectory = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "LeagueSharp") + "\\";
-        public static readonly string RepositoryDir = Path.Combine(Directories.AppDataDirectory, "Repositories") + "\\";
-        public static readonly string AssembliesDir = Path.Combine(Directories.AppDataDirectory, "Assemblies") + "\\";
-        public static readonly string CoreDirectory = Path.Combine(Directories.CurrentDirectory, "System") + "\\";
-        public static readonly string LogsDir = Path.Combine(Directories.CurrentDirectory, "Logs") + "\\";
 
-        public static readonly string LocalRepoDir = Path.Combine(Directories.CurrentDirectory, "LocalAssemblies") + "\\";
-        public static readonly string LoaderFilePath = Path.Combine(Directories.CurrentDirectory, "Leaguesharp.Loader.exe");
-        public static readonly string ConfigFilePath = Path.Combine(Directories.CurrentDirectory, "config.xml");
-        public static readonly string CoreFilePath = Path.Combine(Directories.CoreDirectory, "Leaguesharp.Core.dll");
-        public static readonly string BootstrapFilePath = Path.Combine(Directories.CoreDirectory, "Leaguesharp.Bootstrap.dll");
+        public static readonly string AppDataDirectory =
+            Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "LeagueSharp") + "\\";
+
+        public static readonly string RepositoryDir = Path.Combine(AppDataDirectory, "Repositories") + "\\";
+        public static readonly string AssembliesDir = Path.Combine(AppDataDirectory, "Assemblies") + "\\";
+        public static readonly string CoreDirectory = Path.Combine(CurrentDirectory, "System") + "\\";
+        public static readonly string LogsDir = Path.Combine(CurrentDirectory, "Logs") + "\\";
+
+        public static readonly string LocalRepoDir = Path.Combine(CurrentDirectory, "LocalAssemblies") + "\\";
+        public static readonly string LoaderFilePath = Path.Combine(CurrentDirectory, "Leaguesharp.Loader.exe");
+        public static readonly string ConfigFilePath = Path.Combine(CurrentDirectory, "config.xml");
+        public static readonly string CoreFilePath = Path.Combine(CoreDirectory, "Leaguesharp.Core.dll");
+        public static readonly string BootstrapFilePath = Path.Combine(CoreDirectory, "Leaguesharp.Bootstrap.dll");
     }
 
-    [ XmlType(AnonymousType = true) ]
-    [ XmlRoot(Namespace = "", IsNullable = false) ]
+    [XmlType(AnonymousType = true)]
+    [XmlRoot(Namespace = "", IsNullable = false)]
     public class Config : INotifyPropertyChanged
     {
+        [XmlIgnore] public static Config Instance;
         private bool _firstRun = true;
-        private bool _showDevOptions = false;
-        private string _selectedLanguage = null;
-        private string _leagueOfLegendsExePath = null;
         private Hotkeys _hotkeys;
 
         private bool _install = true;
         private ObservableCollection<string> _knownRepositories;
+        private string _leagueOfLegendsExePath;
         private ObservableCollection<Profile> _profiles;
+        private string _selectedLanguage;
         private Profile _selectedProfile;
         private ConfigSettings _settings;
+        private bool _showDevOptions;
         private bool _updateOnLoad;
-
-        [ XmlIgnore ]
-        public static Config Instance;
 
         public string SelectedLanguage
         {
@@ -129,7 +129,7 @@ namespace LeagueSharp.Loader.Data
                 OnPropertyChanged("ShowDevOptions");
             }
         }
-        
+
         public bool Install
         {
             get { return _install; }
@@ -184,7 +184,7 @@ namespace LeagueSharp.Loader.Data
             }
         }
 
-        [ XmlArrayItem("Profiles", IsNullable = true) ]
+        [XmlArrayItem("Profiles", IsNullable = true)]
         public ObservableCollection<Profile> Profiles
         {
             get { return _profiles; }
@@ -195,7 +195,7 @@ namespace LeagueSharp.Loader.Data
             }
         }
 
-        [ XmlArrayItem("KnownRepositories", IsNullable = true) ]
+        [XmlArrayItem("KnownRepositories", IsNullable = true)]
         public ObservableCollection<string> KnownRepositories
         {
             get { return _knownRepositories; }
@@ -218,12 +218,12 @@ namespace LeagueSharp.Loader.Data
     }
 
 
-    [ XmlType(AnonymousType = true) ]
+    [XmlType(AnonymousType = true)]
     public class ConfigSettings : INotifyPropertyChanged
     {
         private ObservableCollection<GameSettings> _gameSettings;
 
-        [ XmlArrayItem("GameSettings", IsNullable = true) ]
+        [XmlArrayItem("GameSettings", IsNullable = true)]
         public ObservableCollection<GameSettings> GameSettings
         {
             get { return _gameSettings; }
@@ -252,7 +252,7 @@ namespace LeagueSharp.Loader.Data
         private List<string> _posibleValues;
         private string _selectedValue;
 
-        [XmlIgnore]    
+        [XmlIgnore]
         public string DisplayName
         {
             get { return Utility.GetMultiLanguageText(_name); }
@@ -299,12 +299,12 @@ namespace LeagueSharp.Loader.Data
         }
     }
 
-    [ XmlType(AnonymousType = true) ]
+    [XmlType(AnonymousType = true)]
     public class Hotkeys : INotifyPropertyChanged
     {
         private ObservableCollection<HotkeyEntry> _selectedHotkeys;
 
-        [ XmlArrayItem("SelectedHotkeys", IsNullable = true) ]
+        [XmlArrayItem("SelectedHotkeys", IsNullable = true)]
         public ObservableCollection<HotkeyEntry> SelectedHotkeys
         {
             get { return _selectedHotkeys; }
@@ -378,7 +378,7 @@ namespace LeagueSharp.Loader.Data
                     return 0x11;
                 }
 
-                return (byte)KeyInterop.VirtualKeyFromKey(Hotkey);
+                return (byte) KeyInterop.VirtualKeyFromKey(Hotkey);
             }
             set { }
         }
