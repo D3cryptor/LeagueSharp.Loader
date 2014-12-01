@@ -51,6 +51,11 @@ namespace LeagueSharp.Loader.Class
                     }
                     else
                     {
+                        var oldPath = Path.Combine(directory, url.GetHashCode().ToString("X"));
+
+                        if (Directory.Exists(oldPath))
+                            Directory.Delete(oldPath, true);
+
                         Repository.Clone(url, dir);
                     }
 
