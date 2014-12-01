@@ -288,15 +288,15 @@ namespace LeagueSharp.Loader.Class
             OnPropertyChanged("Version");
             try
             {
-                SvnUpdater.Update(SvnUrl, Logs.MainLog, Directories.RepositoryDir);
+                GitUpdater.Update(SvnUrl, Logs.MainLog, Directories.RepositoryDir);
             }
             catch (Exception e)
             {
                 MessageBox.Show(e.ToString());
             }
-            
 
             Status = AssemblyStatus.Ready;
+            OnPropertyChanged("Version");
         }
 
         public bool Compile()

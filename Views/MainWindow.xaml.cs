@@ -448,7 +448,7 @@ namespace LeagueSharp.Loader.Views
 
             Utility.ClearDirectory(Directories.AssembliesDir);
             Utility.ClearDirectory(Directories.LogsDir);
-            SvnUpdater.ClearUnusedRepos(allAssemblies);
+            GitUpdater.ClearUnusedRepos(allAssemblies);
         }
 
         private void InstalledAssembliesDataGrid_OnContextMenuOpening(object sender, ContextMenuEventArgs e)
@@ -491,49 +491,37 @@ namespace LeagueSharp.Loader.Views
             AssembliesWorker.WorkerSupportsCancellation = true;
             AssembliesWorker.DoWork += delegate
             {
-                var updatedSvnUrls = new List<string>();
-
-                foreach (var assembly in leagueSharpAssemblies)
+                if (update)
                 {
-                    if (assembly.Type == AssemblyType.Library)
-                    {
-                        if (update && !updatedSvnUrls.Contains(assembly.SvnUrl))
+                    var updateList = leagueSharpAssemblies
+                        .GroupBy(a => a.SvnUrl)
+                        .Select(g => g.First());
+
+                    Parallel.ForEach(updateList,
+                        new ParallelOptions { MaxDegreeOfParallelism = 5 },
+                        (assembly, state) =>
                         {
                             assembly.Update();
-                            updatedSvnUrls.Add(assembly.SvnUrl);
-                        }
 
-                        if (compile)
-                        {
-                            assembly.Compile();
-                        }
-                    }
-                    if (AssembliesWorker.CancellationPending)
-                    {
-                        AssembliesWorkerCancelled = true;
-                        break;
-                    }
+                            if (AssembliesWorker.CancellationPending)
+                            {
+                                AssembliesWorkerCancelled = true;
+                                state.Break();
+                            }
+                        });
                 }
 
-                foreach (var assembly in leagueSharpAssemblies)
+                if (compile)
                 {
-                    if (assembly.Type != AssemblyType.Library)
+                    foreach (var assembly in leagueSharpAssemblies.OrderBy(a => a.Type))
                     {
-                        if (update && !updatedSvnUrls.Contains(assembly.SvnUrl))
-                        {
-                            assembly.Update();
-                            updatedSvnUrls.Add(assembly.SvnUrl);
-                        }
+                        assembly.Compile();
 
-                        if (compile)
+                        if (AssembliesWorker.CancellationPending)
                         {
-                            assembly.Compile();
+                            AssembliesWorkerCancelled = true;
+                            break;
                         }
-                    }
-                    if (AssembliesWorker.CancellationPending)
-                    {
-                        AssembliesWorkerCancelled = true;
-                        break;
                     }
                 }
             };

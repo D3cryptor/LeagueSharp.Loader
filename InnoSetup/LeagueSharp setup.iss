@@ -25,6 +25,7 @@ PrivilegesRequired=admin
 Source: "..\bin\Release\*.exe"; Excludes: *.vshost.exe; DestDir: {app}; Flags: ignoreversion
 Source: "..\bin\Release\*.config"; Excludes: *.vshost.exe.config;  DestDir: {app}; Flags: ignoreversion
 Source: "..\bin\Release\*.dll"; DestDir: "{app}\bin\"; Flags: ignoreversion
+Source: "..\bin\Release\NativeBinaries\x86\*.dll"; DestDir: "{app}\bin\"; Flags: ignoreversion
 
 ;System
 Source: "..\bin\Release\System\LeagueSharp.AppDomainManager.dll"; DestDir: "{app}\System\"; Flags: ignoreversion

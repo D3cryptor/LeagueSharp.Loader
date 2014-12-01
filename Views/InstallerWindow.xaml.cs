@@ -92,7 +92,7 @@ namespace LeagueSharp.Loader.Views
             {
                 bgWorker.DoWork += delegate
                 {
-                    var updatedDir = SvnUpdater.Update(location, Logs.MainLog, Directories.RepositoryDir);
+                    var updatedDir = GitUpdater.Update(location, Logs.MainLog, Directories.RepositoryDir);
                     FoundAssemblies = LeagueSharpAssemblies.GetAssemblies(Path.Combine(updatedDir, "trunk" ), location);
                     foreach (var assembly in FoundAssemblies)
                     {
