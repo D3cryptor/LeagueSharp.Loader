@@ -93,7 +93,7 @@ namespace LeagueSharp.Loader.Views
                 bgWorker.DoWork += delegate
                 {
                     var updatedDir = GitUpdater.Update(location, Logs.MainLog, Directories.RepositoryDir);
-                    FoundAssemblies = LeagueSharpAssemblies.GetAssemblies(Path.Combine(updatedDir, "trunk" ), location);
+                    FoundAssemblies = LeagueSharpAssemblies.GetAssemblies(updatedDir, location);
                     foreach (var assembly in FoundAssemblies)
                     {
                         if (autoInstallName != null && assembly.Name.ToLower() == autoInstallName.ToLower())
