@@ -748,6 +748,8 @@ namespace LeagueSharp.Loader.Views
 
         private void MainWindow_OnActivated(object sender, EventArgs e)
         {
+            
+
             if (FirstTimeActivated)
             {
                 FirstTimeActivated = false;
@@ -760,6 +762,7 @@ namespace LeagueSharp.Loader.Views
 
                 allAssemblies = allAssemblies.Distinct().ToList();
 
+                GitUpdater.ClearUnusedRepos(allAssemblies);
                 PrepareAssemblies(allAssemblies, Config.Instance.FirstRun || Config.Instance.UpdateOnLoad, true);
             }
 

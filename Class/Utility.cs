@@ -107,6 +107,7 @@ namespace LeagueSharp.Loader.Class
             }
         }
 
+
         public static void ClearDirectory(string directory)
         {
             try
@@ -114,10 +115,12 @@ namespace LeagueSharp.Loader.Class
                 var dir = new DirectoryInfo(directory);
                 foreach (var fi in dir.GetFiles())
                 {
+                    fi.Attributes = FileAttributes.Normal;
                     fi.Delete();
                 }
                 foreach (var di in dir.GetDirectories())
                 {
+                    di.Attributes = FileAttributes.Normal;
                     ClearDirectory(di.FullName);
                     di.Delete();
                 }
