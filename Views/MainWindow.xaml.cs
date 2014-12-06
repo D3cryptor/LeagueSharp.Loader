@@ -291,9 +291,8 @@ namespace LeagueSharp.Loader.Views
                 Task.Factory.StartNew(
                     () =>
                     {
-                        Thread.Sleep(1000);
                         Injection.SendConfig(lhwid);
-                        Thread.Sleep(1000);
+                        Thread.Sleep(1500);
                         foreach (var assembly in Config.Instance.SelectedProfile.InstalledAssemblies.Where(a => a.InjectChecked))
                         {
                             Injection.LoadAssembly(lhwid, assembly);
