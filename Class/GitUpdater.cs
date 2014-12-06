@@ -56,7 +56,7 @@ namespace LeagueSharp.Loader.Class
                         if (Directory.Exists(oldPath))
                             Directory.Delete(oldPath, true);
 
-                        Repository.Clone(url, dir);
+                        Repository.Clone(url, dir, new CloneOptions { Checkout = true });
                     }
 
                     return dir;

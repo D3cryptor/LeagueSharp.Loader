@@ -111,8 +111,18 @@ namespace LeagueSharp.Loader.Views
             Browser.Visibility = Visibility.Hidden;
             DataContext = this;
             GeneralSettingsItem.IsSelected = true;
-            DevMenu.Visibility = Config.ShowDevOptions ? Visibility.Visible : Visibility.Hidden;
-            DevMenu.Height = Config.ShowDevOptions ? DevMenu.Height : 0;
+
+            #region ContextMenu.DevMenu
+            DevMenu.Visibility = Config.Instance.ShowDevOptions ? Visibility.Visible : Visibility.Collapsed;
+            Config.PropertyChanged += (o, args) =>
+            {
+                if (args.PropertyName == "ShowDevOptions")
+                {
+                    DevMenu.Visibility = Config.Instance.ShowDevOptions ? Visibility.Visible : Visibility.Collapsed;
+                }
+            };
+            #endregion
+
             if (!File.Exists(Directories.CoreFilePath))
             {
                 System.Windows.MessageBox.Show(string.Format("Couldn't find {0}", Path.GetFileName(Directories.CoreFilePath)));
@@ -281,8 +291,9 @@ namespace LeagueSharp.Loader.Views
                 Task.Factory.StartNew(
                     () =>
                     {
+                        Thread.Sleep(1000);
                         Injection.SendConfig(lhwid);
-                        Thread.Sleep(1500);
+                        Thread.Sleep(1000);
                         foreach (var assembly in Config.Instance.SelectedProfile.InstalledAssemblies.Where(a => a.InjectChecked))
                         {
                             Injection.LoadAssembly(lhwid, assembly);
