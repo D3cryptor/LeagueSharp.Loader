@@ -78,6 +78,7 @@ namespace LeagueSharp.Loader.Views.Settings
         private void ComboBox_Loaded(object sender, RoutedEventArgs e)
         {
             ((ComboBox) sender).Items.Clear();
+            ((ComboBox)sender).Items.Add("Arabic");
             ((ComboBox) sender).Items.Add("Chinese");
             ((ComboBox) sender).Items.Add("English");
             ((ComboBox) sender).Items.Add("German");
