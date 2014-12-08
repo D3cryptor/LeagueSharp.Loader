@@ -1,0 +1,133 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:system="clr-namespace:System;assembly=mscorlib">
+ 
+    <!-- MainWindow TopBar -->
+    <system:String x:Key="Website">موقع</system:String>
+    <system:String x:Key="Settings">إعدادات</system:String>
+ 
+    <!-- MainWindow Tabs -->
+    <system:String x:Key="News">أخبار</system:String>
+    <system:String x:Key="Assemblies">التجميعات</system:String>
+ 
+    <!-- MainWindow Profile selector -->
+    <system:String x:Key="DefaultProfile">افتراضي</system:String>
+ 
+    <!-- MainWindow Assemblies datagrid columns -->
+    <system:String x:Key="ColumnName">الإسم</system:String>
+    <system:String x:Key="ColumnType">النوع</system:String>
+    <system:String x:Key="ColumnVersion">النسخة</system:String>
+    <system:String x:Key="ColumnLocation">المكان</system:String>
+    <system:String x:Key="ColumnDescription">الوصف</system:String>
+ 
+    <!-- MainWindow Assemblies datagrid Menu -->
+    <system:String x:Key="MenuUpdateAndCompile">تحديث وتجميع</system:String>
+    <system:String x:Key="MenuRemove">حذف</system:String>
+    <system:String x:Key="MenuGitub">GitHub</system:String>
+    <system:String x:Key="MenuShare">شارك</system:String>
+    <system:String x:Key="MenuViewLog">عرض السجل</system:String>
+ 
+        <!-- MainWindow Profiles Menu -->
+    <system:String x:Key="NewProfile">جديد</system:String>
+    <system:String x:Key="ChangeName">تغيير الإسم</system:String>
+    <system:String x:Key="DeleteProfile">حذف</system:String>
+       
+    <!-- MainWindow Buttons -->
+    <system:String x:Key="UpdateAll">تحديث الكل</system:String>
+    <system:String x:Key="CompileAll">تجميع الكل</system:String>
+    <system:String x:Key="InstallNewAssembly">تثبيت أسمبلي جديد</system:String>
+ 
+    <!-- InstallerWindow Title -->
+    <system:String x:Key="AssemblyInstaller">مثبت الأسمبلي</system:String>
+ 
+    <!-- InstallerWindow Tabs -->
+    <system:String x:Key="Search">بحث</system:String>
+    <system:String x:Key="Select">اختيار</system:String>
+ 
+    <!-- InstallerWindow Search tab -->
+    <system:String x:Key="SelectAssembliesText">إختر مكان الأسمبلي :</system:String>
+    <system:String x:Key="Local">مكان</system:String>
+    <system:String x:Key="Github">GitHub</system:String>
+    <system:String x:Key="Installed">مثبت</system:String>
+    <system:String x:Key="Next">التالي</system:String>
+ 
+    <!-- InstallerWindow Select tab -->
+    <system:String x:Key="SelectAll">اختيار الكل</system:String>
+    <system:String x:Key="DeselectAll">ترك الكل</system:String>
+    <system:String x:Key="Previous">السابق</system:String>
+    <system:String x:Key="Add">أضف</system:String>
+ 
+    <!-- Settings General -->
+    <system:String x:Key="General">عام</system:String>
+    <system:String x:Key="GameSettings">إعدادات اللعبة</system:String>
+    <system:String x:Key="Anti-AFK">Anti-AFK</system:String>
+    <system:String x:Key="Debug Console">تصحيح وحدة التحكم </system:String>
+    <system:String x:Key="Display Enemy Tower Range">عرض نطاق برج العدو</system:String>
+    <system:String x:Key="Extended Zoom">تكبير ممتد</system:String>
+    <system:String x:Key="UpdateOnStart">تحديث التجميعات  في البداية</system:String>
+    <system:String x:Key="Inject">حقن</system:String>
+    <system:String x:Key="Logout">خروج</system:String>
+    <system:String x:Key="DefaultHotkeys">استعادة</system:String>
+        <system:String x:Key="Language">اللغة</system:String>
+       
+    <!-- Settings Hotkeys -->
+    <system:String x:Key="Hotkeys">مفاتيح الاختصار</system:String>
+    <system:String x:Key="Hotkey">مفتاح الاختصار</system:String>
+    <system:String x:Key="Reload the assemblies">إعادة تحميل التجميعات</system:String>
+    <system:String x:Key="Recompile and reload the assemblies">إعادة تجميع وإعادة تحميل التجميعات</system:String>
+    <system:String x:Key="Shows the menu (Press)">إظهار القائمة (اضغط)</system:String>
+    <system:String x:Key="Shows the menu (Toggle)">إظهار القائمة (تبديل)</system:String>
+ 
+    <!-- Settings Log -->
+    <system:String x:Key="Log">السجل</system:String>
+    <system:String x:Key="Status">الوضع</system:String>
+    <system:String x:Key="Source">المصدر</system:String>
+    <system:String x:Key="Content">المحتوى</system:String>
+    <system:String x:Key="OpenFolder">إفتح ملف</system:String>
+ 
+    <!-- UpdateWindow -->
+    <system:String x:Key="UpdatingLeagueSharp">عملية تحديث LeagueSharp</system:String>
+    <system:String x:Key="Updating">عملية تحديث ...</system:String>
+    <system:String x:Key="UpdateText">تم تحميل {0}/{1} كيلوبايت.</system:String>
+ 
+    <!-- Errors and other strings -->
+    <system:String x:Key="WrongAuth"> إسم المستخدم أو كلمة المرور خاطئة . قم بالتسجيل في  {0}</system:String>
+    <system:String x:Key="AuthEmpty">خانة إسم المستخدم أ كلمة المرور خالية</system:String>
+    <system:String x:Key="FailedToDelete">لا يمكن حذف ملف التحديث، الرجاء حذفه يدويا وإعادة تشغيل LeagueSharp</system:String>
+    <system:String x:Key="WrongVersion">League Of Legends نسخة غير مدعومة، وهذا يعني عادة أن League Of Legends  تم تحديثها و LeagueSharp لم يتم تحديثها حتى الان. تفقد المنتديات للمزيد من المعلومات أو انتظر تحديث LeagueSharp . هاش:</system:String>
+    <system:String x:Key="FailedToDownload">فشل التحميل.</system:String>
+    <system:String x:Key="FailedToLogin">فشل الدخول: {0}</system:String>
+    <system:String x:Key="Login">الدخول</system:String>
+    <system:String x:Key="LoginError">فشل الدخول بإسم  {0}: {1}</system:String>
+    <system:String x:Key="Uninstall">إزالة التثبيت</system:String>
+    <system:String x:Key="UninstallConfirm">  إلغاء المجالس المختارة</system:String>
+    <system:String x:Key="ConfigWriteError">لا يمكن الكتابة في config.xml</system:String>
+    <system:String x:Key="ShareText">رابط التجميعات تم نسخه في الحافظة</system:String>
+    <system:String x:Key="LogNotFound">لم يتم العثور على ملف التعريف</system:String>
+    <system:String x:Key="NewProfile2">جديد</system:String>
+    <system:String x:Key="Rename">إعادة التسمية</system:String>
+    <system:String x:Key="RenameText">أدخل اسم جديد لملف التعريف</system:String>
+    <system:String x:Key="DownloadingData">عملية تحميل البيانات المطلوبة.</system:String>
+    <system:String x:Key="Installer">مثبت</system:String>
+    <system:String x:Key="SuccessfullyInstalled">التجميعات المختارة تم تثبيتها بنجاح.</system:String>
+    <system:String x:Key="ErrorInstalling">حدث خطأ أثناء محاولة تثبيت بعض التجميعات، تحقق من سجل للمزيد من التفاصيل.</system:String>
+ 
+    <system:String x:Key="EnableDeveloper">تمكين خيارات المطور</system:String>
+    <system:String x:Key="Developer">مطور</system:String>
+    <system:String x:Key="New">جديد</system:String>
+    <system:String x:Key="Edit">تعديل</system:String>
+    <system:String x:Key="Clone">نسخ</system:String>
+   
+        <system:String x:Key="Checking">التحقق ...</system:String>
+    <system:String x:Key="Updated">تم التحديث</system:String>
+    <system:String x:Key="OUTDATED">منتهي الصلاحية</system:String>
+        <system:String x:Key="Unknown">غير معروف</system:String>
+        <system:String x:Key="UpdateStatus">الوضع</system:String>
+       
+        <system:String x:Key="LoaderUpdateFailed">لا يمكن تحميل التحديث، يرجى تحديث يدويا. الخطأ:</system:String>
+    <system:String x:Key="LeagueNotFound">لا يمكن إصلاح مكان " League of Legends.exe" ، حاول بدء تشغيل لعبة مفصلة.</system:String>
+    <system:String x:Key="UpdateSuccess">لقد تم تثبيت LeagueSharp  بنجاح لنسخة league of legends المثبتة</system:String>
+    <system:String x:Key="UpdateUnknown">لا يمكن تحديد إذا كان قد تم تحديث LeagueSharp لنسخة  League Of Legends  المحلية ، وهذا يعني عادة أن www.joduska.me لا يمكن الولوج إليه.</system:String>
+        <system:String x:Key="NotUpdateNeeded">تم تحديث LeagueSharp لنسخة  League Of Legends  المثبتة.</system:String>
+ 
+</ResourceDictionary>
