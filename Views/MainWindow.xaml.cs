@@ -241,11 +241,31 @@ namespace LeagueSharp.Loader.Views
 
             UpdaterWorker.RunWorkerCompleted += delegate
             {
+                try
+                {
+                    if (File.Exists(Updater.SetupFile))
+                    {
+                        Thread.Sleep(1000);
+                        File.Delete(Updater.SetupFile);
+                    }
+                }
+                catch
+                {
+                    System.Windows.MessageBox.Show(Utility.GetMultiLanguageText("FailedToDelete"));
+                    Environment.Exit(0);
+                }
+            
                 if (_loaderVersionCheckResult != null && _loaderVersionCheckResult.Item1)
                 {
-                    Updater.UpdateLoader(_loaderVersionCheckResult);
+                    //Update the loader only when we are not injected to be able to replace the core files.
+                    if (!Injection.IsInjected)
+                    {
+                        Updater.Updating = true;
+                        Updater.UpdateLoader(_loaderVersionCheckResult);
+                    }
                 }
 
+                Updater.CheckedForUpdates = true;
                 CheckingForUpdates = false;
                 if (showDialogOnFinish)
                 {
@@ -420,6 +440,14 @@ namespace LeagueSharp.Loader.Views
         {
             Utility.Log(LogStatus.Ok, "Login", string.Format("Succesfully signed in as {0}", username), Logs.MainLog);
             Browser.Visibility = Visibility.Visible;
+            try
+            {
+                Utility.MapClassToXmlFile(typeof(Config), Config.Instance, Directories.ConfigFilePath);
+            }
+            catch
+            {
+                System.Windows.MessageBox.Show(Utility.GetMultiLanguageText("ConfigWriteError"));
+            }
         }
 
         private void InstallButton_Click(object sender, RoutedEventArgs e)

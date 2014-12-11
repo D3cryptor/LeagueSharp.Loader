@@ -46,6 +46,8 @@ namespace LeagueSharp.Loader.Class
         public static string UpdateZip = Path.Combine(Directories.CoreDirectory, "update.zip");
         public static string SetupFile = Path.Combine(Directories.CurrentDirectory, "LeagueSharp-update.exe");
         public static MainWindow MainWindow;
+        public static bool Updating = false;
+        public static bool CheckedForUpdates = false;
 
         [DataContract]
         internal class UpdateInfo
@@ -86,20 +88,6 @@ namespace LeagueSharp.Loader.Class
 
         public static void UpdateLoader(Tuple<bool, string> versionCheckResult)
         {
-            try
-            {
-                if (File.Exists(SetupFile))
-                {
-                    Thread.Sleep(1000);
-                    File.Delete(SetupFile);
-                }
-            }
-            catch
-            {
-                MessageBox.Show(Utility.GetMultiLanguageText("FailedToDelete"));
-                Environment.Exit(0);
-            }
-
             if (versionCheckResult.Item1)
             {
                 var window = new UpdateWindow();

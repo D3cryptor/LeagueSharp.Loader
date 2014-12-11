@@ -22,7 +22,6 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
-using System.Threading.Tasks;
 using LeagueSharp.Loader.Data;
 
 #endregion
@@ -113,6 +112,10 @@ namespace LeagueSharp.Loader.Class
             var leagueProcess = GetLeagueProcess();
             try
             {
+                //Don't inject untill we checked that there are not updates for the loader.
+                if(Updater.Updating || !Updater.CheckedForUpdates)
+                    return;
+
                 if (leagueProcess == null)
                     return;
 
