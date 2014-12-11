@@ -119,7 +119,7 @@
     <system:String x:Key="Edit">Editar</system:String>
     <system:String x:Key="Clone">Clonar</system:String>
 
-    <system:String x:Key="Checking">Verifando...</system:String>
+    <system:String x:Key="Checking">Verificando...</system:String>
     <system:String x:Key="Updated">Actualizado</system:String>
     <system:String x:Key="OUTDATED">Desactualizado</system:String>
     <system:String x:Key="Unknown">Desconhecido</system:String>
