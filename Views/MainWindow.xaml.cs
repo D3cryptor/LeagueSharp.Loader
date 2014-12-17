@@ -99,7 +99,7 @@ namespace LeagueSharp.Loader.Views
             {
                 _working = value;
                 OnPropertyChanged("Working");
-                InstalledAssembliesDataGrid.Items.Refresh();
+                //InstalledAssembliesDataGrid.Items.Refresh();
             }
         }
 
