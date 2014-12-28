@@ -1,46 +1,48 @@
-﻿/*
-    Copyright (C) 2014 LeagueSharp
+﻿#region LICENSE
 
-    This program is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
+// Copyright 2014 LeagueSharp.Loader
+// Updater.cs is part of LeagueSharp.Loader.
+// 
+// LeagueSharp.Loader is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+// 
+// LeagueSharp.Loader is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+// GNU General Public License for more details.
+// 
+// You should have received a copy of the GNU General Public License
+// along with LeagueSharp.Loader. If not, see <http://www.gnu.org/licenses/>.
 
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License
-    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-*/
-
-#region
-
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.IO;
-using System.IO.Compression;
-using System.Linq;
-using System.Net;
-using System.Reflection;
-using System.Text.RegularExpressions;
-using System.Threading;
-using System.Windows;
-using LeagueSharp.Loader.Data;
-using LeagueSharp.Loader.Views;
-using System.Runtime.Serialization;
-using System.Runtime.Serialization.Json;
-using Hardcodet.Wpf.TaskbarNotification;
-using System.ComponentModel;
 #endregion
 
 namespace LeagueSharp.Loader.Class
 {
+    #region
+
+    using System;
+    using System.Collections.Generic;
+    using System.IO;
+    using System.IO.Compression;
+    using System.Net;
+    using System.Reflection;
+    using System.Runtime.Serialization;
+    using System.Runtime.Serialization.Json;
+    using System.Text.RegularExpressions;
+    using System.Threading;
+    using System.Windows;
+    using Hardcodet.Wpf.TaskbarNotification;
+    using LeagueSharp.Loader.Data;
+    using LeagueSharp.Loader.Views;
+
+    #endregion
+
     internal class Updater
     {
         public delegate void RepositoriesUpdateDelegate(List<string> list);
+
         public const string VersionCheckURL = "http://api.joduska.me/public/deploy/loader/version";
         public const string CoreVersionCheckURL = "http://api.joduska.me/public/deploy/kernel/{0}";
         public static string UpdateZip = Path.Combine(Directories.CoreDirectory, "update.zip");
@@ -52,14 +54,11 @@ namespace LeagueSharp.Loader.Class
         [DataContract]
         internal class UpdateInfo
         {
-            [DataMember]
-            internal bool valid;
+            [DataMember] internal bool valid;
 
-            [DataMember]
-            internal string url;
+            [DataMember] internal string url;
 
-            [DataMember]
-            internal string version;
+            [DataMember] internal string version;
         }
 
         public static Tuple<bool, string> CheckLoaderVersion()
@@ -70,11 +69,11 @@ namespace LeagueSharp.Loader.Class
                 {
                     var data = client.DownloadData(VersionCheckURL);
                     var ser = new DataContractJsonSerializer(typeof(UpdateInfo));
-                    var updateInfo = (UpdateInfo)ser.ReadObject(new MemoryStream(data));
+                    var updateInfo = (UpdateInfo) ser.ReadObject(new MemoryStream(data));
                     var v = Version.Parse(updateInfo.version);
                     if (Utility.VersionToInt(Assembly.GetEntryAssembly().GetName().Version) < Utility.VersionToInt(v))
                     {
-                       return new Tuple<bool, string>(true, updateInfo.url);
+                        return new Tuple<bool, string>(true, updateInfo.url);
                     }
                 }
             }
@@ -111,9 +110,9 @@ namespace LeagueSharp.Loader.Class
                     if (stream != null)
                     {
                         var ser = new DataContractJsonSerializer(typeof(UpdateInfo));
-                        var updateInfo = (UpdateInfo)ser.ReadObject(stream);
-                            
-                        if(updateInfo.version == "0")
+                        var updateInfo = (UpdateInfo) ser.ReadObject(stream);
+
+                        if (updateInfo.version == "0")
                         {
                             var message = Utility.GetMultiLanguageText("WrongVersion") + leagueMd5;
 
@@ -129,7 +128,9 @@ namespace LeagueSharp.Loader.Class
                         {
                             if (MainWindow != null)
                             {
-                                MainWindow.TrayIcon.ShowBalloonTip(Utility.GetMultiLanguageText("Updating"), "LeagueSharp.Core: " + Utility.GetMultiLanguageText("Updating"), BalloonIcon.Info);
+                                MainWindow.TrayIcon.ShowBalloonTip(
+                                    Utility.GetMultiLanguageText("Updating"),
+                                    "LeagueSharp.Core: " + Utility.GetMultiLanguageText("Updating"), BalloonIcon.Info);
                             }
 
                             try
@@ -147,14 +148,16 @@ namespace LeagueSharp.Loader.Class
                                     {
                                         foreach (var entry in archive.Entries)
                                         {
-                                             entry.ExtractToFile(Path.Combine(Directories.CoreDirectory, entry.FullName), true);
+                                            entry.ExtractToFile(
+                                                Path.Combine(Directories.CoreDirectory, entry.FullName), true);
                                         }
                                     }
                                 }
 
-                                return new Tuple<bool, bool?, string>(true, true, Utility.GetMultiLanguageText("UpdateSuccess"));
+                                return new Tuple<bool, bool?, string>(
+                                    true, true, Utility.GetMultiLanguageText("UpdateSuccess"));
                             }
-                            catch(Exception e)
+                            catch (Exception e)
                             {
                                 var message = Utility.GetMultiLanguageText("FailedToDownload") + e;
 
@@ -176,13 +179,15 @@ namespace LeagueSharp.Loader.Class
                     }
                 }
             }
-            catch(Exception)
+            catch (Exception)
             {
                 //MessageBox.Show(e.ToString());
-                return new Tuple<bool, bool?, string>(File.Exists(Directories.CoreFilePath), null, Utility.GetMultiLanguageText("UpdateUnknown"));
+                return new Tuple<bool, bool?, string>(
+                    File.Exists(Directories.CoreFilePath), null, Utility.GetMultiLanguageText("UpdateUnknown"));
             }
 
-            return new Tuple<bool, bool?, string>(File.Exists(Directories.CoreFilePath), true, Utility.GetMultiLanguageText("NotUpdateNeeded"));
+            return new Tuple<bool, bool?, string>(
+                File.Exists(Directories.CoreFilePath), true, Utility.GetMultiLanguageText("NotUpdateNeeded"));
         }
 
         public static void GetRepositories(RepositoriesUpdateDelegate del)
@@ -200,7 +205,9 @@ namespace LeagueSharp.Loader.Class
                 del(result);
             };
 
-            wb.DownloadStringAsync(new Uri("https://raw.githubusercontent.com/LeagueSharp/LeagueSharpLoader/master/Updates/Repositories.txt"));
+            wb.DownloadStringAsync(
+                new Uri(
+                    "https://raw.githubusercontent.com/LeagueSharp/LeagueSharpLoader/master/Updates/Repositories.txt"));
         }
     }
 }

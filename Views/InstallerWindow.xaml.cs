@@ -1,42 +1,45 @@
-﻿using System.IO;
-using System.Text.RegularExpressions;
-using System.Windows.Controls;
-using System.Windows.Data;
+﻿#region LICENSE
 
-#region
-
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Windows;
-using System.Windows.Forms;
-using System.Windows.Input;
-using LeagueSharp.Loader.Class;
-using LeagueSharp.Loader.Data;
-using MahApps.Metro.Controls.Dialogs;
-using TextBox = System.Windows.Controls.TextBox;
+// Copyright 2014 LeagueSharp.Loader
+// InstallerWindow.xaml.cs is part of LeagueSharp.Loader.
+// 
+// LeagueSharp.Loader is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+// 
+// LeagueSharp.Loader is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+// GNU General Public License for more details.
+// 
+// You should have received a copy of the GNU General Public License
+// along with LeagueSharp.Loader. If not, see <http://www.gnu.org/licenses/>.
 
 #endregion
 
-/*
-    Copyright (C) 2014 LeagueSharp
-
-    This program is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
-
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License
-    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-*/
-
 namespace LeagueSharp.Loader.Views
 {
+    #region
+
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.Linq;
+    using System.Text.RegularExpressions;
+    using System.Windows;
+    using System.Windows.Controls;
+    using System.Windows.Data;
+    using System.Windows.Forms;
+    using System.Windows.Input;
+    using LeagueSharp.Loader.Class;
+    using LeagueSharp.Loader.Data;
+    using MahApps.Metro.Controls.Dialogs;
+    using Application = System.Windows.Application;
+    using TextBox = System.Windows.Controls.TextBox;
+
+    #endregion
+
     public partial class InstallerWindow : INotifyPropertyChanged
     {
         private bool _ableToList = true;
@@ -73,7 +76,10 @@ namespace LeagueSharp.Loader.Views
 
         public async void ShowProgress(string location, bool isSvn, string autoInstallName = null)
         {
-            controller = await this.ShowProgressAsync(Utility.GetMultiLanguageText("Updating"), Utility.GetMultiLanguageText("DownloadingData"));
+            controller =
+                await
+                    this.ShowProgressAsync(
+                        Utility.GetMultiLanguageText("Updating"), Utility.GetMultiLanguageText("DownloadingData"));
             controller.SetIndeterminate();
             controller.SetCancelable(true);
             ListAssemblies(location, isSvn, autoInstallName);
@@ -113,7 +119,7 @@ namespace LeagueSharp.Loader.Views
                 }
 
                 AbleToList = true;
-                System.Windows.Application.Current.Dispatcher.Invoke(() => installTabControl.SelectedIndex++);
+                Application.Current.Dispatcher.Invoke(() => installTabControl.SelectedIndex++);
                 if (autoInstallName != null)
                 {
                     InstallSelected();
@@ -162,12 +168,12 @@ namespace LeagueSharp.Loader.Views
                 foreach (var profile in Config.Instance.Profiles)
                 {
                     foreach (var assembly in profile.InstalledAssemblies)
-	                {
-		                FoundAssemblies.Add(assembly.Copy());
-	                }
+                    {
+                        FoundAssemblies.Add(assembly.Copy());
+                    }
                 }
                 FoundAssemblies = FoundAssemblies.Distinct().ToList();
-                
+
                 installTabControl.SelectedIndex++;
             }
             else
@@ -199,7 +205,7 @@ namespace LeagueSharp.Loader.Views
 
         private void PathTextBox_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            var textBox = (TextBox)sender;
+            var textBox = (TextBox) sender;
             if (textBox != null && string.IsNullOrWhiteSpace(textBox.SelectedText))
             {
                 using (var folderDialog = new FolderBrowserDialog())
@@ -247,7 +253,7 @@ namespace LeagueSharp.Loader.Views
             }
             OnPropertyChanged("FoundAssemblies");
         }
-        
+
         private void OnPropertyChanged(string propertyName)
         {
             if (PropertyChanged != null)
@@ -258,7 +264,7 @@ namespace LeagueSharp.Loader.Views
 
         private void TextBoxBase_OnTextChanged(object sender, TextChangedEventArgs e)
         {
-            var searchText = ((TextBox)sender).Text;
+            var searchText = ((TextBox) sender).Text;
             var view = CollectionViewSource.GetDefaultView(FoundAssemblies);
             searchText = searchText.Replace("*", "(.*)");
             view.Filter = obj =>
@@ -270,7 +276,7 @@ namespace LeagueSharp.Loader.Views
 
                     return nameMatch.Success;
                 }
-                catch (System.Exception)
+                catch (Exception)
                 {
                     return true;
                 }

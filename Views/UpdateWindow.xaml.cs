@@ -1,14 +1,38 @@
-﻿using System;
-using System.Diagnostics;
-using System.Net;
-using System.Windows;
-using System.Windows.Input;
-using LeagueSharp.Loader.Class;
-using LeagueSharp.Loader.Data;
-using MahApps.Metro.Controls;
+﻿#region LICENSE
+
+// Copyright 2014 LeagueSharp.Loader
+// UpdateWindow.xaml.cs is part of LeagueSharp.Loader.
+// 
+// LeagueSharp.Loader is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+// 
+// LeagueSharp.Loader is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+// GNU General Public License for more details.
+// 
+// You should have received a copy of the GNU General Public License
+// along with LeagueSharp.Loader. If not, see <http://www.gnu.org/licenses/>.
+
+#endregion
 
 namespace LeagueSharp.Loader.Views
 {
+    #region
+
+    using System;
+    using System.ComponentModel;
+    using System.Diagnostics;
+    using System.Net;
+    using System.Windows;
+    using LeagueSharp.Loader.Class;
+    using LeagueSharp.Loader.Data;
+    using MahApps.Metro.Controls;
+
+    #endregion
+
     /// <summary>
     ///     Interaction logic for UpdateWindow.xaml
     /// </summary>
@@ -29,7 +53,7 @@ namespace LeagueSharp.Loader.Views
             {
                 return;
             }
-            
+
             AlreadyActivated = true;
 
             try
@@ -56,22 +80,33 @@ namespace LeagueSharp.Loader.Views
             }
         }
 
-        private void WebClientOnDownloadProgressChanged(object sender, DownloadProgressChangedEventArgs downloadProgressChangedEventArgs)
+        private void WebClientOnDownloadProgressChanged(object sender,
+            DownloadProgressChangedEventArgs downloadProgressChangedEventArgs)
         {
-            Application.Current.Dispatcher.Invoke(delegate
-            {
-                UpdateProgressBar.Value = downloadProgressChangedEventArgs.ProgressPercentage;
-                ProgressLabel.Content = string.Format(ProgressText, downloadProgressChangedEventArgs.BytesReceived / 1024, downloadProgressChangedEventArgs.TotalBytesToReceive / 1024);
-            });
+            Application.Current.Dispatcher.Invoke(
+                delegate
+                {
+                    UpdateProgressBar.Value = downloadProgressChangedEventArgs.ProgressPercentage;
+                    ProgressLabel.Content = string.Format(
+                        ProgressText, downloadProgressChangedEventArgs.BytesReceived / 1024,
+                        downloadProgressChangedEventArgs.TotalBytesToReceive / 1024);
+                });
         }
 
-        void webClient_DownloadFileCompleted(object sender, System.ComponentModel.AsyncCompletedEventArgs e)
+        private void webClient_DownloadFileCompleted(object sender, AsyncCompletedEventArgs e)
         {
-            if (this.Parent != null)
+            if (Parent != null)
             {
-                ((MainWindow)this.Parent).MainWindow_OnClosing(null, null);
+                ((MainWindow) Parent).MainWindow_OnClosing(null, null);
             }
-            new Process { StartInfo = { FileName = Updater.SetupFile, Arguments = "/VERYSILENT /DIR=\"" + Directories.CurrentDirectory + "\"" } }.Start();
+            new Process
+            {
+                StartInfo =
+                {
+                    FileName = Updater.SetupFile,
+                    Arguments = "/VERYSILENT /DIR=\"" + Directories.CurrentDirectory + "\""
+                }
+            }.Start();
             Environment.Exit(0);
         }
     }

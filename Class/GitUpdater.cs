@@ -1,32 +1,35 @@
-﻿#region
+﻿#region LICENSE
 
-using System;
-using System.IO;
-using LeagueSharp.Loader.Data;
-using System.Collections.Generic;
-using LibGit2Sharp;
+// Copyright 2014 LeagueSharp.Loader
+// GitUpdater.cs is part of LeagueSharp.Loader.
+// 
+// LeagueSharp.Loader is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+// 
+// LeagueSharp.Loader is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+// GNU General Public License for more details.
+// 
+// You should have received a copy of the GNU General Public License
+// along with LeagueSharp.Loader. If not, see <http://www.gnu.org/licenses/>.
 
 #endregion
 
-/*
-    Copyright (C) 2014 LeagueSharp
-
-    This program is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
-
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License
-    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-*/
-
 namespace LeagueSharp.Loader.Class
 {
+    #region
+
+    using System;
+    using System.Collections.Generic;
+    using System.IO;
+    using LeagueSharp.Loader.Data;
+    using LibGit2Sharp;
+
+    #endregion
+
     internal class GitUpdater
     {
         public static string Update(string url, Log log, string directory)
@@ -46,7 +49,8 @@ namespace LeagueSharp.Loader.Class
                         using (var repo = new Repository(dir))
                         {
                             repo.Fetch("origin");
-                            repo.Checkout("origin/master", new CheckoutOptions { CheckoutModifiers = CheckoutModifiers.Force });
+                            repo.Checkout(
+                                "origin/master", new CheckoutOptions { CheckoutModifiers = CheckoutModifiers.Force });
                         }
                     }
                     else
@@ -54,7 +58,9 @@ namespace LeagueSharp.Loader.Class
                         var oldPath = Path.Combine(directory, url.GetHashCode().ToString("X"));
 
                         if (Directory.Exists(oldPath))
+                        {
                             Directory.Delete(oldPath, true);
+                        }
 
                         Repository.Clone(url, dir, new CloneOptions { Checkout = true });
                     }
@@ -91,7 +97,7 @@ namespace LeagueSharp.Loader.Class
                     }
                 }
             }
-            catch (Exception) { }
+            catch (Exception) {}
         }
     }
 }

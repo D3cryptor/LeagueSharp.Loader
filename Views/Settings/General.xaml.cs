@@ -1,31 +1,38 @@
-﻿using System;
-using System.Diagnostics;
-using System.Linq;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Input;
-using LeagueSharp.Loader.Data;
+﻿#region LICENSE
 
-/*
-    Copyright (C) 2014 LeagueSharp
+// Copyright 2014 LeagueSharp.Loader
+// General.xaml.cs is part of LeagueSharp.Loader.
+// 
+// LeagueSharp.Loader is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+// 
+// LeagueSharp.Loader is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+// GNU General Public License for more details.
+// 
+// You should have received a copy of the GNU General Public License
+// along with LeagueSharp.Loader. If not, see <http://www.gnu.org/licenses/>.
 
-    This program is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
-
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License
-    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-*/
+#endregion
 
 namespace LeagueSharp.Loader.Views.Settings
 {
-    public partial class General : UserControl
+    #region
+
+    using System;
+    using System.Diagnostics;
+    using System.Linq;
+    using System.Windows;
+    using System.Windows.Controls;
+    using System.Windows.Input;
+    using LeagueSharp.Loader.Data;
+
+    #endregion
+
+    public partial class General
     {
         public General()
         {
@@ -78,7 +85,7 @@ namespace LeagueSharp.Loader.Views.Settings
         private void ComboBox_Loaded(object sender, RoutedEventArgs e)
         {
             ((ComboBox) sender).Items.Clear();
-            ((ComboBox)sender).Items.Add("Arabic");
+            ((ComboBox) sender).Items.Add("Arabic");
             ((ComboBox) sender).Items.Add("Chinese");
             ((ComboBox) sender).Items.Add("English");
             ((ComboBox) sender).Items.Add("German");

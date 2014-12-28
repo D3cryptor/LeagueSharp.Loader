@@ -1,37 +1,39 @@
-﻿#region
+﻿#region LICENSE
 
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.IO;
-using System.Reflection;
-using System.Xml.Serialization;
-using LeagueSharp.Loader.Data;
-using Microsoft.Build.Evaluation;
-using System.Windows;
-using System.Runtime.Serialization.Formatters.Binary;
+// Copyright 2014 LeagueSharp.Loader
+// LeagueSharpAssembly.cs is part of LeagueSharp.Loader.
+// 
+// LeagueSharp.Loader is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+// 
+// LeagueSharp.Loader is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+// GNU General Public License for more details.
+// 
+// You should have received a copy of the GNU General Public License
+// along with LeagueSharp.Loader. If not, see <http://www.gnu.org/licenses/>.
 
 #endregion
 
-/*
-    Copyright (C) 2014 LeagueSharp
-
-    This program is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
-
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License
-    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-*/
-
 namespace LeagueSharp.Loader.Class
 {
+    #region
+
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Reflection;
+    using System.Windows;
+    using System.Xml.Serialization;
+    using LeagueSharp.Loader.Data;
+    using Microsoft.Build.Evaluation;
+
+    #endregion
+
     public static class LeagueSharpAssemblies
     {
         public static List<LeagueSharpAssembly> GetAssemblies(string directory, string url = "")
@@ -73,7 +75,7 @@ namespace LeagueSharp.Loader.Class
         Compiling,
     }
 
-    [ XmlType(AnonymousType = true), Serializable ]
+    [XmlType(AnonymousType = true), Serializable]
     public class LeagueSharpAssembly : INotifyPropertyChanged
     {
         private string _displayName = "";
@@ -123,11 +125,17 @@ namespace LeagueSharp.Loader.Class
             {
                 if (value)
                 {
-                    Injection.LoadAssembly(Injection.GetLeagueWnd(), this);
+                    foreach (var instance in Injection.GetLeagueWnd())
+                    {
+                        Injection.LoadAssembly(instance, this);
+                    }
                 }
                 else
                 {
-                    Injection.UnloadAssembly(Injection.GetLeagueWnd(), this);
+                    foreach (var instance in Injection.GetLeagueWnd())
+                    {
+                        Injection.UnloadAssembly(instance, this);
+                    }
                 }
 
                 _injectChecked = value;
@@ -165,9 +173,12 @@ namespace LeagueSharp.Loader.Class
         public string PathToBinary
         {
             get
-            { 
-                return Path.Combine((Type == AssemblyType.Library ? Directories.CoreDirectory : Directories.AssembliesDir)
-                      , (Type == AssemblyType.Library ? "" : PathToProjectFile.GetHashCode().ToString("X")) + Path.GetFileName(Compiler.GetOutputFilePath(Project)));
+            {
+                return
+                    Path.Combine(
+                        (Type == AssemblyType.Library ? Directories.CoreDirectory : Directories.AssembliesDir),
+                        (Type == AssemblyType.Library ? "" : PathToProjectFile.GetHashCode().ToString("X")) +
+                        Path.GetFileName(Compiler.GetOutputFilePath(Project)));
             }
         }
 
@@ -239,9 +250,9 @@ namespace LeagueSharp.Loader.Class
 
         public override bool Equals(object obj)
         {
-            if(obj is LeagueSharpAssembly)
+            if (obj is LeagueSharpAssembly)
             {
-                return ((LeagueSharpAssembly)obj).PathToProjectFile == PathToProjectFile;
+                return ((LeagueSharpAssembly) obj).PathToProjectFile == PathToProjectFile;
             }
             return false;
         }
@@ -306,8 +317,7 @@ namespace LeagueSharp.Loader.Class
             RefreshProject();
             if (Compiler.Compile(Project, Path.Combine(Directories.LogsDir, Name + ".txt"), Logs.MainLog))
             {
-                var result = Utility.OverwriteFile(
-                    Compiler.GetOutputFilePath(Project), PathToBinary);
+                var result = Utility.OverwriteFile(Compiler.GetOutputFilePath(Project), PathToBinary);
 
                 Utility.ClearDirectory(Compiler.GetOutputFilePath(Project));
                 Utility.ClearDirectory(Path.Combine(Project.DirectoryPath, "bin"));

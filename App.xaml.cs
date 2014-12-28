@@ -1,32 +1,50 @@
-﻿#region
+﻿#region LICENSE
 
-using System;
-using System.Runtime.InteropServices;
-using System.Threading;
-using System.Windows;
-using LeagueSharp.Loader.Class;
-using LeagueSharp.Loader.Data;
-using Microsoft.Win32;
-using System.IO;
+// Copyright 2014 LeagueSharp.Loader
+// App.xaml.cs is part of LeagueSharp.Loader.
+// 
+// LeagueSharp.Loader is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+// 
+// LeagueSharp.Loader is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+// GNU General Public License for more details.
+// 
+// You should have received a copy of the GNU General Public License
+// along with LeagueSharp.Loader. If not, see <http://www.gnu.org/licenses/>.
 
 #endregion
 
 namespace LeagueSharp.Loader
 {
+    #region
+
+    using System;
+    using System.IO;
+    using System.Runtime.InteropServices;
+    using System.Threading;
+    using System.Windows;
+    using LeagueSharp.Loader.Class;
+    using LeagueSharp.Loader.Data;
+
+    #endregion
 
     public partial class App
     {
         private Mutex _mutex;
 
         [DllImport("user32.dll")]
-        static extern bool SetForegroundWindow(IntPtr hWnd);
+        private static extern bool SetForegroundWindow(IntPtr hWnd);
 
         [DllImport("user32.dll")]
-        static extern bool ShowWindow(IntPtr hWnd, int nCmdShow);
+        private static extern bool ShowWindow(IntPtr hWnd, int nCmdShow);
 
         protected override void OnStartup(StartupEventArgs e)
         {
-            if(File.Exists(Updater.SetupFile))
+            if (File.Exists(Updater.SetupFile))
             {
                 Thread.Sleep(1000);
             }
@@ -54,25 +72,28 @@ namespace LeagueSharp.Loader
 
             try
             {
-                Config.Instance = ((Config)Utility.MapXmlFileToClass(typeof(Config), Directories.ConfigFilePath));
+                Config.Instance = ((Config) Utility.MapXmlFileToClass(typeof(Config), Directories.ConfigFilePath));
             }
             catch (Exception)
             {
-                System.Windows.MessageBox.Show("Couldn't load config.xml.");
+                MessageBox.Show("Couldn't load config.xml.");
                 File.Delete(Directories.ConfigFilePath);
                 Environment.Exit(0);
             }
 
             //Load the language resources.
             var dict = new ResourceDictionary();
-            
+
             if (Config.Instance.SelectedLanguage != null)
             {
-                dict.Source = new Uri("..\\Resources\\Language\\" + Config.Instance.SelectedLanguage + ".xaml", UriKind.Relative);
+                dict.Source = new Uri(
+                    "..\\Resources\\Language\\" + Config.Instance.SelectedLanguage + ".xaml", UriKind.Relative);
             }
             else
             {
-                var lid = Thread.CurrentThread.CurrentCulture.ToString().Contains("-") ? Thread.CurrentThread.CurrentCulture.ToString().Split('-')[0].ToUpperInvariant() : Thread.CurrentThread.CurrentCulture.ToString().ToUpperInvariant();
+                var lid = Thread.CurrentThread.CurrentCulture.ToString().Contains("-")
+                    ? Thread.CurrentThread.CurrentCulture.ToString().Split('-')[0].ToUpperInvariant()
+                    : Thread.CurrentThread.CurrentCulture.ToString().ToUpperInvariant();
                 switch (lid)
                 {
                     case "DE":
@@ -125,7 +146,7 @@ namespace LeagueSharp.Loader
                         break;
                 }
             }
-            
+
             Resources.MergedDictionaries.Add(dict);
             base.OnStartup(e);
         }
@@ -133,7 +154,9 @@ namespace LeagueSharp.Loader
         protected override void OnExit(ExitEventArgs e)
         {
             if (_mutex != null)
+            {
                 _mutex.ReleaseMutex();
+            }
             base.OnExit(e);
         }
     }

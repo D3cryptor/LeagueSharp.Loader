@@ -1,56 +1,40 @@
-﻿using System.Windows.Forms;
-using Application = System.Windows.Application;
+﻿#region LICENSE
 
-#region
-
-using System;
-using System.IO;
-using System.Reflection;
-using System.Security.Cryptography;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Xml.Serialization;
-using LeagueSharp.Loader.Data;
-using MessageBox = System.Windows.Forms.MessageBox;
+// Copyright 2014 LeagueSharp.Loader
+// Utility.cs is part of LeagueSharp.Loader.
+// 
+// LeagueSharp.Loader is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+// 
+// LeagueSharp.Loader is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+// GNU General Public License for more details.
+// 
+// You should have received a copy of the GNU General Public License
+// along with LeagueSharp.Loader. If not, see <http://www.gnu.org/licenses/>.
 
 #endregion
 
-/*
-    Copyright (C) 2014 LeagueSharp
-
-    This program is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
-
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License
-    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-*/
-
-/*
-    Copyright (C) 2014 Nikita Bernthaler
-
-    This program is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
-
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License
-    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-*/
-
 namespace LeagueSharp.Loader.Class
 {
+    #region
+
+    using System;
+    using System.IO;
+    using System.Reflection;
+    using System.Security.Cryptography;
+    using System.Text;
+    using System.Text.RegularExpressions;
+    using System.Windows;
+    using System.Xml.Serialization;
+    using LeagueSharp.Loader.Data;
+    using MessageBox = System.Windows.Forms.MessageBox;
+
+    #endregion
+
     public class Utility
     {
         public static void MapClassToXmlFile(Type type, object obj, string path)
@@ -125,7 +109,7 @@ namespace LeagueSharp.Loader.Class
                     di.Delete();
                 }
             }
-            catch { }
+            catch {}
         }
 
         public static string MakeValidFileName(string name)
@@ -212,7 +196,7 @@ namespace LeagueSharp.Loader.Class
         }
 
         /// <summary>
-        /// Returns the md5 hash from a string.
+        ///     Returns the md5 hash from a string.
         /// </summary>
         public static string Md5Hash(string s)
         {
@@ -248,30 +232,34 @@ namespace LeagueSharp.Loader.Class
 
         public static string GetMultiLanguageText(string key)
         {
-            return App.Current.FindResource(key).ToString();
+            return Application.Current.FindResource(key).ToString();
         }
 
         public static void CopyDirectory(string sourcePath, string targetPath)
         {
             Directory.CreateDirectory(targetPath);
-            foreach (var dirPath in Directory.GetDirectories(sourcePath, "*",
-                    SearchOption.AllDirectories))
+            foreach (var dirPath in Directory.GetDirectories(sourcePath, "*", SearchOption.AllDirectories))
+            {
                 Directory.CreateDirectory(dirPath.Replace(sourcePath, targetPath));
-            foreach (var newPath in Directory.GetFiles(sourcePath, "*.*",
-                SearchOption.AllDirectories))
+            }
+            foreach (var newPath in Directory.GetFiles(sourcePath, "*.*", SearchOption.AllDirectories))
+            {
                 File.Copy(newPath, newPath.Replace(sourcePath, targetPath), true);
+            }
         }
 
         public static LeagueSharpAssembly CreateEmptyAssembly(string assemblyName)
         {
             try
             {
-                var appconfig = Utility.ReadResourceString("LeagueSharp.Loader.Resources.DefaultProject.App.config");
-                var assemblyInfocs = Utility.ReadResourceString("LeagueSharp.Loader.Resources.DefaultProject.AssemblyInfo.cs");
-                var defaultProjectcsproj = Utility.ReadResourceString("LeagueSharp.Loader.Resources.DefaultProject.DefaultProject.csproj");
-                var programcs = Utility.ReadResourceString("LeagueSharp.Loader.Resources.DefaultProject.Program.cs");
+                var appconfig = ReadResourceString("LeagueSharp.Loader.Resources.DefaultProject.App.config");
+                var assemblyInfocs = ReadResourceString("LeagueSharp.Loader.Resources.DefaultProject.AssemblyInfo.cs");
+                var defaultProjectcsproj =
+                    ReadResourceString("LeagueSharp.Loader.Resources.DefaultProject.DefaultProject.csproj");
+                var programcs = ReadResourceString("LeagueSharp.Loader.Resources.DefaultProject.Program.cs");
 
-                var targetPath = Path.Combine(Directories.LocalRepoDir, assemblyName + Environment.TickCount.GetHashCode().ToString("X"));
+                var targetPath = Path.Combine(
+                    Directories.LocalRepoDir, assemblyName + Environment.TickCount.GetHashCode().ToString("X"));
                 Directory.CreateDirectory(targetPath);
 
                 programcs = programcs.Replace("{ProjectName}", assemblyName);
@@ -295,40 +283,41 @@ namespace LeagueSharp.Loader.Class
 
         public static string GetLatestLeagueOfLegendsExePath(string lastKnownPath)
         {
-            try 
-	        {
+            try
+            {
                 var dir = Path.GetFullPath(Path.Combine(Path.GetDirectoryName(lastKnownPath), "..\\..\\"));
-                if(Directory.Exists(dir))
+                if (Directory.Exists(dir))
                 {
                     var versionPaths = Directory.GetDirectories(dir);
                     var greatestVersionString = "";
                     long greatestVersion = 0;
 
                     foreach (var versionPath in versionPaths)
-	                {
+                    {
                         Version version;
-		                var isVersion = Version.TryParse(Path.GetFileName(versionPath), out version);
-                        if(isVersion)
+                        var isVersion = Version.TryParse(Path.GetFileName(versionPath), out version);
+                        if (isVersion)
                         {
-                            var test = version.Build * Math.Pow(600, 4) + version.Major * Math.Pow(600, 3) + version.Minor * Math.Pow(600, 2) + version.Revision * Math.Pow(600, 1);
+                            var test = version.Build * Math.Pow(600, 4) + version.Major * Math.Pow(600, 3) +
+                                       version.Minor * Math.Pow(600, 2) + version.Revision * Math.Pow(600, 1);
                             if (test > greatestVersion)
                             {
-                                greatestVersion = (long)test;
+                                greatestVersion = (long) test;
                                 greatestVersionString = Path.GetFileName(versionPath);
                             }
                         }
-	                }
+                    }
 
-                    if(greatestVersion != 0)
+                    if (greatestVersion != 0)
                     {
-                        var exe = Directory.GetFiles(Path.Combine(dir, greatestVersionString), "League of Legends.exe", SearchOption.AllDirectories);
+                        var exe = Directory.GetFiles(
+                            Path.Combine(dir, greatestVersionString), "League of Legends.exe",
+                            SearchOption.AllDirectories);
                         return exe.Length > 0 ? exe[0] : null;
                     }
                 }
-	        }
-	        catch (Exception)
-	        {
-	        }
+            }
+            catch (Exception) {}
 
             return null;
         }

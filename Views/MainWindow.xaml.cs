@@ -1,63 +1,49 @@
-﻿using System.Windows.Data;
-using System.Windows.Forms;
-using Hardcodet.Wpf.TaskbarNotification;
-using Clipboard = System.Windows.Clipboard;
-using DataGrid = System.Windows.Controls.DataGrid;
-using WebBrowser = System.Windows.Controls.WebBrowser;
+﻿#region LICENSE
 
-#region
-
-using System.Windows.Navigation;
-
-#region
-
-using System.Windows.Input;
-
-#region
-
-using System.Collections.ObjectModel;
-using System.IO;
-using System.Runtime.InteropServices;
-using System.Text.RegularExpressions;
-using System.Threading;
-using System.Threading.Tasks;
-using System.Windows.Interop;
-using System.Collections.Generic;
-using Microsoft.Build.Evaluation;
-using System;
-using System.ComponentModel;
-using System.Linq;
-using System.Windows;
-using System.Windows.Controls;
-using LeagueSharp.Loader.Class;
-using LeagueSharp.Loader.Data;
-using MahApps.Metro.Controls.Dialogs;
+// Copyright 2014 LeagueSharp.Loader
+// MainWindow.xaml.cs is part of LeagueSharp.Loader.
+// 
+// LeagueSharp.Loader is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+// 
+// LeagueSharp.Loader is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+// GNU General Public License for more details.
+// 
+// You should have received a copy of the GNU General Public License
+// along with LeagueSharp.Loader. If not, see <http://www.gnu.org/licenses/>.
 
 #endregion
-
-#endregion
-
-#endregion
-
-/*
-    Copyright (C) 2014 LeagueSharp
-
-    This program is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
-
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License
-    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-*/
 
 namespace LeagueSharp.Loader.Views
 {
+    #region
+
+    using System;
+    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
+    using System.ComponentModel;
+    using System.Diagnostics;
+    using System.IO;
+    using System.Linq;
+    using System.Text.RegularExpressions;
+    using System.Threading;
+    using System.Threading.Tasks;
+    using System.Windows;
+    using System.Windows.Controls;
+    using System.Windows.Data;
+    using System.Windows.Input;
+    using System.Windows.Interop;
+    using LeagueSharp.Loader.Class;
+    using LeagueSharp.Loader.Data;
+    using MahApps.Metro.Controls.Dialogs;
+    using Microsoft.Build.Evaluation;
+
+    #endregion
+
     public partial class MainWindow : INotifyPropertyChanged
     {
         public BackgroundWorker AssembliesWorker = new BackgroundWorker();
@@ -70,7 +56,12 @@ namespace LeagueSharp.Loader.Views
         private Tuple<bool, string> _loaderVersionCheckResult;
 
         private string _updateMessage;
-        public Config Config { get { return Config.Instance; } set { Config.Instance = value; } }
+
+        public Config Config
+        {
+            get { return Config.Instance; }
+            set { Config.Instance = value; }
+        }
 
         public string StatusString
         {
@@ -113,6 +104,7 @@ namespace LeagueSharp.Loader.Views
             GeneralSettingsItem.IsSelected = true;
 
             #region ContextMenu.DevMenu
+
             DevMenu.Visibility = Config.Instance.ShowDevOptions ? Visibility.Visible : Visibility.Collapsed;
             Config.PropertyChanged += (o, args) =>
             {
@@ -121,11 +113,12 @@ namespace LeagueSharp.Loader.Views
                     DevMenu.Visibility = Config.Instance.ShowDevOptions ? Visibility.Visible : Visibility.Collapsed;
                 }
             };
+
             #endregion
 
             if (!File.Exists(Directories.CoreFilePath))
             {
-                System.Windows.MessageBox.Show(string.Format("Couldn't find {0}", Path.GetFileName(Directories.CoreFilePath)));
+                MessageBox.Show(string.Format("Couldn't find {0}", Path.GetFileName(Directories.CoreFilePath)));
                 Environment.Exit(0);
             }
 
@@ -144,7 +137,7 @@ namespace LeagueSharp.Loader.Views
                         }
                     }
                 });
-            
+
             //Try to login with the saved credentials.
             if (!Auth.Login(Config.Instance.Username, Config.Instance.Password).Item1)
             {
@@ -160,8 +153,12 @@ namespace LeagueSharp.Loader.Views
             //Used to reload the assemblies from inside the game.
             KeyboardHook.SetHook();
             KeyboardHook.OnKeyUpTrigger += KeyboardHookOnOnKeyUpTrigger;
-            KeyboardHook.HookedKeys.Add(KeyInterop.VirtualKeyFromKey(Config.Instance.Hotkeys.SelectedHotkeys.First(h => h.Name == "Reload").Hotkey));
-            KeyboardHook.HookedKeys.Add(KeyInterop.VirtualKeyFromKey(Config.Instance.Hotkeys.SelectedHotkeys.First(h => h.Name == "CompileAndReload").Hotkey));
+            KeyboardHook.HookedKeys.Add(
+                KeyInterop.VirtualKeyFromKey(
+                    Config.Instance.Hotkeys.SelectedHotkeys.First(h => h.Name == "Reload").Hotkey));
+            KeyboardHook.HookedKeys.Add(
+                KeyInterop.VirtualKeyFromKey(
+                    Config.Instance.Hotkeys.SelectedHotkeys.First(h => h.Name == "CompileAndReload").Hotkey));
 
             foreach (var hk in Config.Instance.Hotkeys.SelectedHotkeys)
             {
@@ -230,7 +227,7 @@ namespace LeagueSharp.Loader.Views
                                     StatusString = Utility.GetMultiLanguageText("Unknown");
                                     break;
                             }
-                            
+
                             return;
                         }
                     }
@@ -251,10 +248,10 @@ namespace LeagueSharp.Loader.Views
                 }
                 catch
                 {
-                    System.Windows.MessageBox.Show(Utility.GetMultiLanguageText("FailedToDelete"));
+                    MessageBox.Show(Utility.GetMultiLanguageText("FailedToDelete"));
                     Environment.Exit(0);
                 }
-            
+
                 if (_loaderVersionCheckResult != null && _loaderVersionCheckResult.Item1)
                 {
                     //Update the loader only when we are not injected to be able to replace the core files.
@@ -276,23 +273,24 @@ namespace LeagueSharp.Loader.Views
             UpdaterWorker.RunWorkerAsync();
         }
 
-        void hk_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        private void hk_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            KeyboardHook.HookedKeys.Add(KeyInterop.VirtualKeyFromKey(((HotkeyEntry)sender).Hotkey));
+            KeyboardHook.HookedKeys.Add(KeyInterop.VirtualKeyFromKey(((HotkeyEntry) sender).Hotkey));
             try
             {
                 Utility.MapClassToXmlFile(typeof(Config), Config.Instance, Directories.ConfigFilePath);
             }
-            catch
-            {
-            }
+            catch {}
         }
 
         private void GameSettingOnPropertyChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
         {
             if (Injection.IsInjected)
             {
-                Injection.SendConfig(IntPtr.Zero);
+                foreach (var inst in Injection.GetLeagueWnd())
+                {
+                    Injection.SendConfig(inst);
+                }
             }
         }
 
@@ -313,7 +311,8 @@ namespace LeagueSharp.Loader.Views
                     {
                         Injection.SendConfig(lhwid);
                         Thread.Sleep(1500);
-                        foreach (var assembly in Config.Instance.SelectedProfile.InstalledAssemblies.Where(a => a.InjectChecked))
+                        foreach (var assembly in
+                            Config.Instance.SelectedProfile.InstalledAssemblies.Where(a => a.InjectChecked))
                         {
                             Injection.LoadAssembly(lhwid, assembly);
                         }
@@ -330,7 +329,8 @@ namespace LeagueSharp.Loader.Views
             }
 
             var reloadVKey =
-                KeyInterop.VirtualKeyFromKey(Config.Instance.Hotkeys.SelectedHotkeys.First(h => h.Name == "Reload").Hotkey);
+                KeyInterop.VirtualKeyFromKey(
+                    Config.Instance.Hotkeys.SelectedHotkeys.First(h => h.Name == "Reload").Hotkey);
             var reloadAndCompileVKey =
                 KeyInterop.VirtualKeyFromKey(
                     Config.Instance.Hotkeys.SelectedHotkeys.First(h => h.Name == "CompileAndReload").Hotkey);
@@ -342,9 +342,12 @@ namespace LeagueSharp.Loader.Views
                     Config.Instance.SelectedProfile.InstalledAssemblies.Where(
                         a => a.InjectChecked || a.Type == AssemblyType.Library).ToList();
 
-                foreach (var assembly in targetAssemblies)
+                foreach (var instance in hwnd)
                 {
-                    Injection.UnloadAssembly(hwnd, assembly);
+                    foreach (var assembly in targetAssemblies)
+                    {
+                        Injection.UnloadAssembly(instance, assembly);
+                    }
                 }
 
                 if (vKeyCode == reloadAndCompileVKey)
@@ -367,12 +370,15 @@ namespace LeagueSharp.Loader.Views
                     }
                 }
 
-                foreach (var assembly in targetAssemblies)
+                foreach (var instance in hwnd)
                 {
-                    Injection.LoadAssembly(hwnd, assembly);
-                }
+                    foreach (var assembly in targetAssemblies)
+                    {
+                        Injection.LoadAssembly(instance, assembly);
+                    }
 
-                Injection.SendConfig(hwnd);
+                    Injection.SendConfig(instance);
+                }
             }
         }
 
@@ -383,7 +389,11 @@ namespace LeagueSharp.Loader.Views
                 await
                     this.ShowLoginAsync(
                         "LeagueSharp", "Sign in",
-                        new LoginDialogSettings { ColorScheme = MetroDialogOptions.ColorScheme, NegativeButtonVisibility = Visibility.Visible});
+                        new LoginDialogSettings
+                        {
+                            ColorScheme = MetroDialogOptions.ColorScheme,
+                            NegativeButtonVisibility = Visibility.Visible
+                        });
 
             var loginResult = new Tuple<bool, string>(false, "Cancel button pressed");
             if (result != null)
@@ -409,18 +419,18 @@ namespace LeagueSharp.Loader.Views
                     Environment.Exit(0);
                 }
 
-                ShowAfterLoginDialog(string.Format(Utility.GetMultiLanguageText("FailedToLogin"), loginResult.Item2), true);
+                ShowAfterLoginDialog(
+                    string.Format(Utility.GetMultiLanguageText("FailedToLogin"), loginResult.Item2), true);
                 Utility.Log(
                     LogStatus.Error, Utility.GetMultiLanguageText("Login"),
                     string.Format(
-                        Utility.GetMultiLanguageText("LoginError"), (result != null ? result.Username : "null"), loginResult.Item2),
-                    Logs.MainLog);
+                        Utility.GetMultiLanguageText("LoginError"), (result != null ? result.Username : "null"),
+                        loginResult.Item2), Logs.MainLog);
             }
         }
 
         private async void ShowAfterLoginDialog(string message, bool showLoginDialog)
         {
-
             await this.ShowMessageAsync("Login", message);
             if (showLoginDialog)
             {
@@ -446,7 +456,7 @@ namespace LeagueSharp.Loader.Views
             }
             catch
             {
-                System.Windows.MessageBox.Show(Utility.GetMultiLanguageText("ConfigWriteError"));
+                MessageBox.Show(Utility.GetMultiLanguageText("ConfigWriteError"));
             }
         }
 
@@ -472,9 +482,9 @@ namespace LeagueSharp.Loader.Views
             }
             catch
             {
-                System.Windows.MessageBox.Show(Utility.GetMultiLanguageText("ConfigWriteError"));
+                MessageBox.Show(Utility.GetMultiLanguageText("ConfigWriteError"));
             }
-            
+
             KeyboardHook.UnHook();
             InjectThread.Abort();
 
@@ -491,7 +501,7 @@ namespace LeagueSharp.Loader.Views
 
         private void InstalledAssembliesDataGrid_OnContextMenuOpening(object sender, ContextMenuEventArgs e)
         {
-            var dataGrid = (DataGrid)sender;
+            var dataGrid = (DataGrid) sender;
             if (dataGrid != null)
             {
                 if (dataGrid.SelectedItems.Count == 0)
@@ -531,13 +541,10 @@ namespace LeagueSharp.Loader.Views
             {
                 if (update)
                 {
-                    var updateList = leagueSharpAssemblies
-                        .GroupBy(a => a.SvnUrl)
-                        .Select(g => g.First());
+                    var updateList = leagueSharpAssemblies.GroupBy(a => a.SvnUrl).Select(g => g.First());
 
-                    Parallel.ForEach(updateList,
-                        new ParallelOptions { MaxDegreeOfParallelism = 5 },
-                        (assembly, state) =>
+                    Parallel.ForEach(
+                        updateList, new ParallelOptions { MaxDegreeOfParallelism = 5 }, (assembly, state) =>
                         {
                             assembly.Update();
 
@@ -612,14 +619,14 @@ namespace LeagueSharp.Loader.Views
             {
                 return;
             }
-            var selectedAssembly = (LeagueSharpAssembly)InstalledAssembliesDataGrid.SelectedItems[0];
+            var selectedAssembly = (LeagueSharpAssembly) InstalledAssembliesDataGrid.SelectedItems[0];
             if (selectedAssembly.SvnUrl != "")
             {
-                System.Diagnostics.Process.Start(selectedAssembly.SvnUrl);
+                Process.Start(selectedAssembly.SvnUrl);
             }
-            else if(Directory.Exists(Path.GetDirectoryName(selectedAssembly.PathToProjectFile)))
+            else if (Directory.Exists(Path.GetDirectoryName(selectedAssembly.PathToProjectFile)))
             {
-                System.Diagnostics.Process.Start(Path.GetDirectoryName(selectedAssembly.PathToProjectFile));
+                Process.Start(Path.GetDirectoryName(selectedAssembly.PathToProjectFile));
             }
         }
 
@@ -630,7 +637,7 @@ namespace LeagueSharp.Loader.Views
                 return;
             }
 
-            var selectedAssembly = (LeagueSharpAssembly)InstalledAssembliesDataGrid.SelectedItems[0];
+            var selectedAssembly = (LeagueSharpAssembly) InstalledAssembliesDataGrid.SelectedItems[0];
             if (selectedAssembly.SvnUrl.ToLower().StartsWith("https://github.com"))
             {
                 var user = selectedAssembly.SvnUrl.Remove(0, 19);
@@ -646,12 +653,12 @@ namespace LeagueSharp.Loader.Views
                 return;
             }
 
-            var selectedAssembly = (LeagueSharpAssembly)InstalledAssembliesDataGrid.SelectedItems[0];
-            var logFile = Path.Combine(Directories.LogsDir,
-                "Error - " + Path.GetFileName(selectedAssembly.Name + ".txt"));
+            var selectedAssembly = (LeagueSharpAssembly) InstalledAssembliesDataGrid.SelectedItems[0];
+            var logFile = Path.Combine(
+                Directories.LogsDir, "Error - " + Path.GetFileName(selectedAssembly.Name + ".txt"));
             if (File.Exists(logFile))
             {
-                System.Diagnostics.Process.Start(logFile);
+                Process.Start(logFile);
             }
             else
             {
@@ -668,11 +675,11 @@ namespace LeagueSharp.Loader.Views
         {
             var assemblyName = await this.ShowInputAsync("New Project", "Enter the new project name");
 
-            if(assemblyName != null)
+            if (assemblyName != null)
             {
                 assemblyName = Regex.Replace(assemblyName, @"[^A-Za-z0-9]+", "");
             }
-            
+
             if (!string.IsNullOrEmpty(assemblyName))
             {
                 var leagueSharpAssembly = Utility.CreateEmptyAssembly(assemblyName);
@@ -691,10 +698,10 @@ namespace LeagueSharp.Loader.Views
                 return;
             }
 
-            var selectedAssembly = (LeagueSharpAssembly)InstalledAssembliesDataGrid.SelectedItems[0];
+            var selectedAssembly = (LeagueSharpAssembly) InstalledAssembliesDataGrid.SelectedItems[0];
             if (File.Exists(selectedAssembly.PathToProjectFile))
             {
-                System.Diagnostics.Process.Start(selectedAssembly.PathToProjectFile);
+                Process.Start(selectedAssembly.PathToProjectFile);
             }
         }
 
@@ -704,19 +711,22 @@ namespace LeagueSharp.Loader.Views
             {
                 return;
             }
-            var selectedAssembly = (LeagueSharpAssembly)InstalledAssembliesDataGrid.SelectedItems[0];
+            var selectedAssembly = (LeagueSharpAssembly) InstalledAssembliesDataGrid.SelectedItems[0];
             try
             {
                 var source = Path.GetDirectoryName(selectedAssembly.PathToProjectFile);
-                var destination = Path.Combine(Directories.LocalRepoDir, selectedAssembly.Name) + "_clone_" +  Environment.TickCount.GetHashCode().ToString("X");
+                var destination = Path.Combine(Directories.LocalRepoDir, selectedAssembly.Name) + "_clone_" +
+                                  Environment.TickCount.GetHashCode().ToString("X");
                 Utility.CopyDirectory(source, destination);
-                var leagueSharpAssembly = new LeagueSharpAssembly(selectedAssembly.Name + "_clone", Path.Combine(destination, Path.GetFileName(selectedAssembly.PathToProjectFile)), "");
+                var leagueSharpAssembly = new LeagueSharpAssembly(
+                    selectedAssembly.Name + "_clone",
+                    Path.Combine(destination, Path.GetFileName(selectedAssembly.PathToProjectFile)), "");
                 leagueSharpAssembly.Compile();
                 Config.SelectedProfile.InstalledAssemblies.Add(leagueSharpAssembly);
             }
             catch (Exception ex)
             {
-                System.Windows.MessageBox.Show(ex.ToString());
+                MessageBox.Show(ex.ToString());
             }
         }
 
@@ -766,7 +776,7 @@ namespace LeagueSharp.Loader.Views
                 {
                     var assembly = obj as LeagueSharpAssembly;
 
-                    if(searchText == "checked")
+                    if (searchText == "checked")
                     {
                         return assembly.InjectChecked;
                     }
@@ -786,8 +796,6 @@ namespace LeagueSharp.Loader.Views
 
         private void MainWindow_OnActivated(object sender, EventArgs e)
         {
-            
-
             if (FirstTimeActivated)
             {
                 FirstTimeActivated = false;
@@ -848,10 +856,11 @@ namespace LeagueSharp.Loader.Views
 
         private async void ShowProfileNameChangeDialog()
         {
-            var result = await this.ShowInputAsync(Utility.GetMultiLanguageText("Rename"), Utility.GetMultiLanguageText("RenameText"), new MetroDialogSettings
-            { 
-            DefaultText = Config.Instance.SelectedProfile.Name,
-            });
+            var result =
+                await
+                    this.ShowInputAsync(
+                        Utility.GetMultiLanguageText("Rename"), Utility.GetMultiLanguageText("RenameText"),
+                        new MetroDialogSettings { DefaultText = Config.Instance.SelectedProfile.Name, });
 
             if (!string.IsNullOrEmpty(result))
             {
@@ -876,23 +885,25 @@ namespace LeagueSharp.Loader.Views
                 return;
             }
 
-            var oldProfile = (Profile)e.RemovedItems[0];
-            var newProfile = (Profile)e.AddedItems[0];
+            var oldProfile = (Profile) e.RemovedItems[0];
+            var newProfile = (Profile) e.AddedItems[0];
             if (Injection.IsInjected)
             {
                 var hwnd = Injection.GetLeagueWnd();
-
-                foreach (var assembly in oldProfile.InstalledAssemblies.Where(a => a.InjectChecked))
+                foreach (var instance in hwnd)
                 {
-                    Injection.UnloadAssembly(hwnd, assembly);
-                }
+                    foreach (var assembly in oldProfile.InstalledAssemblies.Where(a => a.InjectChecked))
+                    {
+                        Injection.UnloadAssembly(instance, assembly);
+                    }
 
-                var assembliesToLoad =
-                    newProfile.InstalledAssemblies.Where(a => a.InjectChecked || a.Type == AssemblyType.Library);
+                    var assembliesToLoad =
+                        newProfile.InstalledAssemblies.Where(a => a.InjectChecked || a.Type == AssemblyType.Library);
 
-                foreach (var assembly in assembliesToLoad)
-                {
-                    Injection.LoadAssembly(hwnd, assembly);
+                    foreach (var assembly in assembliesToLoad)
+                    {
+                        Injection.LoadAssembly(instance, assembly);
+                    }
                 }
             }
             TextBoxBase_OnTextChanged(null, null);
@@ -905,18 +916,23 @@ namespace LeagueSharp.Loader.Views
                 if (Injection.IsInjected)
                 {
                     var hwnd = Injection.GetLeagueWnd();
-                    if (!Config.Instance.Install)
+                    foreach (var instance in hwnd)
                     {
-                        foreach (var assembly in Config.Instance.SelectedProfile.InstalledAssemblies.Where(a => a.InjectChecked))
+                        if (!Config.Instance.Install)
                         {
-                            Injection.UnloadAssembly(hwnd, assembly);
+                            foreach (var assembly in
+                                Config.Instance.SelectedProfile.InstalledAssemblies.Where(a => a.InjectChecked))
+                            {
+                                Injection.UnloadAssembly(instance, assembly);
+                            }
                         }
-                    }
-                    else
-                    {
-                        foreach (var assembly in Config.Instance.SelectedProfile.InstalledAssemblies.Where(a => a.InjectChecked))
+                        else
                         {
-                            Injection.LoadAssembly(hwnd, assembly);
+                            foreach (var assembly in
+                                Config.Instance.SelectedProfile.InstalledAssemblies.Where(a => a.InjectChecked))
+                            {
+                                Injection.LoadAssembly(instance, assembly);
+                            }
                         }
                     }
                 }
@@ -925,7 +941,7 @@ namespace LeagueSharp.Loader.Views
 
         private void TreeView_OnSelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
-            var name = ((TreeViewItem)((System.Windows.Controls.TreeView)sender).SelectedItem).Uid;
+            var name = ((TreeViewItem) ((TreeView) sender).SelectedItem).Uid;
             SettingsFrame.Content = Activator.CreateInstance(null, "LeagueSharp.Loader.Views.Settings." + name).Unwrap();
         }
 
@@ -946,7 +962,7 @@ namespace LeagueSharp.Loader.Views
 
         private void StatusButton_OnClick(object sender, RoutedEventArgs e)
         {
-           CheckForUpdates(true, true, true);
+            CheckForUpdates(true, true, true);
         }
     }
 }
