@@ -63,7 +63,7 @@ namespace LeagueSharp.Loader.Class
 
         public static bool IsInjected
         {
-            get { return IsProcessInjected(GetLeagueProcess().FirstOrDefault()); }
+            get { return GetLeagueProcess().Any(IsProcessInjected); }
         }
 
         [DllImport("kernel32.dll")]
