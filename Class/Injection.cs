@@ -99,22 +99,12 @@ namespace LeagueSharp.Loader.Class
 
         public static IntPtr[] GetLeagueWnd()
         {
-            var processesByName = Process.GetProcessesByName("League of Legends");
-            if (processesByName.Length > 0)
-            {
-                return processesByName.Select(p => p.MainWindowHandle).ToArray();
-            }
-            return null;
+            return Process.GetProcessesByName("League of Legends").Select(p => p.MainWindowHandle).ToArray();;
         }
 
         public static Process[] GetLeagueProcess()
         {
-            var processesByName = Process.GetProcessesByName("League of Legends");
-            if (processesByName.Length > 0)
-            {
-                return processesByName;
-            }
-            return null;
+            return Process.GetProcessesByName("League of Legends");
         }
 
         public static void Pulse()
