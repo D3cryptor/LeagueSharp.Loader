@@ -90,7 +90,6 @@ namespace LeagueSharp.Loader.Views
             {
                 _working = value;
                 OnPropertyChanged("Working");
-                //InstalledAssembliesDataGrid.Items.Refresh();
             }
         }
 
@@ -164,6 +163,18 @@ namespace LeagueSharp.Loader.Views
             {
                 hk.PropertyChanged += hk_PropertyChanged;
             }
+
+            Injection.OnInject += hwnd => Task.Factory.StartNew(
+                () =>
+                {
+                    Injection.SendConfig(hwnd);
+                    Thread.Sleep(1500);
+                    foreach (var assembly in
+                        Config.Instance.SelectedProfile.InstalledAssemblies.Where(a => a.InjectChecked))
+                    {
+                        Injection.LoadAssembly(hwnd, assembly);
+                    }
+                });
 
             InjectThread = new Thread(
                 () =>
@@ -275,50 +286,20 @@ namespace LeagueSharp.Loader.Views
 
         private void hk_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            KeyboardHook.HookedKeys.Add(KeyInterop.VirtualKeyFromKey(((HotkeyEntry) sender).Hotkey));
+            KeyboardHook.HookedKeys.Add(KeyInterop.VirtualKeyFromKey(((HotkeyEntry)sender).Hotkey));
             try
             {
                 Utility.MapClassToXmlFile(typeof(Config), Config.Instance, Directories.ConfigFilePath);
             }
-            catch {}
+            catch { }
         }
 
         private void GameSettingOnPropertyChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
         {
-            if (Injection.IsInjected)
+            foreach (var instance in Injection.InjectedInstances)
             {
-                foreach (var inst in Injection.GetLeagueWnd())
-                {
-                    Injection.SendConfig(inst);
-                }
+                Injection.SendConfig(instance);
             }
-        }
-
-        protected override void OnSourceInitialized(EventArgs e)
-        {
-            base.OnSourceInitialized(e);
-            var source = PresentationSource.FromVisual(this) as HwndSource;
-            source.AddHook(WndProc);
-        }
-
-        private IntPtr WndProc(IntPtr hwnd, int msg, IntPtr wParam, IntPtr lParam, ref bool handled)
-        {
-            if (msg == 32769)
-            {
-                var lhwid = wParam;
-                Task.Factory.StartNew(
-                    () =>
-                    {
-                        Injection.SendConfig(lhwid);
-                        Thread.Sleep(1500);
-                        foreach (var assembly in
-                            Config.Instance.SelectedProfile.InstalledAssemblies.Where(a => a.InjectChecked))
-                        {
-                            Injection.LoadAssembly(lhwid, assembly);
-                        }
-                    });
-            }
-            return IntPtr.Zero;
         }
 
         private void KeyboardHookOnOnKeyUpTrigger(int vKeyCode)
@@ -337,12 +318,11 @@ namespace LeagueSharp.Loader.Views
 
             if (vKeyCode == reloadVKey || vKeyCode == reloadAndCompileVKey)
             {
-                var hwnd = Injection.GetLeagueWnd();
                 var targetAssemblies =
                     Config.Instance.SelectedProfile.InstalledAssemblies.Where(
                         a => a.InjectChecked || a.Type == AssemblyType.Library).ToList();
 
-                foreach (var instance in hwnd)
+                foreach (var instance in Injection.InjectedInstances)
                 {
                     foreach (var assembly in targetAssemblies)
                     {
@@ -370,7 +350,7 @@ namespace LeagueSharp.Loader.Views
                     }
                 }
 
-                foreach (var instance in hwnd)
+                foreach (var instance in Injection.InjectedInstances)
                 {
                     foreach (var assembly in targetAssemblies)
                     {
@@ -501,7 +481,7 @@ namespace LeagueSharp.Loader.Views
 
         private void InstalledAssembliesDataGrid_OnContextMenuOpening(object sender, ContextMenuEventArgs e)
         {
-            var dataGrid = (DataGrid) sender;
+            var dataGrid = (DataGrid)sender;
             if (dataGrid != null)
             {
                 if (dataGrid.SelectedItems.Count == 0)
@@ -619,7 +599,7 @@ namespace LeagueSharp.Loader.Views
             {
                 return;
             }
-            var selectedAssembly = (LeagueSharpAssembly) InstalledAssembliesDataGrid.SelectedItems[0];
+            var selectedAssembly = (LeagueSharpAssembly)InstalledAssembliesDataGrid.SelectedItems[0];
             if (selectedAssembly.SvnUrl != "")
             {
                 Process.Start(selectedAssembly.SvnUrl);
@@ -637,7 +617,7 @@ namespace LeagueSharp.Loader.Views
                 return;
             }
 
-            var selectedAssembly = (LeagueSharpAssembly) InstalledAssembliesDataGrid.SelectedItems[0];
+            var selectedAssembly = (LeagueSharpAssembly)InstalledAssembliesDataGrid.SelectedItems[0];
             if (selectedAssembly.SvnUrl.ToLower().StartsWith("https://github.com"))
             {
                 var user = selectedAssembly.SvnUrl.Remove(0, 19);
@@ -653,7 +633,7 @@ namespace LeagueSharp.Loader.Views
                 return;
             }
 
-            var selectedAssembly = (LeagueSharpAssembly) InstalledAssembliesDataGrid.SelectedItems[0];
+            var selectedAssembly = (LeagueSharpAssembly)InstalledAssembliesDataGrid.SelectedItems[0];
             var logFile = Path.Combine(
                 Directories.LogsDir, "Error - " + Path.GetFileName(selectedAssembly.Name + ".txt"));
             if (File.Exists(logFile))
@@ -698,7 +678,7 @@ namespace LeagueSharp.Loader.Views
                 return;
             }
 
-            var selectedAssembly = (LeagueSharpAssembly) InstalledAssembliesDataGrid.SelectedItems[0];
+            var selectedAssembly = (LeagueSharpAssembly)InstalledAssembliesDataGrid.SelectedItems[0];
             if (File.Exists(selectedAssembly.PathToProjectFile))
             {
                 Process.Start(selectedAssembly.PathToProjectFile);
@@ -711,7 +691,7 @@ namespace LeagueSharp.Loader.Views
             {
                 return;
             }
-            var selectedAssembly = (LeagueSharpAssembly) InstalledAssembliesDataGrid.SelectedItems[0];
+            var selectedAssembly = (LeagueSharpAssembly)InstalledAssembliesDataGrid.SelectedItems[0];
             try
             {
                 var source = Path.GetDirectoryName(selectedAssembly.PathToProjectFile);
@@ -885,27 +865,25 @@ namespace LeagueSharp.Loader.Views
                 return;
             }
 
-            var oldProfile = (Profile) e.RemovedItems[0];
-            var newProfile = (Profile) e.AddedItems[0];
-            if (Injection.IsInjected)
+            var oldProfile = (Profile)e.RemovedItems[0];
+            var newProfile = (Profile)e.AddedItems[0];
+
+            foreach (var instance in Injection.InjectedInstances)
             {
-                var hwnd = Injection.GetLeagueWnd();
-                foreach (var instance in hwnd)
+                foreach (var assembly in oldProfile.InstalledAssemblies.Where(a => a.InjectChecked))
                 {
-                    foreach (var assembly in oldProfile.InstalledAssemblies.Where(a => a.InjectChecked))
-                    {
-                        Injection.UnloadAssembly(instance, assembly);
-                    }
+                    Injection.UnloadAssembly(instance, assembly);
+                }
 
-                    var assembliesToLoad =
-                        newProfile.InstalledAssemblies.Where(a => a.InjectChecked || a.Type == AssemblyType.Library);
+                var assembliesToLoad =
+                    newProfile.InstalledAssemblies.Where(a => a.InjectChecked || a.Type == AssemblyType.Library);
 
-                    foreach (var assembly in assembliesToLoad)
-                    {
-                        Injection.LoadAssembly(instance, assembly);
-                    }
+                foreach (var assembly in assembliesToLoad)
+                {
+                    Injection.LoadAssembly(instance, assembly);
                 }
             }
+
             TextBoxBase_OnTextChanged(null, null);
         }
 
@@ -913,26 +891,22 @@ namespace LeagueSharp.Loader.Views
         {
             if (propertyChangedEventArgs.PropertyName == "Install")
             {
-                if (Injection.IsInjected)
+                foreach (var instance in Injection.InjectedInstances)
                 {
-                    var hwnd = Injection.GetLeagueWnd();
-                    foreach (var instance in hwnd)
+                    if (!Config.Instance.Install)
                     {
-                        if (!Config.Instance.Install)
+                        foreach (var assembly in
+                            Config.Instance.SelectedProfile.InstalledAssemblies.Where(a => a.InjectChecked))
                         {
-                            foreach (var assembly in
-                                Config.Instance.SelectedProfile.InstalledAssemblies.Where(a => a.InjectChecked))
-                            {
-                                Injection.UnloadAssembly(instance, assembly);
-                            }
+                            Injection.UnloadAssembly(instance, assembly);
                         }
-                        else
+                    }
+                    else
+                    {
+                        foreach (var assembly in
+                            Config.Instance.SelectedProfile.InstalledAssemblies.Where(a => a.InjectChecked))
                         {
-                            foreach (var assembly in
-                                Config.Instance.SelectedProfile.InstalledAssemblies.Where(a => a.InjectChecked))
-                            {
-                                Injection.LoadAssembly(instance, assembly);
-                            }
+                            Injection.LoadAssembly(instance, assembly);
                         }
                     }
                 }
@@ -941,7 +915,7 @@ namespace LeagueSharp.Loader.Views
 
         private void TreeView_OnSelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
-            var name = ((TreeViewItem) ((TreeView) sender).SelectedItem).Uid;
+            var name = ((TreeViewItem)((TreeView)sender).SelectedItem).Uid;
             SettingsFrame.Content = Activator.CreateInstance(null, "LeagueSharp.Loader.Views.Settings." + name).Unwrap();
         }
 

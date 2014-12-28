@@ -23,6 +23,7 @@ namespace LeagueSharp.Loader.Class
     #region
 
     using System;
+    using System.Collections.Generic;
     using System.Diagnostics;
     using System.IO;
     using System.Linq;
@@ -36,7 +37,7 @@ namespace LeagueSharp.Loader.Class
         [UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet = CharSet.Unicode)]
         public delegate bool InjectDLLDelegate(int processId, string path);
 
-        public delegate void OnInjectDelegate(EventArgs args);
+        public delegate void OnInjectDelegate(IntPtr hwnd);
 
         public static event OnInjectDelegate OnInject;
 
@@ -63,7 +64,7 @@ namespace LeagueSharp.Loader.Class
 
         public static bool IsInjected
         {
-            get { return GetLeagueProcess().Any(IsProcessInjected); }
+            get { return LeagueProcess.Any(IsProcessInjected); }
         }
 
         [DllImport("kernel32.dll")]
@@ -97,21 +98,25 @@ namespace LeagueSharp.Loader.Class
                 Marshal.GetDelegateForFunctionPointer(procAddress, typeof(InjectDLLDelegate)) as InjectDLLDelegate;
         }
 
-        public static IntPtr[] GetLeagueWnd()
+        public static List<IntPtr> InjectedInstances
         {
-            return Process.GetProcessesByName("League of Legends").Select(p => p.MainWindowHandle).ToArray();;
+            get
+            {
+                return LeagueProcess.Where(IsProcessInjected).Select(p => p.MainWindowHandle).ToList();
+            }
         }
 
-        public static Process[] GetLeagueProcess()
+        public static List<Process> LeagueProcess
         {
-            return Process.GetProcessesByName("League of Legends");
+            get
+            {
+                return Process.GetProcessesByName("League of Legends").ToList();
+            }
         }
 
         public static void Pulse()
         {
-            var leagueProcess = GetLeagueProcess();
-
-            if (leagueProcess == null)
+            if (LeagueProcess == null)
             {
                 return;
             }
@@ -122,7 +127,7 @@ namespace LeagueSharp.Loader.Class
                 return;
             }
 
-            foreach (var instance in leagueProcess)
+            foreach (var instance in LeagueProcess)
             {
                 try
                 {
@@ -139,17 +144,17 @@ namespace LeagueSharp.Loader.Class
 
                         if (OnInject != null)
                         {
-                            OnInject(EventArgs.Empty);
+                            OnInject(instance.MainWindowHandle);
                         }
                     }
                 }
-                catch {}
+                catch { }
             }
         }
 
         public static void LoadAssembly(IntPtr wnd, LeagueSharpAssembly assembly)
         {
-            if (assembly.Type != AssemblyType.Library && assembly.Status == AssemblyStatus.Ready)
+            if (assembly.Type == AssemblyType.Executable && assembly.Status == AssemblyStatus.Ready)
             {
                 var str = string.Format("load \"{0}\"", assembly.PathToBinary);
                 var lParam = new COPYDATASTRUCT { cbData = 1, dwData = str.Length * 2 + 2, lpData = str };
@@ -159,7 +164,7 @@ namespace LeagueSharp.Loader.Class
 
         public static void UnloadAssembly(IntPtr wnd, LeagueSharpAssembly assembly)
         {
-            if (assembly.Type != AssemblyType.Library && assembly.Status == AssemblyStatus.Ready)
+            if (assembly.Type == AssemblyType.Executable && assembly.Status == AssemblyStatus.Ready)
             {
                 var str = string.Format("unload \"{0}\"", Path.GetFileName(assembly.PathToBinary));
                 var lParam = new COPYDATASTRUCT { cbData = 1, dwData = str.Length * 2 + 2, lpData = str };
@@ -183,7 +188,8 @@ namespace LeagueSharp.Loader.Class
         {
             public int cbData;
             public int dwData;
-            [MarshalAs(UnmanagedType.LPWStr)] public string lpData;
+            [MarshalAs(UnmanagedType.LPWStr)]
+            public string lpData;
         }
     }
 }
