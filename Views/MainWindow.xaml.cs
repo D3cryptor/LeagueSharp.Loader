@@ -296,7 +296,7 @@ namespace LeagueSharp.Loader.Views
 
         private void GameSettingOnPropertyChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
         {
-            foreach (var instance in Injection.InjectedInstances)
+            foreach (var instance in Injection.LeagueInstances)
             {
                 Injection.SendConfig(instance);
             }
@@ -322,7 +322,7 @@ namespace LeagueSharp.Loader.Views
                     Config.Instance.SelectedProfile.InstalledAssemblies.Where(
                         a => a.InjectChecked || a.Type == AssemblyType.Library).ToList();
 
-                foreach (var instance in Injection.InjectedInstances)
+                foreach (var instance in Injection.LeagueInstances)
                 {
                     foreach (var assembly in targetAssemblies)
                     {
@@ -350,7 +350,7 @@ namespace LeagueSharp.Loader.Views
                     }
                 }
 
-                foreach (var instance in Injection.InjectedInstances)
+                foreach (var instance in Injection.LeagueInstances)
                 {
                     foreach (var assembly in targetAssemblies)
                     {
@@ -868,7 +868,7 @@ namespace LeagueSharp.Loader.Views
             var oldProfile = (Profile)e.RemovedItems[0];
             var newProfile = (Profile)e.AddedItems[0];
 
-            foreach (var instance in Injection.InjectedInstances)
+            foreach (var instance in Injection.LeagueInstances)
             {
                 foreach (var assembly in oldProfile.InstalledAssemblies.Where(a => a.InjectChecked))
                 {
@@ -891,7 +891,7 @@ namespace LeagueSharp.Loader.Views
         {
             if (propertyChangedEventArgs.PropertyName == "Install")
             {
-                foreach (var instance in Injection.InjectedInstances)
+                foreach (var instance in Injection.LeagueInstances)
                 {
                     if (!Config.Instance.Install)
                     {

@@ -125,14 +125,14 @@ namespace LeagueSharp.Loader.Class
             {
                 if (value)
                 {
-                    foreach (var instance in Injection.InjectedInstances)
+                    foreach (var instance in Injection.LeagueInstances)
                     {
                         Injection.LoadAssembly(instance, this);
                     }
                 }
                 else
                 {
-                    foreach (var instance in Injection.InjectedInstances)
+                    foreach (var instance in Injection.LeagueInstances)
                     {
                         Injection.UnloadAssembly(instance, this);
                     }
