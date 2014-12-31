@@ -82,9 +82,9 @@ namespace LeagueSharp.Loader.Class
         private bool _injectChecked;
         private bool _installChecked;
         private string _pathToProjectFile = "";
-        private ProjectFile _pf;
-        private Project _project;
         private string _svnUrl;
+        private AssemblyType? _type = null;
+        private string _pathToBinary = null;
 
         public LeagueSharpAssembly()
         {
@@ -174,11 +174,16 @@ namespace LeagueSharp.Loader.Class
         {
             get
             {
-                return
-                    Path.Combine(
-                        (Type == AssemblyType.Library ? Directories.CoreDirectory : Directories.AssembliesDir),
-                        (Type == AssemblyType.Library ? "" : PathToProjectFile.GetHashCode().ToString("X")) +
-                        Path.GetFileName(Compiler.GetOutputFilePath(Project)));
+                if (_pathToBinary == null)
+                {
+                    _pathToBinary =
+                        Path.Combine(
+                            (Type == AssemblyType.Library ? Directories.CoreDirectory : Directories.AssembliesDir),
+                            (Type == AssemblyType.Library ? "" : PathToProjectFile.GetHashCode().ToString("X")) +
+                            Path.GetFileName(Compiler.GetOutputFilePath(GetProject())));
+                }
+
+                return _pathToBinary;
             }
         }
 
@@ -187,33 +192,23 @@ namespace LeagueSharp.Loader.Class
             get { return SvnUrl == "" ? "Local" : SvnUrl; }
         }
 
-        public Project Project
-        {
-            get
-            {
-                if (_project != null)
-                {
-                    return _project;
-                }
-
-                RefreshProject();
-
-                return _project;
-            }
-        }
 
         public AssemblyType Type
         {
             get
             {
-                if (Project != null)
+                if (_type == null)
                 {
-                    return Project.GetPropertyValue("OutputType").ToLower().Contains("exe")
-                        ? AssemblyType.Executable
-                        : AssemblyType.Library;
+                    var project = GetProject();
+                    if (project != null)
+                    {
+                        _type = project.GetPropertyValue("OutputType").ToLower().Contains("exe")
+                            ? AssemblyType.Executable
+                            : AssemblyType.Library;
+                    }
                 }
 
-                return AssemblyType.Unknown;
+                return _type ?? AssemblyType.Unknown;
             }
         }
 
@@ -262,13 +257,13 @@ namespace LeagueSharp.Loader.Class
             return PathToProjectFile.GetHashCode();
         }
 
-        public void RefreshProject()
+        public Project GetProject()
         {
             if (File.Exists(PathToProjectFile))
             {
                 try
                 {
-                    _pf = new ProjectFile(PathToProjectFile, Logs.MainLog)
+                    var pf = new ProjectFile(PathToProjectFile, Logs.MainLog)
                     {
                         Configuration = "Release",
                         PlatformTarget = "x86",
@@ -278,14 +273,26 @@ namespace LeagueSharp.Loader.Class
                         PrebuildEvent = true,
                         ResetOutputPath = true
                     };
-                    _pf.Change();
-                    _project = _pf.Project;
+                    pf.Change();
+
+                   /* _pathToBinary =
+                        Path.Combine(
+                            (Type == AssemblyType.Library ? Directories.CoreDirectory : Directories.AssembliesDir),
+                            (Type == AssemblyType.Library ? "" : PathToProjectFile.GetHashCode().ToString("X")) +
+                            Path.GetFileName(Compiler.GetOutputFilePath(pf.Project)));
+
+                    _type = pf.Project.GetPropertyValue("OutputType").ToLower().Contains("exe")
+                        ? AssemblyType.Executable
+                        : AssemblyType.Library;*/
+
+                    return pf.Project;
                 }
                 catch (Exception e)
                 {
                     Utility.Log(LogStatus.Error, "Builder", "Error: " + e, Logs.MainLog);
                 }
             }
+            return null;
         }
 
         public void Update()
@@ -314,14 +321,15 @@ namespace LeagueSharp.Loader.Class
         {
             Status = AssemblyStatus.Compiling;
             OnPropertyChanged("Version");
-            RefreshProject();
-            if (Compiler.Compile(Project, Path.Combine(Directories.LogsDir, Name + ".txt"), Logs.MainLog))
-            {
-                var result = Utility.OverwriteFile(Compiler.GetOutputFilePath(Project), PathToBinary);
+            var project = GetProject();
 
-                Utility.ClearDirectory(Compiler.GetOutputFilePath(Project));
-                Utility.ClearDirectory(Path.Combine(Project.DirectoryPath, "bin"));
-                Utility.ClearDirectory(Path.Combine(Project.DirectoryPath, "obj"));
+            if (Compiler.Compile(project, Path.Combine(Directories.LogsDir, Name + ".txt"), Logs.MainLog))
+            {
+                var result = Utility.OverwriteFile(Compiler.GetOutputFilePath(project), PathToBinary);
+
+                Utility.ClearDirectory(Compiler.GetOutputFilePath(project));
+                Utility.ClearDirectory(Path.Combine(project.DirectoryPath, "bin"));
+                Utility.ClearDirectory(Path.Combine(project.DirectoryPath, "obj"));
 
                 if (result)
                 {

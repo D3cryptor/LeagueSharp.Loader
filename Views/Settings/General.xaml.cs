@@ -63,7 +63,7 @@ namespace LeagueSharp.Loader.Views.Settings
 
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (e.AddedItems.Count <= 0)
+            if (e.AddedItems.Count <= 0 || e.RemovedItems.Count <= 0)
             {
                 return;
             }
