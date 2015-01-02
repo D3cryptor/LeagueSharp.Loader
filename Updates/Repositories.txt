@@ -13,12 +13,16 @@
 <repo>https://github.com/shalzuth/LeagueSharp</repo>
 <repo>https://github.com/xQxCPMxQx/LeagueSharp2</repo>
 <repo>https://github.com/xSalice/LSharp</repo>   
+<repo>https://github.com/brian0305/MasterSeries</repo>
 <repo>https://github.com/diabaths/sharperino</repo>
 <repo>https://github.com/DZ191/LeagueSharp</repo>
 <repo>https://github.com/FlapperDoodlez/LeagueSharp</repo>
 <repo>https://github.com/InjectionDev/LeagueSharp/</repo>
+<repo>https://github.com/JackisSharp/leaguesharp</repo>
+<repo>https://github.com/metaphorce/leaguesharp</repo>
 <repo>https://github.com/SephLeague/LeagueSharp</repo>
 <repo>https://github.com/SKOBoL/LeagueSharp</repo>
+<repo>https://github.com/yol0swag/LeagueSharp</repo>
 <repo>https://github.com/Areidz/Leaguesharp</repo>
 <repo>https://github.com/DangerousMindLoL/league-sharp</repo>
 <repo>https://github.com/fueledbyflux/LeagueSharp-Public</repo>
