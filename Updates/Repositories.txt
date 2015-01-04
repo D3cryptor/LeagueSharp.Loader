@@ -5,7 +5,6 @@
 <repo>https://github.com/trees-software/leaguesharp</repo>
 <repo>https://github.com/blm95/LeagueSharp2</repo>
 <repo>https://github.com/ChewyMoon/ChewyMoonScripts</repo>
-<repo>https://github.com/detuks/LeagueSharp</repo>
 <repo>https://github.com/h3h3/LeagueSharp</repo>
 <repo>https://github.com/Hellsing/LeagueSharp</repo>
 <repo>https://github.com/Kurisu44/Leaguesharp</repo>
@@ -17,11 +16,14 @@
 <repo>https://github.com/diabaths/sharperino</repo>
 <repo>https://github.com/DZ191/LeagueSharp</repo>
 <repo>https://github.com/FlapperDoodlez/LeagueSharp</repo>
+<repo>https://github.com/imsosharp/leaguesharp</repo>
 <repo>https://github.com/InjectionDev/LeagueSharp/</repo>
 <repo>https://github.com/JackisSharp/leaguesharp</repo>
 <repo>https://github.com/metaphorce/leaguesharp</repo>
 <repo>https://github.com/SephLeague/LeagueSharp</repo>
 <repo>https://github.com/SKOBoL/LeagueSharp</repo>
+<repo>https://github.com/TheSaltyWaffle/LeagueSharp</repo>
+<repo>https://github.com/WorstPing/LeagueSharp</repo>
 <repo>https://github.com/yol0swag/LeagueSharp</repo>
 <repo>https://github.com/Areidz/Leaguesharp</repo>
 <repo>https://github.com/DangerousMindLoL/league-sharp</repo>
