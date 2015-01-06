@@ -87,7 +87,7 @@ namespace LeagueSharp.Loader.Class
 
         public static void UpdateLoader(Tuple<bool, string> versionCheckResult)
         {
-            if (versionCheckResult.Item1)
+            if (versionCheckResult.Item1 && (versionCheckResult.Item2.StartsWith("https://github.com/LeagueSharp/") || versionCheckResult.Item2.StartsWith("https://github.com/joduskame/") || versionCheckResult.Item2.StartsWith("https://github.com/Esk0r/")))
             {
                 var window = new UpdateWindow();
                 window.UpdateUrl = versionCheckResult.Item2;
@@ -124,7 +124,7 @@ namespace LeagueSharp.Loader.Class
                             return new Tuple<bool, bool?, string>(false, false, message);
                         }
 
-                        if (updateInfo.version != Utility.Md5Checksum(Directories.CoreFilePath)) //Update needed
+                        if (updateInfo.version != Utility.Md5Checksum(Directories.CoreFilePath) && updateInfo.url.StartsWith("https://github.com/joduskame/")) //Update needed
                         {
                             if (MainWindow != null)
                             {
