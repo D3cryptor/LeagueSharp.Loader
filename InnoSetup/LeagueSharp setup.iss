@@ -1,6 +1,6 @@
 #dim Version[4]
 #expr ParseVersion("..\bin\Release\LeagueSharp.Loader.exe", Version[0], Version[1], Version[2], Version[3])
-#define MyAppVersion Str(Version[0]) + "." + Str(Version[1]) + "." + Str(Version[2])
+#define MyAppVersion Str(Version[0]) + "." + Str(Version[1]) + "." + Str(Version[2]) + "." + Str(Version[3])
 #define MyAppName "LeagueSharp"
 #define MyAppExeName "LeagueSharp.Loader.exe"
 
@@ -35,10 +35,8 @@ Source: "..\bin\Release\System\LeagueSharp.dll"; DestDir: "{app}\System\"; Flags
 Source: "..\bin\Release\System\LeagueSharp.xml"; DestDir: "{app}\System\"; Flags: ignoreversion
 Source: "..\bin\Release\System\SharpDX.Direct3D9.dll"; DestDir: "{app}\System\"; Flags: ignoreversion
 Source: "..\bin\Release\System\SharpDX.dll"; DestDir: "{app}\System\"; Flags: ignoreversion
-Source: "..\bin\Release\System\SharpDX.Toolkit.dll"; DestDir: "{app}\System\"; Flags: ignoreversion
-Source: "..\bin\Release\System\SharpDX.Toolkit.Graphics.dll"; DestDir: "{app}\System\"; Flags: ignoreversion
-Source: "..\bin\Release\System\SharpDX.Toolkit.Graphics.xml"; DestDir: "{app}\System\"; Flags: ignoreversion
-Source: "..\bin\Release\System\SharpDX.Toolkit.xml"; DestDir: "{app}\System\"; Flags: ignoreversion
+Source: "..\bin\Release\System\SharpDX.XInput.dll"; DestDir: "{app}\System\"; Flags: ignoreversion
+Source: "..\bin\Release\System\BehaviorSharp.dll"; DestDir: "{app}\System\"; Flags: ignoreversion
 Source: "..\bin\Release\System\clipper_library.dll"; DestDir: "{app}\System\"; Flags: ignoreversion
 Source: "..\translations\*.xml"; DestDir: "{app}\translations\"; Flags: ignoreversion
 
