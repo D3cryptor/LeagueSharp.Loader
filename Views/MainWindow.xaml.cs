@@ -505,7 +505,7 @@ namespace LeagueSharp.Loader.Views
             PrepareAssemblies(InstalledAssembliesDataGrid.SelectedItems.Cast<LeagueSharpAssembly>(), true, true);
         }
 
-        private void PrepareAssemblies(IEnumerable<LeagueSharpAssembly> assemblies, bool update, bool compile)
+        private void PrepareAssemblies(IEnumerable<LeagueSharpAssembly> assemblies, bool update, bool compile, bool updateCommonLibOnly = false)
         {
             if (Working)
             {
@@ -519,15 +519,14 @@ namespace LeagueSharp.Loader.Views
             AssembliesWorker.WorkerSupportsCancellation = true;
             AssembliesWorker.DoWork += delegate
             {
-                if (update)
+                if (update || updateCommonLibOnly)
                 {
                     var updateList = leagueSharpAssemblies.GroupBy(a => a.SvnUrl).Select(g => g.First());
 
                     Parallel.ForEach(
-                        updateList, new ParallelOptions { MaxDegreeOfParallelism = 5 }, (assembly, state) =>
+                        updateList.Where(a => !updateCommonLibOnly || a.SvnUrl == "https://github.com/LeagueSharp/LeagueSharpCommon" ), new ParallelOptions { MaxDegreeOfParallelism = 5 }, (assembly, state) =>
                         {
                             assembly.Update();
-
                             if (AssembliesWorker.CancellationPending)
                             {
                                 AssembliesWorkerCancelled = true;
@@ -789,7 +788,7 @@ namespace LeagueSharp.Loader.Views
                 allAssemblies = allAssemblies.Distinct().ToList();
 
                 GitUpdater.ClearUnusedRepos(allAssemblies);
-                PrepareAssemblies(allAssemblies, Config.Instance.FirstRun || Config.Instance.UpdateOnLoad, true);
+                PrepareAssemblies(allAssemblies, Config.Instance.FirstRun || Config.Instance.UpdateOnLoad, true, true);
             }
 
             var text = Clipboard.GetText();
