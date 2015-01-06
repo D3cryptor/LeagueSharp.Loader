@@ -21,7 +21,7 @@
 <repo>https://github.com/JackisSharp/leaguesharp</repo>
 <repo>https://github.com/metaphorce/leaguesharp</repo>
 <repo>https://github.com/SephLeague/LeagueSharp</repo>
-<repo>https://github.com/SKOBoL/LeagueSharp</repo>
+<repo>https://github.com/SKOx0/LeagueSharp</repo>
 <repo>https://github.com/TheSaltyWaffle/LeagueSharp</repo>
 <repo>https://github.com/WorstPing/LeagueSharp</repo>
 <repo>https://github.com/yol0swag/LeagueSharp</repo>
