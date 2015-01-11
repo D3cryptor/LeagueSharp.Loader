@@ -23,13 +23,14 @@ namespace LeagueSharp.Loader.Class
     #region
 
     using System;
+    using System.Linq;
     using System.Collections.Generic;
     using System.ComponentModel;
     using System.IO;
     using System.Reflection;
     using System.Windows;
     using System.Xml.Serialization;
-    using LeagueSharp.Loader.Data;
+    using Data;
     using Microsoft.Build.Evaluation;
 
     #endregion
@@ -155,7 +156,30 @@ namespace LeagueSharp.Loader.Class
 
         public string PathToProjectFile
         {
-            get { return _pathToProjectFile; }
+            get
+            {
+                if (File.Exists(_pathToProjectFile))
+                {
+                    return _pathToProjectFile;
+                }
+
+                try
+                {
+                    var folderToSearch = Path.Combine(Directories.RepositoryDir, SvnUrl.GetHashCode().ToString("X"), "trunk");
+                    var projectFile = Directory.GetFiles(folderToSearch, "*.csproj", SearchOption.AllDirectories)
+                        .FirstOrDefault(file => Path.GetFileNameWithoutExtension(file) == Name);
+                    if (projectFile != default(string))
+                    {
+                        return projectFile;
+                    }
+                }
+                catch (Exception)
+                {
+                    
+                }
+                
+                return _pathToProjectFile;
+            }
             set
             {
                 if (!value.Contains("%AppData%"))

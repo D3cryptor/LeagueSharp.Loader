@@ -505,7 +505,7 @@ namespace LeagueSharp.Loader.Views
             PrepareAssemblies(InstalledAssembliesDataGrid.SelectedItems.Cast<LeagueSharpAssembly>(), true, true);
         }
 
-        private void PrepareAssemblies(IEnumerable<LeagueSharpAssembly> assemblies, bool update, bool compile, bool updateCommonLibOnly = false)
+        public void PrepareAssemblies(IEnumerable<LeagueSharpAssembly> assemblies, bool update, bool compile, bool updateCommonLibOnly = false)
         {
             if (Working)
             {
@@ -616,11 +616,22 @@ namespace LeagueSharp.Loader.Views
                 return;
             }
 
-            var selectedAssembly = (LeagueSharpAssembly)InstalledAssembliesDataGrid.SelectedItems[0];
-            if (selectedAssembly.SvnUrl.ToLower().StartsWith("https://github.com"))
+            var stringToAppend = "";
+            var count = 0;
+            foreach (var selectedAssembly in InstalledAssembliesDataGrid.SelectedItems.Cast<LeagueSharpAssembly>())
             {
-                var user = selectedAssembly.SvnUrl.Remove(0, 19);
-                Clipboard.SetText(string.Format(LSUriScheme.FullName + "project/{0}/{1}/", user, selectedAssembly.Name));
+                if (selectedAssembly.SvnUrl.StartsWith("https://github.com", StringComparison.InvariantCultureIgnoreCase))
+                {
+                    var user = selectedAssembly.SvnUrl.Remove(0, 19);
+                    stringToAppend += string.Format("{0}/{1}/", user, selectedAssembly.Name);
+                    count++;
+                }
+            }
+
+            if (count > 0)
+            {
+                var uri = LSUriScheme.FullName + (count == 1 ? "project" : "projectGroup") + "/" + stringToAppend;
+                Clipboard.SetText(uri);
                 ShowTextMessage(Utility.GetMultiLanguageText("MenuShare"), Utility.GetMultiLanguageText("ShareText"));
             }
         }
