@@ -7,7 +7,7 @@
 <repo>https://github.com/ChewyMoon/ChewyMoonScripts</repo>
 <repo>https://github.com/h3h3/LeagueSharp</repo>
 <repo>https://github.com/Hellsing/LeagueSharp</repo>
-<repo>https://github.com/Kurisu44/Leaguesharp</repo>
+<repo>https://github.com/xKurisu/KurisuSolutions</repo>
 <repo>https://github.com/Screeder/SAwareness</repo>
 <repo>https://github.com/shalzuth/LeagueSharp</repo>
 <repo>https://github.com/xQxCPMxQx/LeagueSharp2</repo>
