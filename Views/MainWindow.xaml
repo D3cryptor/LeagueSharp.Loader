@@ -14,12 +14,44 @@
                       Closing="MainWindow_OnClosing"
                       Icon="../Resources/icon_64x64.ico"
                       ShowIconOnTitleBar="False"
-                      BorderThickness="1"
-                      BorderBrush="DeepSkyBlue"
+                      BorderThickness="0.5"
+                      BorderBrush="Black"
                       SaveWindowPosition="True">
     <Controls:MetroWindow.RightWindowCommands>
         <Controls:WindowCommands>
+            <Button Cursor="Hand" x:Name="NewsButton" Click="NewsButton_OnClick">
+                <StackPanel Orientation="Horizontal" >
+                    <Rectangle Width="14"
+                               Height="14"
+                               Fill="{Binding RelativeSource={RelativeSource AncestorType=Button},
+                                              Path=Foreground}">
+                        <Rectangle.OpacityMask >
+                            <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_page_text}" />
+                        </Rectangle.OpacityMask>
+                    </Rectangle>
+                    <TextBlock Margin="4 0 0 0"
+                               VerticalAlignment="Center"
+                               Text="{DynamicResource News}"/>
+                </StackPanel>
+            </Button>
 
+
+            <Button Cursor="Hand" x:Name="AssemblyButton" Click="AssemblyButton_OnClick">
+                <StackPanel Orientation="Horizontal" >
+                    <Rectangle Width="14"
+                               Height="14"
+                               Fill="{Binding RelativeSource={RelativeSource AncestorType=Button},
+                                              Path=Foreground}">
+                        <Rectangle.OpacityMask >
+                            <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_layer}" />
+                        </Rectangle.OpacityMask>
+                    </Rectangle>
+                    <TextBlock Margin="4 0 0 0"
+                               VerticalAlignment="Center"
+                               Text="{DynamicResource Assemblies}"/>
+                </StackPanel>
+            </Button>
+            
             <Button Cursor="Hand" x:Name="StatusButton" Click="StatusButton_OnClick">
                 <StackPanel Orientation="Horizontal" >
                     <Rectangle Width="14"
@@ -27,7 +59,7 @@
                                Fill="{Binding RelativeSource={RelativeSource AncestorType=Button},
                                               Path=Foreground}">
                         <Rectangle.OpacityMask >
-                            <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_information_circle}" />
+                            <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_refresh}" />
                         </Rectangle.OpacityMask>
                     </Rectangle>
                     <TextBlock Margin="4 0 0 0"
@@ -43,7 +75,7 @@
                                Fill="{Binding RelativeSource={RelativeSource AncestorType=Button},
                                               Path=Foreground}">
                         <Rectangle.OpacityMask>
-                            <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_settings}" />
+                            <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_cog}" />
                         </Rectangle.OpacityMask>
                     </Rectangle>
                     <TextBlock Margin="4 0 0 0"
@@ -58,9 +90,9 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <TabControl Margin="3" Grid.ColumnSpan="2" x:Name="MainTabControl" >
-            <TabItem Header="{DynamicResource News}">
-                <Grid Background="#FFE5E5E5">
+        <TabControl Margin="3,-36,3,3" x:Name="MainTabControl" >
+            <TabItem x:Name="NewsTabItem" Header="News" Height="36" VerticalAlignment="Top">
+                    <Grid Background="#FFE5E5E5">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
@@ -77,11 +109,11 @@
                             </ContextMenu>
                         </tb:TaskbarIcon.ContextMenu>
                     </tb:TaskbarIcon>
-                  <WebBrowser x:Name="Browser" Visibility="Visible" Margin="10" Source="http://api.joduska.me/public/news/html" Grid.ColumnSpan="2"/>
+                    <WebBrowser x:Name="Browser" Visibility="Visible" Margin="10" Source="http://api.joduska.me/public/news/html" Grid.ColumnSpan="2"/>
                 </Grid>
             </TabItem>
-            <TabItem Header="{DynamicResource Assemblies}">
-                <Grid Background="#FFE5E5E5" Margin="0,2,0,-2">
+            <TabItem x:Name="AssembliesTabItem" Header="Assemblies" Height="36" VerticalAlignment="Top">
+                    <Grid Background="#FFE5E5E5" Margin="0,2,0,-2">
                     <DataGrid x:Name="InstalledAssembliesDataGrid" 
                               Margin="10,41,10,40" 
                               CanUserAddRows="False"
