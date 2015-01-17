@@ -98,6 +98,7 @@ namespace LeagueSharp.Loader.Views
 
         private void MainWindow_OnLoaded(object sender, RoutedEventArgs e)
         {
+            Browser.Visibility = Visibility.Hidden;
             DataContext = this;
             GeneralSettingsItem.IsSelected = true;
 
