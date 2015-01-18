@@ -1,4 +1,5 @@
 <repo>https://github.com/LeagueSharp/LeagueSharpCommon</repo>
+<repo>https://github.com/LeagueSharp/LeagueSharp.Network</repo>
 <repo>https://github.com/Beaving/LeagueSharp</repo>
 <repo>https://github.com/Esk0r/LeagueSharp</repo>
 <repo>https://github.com/TC-Crew/L-Assemblies</repo>
