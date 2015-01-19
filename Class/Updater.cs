@@ -97,6 +97,11 @@ namespace LeagueSharp.Loader.Class
 
         public static Tuple<bool, bool?, string> UpdateCore(string LeagueOfLegendsFilePath, bool showMessages)
         {
+            if (Directory.Exists(Path.Combine(Directories.CurrentDirectory, "noupdate")))
+            {
+                return new Tuple<bool, bool?, string>(true, true, Utility.GetMultiLanguageText("NotUpdateNeeded"));
+            }
+
             try
             {
                 var leagueMd5 = Utility.Md5Checksum(LeagueOfLegendsFilePath);
