@@ -65,7 +65,7 @@ namespace LeagueSharp.Loader.Views
 
         public string StatusString
         {
-            get { return Utility.GetMultiLanguageText("UpdateStatus") + ": " + _statusString; }
+            get { return _statusString; }
             set
             {
                 _statusString = value;
@@ -195,7 +195,8 @@ namespace LeagueSharp.Loader.Views
             {
                 gameSetting.PropertyChanged += GameSettingOnPropertyChanged;
             }
-
+            NewsTabItem.Visibility = Visibility.Hidden;
+            AssembliesTabItem.Visibility = Visibility.Hidden;
             SettingsTabItem.Visibility = Visibility.Hidden;
         }
 
@@ -937,6 +938,16 @@ namespace LeagueSharp.Loader.Views
         private void CompileAll_OnClick(object sender, RoutedEventArgs e)
         {
             PrepareAssemblies(Config.Instance.SelectedProfile.InstalledAssemblies, false, true);
+        }
+
+        private void NewsButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            MainTabControl.SelectedIndex = 0;
+        }
+
+        private void AssemblyButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            MainTabControl.SelectedIndex = 1;
         }
 
         private void SettingsButton_OnClick(object sender, RoutedEventArgs e)
