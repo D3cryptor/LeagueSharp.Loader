@@ -210,6 +210,6 @@ pip-log.txt
 
 #Translations
 *.mo
-
+packages/*
 #Mr Developer
 .mr.developer.cfg

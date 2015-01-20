@@ -1,13 +1,15 @@
 <repo>https://github.com/LeagueSharp/LeagueSharpCommon</repo>
+<repo>https://github.com/LeagueSharp/LeagueSharp.Network</repo>
 <repo>https://github.com/Beaving/LeagueSharp</repo>
 <repo>https://github.com/Esk0r/LeagueSharp</repo>
+<repo>https://github.com/legacy3/Marksman</repo>
 <repo>https://github.com/TC-Crew/L-Assemblies</repo>
 <repo>https://github.com/trees-software/leaguesharp</repo>
 <repo>https://github.com/blm95/LeagueSharp2</repo>
 <repo>https://github.com/ChewyMoon/ChewyMoonScripts</repo>
 <repo>https://github.com/h3h3/LeagueSharp</repo>
 <repo>https://github.com/Hellsing/LeagueSharp</repo>
-<repo>https://github.com/Kurisu44/Leaguesharp</repo>
+<repo>https://github.com/xKurisu/KurisuSolutions</repo>
 <repo>https://github.com/Screeder/SAwareness</repo>
 <repo>https://github.com/shalzuth/LeagueSharp</repo>
 <repo>https://github.com/xQxCPMxQx/LeagueSharp2</repo>
@@ -21,7 +23,7 @@
 <repo>https://github.com/JackisSharp/leaguesharp</repo>
 <repo>https://github.com/metaphorce/leaguesharp</repo>
 <repo>https://github.com/SephLeague/LeagueSharp</repo>
-<repo>https://github.com/SKOBoL/LeagueSharp</repo>
+<repo>https://github.com/SKOx0/LeagueSharp</repo>
 <repo>https://github.com/TheSaltyWaffle/LeagueSharp</repo>
 <repo>https://github.com/WorstPing/LeagueSharp</repo>
 <repo>https://github.com/yol0swag/LeagueSharp</repo>
