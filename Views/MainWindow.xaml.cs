@@ -728,6 +728,7 @@ namespace LeagueSharp.Loader.Views
                 Show();
                 Activate();
                 WindowState = WindowState.Normal;
+                MenuItemLabelHide.Header = "Hide";
             }
         }
 
@@ -741,10 +742,12 @@ namespace LeagueSharp.Loader.Views
             if (Visibility == Visibility.Visible)
             {
                 Hide();
+                MenuItemLabelHide.Header = "Show";
             }
             else
             {
                 Show();
+                MenuItemLabelHide.Header = "Hide";
             }
         }
 
@@ -753,6 +756,7 @@ namespace LeagueSharp.Loader.Views
             if (Visibility == Visibility.Visible)
             {
                 Hide();
+                MenuItemLabelHide.Header = "Show";
             }
         }
 
