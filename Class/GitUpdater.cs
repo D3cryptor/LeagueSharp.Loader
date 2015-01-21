@@ -48,10 +48,12 @@ namespace LeagueSharp.Loader.Class
                     {
                         using (var repo = new Repository(dir))
                         {
+                            repo.Config.Set("user.name", Config.Instance.Username);
+                            repo.Config.Set("user.email", Config.Instance.Username + "@joduska.me");
                             repo.Fetch("origin");
-                            repo.Checkout(
-                                "origin/master", new CheckoutOptions { CheckoutModifiers = CheckoutModifiers.Force });
+                            repo.Checkout("origin/master", new CheckoutOptions { CheckoutModifiers = CheckoutModifiers.Force });
                         }
+
                     }
                     else
                     {
@@ -63,6 +65,11 @@ namespace LeagueSharp.Loader.Class
                         }
 
                         Repository.Clone(url, dir, new CloneOptions { Checkout = true });
+                        using (var repo = new Repository(dir))
+                        {
+                            repo.Config.Set("user.name", Config.Instance.Username);
+                            repo.Config.Set("user.email", Config.Instance.Username + "@joduska.me");
+                        }
                     }
 
                     return dir;
@@ -97,7 +104,7 @@ namespace LeagueSharp.Loader.Class
                     }
                 }
             }
-            catch (Exception) {}
+            catch (Exception) { }
         }
     }
 }
