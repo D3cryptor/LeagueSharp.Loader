@@ -65,7 +65,7 @@
     <system:String x:Key="Display Enemy Tower Range">Mostrar el rango de las torres</system:String>
     <system:String x:Key="Extended Zoom">Zoom extendido</system:String>
     <system:String x:Key="UpdateOnStart">Actualizar los ensamblados al iniciar el programa</system:String>
-    <system:String x:Key="Inject">Injectar</system:String>
+    <system:String x:Key="Inject">Inyectar</system:String>
     <system:String x:Key="Logout">Cerrar sesión</system:String>
 	<system:String x:Key="DefaultHotkeys">Restaurar</system:String>
 	
@@ -119,7 +119,7 @@
     <system:String x:Key="Edit">Editar</system:String>
     <system:String x:Key="Clone">Clonar</system:String>
 
-    <system:String x:Key="Checking">Checking...</system:String>
+    <system:String x:Key="Checking">Verificando...</system:String>
     <system:String x:Key="Updated">Actualizado</system:String>
     <system:String x:Key="OUTDATED">DESACTUALIZADO</system:String>
     <system:String x:Key="Unknown">Desconocido</system:String>
