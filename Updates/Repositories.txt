@@ -52,6 +52,7 @@ Known Users
 <repo>https://github.com/ikkeflikkeri/LeagueSharp</repo>
 <repo>https://github.com/jasteph/LeagueSharp</repo>
 <repo>https://github.com/LittleRedEye/LeagueSharp</repo>
+<repo>https://github.com/OneKeyToWin/LeagueRepo</repo>
 <repo>https://github.com/TheKushStyle/LeagueSharp</repo>
 <repo>https://github.com/trus/L-</repo>
 <repo>https://github.com/yol0swag/LeagueSharp</repo> 
