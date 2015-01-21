@@ -104,7 +104,7 @@
                                     IconSource="../Resources/icon_16x16.ico">
                         <tb:TaskbarIcon.ContextMenu>
                             <ContextMenu Style="{x:Null}">
-                                <MenuItem Header="Hide" Click="TrayMenuHide_OnClick"/>
+                                <MenuItem x:Name="MenuItemLabelHide" Header="Hide" Click="TrayMenuHide_OnClick"/>
                                 <MenuItem Header="Close" Click="TrayMenuClose_OnClick"/>
                             </ContextMenu>
                         </tb:TaskbarIcon.ContextMenu>
