@@ -127,8 +127,8 @@
 
     <system:String x:Key="LoaderUpdateFailed">Konnte das Update nicht herunterladen. Fehler:</system:String>
     <system:String x:Key="LeagueNotFound">Konnte "League of Legends.exe" Pfad nicht finden, versuche ein Custom game zu starten.</system:String>
-    <system:String x:Key="UpdateSuccess">LeagueSharp wurde erfolgreich für die installierte League of Legends Version geupdated.</system:String>
-    <system:String x:Key="UpdateUnknown">Konnte www.joduska.me nicht kontaktieren, um zu überprüfen, ob LeagueSharp mit der installierten League of Legends Version kompatibel.</system:String>
+    <system:String x:Key="UpdateSuccess">LeagueSharp wurde erfolgreich für die installierte League of Legends Version aktualisiert.</system:String>
+    <system:String x:Key="UpdateUnknown">Konnte www.joduska.me nicht kontaktieren, um zu überprüfen, ob LeagueSharp mit der installierten League of Legends Version kompatibel ist.</system:String>
     <system:String x:Key="NotUpdateNeeded">LeagueSharp ist mit der installierte League of Legends Version kompatibel.</system:String>
 
 </ResourceDictionary>
