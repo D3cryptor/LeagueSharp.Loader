@@ -11,7 +11,7 @@
     <system:String x:Key="Assemblies">Assemblies</system:String>
 
     <!-- MainWindow Profile selector -->
-    <system:String x:Key="DefaultProfile">HuyNK</system:String>
+    <system:String x:Key="DefaultProfile">Mặc Định</system:String>
 
     <!-- MainWindow Assemblies datagrid columns -->
     <system:String x:Key="ColumnName">Tên</system:String>
