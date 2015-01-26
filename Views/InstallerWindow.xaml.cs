@@ -208,13 +208,14 @@ namespace LeagueSharp.Loader.Views
             var textBox = (TextBox) sender;
             if (textBox != null && string.IsNullOrWhiteSpace(textBox.SelectedText))
             {
-                using (var folderDialog = new FolderBrowserDialog())
+                var folderDialog = new FolderSelectDialog();
+
+                folderDialog.Title = "Select project folder";
+
+                if (folderDialog.ShowDialog())
                 {
-                    if (folderDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-                    {
-                        textBox.Text = folderDialog.SelectedPath;
-                        LocalRadioButton.IsChecked = true;
-                    }
+                    textBox.Text = folderDialog.FileName;
+                    LocalRadioButton.IsChecked = true;
                 }
             }
         }

@@ -106,10 +106,12 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Class\Auth.cs" />
+    <Compile Include="Class\FolderSelectDialog.cs" />
     <Compile Include="Class\KeyboardHook.cs" />
     <Compile Include="Class\Injection.cs" />
     <Compile Include="Class\LSUriScheme.cs" />
     <Compile Include="Class\Profile.cs" />
+    <Compile Include="Class\Reflector.cs" />
     <Compile Include="Class\Updater.cs" />
     <Compile Include="Data\Config.cs" />
     <Compile Include="Class\LeagueSharpAssembly.cs" />
