@@ -17,11 +17,13 @@ Developers
 ----------
 <repo>https://github.com/blm95/LeagueSharp2</repo>
 <repo>https://github.com/ChewyMoon/ChewyMoonScripts</repo>
+<repo>https://github.com/DZ191/LeagueSharp</repo>
 <repo>https://github.com/h3h3/LeagueSharp</repo>
 <repo>https://github.com/Hellsing/LeagueSharp</repo>
 <repo>https://github.com/Screeder/SAwareness</repo>
 <repo>https://github.com/shalzuth/LeagueSharp</repo>
 <repo>https://github.com/trees-software/leaguesharp</repo>
+<repo>https://github.com/WorstPing/LeagueSharp</repo>
 <repo>https://github.com/xKurisu/KurisuSolutions</repo>
 <repo>https://github.com/xQxCPMxQx/LeagueSharp2</repo>
 <repo>https://github.com/xSalice/LSharp</repo>
@@ -30,16 +32,15 @@ Contributors
 ------------
 <repo>https://github.com/brian0305/MasterSeries</repo>
 <repo>https://github.com/diabaths/sharperino</repo>
-<repo>https://github.com/DZ191/LeagueSharp</repo>
 <repo>https://github.com/FlapperDoodlez/LeagueSharp</repo>
 <repo>https://github.com/imsosharp/leaguesharp</repo>
 <repo>https://github.com/InjectionDev/LeagueSharp</repo>
 <repo>https://github.com/JackisSharp/leaguesharp</repo>
 <repo>https://github.com/metaphorce/leaguesharp</repo>
+<repo>https://github.com/OneKeyToWin/LeagueRepo</repo>
 <repo>https://github.com/SephLeague/LeagueSharp</repo>
 <repo>https://github.com/SKOx0/LeagueSharp</repo>
 <repo>https://github.com/TheSaltyWaffle/LeagueSharp</repo>
-<repo>https://github.com/WorstPing/LeagueSharp</repo>
 <repo>https://github.com/yol0swag/LeagueSharp</repo>
 
 Known Users
@@ -52,7 +53,6 @@ Known Users
 <repo>https://github.com/ikkeflikkeri/LeagueSharp</repo>
 <repo>https://github.com/jasteph/LeagueSharp</repo>
 <repo>https://github.com/LittleRedEye/LeagueSharp</repo>
-<repo>https://github.com/OneKeyToWin/LeagueRepo</repo>
 <repo>https://github.com/TheKushStyle/LeagueSharp</repo>
 <repo>https://github.com/trus/L-</repo>
 <repo>https://github.com/yol0swag/LeagueSharp</repo> 
