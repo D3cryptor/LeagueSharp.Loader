@@ -88,6 +88,7 @@
     <!-- UpdateWindow -->
     <system:String x:Key="UpdatingLeagueSharp">Cập nhật Lsharp</system:String>
     <system:String x:Key="Updating">Cập nhật...</system:String>
+    <system:String x:Key="UpdateWaiting">Waiting...</system:String>
     <system:String x:Key="UpdateText">Tải {0} KB / {1} KB.</system:String>
 
     <!-- Errors and other strings -->

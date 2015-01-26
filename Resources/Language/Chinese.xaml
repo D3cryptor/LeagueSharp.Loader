@@ -88,7 +88,8 @@
     <!-- UpdateWindow -->
     <system:String x:Key="UpdatingLeagueSharp">升级LeagueSharp</system:String>
     <system:String x:Key="Updating">升级中...</system:String>
-    <system:String x:Key="UpdateText">已下载{0}KB，总共{1}KB.</system:String>
+    <system:String x:Key="UpdateWaiting">Waiting...</system:String>
+    <system:String x:Key="UpdateText">تم تحميل {0}/{1} كيلوبايت已下载{0}KB，总共{1}KB.</system:String>
 
     <!-- Errors and other strings -->
     <system:String x:Key="WrongAuth">错误账户或密码，请注册 {0}</system:String>

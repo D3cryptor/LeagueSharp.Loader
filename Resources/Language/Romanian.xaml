@@ -88,6 +88,7 @@
     <!-- UpdateWindow -->
     <system:String x:Key="UpdatingLeagueSharp">Actualizare Leaguesharp</system:String>
     <system:String x:Key="Updating">Se actualizeaza...</system:String>
+    <system:String x:Key="UpdateWaiting">Waiting...</system:String>
     <system:String x:Key="UpdateText">Descarcat {0} KB din {1} KB.</system:String>
 
     <!-- Errors and other strings -->

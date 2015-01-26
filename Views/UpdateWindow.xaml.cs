@@ -18,6 +18,8 @@
 
 #endregion
 
+using System.Resources;
+
 namespace LeagueSharp.Loader.Views
 {
     #region
@@ -87,6 +89,12 @@ namespace LeagueSharp.Loader.Views
                 delegate
                 {
                     UpdateProgressBar.Value = downloadProgressChangedEventArgs.ProgressPercentage;
+
+                    if (ProgressText == (String)FindResource("UpdateWaiting"))
+                    {
+                        ProgressText = (String)FindResource("UpdateText");
+                    }
+
                     ProgressLabel.Content = string.Format(
                         ProgressText, downloadProgressChangedEventArgs.BytesReceived / 1024,
                         downloadProgressChangedEventArgs.TotalBytesToReceive / 1024);

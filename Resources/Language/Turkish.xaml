@@ -88,6 +88,7 @@
     <!-- UpdateWindow -->
     <system:String x:Key="UpdatingLeagueSharp">LeagueSharp Güncelleniyor</system:String>
     <system:String x:Key="Updating">Güncelleniyor</system:String>
+    <system:String x:Key="UpdateWaiting">Waiting...</system:String>
     <system:String x:Key="UpdateText">{1} KB'ın {0} KB'ı yüklendi.</system:String>
 
     <!-- Errors and other strings -->
