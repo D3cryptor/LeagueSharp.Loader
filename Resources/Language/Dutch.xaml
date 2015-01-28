@@ -88,7 +88,7 @@
     <!-- UpdateWindow -->
     <system:String x:Key="UpdatingLeagueSharp">LeagueSharp aan het bijwerken</system:String>
     <system:String x:Key="Updating">Aan het bijwerken...</system:String>
-    <system:String x:Key="UpdateWaiting">Waiting...</system:String>
+    <system:String x:Key="UpdateWaiting">Even geduld...</system:String>
     <system:String x:Key="UpdateText">{0} KB van {1} KB gedownload.</system:String>
 
     <!-- Errors and other strings -->
