@@ -32,6 +32,7 @@ Contributors
 ------------
 <repo>https://github.com/brian0305/MasterSeries</repo>
 <repo>https://github.com/FlapperDoodlez/LeagueSharp</repo>
+<repo>https://github.com/fueledbyflux/LeagueSharp-Public</repo>
 <repo>https://github.com/imsosharp/leaguesharp</repo>
 <repo>https://github.com/InjectionDev/LeagueSharp</repo>
 <repo>https://github.com/JackisSharp/leaguesharp</repo>
@@ -48,7 +49,6 @@ Known Users
 <repo>https://github.com/blackyy/LeagueSharp</repo>
 <repo>https://github.com/Crisdmc/LeagueSharp</repo>
 <repo>https://github.com/DarkAzazel/LeagueSharp</repo>
-<repo>https://github.com/fueledbyflux/LeagueSharp-Public</repo>
 <repo>https://github.com/ikkeflikkeri/LeagueSharp</repo>
 <repo>https://github.com/jasteph/LeagueSharp</repo>
 <repo>https://github.com/LittleRedEye/LeagueSharp</repo>
