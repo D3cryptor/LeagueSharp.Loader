@@ -50,7 +50,7 @@ namespace LeagueSharp.Loader
             }
 
             bool createdNew;
-            _mutex = new Mutex(true, @"LeagueSharp.Loader.Mutex", out createdNew);
+            _mutex = new Mutex(true, Utility.Md5Hash(Utility.Md5Checksum(Directories.LoaderFilePath) + Utility.Md5Hash(Environment.UserName)), out createdNew);
             if (!createdNew)
             {
                 if (e.Args.Length > 0)

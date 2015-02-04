@@ -97,7 +97,7 @@ namespace LeagueSharp.Loader.Class
 
         public static Tuple<bool, bool?, string> UpdateCore(string LeagueOfLegendsFilePath, bool showMessages)
         {
-            if (Directory.Exists(Path.Combine(Directories.CurrentDirectory, "noupdate")))
+            if (Directory.Exists(Path.Combine(Directories.CurrentDirectory, "iwanttogetbanned")))
             {
                 return new Tuple<bool, bool?, string>(true, true, Utility.GetMultiLanguageText("NotUpdateNeeded"));
             }
