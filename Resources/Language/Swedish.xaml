@@ -24,6 +24,7 @@
     <system:String x:Key="MenuUpdateAndCompile">Uppdatera och utarbeta</system:String>
     <system:String x:Key="MenuRemove">Ta bort</system:String>
     <system:String x:Key="MenuGitub">GitHub</system:String>
+    <system:String x:Key="MenuGithubAssemblies">GitHub Assemblies</system:String>
     <system:String x:Key="MenuShare">Dela</system:String>
     <system:String x:Key="MenuViewLog">Visa logg</system:String>
 

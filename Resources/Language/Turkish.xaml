@@ -23,7 +23,8 @@
     <!-- MainWindow Assemblies datagrid Menu -->
     <system:String x:Key="MenuUpdateAndCompile">Güncelle ve Derle</system:String>
     <system:String x:Key="MenuRemove">Kaldır</system:String>
-    <system:String x:Key="MenuGitub">GitHub</system:String>
+    <system:String x:Key="MenuGithub">GitHub</system:String>
+    <system:String x:Key="MenuGithubAssemblies">GitHub Assemblyler</system:String>
     <system:String x:Key="MenuShare">Paylaş</system:String>
     <system:String x:Key="MenuViewLog">Kayıt Görüntüle</system:String>
 

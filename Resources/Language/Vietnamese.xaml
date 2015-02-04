@@ -23,7 +23,8 @@
     <!-- MainWindow Assemblies datagrid Menu -->
     <system:String x:Key="MenuUpdateAndCompile">Cập nhật và biên dịch</system:String>
     <system:String x:Key="MenuRemove">Xóa</system:String>
-    <system:String x:Key="MenuGitub">GitHub</system:String>
+    <system:String x:Key="MenuGithub">GitHub</system:String>
+    <system:String x:Key="MenuGithubAssemblies">GitHub Assemblies</system:String>
     <system:String x:Key="MenuShare">Chia sẻ</system:String>
     <system:String x:Key="MenuViewLog">Xem file nhật ký</system:String>
 

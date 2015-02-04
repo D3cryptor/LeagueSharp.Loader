@@ -23,7 +23,8 @@
     <!-- MainWindow Assemblies datagrid Menu -->
     <system:String x:Key="MenuUpdateAndCompile">업데이트, 컴파일</system:String>
     <system:String x:Key="MenuRemove">삭제</system:String>
-    <system:String x:Key="MenuGitub">GitHub</system:String>
+    <system:String x:Key="MenuGithub">GitHub</system:String>
+    <system:String x:Key="MenuGithubAssemblies">GitHub 어셈블리</system:String>
     <system:String x:Key="MenuShare">공유</system:String>
     <system:String x:Key="MenuViewLog">로그 보기</system:String>
 

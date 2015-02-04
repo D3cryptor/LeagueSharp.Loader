@@ -23,7 +23,8 @@
     <!-- MainWindow Assemblies datagrid Menu -->
     <system:String x:Key="MenuUpdateAndCompile">Update en Compileer</system:String>
     <system:String x:Key="MenuRemove">Verwijder</system:String>
-    <system:String x:Key="MenuGitub">GitHub</system:String>
+    <system:String x:Key="MenuGithub">GitHub</system:String>
+    <system:String x:Key="MenuGithubAssemblies">GitHub Assemblies</system:String>
     <system:String x:Key="MenuShare">Deel</system:String>
     <system:String x:Key="MenuViewLog">Bekijk logboek</system:String>
 

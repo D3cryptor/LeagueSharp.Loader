@@ -23,7 +23,8 @@
     <!-- MainWindow Assemblies datagrid Menu -->
     <system:String x:Key="MenuUpdateAndCompile">升级并编译</system:String>
     <system:String x:Key="MenuRemove">清除</system:String>
-    <system:String x:Key="MenuGitub">GitHub</system:String>
+    <system:String x:Key="MenuGithub">GitHub</system:String>
+    <system:String x:Key="MenuGithubAssemblies">GitHub 脚本</system:String>
     <system:String x:Key="MenuShare">分享 </system:String>
     <system:String x:Key="MenuViewLog">查看日志</system:String>
 

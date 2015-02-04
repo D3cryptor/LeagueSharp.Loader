@@ -963,5 +963,20 @@ namespace LeagueSharp.Loader.Views
         {
             CheckForUpdates(true, true, true);
         }
+
+        private void GithubAssembliesItem_OnClick(object sender, RoutedEventArgs e)
+        {
+            if (InstalledAssembliesDataGrid.SelectedItems.Count <= 0)
+            {
+                return;
+            }
+            var selectedAssembly = (LeagueSharpAssembly)InstalledAssembliesDataGrid.SelectedItems[0];
+            if (selectedAssembly.SvnUrl != "")
+            {
+                var window = new InstallerWindow { Owner = this };
+                window.ListAssemblies(selectedAssembly.SvnUrl, true);
+                window.ShowDialog();
+            }
+        }
     }
 }

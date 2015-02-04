@@ -24,6 +24,7 @@
     <system:String x:Key="MenuUpdateAndCompile">Actualizar y compilar</system:String>
     <system:String x:Key="MenuRemove">Eliminar</system:String>
     <system:String x:Key="MenuGithub">Github</system:String>
+    <system:String x:Key="MenuGithubAssemblies">GitHub Ensamblados</system:String>
     <system:String x:Key="MenuShare">Compartir</system:String>
     <system:String x:Key="MenuViewLog">Ver el Log</system:String>
 
