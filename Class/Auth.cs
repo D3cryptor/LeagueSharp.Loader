@@ -23,6 +23,7 @@ namespace LeagueSharp.Loader.Class
     #region
 
     using System;
+    using System.Net;
     using System.Net.Security;
     using System.Net.Sockets;
     using System.Security.Authentication;
@@ -32,7 +33,7 @@ namespace LeagueSharp.Loader.Class
 
     internal static class Auth
     {
-        public const string AuthServer = "5.196.9.111";
+        public const string AuthServer = "loader.joduska.me";
         public static bool Authed { get; set; }
 
         public static Tuple<bool, string> Login(string user, string hash)
@@ -44,35 +45,31 @@ namespace LeagueSharp.Loader.Class
 
             try
             {
-                using (var client = new TcpClient())
+                var data = "p=" + hash;
+                var dataBytes = Encoding.UTF8.GetBytes(data);
+
+                var wr = HttpWebRequest.Create("https://" + AuthServer + "/login/" + WebUtility.UrlEncode(user));
+                wr.Timeout = 2000;
+                wr.ContentLength = dataBytes.Length;
+                wr.Method = "POST";
+                wr.ContentType = "application/x-www-form-urlencoded";
+
+                try
                 {
-                    client.Connect(AuthServer, 8080);
-                    if (client.Connected)
+                    var dataStream = wr.GetRequestStream();
+                    dataStream.Write(dataBytes, 0, dataBytes.Length);
+                    dataStream.Close();
+                    wr.GetResponse();
+                }
+                catch (WebException ex)
+                {
+                    if ((int)((HttpWebResponse)ex.Response).StatusCode == 403)
                     {
-                        var stream = new SslStream(
-                            client.GetStream(), false, (sender, certificate, chain, policyErrors) => { return true; },
-                            null);
-                        try
-                        {
-                            stream.AuthenticateAsClient(AuthServer);
-                            stream.Write(
-                                Encoding.UTF8.GetBytes(
-                                    "{\"action\" : \"ll\", \"user\" : \"" + user.Trim() + "\", \"pass\" : \"" +
-                                    hash.Trim() + "\"}"));
-                            if (stream.ReadByte() == '1')
-                            {
-                                return new Tuple<bool, string>(true, "Success!");
-                            }
-                            return new Tuple<bool, string>(
-                                false, string.Format(Utility.GetMultiLanguageText("WrongAuth"), "www.joduska.me"));
-                        }
-                        catch (AuthenticationException)
-                        {
-                            return new Tuple<bool, string>(false, "Fallback T_T");
-                        }
+                        return new Tuple<bool, string>(false, string.Format(Utility.GetMultiLanguageText("WrongAuth"), "www.joduska.me"));
                     }
                 }
-                return new Tuple<bool, string>(true, "Fallback T_T");
+                
+                return new Tuple<bool, string>(true, "Success");
             }
             catch (Exception)
             {
