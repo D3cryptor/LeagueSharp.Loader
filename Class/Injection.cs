@@ -180,7 +180,7 @@ namespace LeagueSharp.Loader.Class
                             ResolveInjectDLL();
                         }
 
-                        if (injectDLL != null)
+                        if (injectDLL != null && GetWindowText(instance.MainWindowHandle).Contains("League of Legends (TM) Client"))
                         {
                             injectDLL(instance.Id, Directories.CoreFilePath);
 

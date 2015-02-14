@@ -168,7 +168,6 @@ namespace LeagueSharp.Loader.Views
                 () =>
                 {
                     Injection.SendConfig(hwnd);
-                    Thread.Sleep(1500);
                     foreach (var assembly in
                         Config.Instance.SelectedProfile.InstalledAssemblies.Where(a => a.InjectChecked))
                     {
