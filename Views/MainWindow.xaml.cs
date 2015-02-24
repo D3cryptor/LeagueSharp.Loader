@@ -167,6 +167,7 @@ namespace LeagueSharp.Loader.Views
             Injection.OnInject += hwnd => Task.Factory.StartNew(
                 () =>
                 {
+                    Injection.SendLoginCredentials(hwnd, Config.Instance.Username, Config.Instance.Password);
                     Injection.SendConfig(hwnd);
                     foreach (var assembly in
                         Config.Instance.SelectedProfile.InstalledAssemblies.Where(a => a.InjectChecked))

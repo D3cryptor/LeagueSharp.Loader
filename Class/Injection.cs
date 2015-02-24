@@ -215,6 +215,13 @@ namespace LeagueSharp.Loader.Class
             }
         }
 
+        public static void SendLoginCredentials(IntPtr wnd, string user, string passwordHash)
+        {
+            var str = string.Format("LOGIN|{0}|{1}", user, passwordHash);
+            var lParam = new COPYDATASTRUCT { cbData = 2, dwData = str.Length * 2 + 2, lpData = str };
+            SendMessage(wnd, 74U, IntPtr.Zero, ref lParam);
+        }
+
         public static void SendConfig(IntPtr wnd)
         {
             var str = string.Format(
