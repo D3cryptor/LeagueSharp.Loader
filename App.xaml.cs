@@ -70,15 +70,48 @@ namespace LeagueSharp.Loader
 
             Utility.CreateFileFromResource(Directories.ConfigFilePath, "LeagueSharp.Loader.Resources.config.xml");
 
+            var configCorrupted = false;
             try
             {
                 Config.Instance = ((Config) Utility.MapXmlFileToClass(typeof(Config), Directories.ConfigFilePath));
             }
             catch (Exception)
             {
-                MessageBox.Show("Couldn't load config.xml.");
-                File.Delete(Directories.ConfigFilePath);
-                Environment.Exit(0);
+                configCorrupted = true;
+            }
+
+            if (!configCorrupted)
+            {
+                try
+                {
+                    if (File.Exists(Directories.ConfigFilePath + ".bak"))
+                    {
+                        File.Delete(Directories.ConfigFilePath + ".bak");
+                    }
+                    File.Copy(Directories.ConfigFilePath, Directories.ConfigFilePath + ".bak");
+                    File.SetAttributes(Directories.ConfigFilePath + ".bak", FileAttributes.Hidden);
+                }
+                catch (Exception)
+                {
+                    //ignore
+                }
+            }
+            else
+            {
+                try
+                {
+                    Config.Instance = ((Config)Utility.MapXmlFileToClass(typeof(Config), Directories.ConfigFilePath + ".bak"));
+                    File.Delete(Directories.ConfigFilePath);
+                    File.Copy(Directories.ConfigFilePath + ".bak", Directories.ConfigFilePath);
+                    File.SetAttributes(Directories.ConfigFilePath, FileAttributes.Normal);
+                }
+                catch (Exception)
+                {
+                    File.Delete(Directories.ConfigFilePath + ".bak");
+                    File.Delete(Directories.ConfigFilePath);
+                    MessageBox.Show("Couldn't load config.xml.");
+                    Environment.Exit(0);
+                }
             }
 
             //Load the language resources.
