@@ -325,10 +325,7 @@ namespace LeagueSharp.Loader.Views
 
                 foreach (var instance in Injection.LeagueInstances)
                 {
-                    foreach (var assembly in targetAssemblies)
-                    {
-                        Injection.UnloadAssembly(instance, assembly);
-                    }
+                    Injection.UnloadAll(instance);
                 }
 
                 if (vKeyCode == reloadAndCompileVKey)
