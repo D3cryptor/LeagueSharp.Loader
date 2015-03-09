@@ -99,6 +99,7 @@ namespace LeagueSharp.Loader.Views
         private void MainWindow_OnLoaded(object sender, RoutedEventArgs e)
         {
             Browser.Visibility = Visibility.Hidden;
+            TosBrowser.Visibility = Visibility.Hidden;
             DataContext = this;
             GeneralSettingsItem.IsSelected = true;
 
@@ -441,6 +442,7 @@ namespace LeagueSharp.Loader.Views
         {
             Utility.Log(LogStatus.Ok, "Login", string.Format("Succesfully signed in as {0}", username), Logs.MainLog);
             Browser.Visibility = Visibility.Visible;
+            TosBrowser.Visibility = Visibility.Visible;
             try
             {
                 Utility.MapClassToXmlFile(typeof(Config), Config.Instance, Directories.ConfigFilePath);
@@ -994,6 +996,7 @@ namespace LeagueSharp.Loader.Views
             Config.Instance.TosAccepted = true;
             MainTabControl.SelectedIndex = 1;
             RightWindowCommands.Visibility = Visibility.Visible;
+            TosBrowser.Visibility = Visibility.Collapsed;
         }
 
         private void TosDecline_Click(object sender, RoutedEventArgs e)
