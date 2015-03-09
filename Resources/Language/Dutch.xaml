@@ -34,8 +34,8 @@
     <system:String x:Key="DeleteProfile">Verwijder</system:String>
 
     <!-- MainWindow Buttons -->
-    <system:String x:Key="AcceptTosButton">I Accept</system:String>
-    <system:String x:Key="DeclineTosButton">I Decline</system:String>
+    <system:String x:Key="AcceptTosButton">Accepteer</system:String>
+    <system:String x:Key="DeclineTosButton">Weiger</system:String>
     <system:String x:Key="UpdateAll">Update Alles</system:String>
     <system:String x:Key="CompileAll">Compileer Alles</system:String>
     <system:String x:Key="InstallNewAssembly">Installeer nieuwe assembly</system:String>
