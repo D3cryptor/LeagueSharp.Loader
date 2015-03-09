@@ -69,6 +69,17 @@ namespace LeagueSharp.Loader.Data
         private ConfigSettings _settings;
         private bool _showDevOptions;
         private bool _updateOnLoad;
+        private bool _tosAccepted;
+
+        public bool TosAccepted
+        {
+            get { return _tosAccepted; }
+            set
+            {
+                _tosAccepted = value;
+                OnPropertyChanged("TosAccepted");
+            }
+        }
 
         public string SelectedLanguage
         {

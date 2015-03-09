@@ -34,6 +34,8 @@
     <system:String x:Key="DeleteProfile">삭제</system:String>
 	
     <!-- MainWindow Buttons -->
+    <system:String x:Key="AcceptTosButton">I Accept</system:String>
+    <system:String x:Key="DeclineTosButton">I Decline</system:String>
     <system:String x:Key="UpdateAll">모두 업데이트</system:String>
     <system:String x:Key="CompileAll">모두 컴파일</system:String>
     <system:String x:Key="InstallNewAssembly">어셈블리 설치</system:String>

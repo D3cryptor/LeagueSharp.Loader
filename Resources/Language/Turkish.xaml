@@ -34,6 +34,8 @@
     <system:String x:Key="DeleteProfile">Sil</system:String>
 	
     <!-- MainWindow Buttons -->
+    <system:String x:Key="AcceptTosButton">I Accept</system:String>
+    <system:String x:Key="DeclineTosButton">I Decline</system:String>
     <system:String x:Key="UpdateAll">Hepsini Güncelle</system:String>
     <system:String x:Key="CompileAll">Hepsini Derle</system:String>
     <system:String x:Key="InstallNewAssembly">Yeni Assembly Yükle</system:String>

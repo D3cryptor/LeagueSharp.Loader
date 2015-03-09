@@ -34,6 +34,8 @@
     <system:String x:Key="DeleteProfile">Stergeti</system:String>
 
     <!-- MainWindow Buttons -->
+    <system:String x:Key="AcceptTosButton">I Accept</system:String>
+    <system:String x:Key="DeclineTosButton">I Decline</system:String>
     <system:String x:Key="UpdateAll">Actualizati Tot</system:String>
     <system:String x:Key="CompileAll">Compilati Tot</system:String>
     <system:String x:Key="InstallNewAssembly">Instalati nou ansamblu</system:String>

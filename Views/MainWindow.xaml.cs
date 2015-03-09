@@ -115,6 +115,19 @@ namespace LeagueSharp.Loader.Views
 
             #endregion
 
+            #region ToS
+
+            if (!Config.Instance.TosAccepted)
+            {
+                RightWindowCommands.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                MainTabControl.SelectedIndex = 1;
+            }
+
+            #endregion
+
             if (!File.Exists(Directories.CoreFilePath))
             {
                 MessageBox.Show(string.Format("Couldn't find {0}", Path.GetFileName(Directories.CoreFilePath)));
@@ -943,17 +956,17 @@ namespace LeagueSharp.Loader.Views
 
         private void NewsButton_OnClick(object sender, RoutedEventArgs e)
         {
-            MainTabControl.SelectedIndex = 0;
+            MainTabControl.SelectedIndex = 1;
         }
 
         private void AssemblyButton_OnClick(object sender, RoutedEventArgs e)
         {
-            MainTabControl.SelectedIndex = 1;
+            MainTabControl.SelectedIndex = 2;
         }
 
         private void SettingsButton_OnClick(object sender, RoutedEventArgs e)
         {
-            MainTabControl.SelectedIndex = 2;
+            MainTabControl.SelectedIndex = 3;
         }
 
         private void StatusButton_OnClick(object sender, RoutedEventArgs e)
@@ -974,6 +987,19 @@ namespace LeagueSharp.Loader.Views
                 window.ListAssemblies(selectedAssembly.SvnUrl, true);
                 window.ShowDialog();
             }
+        }
+
+        private void TosAccept_Click(object sender, RoutedEventArgs e)
+        {
+            Config.Instance.TosAccepted = true;
+            MainTabControl.SelectedIndex = 1;
+            RightWindowCommands.Visibility = Visibility.Visible;
+        }
+
+        private void TosDecline_Click(object sender, RoutedEventArgs e)
+        {
+            MainWindow_OnClosing(null, null);
+            Environment.Exit(0);
         }
     }
 }

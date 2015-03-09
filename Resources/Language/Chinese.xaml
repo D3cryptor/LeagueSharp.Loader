@@ -34,6 +34,8 @@
     <system:String x:Key="DeleteProfile">删除</system:String>
 	
     <!-- MainWindow Buttons -->
+    <system:String x:Key="AcceptTosButton">I Accept</system:String>
+    <system:String x:Key="DeclineTosButton">I Decline</system:String>
     <system:String x:Key="UpdateAll">升级所有</system:String>
     <system:String x:Key="CompileAll">编译所有</system:String>
     <system:String x:Key="InstallNewAssembly">下载新脚本</system:String>

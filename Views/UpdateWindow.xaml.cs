@@ -115,6 +115,18 @@ namespace LeagueSharp.Loader.Views
                     Arguments = "/VERYSILENT /DIR=\"" + Directories.CurrentDirectory + "\""
                 }
             }.Start();
+
+            Config.Instance.TosAccepted = false;
+
+            try
+            {
+                Utility.MapClassToXmlFile(typeof(Config), Config.Instance, Directories.ConfigFilePath);
+            }
+            catch
+            {
+                MessageBox.Show(Utility.GetMultiLanguageText("ConfigWriteError"));
+            }
+
             Environment.Exit(0);
         }
     }

@@ -51,7 +51,7 @@
                                Text="{DynamicResource Assemblies}"/>
                 </StackPanel>
             </Button>
-            
+
             <Button Cursor="Hand" x:Name="StatusButton" Click="StatusButton_OnClick">
                 <StackPanel Orientation="Horizontal" >
                     <Rectangle Width="14"
@@ -87,15 +87,16 @@
     </Controls:MetroWindow.RightWindowCommands>
 
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-        </Grid.ColumnDefinitions>
         <TabControl Margin="3,-36,3,3" x:Name="MainTabControl" >
+            <TabItem x:Name="TosTabItem" Height="36" VerticalAlignment="Top" Visibility="Visible">
+                <Grid Background="#FFE5E5E5">
+                    <WebBrowser x:Name="TosBrowser" Visibility="Visible" Margin="10,10,10,32" Source="http://api.joduska.me/public/tos" />
+                    <Button Content="{DynamicResource AcceptTosButton}" HorizontalAlignment="Right" Margin="0,0,90,2" VerticalAlignment="Bottom" Width="75" Click="TosAccept_Click"/>
+                    <Button Content="{DynamicResource DeclineTosButton}" Margin="0,0,10,2" HorizontalAlignment="Right" Width="75" Height="25" VerticalAlignment="Bottom" Click="TosDecline_Click"/>
+                </Grid>
+            </TabItem>
             <TabItem x:Name="NewsTabItem" Header="News" Height="36" VerticalAlignment="Top">
-                    <Grid Background="#FFE5E5E5">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition/>
-                    </Grid.ColumnDefinitions>
+                <Grid Background="#FFE5E5E5">
                     <tb:TaskbarIcon x:Name="TrayIcon"
                                     Visibility="Visible"
                                     ToolTipText="LeagueSharp"
@@ -113,7 +114,7 @@
                 </Grid>
             </TabItem>
             <TabItem x:Name="AssembliesTabItem" Header="Assemblies" Height="36" VerticalAlignment="Top">
-                    <Grid Background="#FFE5E5E5" Margin="0,2,0,-2">
+                <Grid Background="#FFE5E5E5" Margin="0,2,0,-2">
                     <DataGrid x:Name="InstalledAssembliesDataGrid" 
                               Margin="10,41,10,40" 
                               CanUserAddRows="False"

@@ -34,6 +34,8 @@
     <system:String x:Key="DeleteProfile">Ta bort</system:String>
 
     <!-- MainWindow Buttons -->
+    <system:String x:Key="AcceptTosButton">I Accept</system:String>
+    <system:String x:Key="DeclineTosButton">I Decline</system:String>
     <system:String x:Key="UpdateAll">Uppdatera Alla</system:String>
     <system:String x:Key="CompileAll">Utarbeta Alla</system:String>
     <system:String x:Key="InstallNewAssembly">Installera Ny Assembly</system:String>
