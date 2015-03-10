@@ -34,8 +34,8 @@
     <system:String x:Key="DeleteProfile">Eliminar</system:String>
 
     <!-- MainWindow Buttons -->
-    <system:String x:Key="AcceptTosButton">I Accept</system:String>
-    <system:String x:Key="DeclineTosButton">I Decline</system:String>
+    <system:String x:Key="AcceptTosButton">Aceitar</system:String>
+    <system:String x:Key="DeclineTosButton">Recusar</system:String>
     <system:String x:Key="UpdateAll">Actualizar todos</system:String>
     <system:String x:Key="CompileAll">Compilar todos</system:String>
     <system:String x:Key="InstallNewAssembly">Instalar um novo assembly</system:String>
@@ -100,8 +100,8 @@
 	<system:String x:Key="AuthEmpty">Por favor introduza o usuário e palavra-passe.</system:String>
 	<system:String x:Key="FailedToDelete">Não foi possível eliminar o ficheiro da actualização. Por favor reinicia o LeagueSharp.</system:String>
 	<system:String x:Key="WrongVersion">Versão de League Of Legends não suportada. Hash: </system:String>
-	<system:String x:Key="FailedToDownload">Error na descarga.</system:String>
-	<system:String x:Key="FailedToLogin">Error ao iniciar sessão: {0}</system:String>
+	<system:String x:Key="FailedToDownload">Erro na descarga.</system:String>
+	<system:String x:Key="FailedToLogin">Erro ao iniciar sessão: {0}</system:String>
 	<system:String x:Key="Login">Iniciar sessão</system:String>
 	<system:String x:Key="LoginError">Erro ao iniciar sessao como: {0}: {1}</system:String>
 	<system:String x:Key="Uninstall">Desinstalar</system:String>
@@ -129,7 +129,7 @@
     <system:String x:Key="Unknown">Desconhecido</system:String>
     <system:String x:Key="UpdateStatus">Estado</system:String>
 
-    <system:String x:Key="LoaderUpdateFailed">Não foi possível descarregar o update, por favor actualize manualmente. Erro:</system:String>
+    <system:String x:Key="LoaderUpdateFailed">Não foi possível descarregar a atualização, por favor actualize manualmente. Erro:</system:String>
     <system:String x:Key="LeagueNotFound">Não foi possível encontrar a localização do "League of Legends.exe", experimente começar uma partida personalizada.</system:String>
     <system:String x:Key="UpdateSuccess">O LeagueSharp actualizou com sucesso para a versão do league of legends instalado.</system:String>
     <system:String x:Key="UpdateUnknown">Não foi possível determinar se o LeagueSharp está actualizado para versão do league of legends instalado, normalmente isto quer dizer que www.joduska.me está inacessível.</system:String>
