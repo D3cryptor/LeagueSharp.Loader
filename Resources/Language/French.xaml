@@ -11,7 +11,7 @@
     <system:String x:Key="Assemblies">Assemblies</system:String>
 
     <!-- MainWindow Profile selector -->
-    <system:String x:Key="DefaultProfile">Standard</system:String>
+    <system:String x:Key="DefaultProfile">Par défaut</system:String>
 
     <!-- MainWindow Assemblies datagrid columns -->
     <system:String x:Key="ColumnName">Nom</system:String>
@@ -34,8 +34,8 @@
     <system:String x:Key="DeleteProfile">Effacer</system:String>
 
     <!-- MainWindow Buttons -->
-    <system:String x:Key="AcceptTosButton">I Accept</system:String>
-    <system:String x:Key="DeclineTosButton">I Decline</system:String>
+    <system:String x:Key="AcceptTosButton">J'accepte</system:String>
+    <system:String x:Key="DeclineTosButton">Je décline</system:String>
     <system:String x:Key="UpdateAll">Tout actualiser</system:String>
     <system:String x:Key="CompileAll">Tout compiler</system:String>
     <system:String x:Key="InstallNewAssembly">Installer une assembly</system:String>
@@ -45,7 +45,7 @@
 
     <!-- InstallerWindow Tabs -->
     <system:String x:Key="Search">Rechercher</system:String>
-    <system:String x:Key="Select">Selectionner</system:String>
+    <system:String x:Key="Select">Sélectionner</system:String>
 
     <!-- InstallerWindow Search tab -->
     <system:String x:Key="SelectAssembliesText">Où se trouve votre assembly ? :</system:String>
@@ -90,8 +90,8 @@
 
     <!-- UpdateWindow -->
     <system:String x:Key="UpdatingLeagueSharp">Mise à jour de LeagueSharp</system:String>
-    <system:String x:Key="Updating">Mise à Jour...</system:String>
-    <system:String x:Key="UpdateWaiting">Waiting...</system:String>
+    <system:String x:Key="Updating">Mise à jour...</system:String>
+    <system:String x:Key="UpdateWaiting">Attendez...</system:String>
     <system:String x:Key="UpdateText">Téléchargement de {0} KB sur {1} KB.</system:String>
 
     <!-- Errors and other strings -->
@@ -114,7 +114,7 @@
     <system:String x:Key="DownloadingData">Téléchargement des données requises.</system:String>
     <system:String x:Key="Installer">Installer</system:String>
     <system:String x:Key="SuccessfullyInstalled">Les assemblies sélectionnées ont été installées avec succès.</system:String>
-    <system:String x:Key="ErrorInstalling">Une erreur s'est produite pendant l'installation des assemblies, vérifiez les log pour plus de détails.</system:String>
+    <system:String x:Key="ErrorInstalling">Une erreur s'est produite lors de l'installation des assemblies, vérifiez les log pour plus de détails.</system:String>
 
     <system:String x:Key="EnableDeveloper">Activer les options développeurs</system:String>
     <system:String x:Key="Developer">Developpeur</system:String>
@@ -124,14 +124,14 @@
 
     <system:String x:Key="Checking">Verification...</system:String>
     <system:String x:Key="Updated">Mis à jour</system:String>
-    <system:String x:Key="OUTDATED">Non à jour</system:String>
+    <system:String x:Key="OUTDATED">Pas à jour</system:String>
     <system:String x:Key="Unknown">Inconnu</system:String>
-    <system:String x:Key="UpdateStatus">Status</system:String>
+    <system:String x:Key="UpdateStatus">Statut</system:String>
 
-    <system:String x:Key="LoaderUpdateFailed">Impossible de télécharger la mise à jour, veuillez la faire manuellement. Erreur:</system:String>
+    <system:String x:Key="LoaderUpdateFailed">Erreur - Impossible de télécharger la mise à jour, veuillez le faire manuellement :</system:String>
     <system:String x:Key="LeagueNotFound">Impossible de trouver "League of Legends.exe", essayez de lancer une partie personnalisée.</system:String>
     <system:String x:Key="UpdateSuccess">LeagueSharp à bien été mis à jour pour la version de League of Legends installée.</system:String>
     <system:String x:Key="UpdateUnknown">Impossible de vérifier si LeagueSharp à bien été mis à jour, www.joduska.me est probablement inaccessible.</system:String>
-    <system:String x:Key="NotUpdateNeeded">LeagueSharp est bien à jour pour la version de League of Legends installée.</system:String>
+    <system:String x:Key="NotUpdateNeeded">LeagueSharp est bien à jour pour la version actuelle de League of Legends.</system:String>
 
 </ResourceDictionary>
