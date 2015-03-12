@@ -170,6 +170,7 @@ namespace LeagueSharp.Loader.Class
                         .FirstOrDefault(file => Path.GetFileNameWithoutExtension(file) == Name);
                     if (projectFile != default(string))
                     {
+                        _pathToProjectFile = projectFile;
                         return projectFile;
                     }
                 }
