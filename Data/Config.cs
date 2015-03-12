@@ -37,11 +37,11 @@ namespace LeagueSharp.Loader.Data
     {
         public static readonly string CurrentDirectory = AppDomain.CurrentDomain.BaseDirectory + "\\";
 
-        public static readonly string AppDataDirectory =
+        public static string AppDataDirectory =
             Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "LeagueSharp") + "\\";
 
-        public static readonly string RepositoryDir = Path.Combine(AppDataDirectory, "Repositories") + "\\";
-        public static readonly string AssembliesDir = Path.Combine(AppDataDirectory, "Assemblies") + "\\";
+        public static string RepositoryDir = Path.Combine(AppDataDirectory, "Repositories") + "\\";
+        public static string AssembliesDir = Path.Combine(AppDataDirectory, "Assemblies") + "\\";
         public static readonly string CoreDirectory = Path.Combine(CurrentDirectory, "System") + "\\";
         public static readonly string LogsDir = Path.Combine(CurrentDirectory, "Logs") + "\\";
 
@@ -70,6 +70,17 @@ namespace LeagueSharp.Loader.Data
         private bool _showDevOptions;
         private bool _updateOnLoad;
         private bool _tosAccepted;
+        private string _appDirectory;
+
+        public string AppDirectory
+        {
+            get { return _appDirectory; }
+            set
+            {
+                _appDirectory = value;
+                OnPropertyChanged("AppDirectory");
+            }
+        }
 
         public bool TosAccepted
         {

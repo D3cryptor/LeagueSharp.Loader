@@ -114,6 +114,42 @@ namespace LeagueSharp.Loader
                 }
             }
 
+            #region AppData randomization
+
+            try
+            {
+                var oldPath = Path.Combine(Environment.GetFolderPath(
+                    Environment.SpecialFolder.ApplicationData), "LeagueSharp");
+
+                var appPath = Path.Combine(Environment.GetFolderPath(
+                    Environment.SpecialFolder.ApplicationData), "LeagueSharp" + DateTime.Now.Ticks.GetHashCode().ToString("X"));
+
+                if (Directory.Exists(oldPath))
+                {
+                    Directory.Move(oldPath, appPath);
+                }
+
+                if (string.IsNullOrEmpty(Config.Instance.AppDirectory) || !Directory.Exists(Config.Instance.AppDirectory))
+                {
+                    Config.Instance.AppDirectory = appPath;
+                }
+                else
+                {
+                    appPath = Config.Instance.AppDirectory;
+                }
+
+                Directories.AppDataDirectory = appPath + "\\";
+                Directories.RepositoryDir = Path.Combine(Directories.AppDataDirectory, "Repositories") + "\\";
+                Directories.AssembliesDir = Path.Combine(Directories.AppDataDirectory, "Assemblies") + "\\";
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("AppData randomization failed.\n" + ex.Message, "Startup", MessageBoxButton.OK, MessageBoxImage.Error);
+                Environment.Exit(0);
+            }
+
+            #endregion
+
             //Load the language resources.
             var dict = new ResourceDictionary();
 
