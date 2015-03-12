@@ -122,7 +122,7 @@ namespace LeagueSharp.Loader
                     Environment.SpecialFolder.ApplicationData), "LeagueSharp");
 
                 var appPath = Path.Combine(Environment.GetFolderPath(
-                    Environment.SpecialFolder.ApplicationData), "LeagueSharp" + DateTime.Now.Ticks.GetHashCode().ToString("X"));
+                    Environment.SpecialFolder.ApplicationData), "LeagueSharp" + Environment.UserName.GetHashCode().ToString("X"));
 
                 if (Directory.Exists(oldPath))
                 {
