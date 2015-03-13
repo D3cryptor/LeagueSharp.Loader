@@ -121,31 +121,22 @@ namespace LeagueSharp.Loader
                 var oldPath = Path.Combine(Environment.GetFolderPath(
                     Environment.SpecialFolder.ApplicationData), "LeagueSharp");
 
-                var appPath = Path.Combine(Environment.GetFolderPath(
-                    Environment.SpecialFolder.ApplicationData), "LeagueSharp" + Environment.UserName.GetHashCode().ToString("X"));
-
-                if (Directory.Exists(oldPath) && !Directory.Exists(appPath))
+                if (!Directory.Exists(Directories.AppDataDirectory))
                 {
-                    Directory.Move(oldPath, appPath);
+                    Directory.CreateDirectory(Directories.AppDataDirectory);
                 }
 
-                if (string.IsNullOrEmpty(Config.Instance.AppDirectory) || !Directory.Exists(Config.Instance.AppDirectory))
+                if (Directory.Exists(oldPath))
                 {
-                    Config.Instance.AppDirectory = appPath;
+                    Utility.CopyDirectory(oldPath, Directories.AppDataDirectory, true, true);
+                    Utility.ClearDirectory(oldPath);
+                    Directory.Delete(oldPath, true);
                 }
-                else
-                {
-                    appPath = Config.Instance.AppDirectory;
-                }
-
-                Directories.AppDataDirectory = appPath + "\\";
-                Directories.RepositoryDir = Path.Combine(Directories.AppDataDirectory, "Repositories") + "\\";
-                Directories.AssembliesDir = Path.Combine(Directories.AppDataDirectory, "Assemblies") + "\\";
             }
             catch (Exception ex)
             {
                 MessageBox.Show("AppData randomization failed.\n" + ex.Message, "Startup", MessageBoxButton.OK, MessageBoxImage.Error);
-                Environment.Exit(0);
+                Environment.Exit(1);
             }
 
             #endregion

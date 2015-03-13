@@ -37,11 +37,12 @@ namespace LeagueSharp.Loader.Data
     {
         public static readonly string CurrentDirectory = AppDomain.CurrentDomain.BaseDirectory + "\\";
 
-        public static string AppDataDirectory =
-            Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "LeagueSharp") + "\\";
+        public static readonly string AppDataDirectory = 
+            Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "LeagueSharp" + 
+            Environment.UserName.GetHashCode().ToString("X")) + "\\";
 
-        public static string RepositoryDir = Path.Combine(AppDataDirectory, "Repositories") + "\\";
-        public static string AssembliesDir = Path.Combine(AppDataDirectory, "Assemblies") + "\\";
+        public static readonly string RepositoryDir = Path.Combine(AppDataDirectory, "Repositories") + "\\";
+        public static readonly string AssembliesDir = Path.Combine(AppDataDirectory, "Assemblies") + "\\";
         public static readonly string CoreDirectory = Path.Combine(CurrentDirectory, "System") + "\\";
         public static readonly string LogsDir = Path.Combine(CurrentDirectory, "Logs") + "\\";
 

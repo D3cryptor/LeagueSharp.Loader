@@ -174,9 +174,9 @@ namespace LeagueSharp.Loader.Class
                         return projectFile;
                     }
                 }
-                catch (Exception)
+                catch
                 {
-                    
+                    // ignored
                 }
                 
                 return _pathToProjectFile;
@@ -352,7 +352,6 @@ namespace LeagueSharp.Loader.Class
             {
                 var result = Utility.OverwriteFile(Compiler.GetOutputFilePath(project), PathToBinary);
 
-                Utility.ClearDirectory(Compiler.GetOutputFilePath(project));
                 Utility.ClearDirectory(Path.Combine(project.DirectoryPath, "bin"));
                 Utility.ClearDirectory(Path.Combine(project.DirectoryPath, "obj"));
 

@@ -235,19 +235,6 @@ namespace LeagueSharp.Loader.Class
             return Application.Current.FindResource(key).ToString();
         }
 
-        public static void CopyDirectory(string sourcePath, string targetPath)
-        {
-            Directory.CreateDirectory(targetPath);
-            foreach (var dirPath in Directory.GetDirectories(sourcePath, "*", SearchOption.AllDirectories))
-            {
-                Directory.CreateDirectory(dirPath.Replace(sourcePath, targetPath));
-            }
-            foreach (var newPath in Directory.GetFiles(sourcePath, "*.*", SearchOption.AllDirectories))
-            {
-                File.Copy(newPath, newPath.Replace(sourcePath, targetPath), true);
-            }
-        }
-
         public static LeagueSharpAssembly CreateEmptyAssembly(string assemblyName)
         {
             try
@@ -325,6 +312,53 @@ namespace LeagueSharp.Loader.Class
         public static int VersionToInt(Version version)
         {
             return version.Major * 10000000 + version.Minor * 10000 + version.Build * 100 + version.Revision;
+        }
+
+        public static void CopyDirectory(string sourceDirName, string destDirName, bool copySubDirs = false, bool overrideFiles = false)
+        {
+            try
+            {
+                // Get the subdirectories for the specified directory.
+                var dir = new DirectoryInfo(sourceDirName);
+                dir.Attributes = FileAttributes.Directory;
+                var dirs = dir.GetDirectories();
+
+                if (!dir.Exists)
+                {
+                    throw new DirectoryNotFoundException(
+                        "Source directory does not exist or could not be found: "
+                        + sourceDirName);
+                }
+
+                // If the destination directory doesn't exist, create it. 
+                if (!Directory.Exists(destDirName))
+                {
+                    Directory.CreateDirectory(destDirName);
+                }
+
+                // Get the files in the directory and copy them to the new location.
+                var files = dir.GetFiles();
+                foreach (var file in files)
+                {
+                    var temppath = Path.Combine(destDirName, file.Name);
+                    file.Attributes = FileAttributes.Normal;
+                    file.CopyTo(temppath, overrideFiles);
+                }
+
+                // If copying subdirectories, copy them and their contents to new location. 
+                if (copySubDirs)
+                {
+                    foreach (var subdir in dirs)
+                    {
+                        var temppath = Path.Combine(destDirName, subdir.Name);
+                        CopyDirectory(subdir.FullName, temppath, true, overrideFiles);
+                    }
+                }
+            }
+            catch
+            {
+                // ignored
+            }
         }
     }
 }
