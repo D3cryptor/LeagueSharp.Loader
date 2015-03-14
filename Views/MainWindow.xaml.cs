@@ -897,10 +897,7 @@ namespace LeagueSharp.Loader.Views
 
             foreach (var instance in Injection.LeagueInstances)
             {
-                foreach (var assembly in oldProfile.InstalledAssemblies.Where(a => a.InjectChecked))
-                {
-                    Injection.UnloadAssembly(instance, assembly);
-                }
+                Injection.UnloadAll(instance);
 
                 var assembliesToLoad =
                     newProfile.InstalledAssemblies.Where(a => a.InjectChecked || a.Type == AssemblyType.Library);
@@ -922,11 +919,7 @@ namespace LeagueSharp.Loader.Views
                 {
                     if (!Config.Instance.Install)
                     {
-                        foreach (var assembly in
-                            Config.Instance.SelectedProfile.InstalledAssemblies.Where(a => a.InjectChecked))
-                        {
-                            Injection.UnloadAssembly(instance, assembly);
-                        }
+                        Injection.UnloadAll(instance);
                     }
                     else
                     {

@@ -205,16 +205,6 @@ namespace LeagueSharp.Loader.Class
             }
         }
 
-        public static void UnloadAssembly(IntPtr wnd, LeagueSharpAssembly assembly)
-        {
-            if (assembly.Type == AssemblyType.Executable && assembly.Status == AssemblyStatus.Ready)
-            {
-                var str = string.Format("unload \"{0}\"", Path.GetFileName(assembly.PathToBinary));
-                var lParam = new COPYDATASTRUCT { cbData = 1, dwData = str.Length * 2 + 2, lpData = str };
-                SendMessage(wnd, 74U, IntPtr.Zero, ref lParam);
-            }
-        }
-
         public static void UnloadAll(IntPtr wnd)
         {
             const string str = "unload \"all\"";
