@@ -337,45 +337,40 @@ namespace LeagueSharp.Loader.Views
                     Config.Instance.SelectedProfile.InstalledAssemblies.Where(
                         a => a.InjectChecked || a.Type == AssemblyType.Library).ToList();
 
-                Task.Factory.StartNew(() =>
+                foreach (var instance in Injection.LeagueInstances)
                 {
-                    foreach (var instance in Injection.LeagueInstances)
+                    Injection.UnloadAll(instance);
+                }
+
+                if (vKeyCode == reloadAndCompileVKey)
+                {
+                    //Recompile the assemblies:
+                    foreach (var assembly in targetAssemblies)
                     {
-                        Injection.UnloadAll(instance);
-                    }
-
-                    Thread.Sleep(1000);
-
-                    if (vKeyCode == reloadAndCompileVKey)
-                    {
-                        //Recompile the assemblies:
-                        foreach (var assembly in targetAssemblies)
+                        if (assembly.Type == AssemblyType.Library)
                         {
-                            if (assembly.Type == AssemblyType.Library)
-                            {
-                                assembly.Compile();
-                            }
-                        }
-
-                        foreach (var assembly in targetAssemblies)
-                        {
-                            if (assembly.Type != AssemblyType.Library)
-                            {
-                                assembly.Compile();
-                            }
+                            assembly.Compile();
                         }
                     }
 
-                    foreach (var instance in Injection.LeagueInstances)
+                    foreach (var assembly in targetAssemblies)
                     {
-                        foreach (var assembly in targetAssemblies)
+                        if (assembly.Type != AssemblyType.Library)
                         {
-                            Injection.LoadAssembly(instance, assembly);
+                            assembly.Compile();
                         }
-
-                        Injection.SendConfig(instance);
                     }
-                });
+                }
+
+                foreach (var instance in Injection.LeagueInstances)
+                {
+                    foreach (var assembly in targetAssemblies)
+                    {
+                        Injection.LoadAssembly(instance, assembly);
+                    }
+
+                    Injection.SendConfig(instance);
+                }
             }
         }
 
@@ -900,23 +895,18 @@ namespace LeagueSharp.Loader.Views
             var oldProfile = (Profile)e.RemovedItems[0];
             var newProfile = (Profile)e.AddedItems[0];
 
-            Task.Factory.StartNew(() =>
+            foreach (var instance in Injection.LeagueInstances)
             {
-                foreach (var instance in Injection.LeagueInstances)
+                Injection.UnloadAll(instance);
+
+                var assembliesToLoad =
+                    newProfile.InstalledAssemblies.Where(a => a.InjectChecked || a.Type == AssemblyType.Library);
+
+                foreach (var assembly in assembliesToLoad)
                 {
-                    Injection.UnloadAll(instance);
-
-                    Thread.Sleep(1000);
-
-                    var assembliesToLoad =
-                        newProfile.InstalledAssemblies.Where(a => a.InjectChecked || a.Type == AssemblyType.Library);
-
-                    foreach (var assembly in assembliesToLoad)
-                    {
-                        Injection.LoadAssembly(instance, assembly);
-                    }
+                    Injection.LoadAssembly(instance, assembly);
                 }
-            });
+            }
 
             TextBoxBase_OnTextChanged(null, null);
         }
