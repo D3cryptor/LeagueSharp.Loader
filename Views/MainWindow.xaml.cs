@@ -997,5 +997,14 @@ namespace LeagueSharp.Loader.Views
             MainWindow_OnClosing(null, null);
             Environment.Exit(0);
         }
+
+        private void MainWindow_OnDeactivated(object sender, EventArgs e)
+        {
+            if (Injection.IsInjected && Injection.InjectedAssembliesChanged && !Working)
+            {
+                Injection.InjectedAssembliesChanged = false;
+                Injection.ReloadAssemblies();
+            }
+        }
     }
 }

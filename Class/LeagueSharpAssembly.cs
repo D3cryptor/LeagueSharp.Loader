@@ -131,6 +131,10 @@ namespace LeagueSharp.Loader.Class
                         Injection.LoadAssembly(instance, this);
                     }
                 }
+                else
+                {
+                    Injection.InjectedAssembliesChanged = true;
+                }
 
                 _injectChecked = value;
                 OnPropertyChanged("InjectChecked");
