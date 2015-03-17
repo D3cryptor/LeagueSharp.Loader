@@ -92,6 +92,9 @@ namespace LeagueSharp.Loader.Class
         private static extern int GetWindowTextLength(IntPtr hWnd);
 
         [DllImport("user32.dll")]
+        private static extern IntPtr GetForegroundWindow();
+
+        [DllImport("user32.dll")]
         private static extern bool EnumWindows(EnumWindowsProc enumProc, IntPtr lParam);
         private delegate bool EnumWindowsProc(IntPtr hWnd, IntPtr lParam);
 
@@ -122,6 +125,14 @@ namespace LeagueSharp.Loader.Class
             }, IntPtr.Zero);
 
             return windows;
+        }
+
+        internal static bool IsLeagueOfLegendsFocused
+        {
+            get
+            {
+                return GetWindowText(GetForegroundWindow()).Contains("League of Legends (TM) Client");
+            }
         }
 
         private static void ResolveInjectDLL()

@@ -319,7 +319,7 @@ namespace LeagueSharp.Loader.Views
 
         private void KeyboardHookOnOnKeyUpTrigger(int vKeyCode)
         {
-            if (!Injection.IsInjected)
+            if (!Injection.IsInjected || !Injection.IsLeagueOfLegendsFocused)
             {
                 return;
             }
