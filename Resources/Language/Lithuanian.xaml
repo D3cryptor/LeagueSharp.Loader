@@ -1,0 +1,137 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:system="clr-namespace:System;assembly=mscorlib">
+
+    <!-- MainWindow TopBar -->
+    <system:String x:Key="Website">Saitas</system:String>
+    <system:String x:Key="Settings">Nustatymai</system:String>
+
+    <!-- MainWindow Tabs -->
+    <system:String x:Key="News">Naujienos</system:String>
+    <system:String x:Key="Assemblies">Skriptai</system:String>
+
+    <!-- MainWindow Profile selector -->
+    <system:String x:Key="DefaultProfile">Numatytasis</system:String>
+
+    <!-- MainWindow Assemblies datagrid columns -->
+    <system:String x:Key="ColumnName">Pavadinimas</system:String>
+    <system:String x:Key="ColumnType">Tipas</system:String>
+    <system:String x:Key="ColumnVersion">Versija</system:String>
+    <system:String x:Key="ColumnLocation">Lokacija</system:String>
+    <system:String x:Key="ColumnDescription">Aprašymas</system:String>
+
+    <!-- MainWindow Assemblies datagrid Menu -->
+    <system:String x:Key="MenuUpdateAndCompile">Atnaujinti ir kompiliuoti</system:String>
+    <system:String x:Key="MenuRemove">Ištinti</system:String>
+    <system:String x:Key="MenuGithub">GitHub</system:String>
+    <system:String x:Key="MenuGithubAssemblies">GitHub Skriptai</system:String>
+    <system:String x:Key="MenuShare">Dalintis</system:String>
+    <system:String x:Key="MenuViewLog">Žiūrėti log`ą</system:String>
+
+	<!-- MainWindow Profiles Menu -->
+    <system:String x:Key="NewProfile">Naujas</system:String>
+    <system:String x:Key="ChangeName">Keisti pavadinimą</system:String>
+    <system:String x:Key="DeleteProfile">Trinti</system:String>
+	
+    <!-- MainWindow Buttons -->
+    <system:String x:Key="AcceptTosButton">Sutinku</system:String>
+    <system:String x:Key="DeclineTosButton">Nesutinku</system:String>
+    <system:String x:Key="UpdateAll">Viską atnaujinti</system:String>
+    <system:String x:Key="CompileAll">Viską kompiliuoti</system:String>
+    <system:String x:Key="InstallNewAssembly">Instaliuoti skriptą</system:String>
+
+    <!-- InstallerWindow Title -->
+    <system:String x:Key="AssemblyInstaller">Skriptų instaliavimas</system:String>
+
+    <!-- InstallerWindow Tabs -->
+    <system:String x:Key="Search">Paieška</system:String>
+    <system:String x:Key="Select">Pasirinkti</system:String>
+
+    <!-- InstallerWindow Search tab -->
+    <system:String x:Key="SelectAssembliesText">Pasirinkite skripto lokaciją:</system:String>
+    <system:String x:Key="Local">Vidinė</system:String>
+    <system:String x:Key="Github">GitHub</system:String>
+    <system:String x:Key="Installed">Instaliuota</system:String>
+    <system:String x:Key="Next">Toliau</system:String>
+
+    <!-- InstallerWindow Select tab -->
+    <system:String x:Key="SelectAll">Pažymeti viską</system:String>
+    <system:String x:Key="DeselectAll">Nežymėti nieko</system:String>
+    <system:String x:Key="Previous">Atgal</system:String>
+    <system:String x:Key="Add">Pridėti</system:String>
+
+    <!-- Settings General -->
+    <system:String x:Key="General">Pagrindiniai</system:String>
+    <system:String x:Key="GameSettings">Žaidimo nustatymai</system:String>
+    <system:String x:Key="Anti-AFK">Anti-AFK</system:String>
+    <system:String x:Key="Debug Console">Debug konsolė</system:String>
+    <system:String x:Key="Display Enemy Tower Range">Rodyti priešų bokštų liniją</system:String>
+    <system:String x:Key="Extended Zoom">Praplėstas matymas</system:String>
+    <system:String x:Key="UpdateOnStart">Atnaujinti skriptus kaskart paleidus</system:String>
+    <system:String x:Key="Inject">L# Injekcija</system:String>
+    <system:String x:Key="Logout">Atsijungti</system:String>
+    <system:String x:Key="DefaultHotkeys">Atstatyti</system:String>
+	<system:String x:Key="Language">Kalba</system:String>
+	
+    <!-- Settings Hotkeys -->
+    <system:String x:Key="Hotkeys">Spartieji klavišai</system:String>
+    <system:String x:Key="Hotkey">Spartusis klavišas</system:String>
+    <system:String x:Key="Reload the assemblies">Perkrauti skriptus</system:String>
+    <system:String x:Key="Recompile and reload the assemblies">Kompiliuoti ir perkrauti skriptus/system:String>
+    <system:String x:Key="Shows the menu (Press)">Meniu rodymas (Spaudžiant)</system:String>
+    <system:String x:Key="Shows the menu (Toggle)">Meniu rodymas (Įjungiant)</system:String>
+
+    <!-- Settings Log -->
+    <system:String x:Key="Log">Log`as</system:String>
+    <system:String x:Key="Status">Statusas</system:String>
+    <system:String x:Key="Source">Ištakos</system:String>
+    <system:String x:Key="Content">Turinys</system:String>
+    <system:String x:Key="OpenFolder">Atidaryti direktoriją</system:String>
+
+    <!-- UpdateWindow -->
+    <system:String x:Key="UpdatingLeagueSharp">LeagueSharp Atnaujinamas</system:String>
+    <system:String x:Key="Updating">Atnaujinama...</system:String>
+    <system:String x:Key="UpdateWaiting">Laukiama...</system:String>
+    <system:String x:Key="UpdateText">Atsiųsta {0}/{1} KB.</system:String>
+
+    <!-- Errors and other strings -->
+    <system:String x:Key="WrongAuth"Blogas slaptažodis arba prisijungimo vardas. Registruokitės {0}</system:String>
+    <system:String x:Key="AuthEmpty">Neįvestas slaptažodis arba prisijungimo vardas</system:String>
+    <system:String x:Key="FailedToDelete">Atnaujintas failas reikalauja rankinio pašalinimo. Tai padarę prašome perkrauti programą</system:String>
+    <system:String x:Key="WrongVersion">League of Legends versija nepalaikoma. Tai reiškia, kad LeagueSharp šio metu veikia pasenusia versija. Aplankykite forumą norėdami sužinoti daugiau. Koduotė:</system:String>
+    <system:String x:Key="FailedToDownload">Atsiųsti nepavyko.</system:String>
+    <system:String x:Key="FailedToLogin">Prisijungti nepavyko: {0}</system:String>
+    <system:String x:Key="Login">Prisijungimas</system:String>
+    <system:String x:Key="LoginError">Nepavyko prisijungti kaip {0}: {1}</system:String>
+    <system:String x:Key="Uninstall">Išinstaliuoti</system:String>
+    <system:String x:Key="UninstallConfirm">Tikrai norite ištrinti visus pasirinktus skriptus?</system:String>
+    <system:String x:Key="ConfigWriteError">Nepavyko įrašyti į config.xml</system:String>
+    <system:String x:Key="ShareText">Skripto adresas nukopijuotas į iškarpinę.</system:String>
+    <system:String x:Key="LogNotFound">Log`o failas nerastas</system:String>
+    <system:String x:Key="NewProfile2">Naujas profilis</system:String>
+    <system:String x:Key="Rename">Pervadinti</system:String>
+    <system:String x:Key="RenameText">Įveskite naują profilio pavadinimą</system:String>
+    <system:String x:Key="DownloadingData">Siunčiami reikiami duomenys.</system:String>
+    <system:String x:Key="Installer">Diegimo programa</system:String>
+    <system:String x:Key="SuccessfullyInstalled">Skriptai sėkmingai instaliuoti.</system:String>
+    <system:String x:Key="ErrorInstalling">Skripto instaliuoti nepavyko. Daugiau informacijos rasite log`e.</system:String>
+
+    <system:String x:Key="EnableDeveloper">Įgalinti kūrėjo galimybes</system:String>
+    <system:String x:Key="Developer">Kūrėjas</system:String>
+    <system:String x:Key="New">Naujas</system:String>
+    <system:String x:Key="Edit">Redaguoti</system:String>
+    <system:String x:Key="Clone">Klonuoti</system:String>
+    
+	<system:String x:Key="Checking">Tikrinama...</system:String>
+    <system:String x:Key="Updated">Galioja</system:String>
+    <system:String x:Key="OUTDATED">NEGALIOJA</system:String>
+	<system:String x:Key="Unknown">Nežinoma</system:String>
+	<system:String x:Key="UpdateStatus">Statusas</system:String>
+	
+	<system:String x:Key="LoaderUpdateFailed">Parsiųsti atnaujintų failų nepavyko. Prašome tai padaryti rankiniu būdu. Klaida: </system:String>
+    <system:String x:Key="LeagueNotFound">Neįmanoma rasti "League of Legends.exe" lokacijos, pamėginkite paleisti 'Custom Game'.</system:String>
+    <system:String x:Key="UpdateSuccess">LeagueSharp sėkmingai atnaujintas instaliuotai League of Legends versijai.</system:String>
+    <system:String x:Key="UpdateUnknown">Nepavyko nustatyti ar LeagueSharp galioja instaliuotai League of Legends versijai, tai dažniausiai reiškia, kad www.joduska.me neprieinamas.</system:String>
+	<system:String x:Key="NotUpdateNeeded">LeagueSharp jau yra naujausios versijos.</system:String>
+
+</ResourceDictionary>
