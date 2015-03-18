@@ -77,7 +77,7 @@
     <system:String x:Key="Hotkeys">Spartieji klavišai</system:String>
     <system:String x:Key="Hotkey">Spartusis klavišas</system:String>
     <system:String x:Key="Reload the assemblies">Perkrauti skriptus</system:String>
-    <system:String x:Key="Recompile and reload the assemblies">Kompiliuoti ir perkrauti skriptus/system:String>
+    <system:String x:Key="Recompile and reload the assemblies">Kompiliuoti ir perkrauti skriptus</system:String>
     <system:String x:Key="Shows the menu (Press)">Meniu rodymas (Spaudžiant)</system:String>
     <system:String x:Key="Shows the menu (Toggle)">Meniu rodymas (Įjungiant)</system:String>
 
@@ -95,7 +95,7 @@
     <system:String x:Key="UpdateText">Atsiųsta {0}/{1} KB.</system:String>
 
     <!-- Errors and other strings -->
-    <system:String x:Key="WrongAuth"Blogas slaptažodis arba prisijungimo vardas. Registruokitės {0}</system:String>
+    <system:String x:Key="WrongAuth">Blogas slaptažodis arba prisijungimo vardas. Registruokitės {0}</system:String>
     <system:String x:Key="AuthEmpty">Neįvestas slaptažodis arba prisijungimo vardas</system:String>
     <system:String x:Key="FailedToDelete">Atnaujintas failas reikalauja rankinio pašalinimo. Tai padarę prašome perkrauti programą</system:String>
     <system:String x:Key="WrongVersion">League of Legends versija nepalaikoma. Tai reiškia, kad LeagueSharp šio metu veikia pasenusia versija. Aplankykite forumą norėdami sužinoti daugiau. Koduotė:</system:String>

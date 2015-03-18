@@ -201,6 +201,9 @@ namespace LeagueSharp.Loader
                     case "ZH":
                         dict.Source = new Uri("..\\Resources\\Language\\Chinese.xaml", UriKind.Relative);
                         break;
+                    case "LT":
+                        dict.Source = new Uri("..\\Resources\\Language\\Lithuanian.xaml", UriKind.Relative);
+                        break;
                     default:
                         dict.Source = new Uri("..\\Resources\\Language\\English.xaml", UriKind.Relative);
                         break;

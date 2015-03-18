@@ -103,6 +103,7 @@ namespace LeagueSharp.Loader.Views.Settings
             ((ComboBox) sender).Items.Add("Turkish");
             ((ComboBox) sender).Items.Add("Thai");
             ((ComboBox) sender).Items.Add("Vietnamese");
+            ((ComboBox) sender).Items.Add("Lithuanian");
 
             if (Config.Instance.SelectedLanguage != null)
             {
