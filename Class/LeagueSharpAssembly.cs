@@ -124,18 +124,6 @@ namespace LeagueSharp.Loader.Class
             }
             set
             {
-                if (value)
-                {
-                    foreach (var instance in Injection.LeagueInstances)
-                    {
-                        Injection.LoadAssembly(instance, this);
-                    }
-                }
-                else
-                {
-                    Injection.InjectedAssembliesChanged = true;
-                }
-
                 _injectChecked = value;
                 OnPropertyChanged("InjectChecked");
             }

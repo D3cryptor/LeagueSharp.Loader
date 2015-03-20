@@ -163,31 +163,11 @@ namespace LeagueSharp.Loader.Views
 
             Config.Instance.FirstRun = false;
 
-            //Used to reload the assemblies from inside the game.
-            KeyboardHook.SetHook();
-            KeyboardHook.OnKeyUpTrigger += KeyboardHookOnOnKeyUpTrigger;
-            KeyboardHook.HookedKeys.Add(
-                KeyInterop.VirtualKeyFromKey(
-                    Config.Instance.Hotkeys.SelectedHotkeys.First(h => h.Name == "Reload").Hotkey));
-            KeyboardHook.HookedKeys.Add(
-                KeyInterop.VirtualKeyFromKey(
-                    Config.Instance.Hotkeys.SelectedHotkeys.First(h => h.Name == "CompileAndReload").Hotkey));
-
-            foreach (var hk in Config.Instance.Hotkeys.SelectedHotkeys)
-            {
-                hk.PropertyChanged += hk_PropertyChanged;
-            }
-
             Injection.OnInject += hwnd => Task.Factory.StartNew(
                 () =>
                 {
                     Injection.SendLoginCredentials(hwnd, Config.Instance.Username, Config.Instance.Password);
                     Injection.SendConfig(hwnd);
-                    foreach (var assembly in
-                        Config.Instance.SelectedProfile.InstalledAssemblies.Where(a => a.InjectChecked))
-                    {
-                        Injection.LoadAssembly(hwnd, assembly);
-                    }
                 });
 
             InjectThread = new Thread(
@@ -204,7 +184,6 @@ namespace LeagueSharp.Loader.Views
                 });
 
             InjectThread.Start();
-            Config.Instance.PropertyChanged += ConfigOnPropertyChanged;
             foreach (var gameSetting in Config.Instance.Settings.GameSettings)
             {
                 gameSetting.PropertyChanged += GameSettingOnPropertyChanged;
@@ -299,78 +278,11 @@ namespace LeagueSharp.Loader.Views
             UpdaterWorker.RunWorkerAsync();
         }
 
-        private void hk_PropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-            KeyboardHook.HookedKeys.Add(KeyInterop.VirtualKeyFromKey(((HotkeyEntry)sender).Hotkey));
-            try
-            {
-                Utility.MapClassToXmlFile(typeof(Config), Config.Instance, Directories.ConfigFilePath);
-            }
-            catch { }
-        }
-
         private void GameSettingOnPropertyChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
         {
             foreach (var instance in Injection.LeagueInstances)
             {
                 Injection.SendConfig(instance);
-            }
-        }
-
-        private void KeyboardHookOnOnKeyUpTrigger(int vKeyCode)
-        {
-            if (!Injection.IsInjected || !Injection.IsLeagueOfLegendsFocused)
-            {
-                return;
-            }
-
-            var reloadVKey =
-                KeyInterop.VirtualKeyFromKey(
-                    Config.Instance.Hotkeys.SelectedHotkeys.First(h => h.Name == "Reload").Hotkey);
-            var reloadAndCompileVKey =
-                KeyInterop.VirtualKeyFromKey(
-                    Config.Instance.Hotkeys.SelectedHotkeys.First(h => h.Name == "CompileAndReload").Hotkey);
-
-            if (vKeyCode == reloadVKey || vKeyCode == reloadAndCompileVKey)
-            {
-                var targetAssemblies =
-                    Config.Instance.SelectedProfile.InstalledAssemblies.Where(
-                        a => a.InjectChecked || a.Type == AssemblyType.Library).ToList();
-
-                foreach (var instance in Injection.LeagueInstances)
-                {
-                    Injection.UnloadAll(instance);
-                }
-
-                if (vKeyCode == reloadAndCompileVKey)
-                {
-                    //Recompile the assemblies:
-                    foreach (var assembly in targetAssemblies)
-                    {
-                        if (assembly.Type == AssemblyType.Library)
-                        {
-                            assembly.Compile();
-                        }
-                    }
-
-                    foreach (var assembly in targetAssemblies)
-                    {
-                        if (assembly.Type != AssemblyType.Library)
-                        {
-                            assembly.Compile();
-                        }
-                    }
-                }
-
-                foreach (var instance in Injection.LeagueInstances)
-                {
-                    foreach (var assembly in targetAssemblies)
-                    {
-                        Injection.LoadAssembly(instance, assembly);
-                    }
-
-                    Injection.SendConfig(instance);
-                }
             }
         }
 
@@ -478,7 +390,6 @@ namespace LeagueSharp.Loader.Views
                 MessageBox.Show(Utility.GetMultiLanguageText("ConfigWriteError"));
             }
 
-            KeyboardHook.UnHook();
             InjectThread.Abort();
 
             var allAssemblies = new List<LeagueSharpAssembly>();
@@ -817,6 +728,7 @@ namespace LeagueSharp.Loader.Views
 
                 GitUpdater.ClearUnusedRepos(allAssemblies);
                 PrepareAssemblies(allAssemblies, Config.Instance.FirstRun || Config.Instance.UpdateOnLoad, true, true);
+                Shared.ShareInterface<Loader_API>();
             }
 
             var text = Clipboard.GetText();
@@ -892,45 +804,7 @@ namespace LeagueSharp.Loader.Views
                 return;
             }
 
-            var oldProfile = (Profile)e.RemovedItems[0];
-            var newProfile = (Profile)e.AddedItems[0];
-
-            foreach (var instance in Injection.LeagueInstances)
-            {
-                Injection.UnloadAll(instance);
-
-                var assembliesToLoad =
-                    newProfile.InstalledAssemblies.Where(a => a.InjectChecked || a.Type == AssemblyType.Library);
-
-                foreach (var assembly in assembliesToLoad)
-                {
-                    Injection.LoadAssembly(instance, assembly);
-                }
-            }
-
             TextBoxBase_OnTextChanged(null, null);
-        }
-
-        private void ConfigOnPropertyChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
-        {
-            if (propertyChangedEventArgs.PropertyName == "Install")
-            {
-                foreach (var instance in Injection.LeagueInstances)
-                {
-                    if (!Config.Instance.Install)
-                    {
-                        Injection.UnloadAll(instance);
-                    }
-                    else
-                    {
-                        foreach (var assembly in
-                            Config.Instance.SelectedProfile.InstalledAssemblies.Where(a => a.InjectChecked))
-                        {
-                            Injection.LoadAssembly(instance, assembly);
-                        }
-                    }
-                }
-            }
         }
 
         private void TreeView_OnSelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
@@ -996,15 +870,6 @@ namespace LeagueSharp.Loader.Views
         {
             MainWindow_OnClosing(null, null);
             Environment.Exit(0);
-        }
-
-        private void MainWindow_OnDeactivated(object sender, EventArgs e)
-        {
-            if (Injection.IsInjected && Injection.InjectedAssembliesChanged && !Working)
-            {
-                Injection.InjectedAssembliesChanged = false;
-                Injection.ReloadAssemblies();
-            }
         }
     }
 }

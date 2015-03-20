@@ -208,43 +208,6 @@ namespace LeagueSharp.Loader.Class
             }
         }
 
-        public static void LoadAssembly(IntPtr wnd, LeagueSharpAssembly assembly)
-        {
-            if (assembly.Type == AssemblyType.Executable && assembly.Status == AssemblyStatus.Ready)
-            {
-                var str = string.Format("load \"{0}\"", assembly.PathToBinary);
-                var lParam = new COPYDATASTRUCT { cbData = 1, dwData = str.Length * 2 + 2, lpData = str };
-                SendMessage(wnd, 74U, IntPtr.Zero, ref lParam);
-            }
-        }
-
-        public static void UnloadAll(IntPtr wnd)
-        {
-            const string str = "unload \"all\"";
-            var lParam = new COPYDATASTRUCT { cbData = 1, dwData = str.Length * 2 + 2, lpData = str };
-            SendMessage(wnd, 74U, IntPtr.Zero, ref lParam);
-        }
-
-        public static void ReloadAssemblies()
-        {
-            var targetAssemblies =
-                Config.Instance.SelectedProfile.InstalledAssemblies.Where(
-                    a => a.InjectChecked || a.Type == AssemblyType.Library).ToList();
-
-            foreach (var instance in LeagueInstances)
-            {
-                UnloadAll(instance);
-            }
-
-            foreach (var instance in LeagueInstances)
-            {
-                foreach (var assembly in targetAssemblies)
-                {
-                    LoadAssembly(instance, assembly);
-                }
-            }
-        }
-
         public static void SendLoginCredentials(IntPtr wnd, string user, string passwordHash)
         {
             var str = string.Format("LOGIN|{0}|{1}", user, passwordHash);

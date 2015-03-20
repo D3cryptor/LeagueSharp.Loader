@@ -85,6 +85,7 @@
     <Reference Include="System.IO.Compression" />
     <Reference Include="System.IO.Compression.FileSystem" />
     <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Windows.Interactivity">
       <HintPath>packages\MahApps.Metro.1.0.0.0\lib\net45\System.Windows.Interactivity.dll</HintPath>
@@ -107,11 +108,12 @@
     </ApplicationDefinition>
     <Compile Include="Class\Auth.cs" />
     <Compile Include="Class\FolderSelectDialog.cs" />
-    <Compile Include="Class\KeyboardHook.cs" />
     <Compile Include="Class\Injection.cs" />
     <Compile Include="Class\LSUriScheme.cs" />
     <Compile Include="Class\Profile.cs" />
     <Compile Include="Class\Reflector.cs" />
+    <Compile Include="Class\Shared.cs" />
+    <Compile Include="Class\SharedInterface.cs" />
     <Compile Include="Class\Updater.cs" />
     <Compile Include="Data\Config.cs" />
     <Compile Include="Class\LeagueSharpAssembly.cs" />

@@ -11,7 +11,6 @@
                       WindowStartupLocation="CenterScreen" 
                       Loaded="MainWindow_OnLoaded" 
                       Activated="MainWindow_OnActivated"
-                      Deactivated="MainWindow_OnDeactivated"
                       Closing="MainWindow_OnClosing"
                       Icon="../Resources/icon_64x64.ico"
                       ShowIconOnTitleBar="False"
