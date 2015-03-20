@@ -21,6 +21,14 @@ namespace LeagueSharp.Loader.Class
             [OperationContract]
             void Recompile();
 
+            [OperationContract]
+            Tuple<int, int> GetHotkeys();
+
+            [OperationContract]
+            string GetLibrariesDirectory();
+
+            [OperationContract]
+            string GetLeagueSharpDllName();
         };
 
         #endregion Interface definitions

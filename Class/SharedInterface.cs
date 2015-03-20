@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using LeagueSharp.Loader.Data;
 
 namespace LeagueSharp.Loader.Class
@@ -36,5 +38,22 @@ namespace LeagueSharp.Loader.Class
                 }
             }
         }
+
+        public Tuple<int, int> GetHotkeys()
+        {
+            return new Tuple<int, int>(KeyInterop.VirtualKeyFromKey(Config.Instance.Hotkeys.SelectedHotkeys.First(h => h.Name == "Reload").Hotkey),
+                                       KeyInterop.VirtualKeyFromKey(Config.Instance.Hotkeys.SelectedHotkeys.First(h => h.Name == "CompileAndReload").Hotkey));
+        }
+
+        public string GetLibrariesDirectory()
+        {
+            return Directories.CoreDirectory;
+        }
+
+        public string GetLeagueSharpDllName()
+        {
+            return PathRandomizer.LeagueSharpDllName;
+        }
+
     };
 }

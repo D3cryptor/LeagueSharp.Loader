@@ -163,27 +163,7 @@ namespace LeagueSharp.Loader.Views
 
             Config.Instance.FirstRun = false;
 
-            Injection.OnInject += hwnd => Task.Factory.StartNew(
-                () =>
-                {
-                    Injection.SendLoginCredentials(hwnd, Config.Instance.Username, Config.Instance.Password);
-                    Injection.SendConfig(hwnd);
-                });
-
-            InjectThread = new Thread(
-                () =>
-                {
-                    while (true)
-                    {
-                        if (Config.Instance.Install)
-                        {
-                            Injection.Pulse();
-                        }
-                        Thread.Sleep(3000);
-                    }
-                });
-
-            InjectThread.Start();
+            
             foreach (var gameSetting in Config.Instance.Settings.GameSettings)
             {
                 gameSetting.PropertyChanged += GameSettingOnPropertyChanged;
@@ -363,6 +343,30 @@ namespace LeagueSharp.Loader.Views
             {
                 MessageBox.Show(Utility.GetMultiLanguageText("ConfigWriteError"));
             }
+
+            PathRandomizer.CopyFiles();
+
+            Injection.OnInject += hwnd => Task.Factory.StartNew(
+                () =>
+                {
+                    Injection.SendLoginCredentials(hwnd, Config.Instance.Username, Config.Instance.Password);
+                    Injection.SendConfig(hwnd);
+                });
+
+            InjectThread = new Thread(
+                () =>
+                {
+                    while (true)
+                    {
+                        if (Config.Instance.Install)
+                        {
+                            Injection.Pulse();
+                        }
+                        Thread.Sleep(3000);
+                    }
+                });
+
+            InjectThread.Start();
         }
 
         private void InstallButton_Click(object sender, RoutedEventArgs e)

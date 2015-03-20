@@ -130,7 +130,7 @@ namespace LeagueSharp.Loader.Class
             return "^" + Regex.Escape(pattern).Replace(@"\*", ".*").Replace(@"\?", ".") + "$";
         }
 
-        public static bool OverwriteFile(string file, string path)
+        public static bool OverwriteFile(string file, string path, bool copy = false)
         {
             try
             {
@@ -148,7 +148,14 @@ namespace LeagueSharp.Loader.Class
                 }
                 try
                 {
-                    File.Move(file, path);
+                    if (copy)
+                    {
+                        File.Copy(file, path);
+                    }
+                    else
+                    {
+                        File.Move(file, path);
+                    }
                 }
                 catch (Exception e)
                 {

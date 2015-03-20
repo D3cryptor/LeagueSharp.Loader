@@ -42,7 +42,7 @@ namespace LeagueSharp.Loader.Data
             Environment.UserName.GetHashCode().ToString("X")) + "\\";
 
         public static readonly string RepositoryDir = Path.Combine(AppDataDirectory, "Repositories") + "\\";
-        public static readonly string AssembliesDir = Path.Combine(AppDataDirectory, "Assemblies") + "\\";
+        public static readonly string AssembliesDir = Path.Combine(AppDataDirectory, "1") + "\\";
         public static readonly string CoreDirectory = Path.Combine(CurrentDirectory, "System") + "\\";
         public static readonly string LogsDir = Path.Combine(CurrentDirectory, "Logs") + "\\";
 

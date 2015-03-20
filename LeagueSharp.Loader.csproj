@@ -110,6 +110,7 @@
     <Compile Include="Class\FolderSelectDialog.cs" />
     <Compile Include="Class\Injection.cs" />
     <Compile Include="Class\LSUriScheme.cs" />
+    <Compile Include="Class\PathRandomizer.cs" />
     <Compile Include="Class\Profile.cs" />
     <Compile Include="Class\Reflector.cs" />
     <Compile Include="Class\Shared.cs" />

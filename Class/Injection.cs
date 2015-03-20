@@ -42,7 +42,7 @@ namespace LeagueSharp.Loader.Class
 
         public delegate void OnInjectDelegate(IntPtr hwnd);
 
-        public static event OnInjectDelegate OnInject;
+        public static event Injection.OnInjectDelegate OnInject;
 
         public static bool InjectedAssembliesChanged { get; set; }
 
@@ -55,7 +55,7 @@ namespace LeagueSharp.Loader.Class
                     return
                         leagueProcess.Modules.Cast<ProcessModule>()
                             .Any(
-                                processModule => processModule.ModuleName == Path.GetFileName(Directories.CoreFilePath));
+                                processModule => processModule.ModuleName == PathRandomizer.LeagueSharpCoreDllName);
                 }
                 catch (Exception e)
                 {
@@ -137,7 +137,7 @@ namespace LeagueSharp.Loader.Class
 
         private static void ResolveInjectDLL()
         {
-            var hModule = LoadLibrary(Directories.BootstrapFilePath);
+            var hModule = LoadLibrary(PathRandomizer.LeagueSharpBootstrapDllPath);
             if (!(hModule != IntPtr.Zero))
             {
                 return;
@@ -195,7 +195,7 @@ namespace LeagueSharp.Loader.Class
 
                         if (injectDLL != null && GetWindowText(instance.MainWindowHandle).Contains("League of Legends (TM) Client"))
                         {
-                            injectDLL(instance.Id, Directories.CoreFilePath);
+                            injectDLL(instance.Id, PathRandomizer.LeagueSharpCoreDllPath);
 
                             if (OnInject != null)
                             {
