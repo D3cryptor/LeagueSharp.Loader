@@ -1,4 +1,4 @@
-﻿<Controls:MetroWindow x:Class="LeagueSharp.Loader.Views.MainWindow"
+<Controls:MetroWindow x:Class="LeagueSharp.Loader.Views.MainWindow"
                       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                       xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
@@ -369,7 +369,7 @@
 
                     <Button x:Name="InstallButton"  Content="{DynamicResource InstallNewAssembly}" Margin="0,0,10,10" Click="InstallButton_Click" HorizontalAlignment="Right" Width="181" Height="25" VerticalAlignment="Bottom"/>
                     <TextBox x:Name="SearchTextBox" Height="23" Margin="0,10,10,0" TextWrapping="Wrap" VerticalAlignment="Top" TextChanged="TextBoxBase_OnTextChanged" HorizontalAlignment="Right" Width="181" />
-                    <Controls:ProgressRing IsActive="{Binding Working}" HorizontalAlignment="Right" Margin="0,0,22,50" VerticalAlignment="Bottom" Width="64" Height="56"/>
+                    <Controls:ProgressRing IsActive="{Binding Working}" Foreground="{DynamicResource AccentColorBrush}" HorizontalAlignment="Right" Margin="0,0,22,50" VerticalAlignment="Bottom" Width="64" Height="56"/>
                     <Button Content="{DynamicResource UpdateAll}" HorizontalAlignment="Left" Margin="10,0,0,10" Width="108" Height="25" VerticalAlignment="Bottom" Click="UpdateAll_OnClick"/>
                     <Button Content="{DynamicResource CompileAll}" HorizontalAlignment="Left" Margin="123,0,0,10" Width="110" Height="25" VerticalAlignment="Bottom" Click="CompileAll_OnClick"/>
                 </Grid>
