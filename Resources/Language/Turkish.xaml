@@ -72,6 +72,7 @@
     <system:String x:Key="Logout">Çıkış</system:String>
     <system:String x:Key="DefaultHotkeys">Geri Yükle</system:String>
 	<system:String x:Key="Language">Dil</system:String>
+    <system:String x:Key="Color">Color</system:String>
 	
     <!-- Settings Hotkeys -->
     <system:String x:Key="Hotkeys">Kısayollar</system:String>

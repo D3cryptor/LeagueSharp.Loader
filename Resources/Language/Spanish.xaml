@@ -71,7 +71,9 @@
     <system:String x:Key="Inject">Inyectar</system:String>
     <system:String x:Key="Logout">Cerrar sesión</system:String>
 	<system:String x:Key="DefaultHotkeys">Restaurar</system:String>
-	
+    <system:String x:Key="Language">Idioma</system:String>
+    <system:String x:Key="Color">Color</system:String>
+
     <!-- Settings Hotkeys -->
     <system:String x:Key="Hotkeys">Hotkeys</system:String>
     <system:String x:Key="Hotkey">Hotkey</system:String>
@@ -79,8 +81,6 @@
     <system:String x:Key="Recompile and reload the assemblies">Recompilar y recargar los ensamblados</system:String>
     <system:String x:Key="Shows the menu (Press)">Mostrar menu (Press)</system:String>
     <system:String x:Key="Shows the menu (Toggle)">Mostrar menu (Toggle)</system:String>
-
-	<system:String x:Key="Language">Idioma</system:String>
 	
     <!-- Settings Log -->
     <system:String x:Key="Log">Log</system:String>

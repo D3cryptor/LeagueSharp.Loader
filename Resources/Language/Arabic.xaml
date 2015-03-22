@@ -71,7 +71,8 @@
     <system:String x:Key="Inject">حقن</system:String>
     <system:String x:Key="Logout">خروج</system:String>
     <system:String x:Key="DefaultHotkeys">استعادة</system:String>
-        <system:String x:Key="Language">اللغة</system:String>
+    <system:String x:Key="Language">اللغة</system:String>
+    <system:String x:Key="Color">Color</system:String>
        
     <!-- Settings Hotkeys -->
     <system:String x:Key="Hotkeys">مفاتيح الاختصار</system:String>

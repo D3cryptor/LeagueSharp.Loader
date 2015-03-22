@@ -72,6 +72,7 @@
     <system:String x:Key="Logout">退出</system:String>
     <system:String x:Key="DefaultHotkeys">恢复</system:String>
     <system:String x:Key="Language">语言</system:String>
+    <system:String x:Key="Color">Color</system:String>
 	
     <!-- Settings Hotkeys -->
     <system:String x:Key="Hotkeys">热键</system:String>

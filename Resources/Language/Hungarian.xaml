@@ -69,6 +69,7 @@
     <system:String x:Key="Logout">Kijelentkezés</system:String>
     <system:String x:Key="DefaultHotkeys">Visszaállítás</system:String>
 	<system:String x:Key="Language">Nyelv</system:String>
+    <system:String x:Key="Color">Color</system:String>
 	
     <!-- Settings Hotkeys -->
     <system:String x:Key="Hotkeys">Gyorsbillentyűk</system:String>

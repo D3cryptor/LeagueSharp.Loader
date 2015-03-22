@@ -69,6 +69,7 @@
     <system:String x:Key="Logout">離開</system:String>
     <system:String x:Key="DefaultHotkeys">預設值</system:String>
     <system:String x:Key="Language">語言</system:String>
+    <system:String x:Key="Color">Color</system:String>
 	
     <!-- Settings Hotkeys -->
     <system:String x:Key="Hotkeys">快捷鍵</system:String>

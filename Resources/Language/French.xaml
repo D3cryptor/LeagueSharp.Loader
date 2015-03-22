@@ -72,6 +72,7 @@
     <system:String x:Key="Logout">Déconnexion</system:String>
     <system:String x:Key="DefaultHotkeys">Restaurer</system:String>
     <system:String x:Key="Language">Langue</system:String>
+    <system:String x:Key="Color">Color</system:String>
 
     <!-- Settings Hotkeys -->
     <system:String x:Key="Hotkeys">Raccourcis Clavier</system:String>

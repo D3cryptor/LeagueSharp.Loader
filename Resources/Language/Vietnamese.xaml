@@ -72,6 +72,7 @@
     <system:String x:Key="Logout">Thoát</system:String>
     <system:String x:Key="DefaultHotkeys">Khôi phục</system:String>
     <system:String x:Key="Language">Ngôn ngữ</system:String>
+    <system:String x:Key="Color">Color</system:String>
 
     <!-- Settings Hotkeys -->
     <system:String x:Key="Hotkeys">Phím nóng</system:String>

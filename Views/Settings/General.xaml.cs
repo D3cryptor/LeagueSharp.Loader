@@ -1,42 +1,23 @@
-#region LICENSE
-
-// Copyright 2014 LeagueSharp.Loader
-// General.xaml.cs is part of LeagueSharp.Loader.
-// 
-// LeagueSharp.Loader is free software: you can redistribute it and/or modify
-// it under the terms of the GNU General Public License as published by
-// the Free Software Foundation, either version 3 of the License, or
-// (at your option) any later version.
-// 
-// LeagueSharp.Loader is distributed in the hope that it will be useful,
-// but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-// GNU General Public License for more details.
-// 
-// You should have received a copy of the GNU General Public License
-// along with LeagueSharp.Loader. If not, see <http://www.gnu.org/licenses/>.
-
-#endregion
+using System;
+using System.Diagnostics;
+using System.Linq;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Input;
+using LeagueSharp.Loader.Data;
+using MahApps.Metro;
 
 namespace LeagueSharp.Loader.Views.Settings
 {
-    #region
-
-    using System;
-    using System.Diagnostics;
-    using System.Linq;
-    using System.Windows;
-    using System.Windows.Controls;
-    using System.Windows.Input;
-    using LeagueSharp.Loader.Data;
-    using MahApps.Metro;
-    #endregion
-
     public partial class General
     {
-        string[] accentArray = { "Red", "Green", "Blue", "Purple", "Orange", "Lime", "Emerald", "Teal", "Cyan", "Cobalt", "Indigo", "Violet", "Pink", "Magenta", "Crimson", "Amber", "Yellow", "Brown", "Olive", "Steel", "Mauve", "Taupe", "Sienna" };
-        int myAccent = 0;
-        
+        private readonly string[] _accentColors =
+        {
+            "Red", "Green", "Blue", "Purple", "Orange", "Lime", "Emerald", "Teal",
+            "Cyan", "Cobalt", "Indigo", "Violet", "Pink", "Magenta", "Crimson", "Amber", "Yellow", "Brown", "Olive",
+            "Steel", "Mauve", "Taupe", "Sienna"
+        };
+
         public General()
         {
             InitializeComponent();
@@ -54,7 +35,7 @@ namespace LeagueSharp.Loader.Views.Settings
             }
         }
 
-        private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
+        private void Logout_OnClick(object sender, RoutedEventArgs e)
         {
             Config.Instance.Username = "";
             Config.Instance.Password = "";
@@ -91,24 +72,28 @@ namespace LeagueSharp.Loader.Views.Settings
 
             senderBox.Items.Clear();
             senderBox.Items.Add("Arabic");
+            senderBox.Items.Add("Bulgarian");
             senderBox.Items.Add("Chinese");
+            senderBox.Items.Add("Dutch");
             senderBox.Items.Add("English");
+            senderBox.Items.Add("French");
             senderBox.Items.Add("German");
             senderBox.Items.Add("Greek");
-            senderBox.Items.Add("Dutch");
-            senderBox.Items.Add("Spanish");
-            senderBox.Items.Add("Russian");
-            senderBox.Items.Add("Portuguese");
+            senderBox.Items.Add("Hungarian");
             senderBox.Items.Add("Italian");
-            senderBox.Items.Add("French");
             senderBox.Items.Add("Korean");
-            senderBox.Items.Add("Polish");
-            senderBox.Items.Add("Romanian");
-            senderBox.Items.Add("Swedish");
-            senderBox.Items.Add("Turkish");
-            senderBox.Items.Add("Thai");
-            senderBox.Items.Add("Vietnamese");
+            senderBox.Items.Add("Latvian");
             senderBox.Items.Add("Lithuanian");
+            senderBox.Items.Add("Polish");
+            senderBox.Items.Add("Portuguese");
+            senderBox.Items.Add("Romanian");
+            senderBox.Items.Add("Russian");
+            senderBox.Items.Add("Spanish");
+            senderBox.Items.Add("Swedish");
+            senderBox.Items.Add("Thai");
+            senderBox.Items.Add("Traditional-Chinese");
+            senderBox.Items.Add("Turkish");
+            senderBox.Items.Add("Vietnamese");
 
             if (Config.Instance.SelectedLanguage != null)
             {
@@ -117,19 +102,42 @@ namespace LeagueSharp.Loader.Views.Settings
                         .FirstOrDefault(item => item == Config.Instance.SelectedLanguage);
             }
 
-
             //English as default
             if (senderBox.SelectedIndex == -1)
             {
                 senderBox.SelectedIndex = senderBox.Items.IndexOf("English");
             }
         }
-            
-        private void ChangeAccent_OnClick(object sender, RoutedEventArgs e)
+
+        private void Color_Loaded(object sender, RoutedEventArgs e)
         {
-            ThemeManager.ChangeAppStyle(Application.Current, ThemeManager.GetAccent(accentArray[n]), ThemeManager.GetAppTheme("BaseLight"));
-            myAccent = (myAccent + 1) % 23;
+            var colorBox = (ComboBox)sender;
+
+            foreach (var asccent in _accentColors)
+            {
+                colorBox.Items.Add(asccent);
+            }
+
+            if (Config.Instance.SelectedColor != null)
+            {
+                colorBox.SelectedItem = Config.Instance.SelectedColor;
+            }
+
+            if (colorBox.SelectedIndex == -1)
+            {
+                colorBox.SelectedIndex = colorBox.Items.IndexOf("Blue");
+            }
         }
 
+        private void Color_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var color = ((ComboBox)sender).SelectedValue.ToString();
+
+            if (_accentColors.Contains(color))
+            {
+                ThemeManager.ChangeAppStyle(Application.Current, ThemeManager.GetAccent(color), ThemeManager.GetAppTheme("BaseLight"));
+                Config.Instance.SelectedColor = color;
+            }
+        }
     }
 }

@@ -69,6 +69,7 @@
     <system:String x:Key="Logout">Изход</system:String>
     <system:String x:Key="DefaultHotkeys">Възстанови</system:String>
     <system:String x:Key="Language">Език</system:String>
+    <system:String x:Key="Color">Color</system:String>
 
     <!-- Settings Hotkeys -->
     <system:String x:Key="Hotkeys">Горещи клавиши</system:String>

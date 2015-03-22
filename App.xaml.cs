@@ -29,6 +29,7 @@ namespace LeagueSharp.Loader
     using System.Windows;
     using LeagueSharp.Loader.Class;
     using LeagueSharp.Loader.Data;
+    using MahApps.Metro;
 
     #endregion
 
@@ -208,6 +209,11 @@ namespace LeagueSharp.Loader
                         dict.Source = new Uri("..\\Resources\\Language\\English.xaml", UriKind.Relative);
                         break;
                 }
+            }
+
+            if (Config.Instance.SelectedColor != null)
+            {
+                ThemeManager.ChangeAppStyle(Application.Current, ThemeManager.GetAccent(Config.Instance.SelectedColor), ThemeManager.GetAppTheme("BaseLight"));
             }
 
             Resources.MergedDictionaries.Add(dict);

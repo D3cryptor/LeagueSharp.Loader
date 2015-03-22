@@ -72,6 +72,17 @@ namespace LeagueSharp.Loader.Data
         private bool _updateOnLoad;
         private bool _tosAccepted;
         private string _appDirectory;
+        private string _selectedColor;
+
+        public string SelectedColor
+        {
+            get { return _selectedColor; }
+            set
+            {
+                _selectedColor = value;
+                OnPropertyChanged("SelectedColor");
+            }
+        }
 
         public string AppDirectory
         {

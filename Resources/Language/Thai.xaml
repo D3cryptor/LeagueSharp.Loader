@@ -69,6 +69,7 @@
     <system:String x:Key="Logout">ออกจากระบบ</system:String>
     <system:String x:Key="DefaultHotkeys">คืนค่าเริ่มต้น</system:String>
     <system:String x:Key="Language">ภาษา</system:String>
+    <system:String x:Key="Color">Color</system:String>
 	
     <!-- Settings Hotkeys -->
     <system:String x:Key="Hotkeys">ปุ่มคีย์ลัด</system:String>

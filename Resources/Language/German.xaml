@@ -72,6 +72,7 @@
     <system:String x:Key="Logout">Abmelden</system:String>
     <system:String x:Key="DefaultHotkeys">Wiederherstellen</system:String>
     <system:String x:Key="Language">Sprache</system:String>
+    <system:String x:Key="Color">Color</system:String>
 
     <!-- Settings Hotkeys -->
     <system:String x:Key="Hotkeys">Hotkeys</system:String>
@@ -109,7 +110,7 @@
     <system:String x:Key="ShareText">Die Assembly URL wurde im Zwischenspeicher abgelegt.</system:String>
     <system:String x:Key="LogNotFound">Die Logdatei wurde nicht gefunden.</system:String>
     <system:String x:Key="NewProfile2">Neues Profil</system:String>
-    <system:String x:Key="Rename">Umbennen</system:String>
+    <system:String x:Key="Rename">Umbenennen</system:String>
     <system:String x:Key="RenameText">Gebe den neuen Profilnamen ein.</system:String>
     <system:String x:Key="DownloadingData">Die benötigten Daten werden heruntergeladen.</system:String>
     <system:String x:Key="Installer">Assemblies installieren</system:String>

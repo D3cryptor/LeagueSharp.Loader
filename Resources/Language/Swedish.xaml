@@ -72,6 +72,7 @@
     <system:String x:Key="Logout">Logga ut</system:String>
     <system:String x:Key="DefaultHotkeys">Återställ</system:String>
     <system:String x:Key="Language">Språk</system:String>
+    <system:String x:Key="Color">Color</system:String>
 
     <!-- Settings Hotkeys -->
     <system:String x:Key="Hotkeys">Snabbtangenter</system:String>
