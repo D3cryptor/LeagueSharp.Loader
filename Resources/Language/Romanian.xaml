@@ -3,7 +3,7 @@
     xmlns:system="clr-namespace:System;assembly=mscorlib">
 
     <!-- MainWindow TopBar -->
-    <system:String x:Key="Website">Website</system:String>
+    <system:String x:Key="Website">Web-site</system:String>
     <system:String x:Key="Settings">Setari</system:String>
 
     <!-- MainWindow Tabs -->
@@ -34,8 +34,8 @@
     <system:String x:Key="DeleteProfile">Stergeti</system:String>
 
     <!-- MainWindow Buttons -->
-    <system:String x:Key="AcceptTosButton">I Accept</system:String>
-    <system:String x:Key="DeclineTosButton">I Decline</system:String>
+    <system:String x:Key="AcceptTosButton">Eu Accept</system:String>
+    <system:String x:Key="DeclineTosButton">Eu Decline</system:String>
     <system:String x:Key="UpdateAll">Actualizati Tot</system:String>
     <system:String x:Key="CompileAll">Compilati Tot</system:String>
     <system:String x:Key="InstallNewAssembly">Instalati nou ansamblu</system:String>
@@ -86,7 +86,7 @@
     <system:String x:Key="Status">Status</system:String>
     <system:String x:Key="Source">Sursa</system:String>
     <system:String x:Key="Content">Continut</system:String>
-    <system:String x:Key="OpenFolder">Deschideti</system:String>
+    <system:String x:Key="OpenFolder">Deschideti foler</system:String>
 
     <!-- UpdateWindow -->
     <system:String x:Key="UpdatingLeagueSharp">Actualizare Leaguesharp</system:String>
@@ -95,20 +95,20 @@
     <system:String x:Key="UpdateText">Descarcat {0} KB din {1} KB.</system:String>
 
     <!-- Errors and other strings -->
-    <system:String x:Key="WrongAuth">Password sau Username gresit, inregistrativa pe {0}</system:String>
-    <system:String x:Key="AuthEmpty">Password sau username sunt goale</system:String>
+    <system:String x:Key="WrongAuth">Password-ul sau Username-ul este gresit, inregistrativa pe {0}</system:String>
+    <system:String x:Key="AuthEmpty">Password-ul sau Username-ul este gol</system:String>
     <system:String x:Key="FailedToDelete">Nu sa putut sterge fisierul, va rugam sa il stergeti manual si sa restartati LeagueSharp</system:String>
-    <system:String x:Key="WrongVersion">Versiunea din League of Legends nu ieste suportata. Hash:</system:String>
+    <system:String x:Key="WrongVersion">Versiunea din League of Legends nu este suportata. Hash:</system:String>
     <system:String x:Key="FailedToDownload">Download nereusit.</system:String>
     <system:String x:Key="FailedToLogin">Login nereusit: {0}</system:String>
     <system:String x:Key="Login">Login</system:String>
     <system:String x:Key="LoginError">Login nereusit ca {0}: {1}</system:String>
     <system:String x:Key="Uninstall">Dezinstalati</system:String>
-    <system:String x:Key="UninstallConfirm">Sinteti sigur de a dezinstala aceste ansambluri ?</system:String>
+    <system:String x:Key="UninstallConfirm">Sunteti sigur de a dezinstala aceste ansambluri ?</system:String>
     <system:String x:Key="ConfigWriteError">Nu sa putut scrie pe Config.xml</system:String>
-    <system:String x:Key="ShareText">Urlul ansamblului copiat pe clipboard</system:String>
+    <system:String x:Key="ShareText">Url-ul ansamblului copiat pe clipboard</system:String>
     <system:String x:Key="LogNotFound">Fisierul de Log nu a fost gasit</system:String>
-    <system:String x:Key="NewProfile2">Nou profil</system:String>
+    <system:String x:Key="NewProfile2">Profil nou</system:String>
     <system:String x:Key="Rename">Redenumiti</system:String>
     <system:String x:Key="RenameText">Introduceti noua denumire pentru profil</system:String>
     <system:String x:Key="DownloadingData">Se downloadeaza datele necesare</system:String>
@@ -116,22 +116,22 @@
     <system:String x:Key="SuccessfullyInstalled">Ansamblele selectate au fost instalate corect.</system:String>
     <system:String x:Key="ErrorInstalling">A aparut o eroare în timp ce încercati sa instalati unele dintre ansamble, verificati Logul pentru mai multe detalii.</system:String>
 
-    <system:String x:Key="EnableDeveloper">Enable developer options</system:String>
-    <system:String x:Key="Developer">Developer</system:String>
-    <system:String x:Key="New">New</system:String>
-    <system:String x:Key="Edit">Edit</system:String>
-    <system:String x:Key="Clone">Clone</system:String>
+    <system:String x:Key="EnableDeveloper">Activeaza optiunile dezvoltator</system:String>
+    <system:String x:Key="Developer">Dezvoltator</system:String>
+    <system:String x:Key="New">Now</system:String>
+    <system:String x:Key="Edit">Editeaza</system:String>
+    <system:String x:Key="Clone">Clona</system:String>
 
-    <system:String x:Key="Checking">Checking...</system:String>
-    <system:String x:Key="Updated">Updated</system:String>
-    <system:String x:Key="OUTDATED">OUTDATED</system:String>
-    <system:String x:Key="Unknown">Unknown</system:String>
+    <system:String x:Key="Checking">Cauta...</system:String>
+    <system:String x:Key="Updated">Updatat</system:String>
+    <system:String x:Key="OUTDATED">Invechit</system:String>
+    <system:String x:Key="Unknown">Necunoscut</system:String>
     <system:String x:Key="UpdateStatus">Status</system:String>
 
-    <system:String x:Key="LoaderUpdateFailed">Could not download the update, please update manually. Error:</system:String>
-    <system:String x:Key="LeagueNotFound">Could not resolve "League of Legends.exe" location, try starting a custom game.</system:String>
-    <system:String x:Key="UpdateSuccess">LeagueSharp has successfully updated for the installed league of legends version</system:String>
-    <system:String x:Key="UpdateUnknown">Couldn't determine if LeagueSharp is updated for the local League Of Legends version, this usually means that www.joduska.me is inaccessible.</system:String>
-    <system:String x:Key="NotUpdateNeeded">LeagueSharp is updated for the installed league of legends version.</system:String>
+    <system:String x:Key="LoaderUpdateFailed">Nu s-a putut descarca update-ul,va rugam descarcati-l manual. Error:</system:String>
+    <system:String x:Key="LeagueNotFound">Nu sa putut gasi locatia fisierului "League of Legendds.exe",va rugam deschide-ti un joc personalizat.</system:String>
+    <system:String x:Key="UpdateSuccess">LeagueSharp sa updatat cu succes pentru versiunea instalata de League f Legends</system:String>
+    <system:String x:Key="UpdateUnknown">Nu s-a putut determina daca LeagueSharp este updatat pentru versiunea locala de League of Legends,deobicei asta inseamna ca site-ul www.joduska.me este inaccesibil.</system:String>
+    <system:String x:Key="NotUpdateNeeded">LeagueSharp este updatat pentru versiunea de League of LEgends locala.</system:String>
 
 </ResourceDictionary>
