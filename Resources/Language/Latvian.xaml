@@ -1,0 +1,137 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:system="clr-namespace:System;assembly=mscorlib">
+
+    <!-- MainWindow TopBar -->
+    <system:String x:Key="Website">Mājaslapa</system:String>
+    <system:String x:Key="Settings">Iestatījumi</system:String>
+
+    <!-- MainWindow Tabs -->
+    <system:String x:Key="News">Jaunumi</system:String>
+    <system:String x:Key="Assemblies">Assembliji</system:String>
+
+    <!-- MainWindow Profile selector -->
+    <system:String x:Key="DefaultProfile">Parastais</system:String>
+
+    <!-- MainWindow Assemblies datagrid columns -->
+    <system:String x:Key="ColumnName">Nosaukums</system:String>
+    <system:String x:Key="ColumnType">Tips</system:String>
+    <system:String x:Key="ColumnVersion">Versija</system:String>
+    <system:String x:Key="ColumnLocation">Vieta</system:String>
+    <system:String x:Key="ColumnDescription">Apraksts</system:String>
+
+    <!-- MainWindow Assemblies datagrid Menu -->
+    <system:String x:Key="MenuUpdateAndCompile">Atjaunināt un kompilot</system:String>
+    <system:String x:Key="MenuRemove">Nonjemt</system:String>
+    <system:String x:Key="MenuGithub">GitHub</system:String>
+    <system:String x:Key="MenuGithubAssemblies">GitHub Assembliji</system:String>
+    <system:String x:Key="MenuShare">Dalīties</system:String>
+    <system:String x:Key="MenuViewLog">Apskatīt Log</system:String>
+
+	<!-- MainWindow Profiles Menu -->
+    <system:String x:Key="NewProfile">Jauns</system:String>
+    <system:String x:Key="ChangeName">Mainīt nosaukumu</system:String>
+    <system:String x:Key="DeleteProfile">Dzēst</system:String>
+	
+    <!-- MainWindow Buttons -->
+    <system:String x:Key="AcceptTosButton">Piekrītu</system:String>
+    <system:String x:Key="DeclineTosButton">Nepiekrītu</system:String>
+    <system:String x:Key="UpdateAll">Atjaunināt visu</system:String>
+    <system:String x:Key="CompileAll">Kompilot visu</system:String>
+    <system:String x:Key="InstallNewAssembly">Ielādēt jaunu assembliju</system:String>
+
+    <!-- InstallerWindow Title -->
+    <system:String x:Key="AssemblyInstaller">Assembliju ielādētājs</system:String>
+
+    <!-- InstallerWindow Tabs -->
+    <system:String x:Key="Search">Meklēt</system:String>
+    <system:String x:Key="Select">Iezīmēt</system:String>
+
+    <!-- InstallerWindow Search tab -->
+    <system:String x:Key="SelectAssembliesText">Pievieno assemblija atrašanās vietu:</system:String>
+    <system:String x:Key="Local">Lokāls</system:String>
+    <system:String x:Key="Github">GitHub</system:String>
+    <system:String x:Key="Installed">Jau ieinstalēts</system:String>
+    <system:String x:Key="Next">Nākamais</system:String>
+
+    <!-- InstallerWindow Select tab -->
+    <system:String x:Key="SelectAll">Atzīmēt visu</system:String>
+    <system:String x:Key="DeselectAll">Nonjemt atzīmējumus</system:String>
+    <system:String x:Key="Previous">Atgriezties</system:String>
+    <system:String x:Key="Add">Pievienot</system:String>
+
+    <!-- Settings General -->
+    <system:String x:Key="General">Galvenais</system:String>
+    <system:String x:Key="GameSettings">Spēles iestatījumi</system:String>
+    <system:String x:Key="Anti-AFK">Anti-AFK</system:String>
+    <system:String x:Key="Debug Console">Debug Konsole</system:String>
+    <system:String x:Key="Display Enemy Tower Range">Rādīt torņa attālumu</system:String>
+    <system:String x:Key="Extended Zoom">Palielināts Zoom</system:String>
+    <system:String x:Key="UpdateOnStart">Atjaunot skriptus ieslēdzot</system:String>
+    <system:String x:Key="Inject">Inject</system:String>
+    <system:String x:Key="Logout">Izlogoties</system:String>
+    <system:String x:Key="DefaultHotkeys">Atjaunot</system:String>
+	<system:String x:Key="Language">Valoda</system:String>
+	
+    <!-- Settings Hotkeys -->
+    <system:String x:Key="Hotkeys">Ātrās pogas</system:String>
+    <system:String x:Key="Hotkey">Ātrā poga</system:String>
+    <system:String x:Key="Reload the assemblies">Pārlādēt assemblijus</system:String>
+    <system:String x:Key="Recompile and reload the assemblies">Kompilot un parlādēt assemblijus</system:String>
+    <system:String x:Key="Parādīt izvelni (Turot)">Shows the menu (Press)</system:String>
+    <system:String x:Key="Parādīt izvelni (Uzspiežot)">Show the menu (Toggle)</system:String>
+
+    <!-- Settings Log -->
+    <system:String x:Key="Log">Log</system:String>
+    <system:String x:Key="Status">Status</system:String>
+    <system:String x:Key="Source">Avots</system:String>
+    <system:String x:Key="Content">Saturs</system:String>
+    <system:String x:Key="OpenFolder">Atvērt mapi</system:String>
+
+    <!-- UpdateWindow -->
+    <system:String x:Key="UpdatingLeagueSharp">Atjauno LeagueSharp</system:String>
+    <system:String x:Key="Updating">Atjauno...</system:String>
+    <system:String x:Key="UpdateWaiting">Gaida...</system:String>
+    <system:String x:Key="UpdateText">Nolādēts {0}/{1} KB.</system:String>
+
+    <!-- Errors and other strings -->
+    <system:String x:Key="WrongAuth">Nepareizs lietotājvārds vai parole , reģistrējies - {0}</system:String>
+    <system:String x:Key="AuthEmpty">Parole vai lietotājvārds ir tukši</system:String>
+    <system:String x:Key="FailedToDelete">Nevarēja izdzēst atjaunošanas failu, lūdz izdariet to manuāli un restartējiet LeagueSharp</system:String>
+    <system:String x:Key="WrongVersion">Šī League Of Legends versija netiek atbalstīta, parasti tas nozīme to ka League Of Legends ir atjaunots, bet LeagueSharp vēl nav. Parbaudiet forumu, lai uzzinātu vairāk vai arī gaidiet līdz LeagueSharp atjaunosies. Hash:</system:String>
+    <system:String x:Key="FailedToDownload">Nespēja nolādēt.</system:String>
+    <system:String x:Key="FailedToLogin">Nevarēja ielogoties : {0}</system:String>
+    <system:String x:Key="Login">Ielogoties</system:String>
+    <system:String x:Key="LoginError">Nevarēja ielogoties kā  {0}: {1}</system:String>
+    <system:String x:Key="Uninstall">Atinstalēt</system:String>
+    <system:String x:Key="UninstallConfirm">Vai jūs tiešām vēlaties atinstalēt visas iezīmētās assemblijas?</system:String>
+    <system:String x:Key="ConfigWriteError">Nevarēja ierakstīt failā config.xml</system:String>
+    <system:String x:Key="ShareText">Assemblija saite nokopēta</system:String>
+    <system:String x:Key="LogNotFound">Log fails nav atrasts</system:String>
+    <system:String x:Key="NewProfile2">Jauns profils</system:String>
+    <system:String x:Key="Rename">Pārsaukt</system:String>
+    <system:String x:Key="RenameText">Uzrakstiet jaunu vārdu profilam</system:String>
+    <system:String x:Key="DownloadingData">Nolādē nepieciešamos datus.</system:String>
+    <system:String x:Key="Installer">Instalētājs</system:String>
+    <system:String x:Key="SuccessfullyInstalled">Visas assemblijas tika veiksmīgi ieinstalētas.</system:String>
+    <system:String x:Key="ErrorInstalling">Notika kļūda ielādejot dažas assemblijas, parbaudiet log failu, lai uzzinātu vairāk informācijas</system:String>
+
+    <system:String x:Key="EnableDeveloper">Ieslēgt izstrādātaja opcijas</system:String>
+    <system:String x:Key="Developer">Izstrādātājs</system:String>
+    <system:String x:Key="New">Jauns</system:String>
+    <system:String x:Key="Edit">Rediģēt</system:String>
+    <system:String x:Key="Clone">Klonot</system:String>
+    
+	<system:String x:Key="Checking">Pārbauda...</system:String>
+    <system:String x:Key="Updated">Atjaunots</system:String>
+    <system:String x:Key="OUTDATED">NOVECOJIS</system:String>
+	<system:String x:Key="Unknown">Nezināms</system:String>
+	<system:String x:Key="UpdateStatus">Status</system:String>
+	
+	<system:String x:Key="LoaderUpdateFailed">Nevārēja nolādēt atjauninājumu. Errors : </system:String>
+    <system:String x:Key="LeagueNotFound">Nevarēja atrast "League of Legends.exe" atrašanās vietu, izmēģiniet uzsākt custom spēli.</system:String>
+    <system:String x:Key="UpdateSuccess">LeagueSharp ir veiksmīgi atjaunināts jaunākajai League of Legends versijai.</system:String>
+    <system:String x:Key="UpdateUnknown">Nevarēja noteikt vai LeagueSharp ir atjaunināts ieinstalētajai League Of Legends versijai, tas parasti nozīmē to, ka www.joduska.me nav sasniedzams.</system:String>
+	<system:String x:Key="NotUpdateNeeded">LeagueSharp ir atjaunots jaunākajai League of Legends versijai.</system:String>
+
+</ResourceDictionary>
