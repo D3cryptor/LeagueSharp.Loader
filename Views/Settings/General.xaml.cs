@@ -1,4 +1,4 @@
-﻿#region LICENSE
+#region LICENSE
 
 // Copyright 2014 LeagueSharp.Loader
 // General.xaml.cs is part of LeagueSharp.Loader.
@@ -29,11 +29,14 @@ namespace LeagueSharp.Loader.Views.Settings
     using System.Windows.Controls;
     using System.Windows.Input;
     using LeagueSharp.Loader.Data;
-
+    using MahApps.Metro;
     #endregion
 
     public partial class General
     {
+        string[] accentArray = { "Red", "Green", "Blue", "Purple", "Orange", "Lime", "Emerald", "Teal", "Cyan", "Cobalt", "Indigo", "Violet", "Pink", "Magenta", "Crimson", "Amber", "Yellow", "Brown", "Olive", "Steel", "Mauve", "Taupe", "Sienna" };
+        int myAccent = 0;
+        
         public General()
         {
             InitializeComponent();
@@ -121,5 +124,12 @@ namespace LeagueSharp.Loader.Views.Settings
                 senderBox.SelectedIndex = senderBox.Items.IndexOf("English");
             }
         }
+            
+        private void ChangeAccent_OnClick(object sender, RoutedEventArgs e)
+        {
+            ThemeManager.ChangeAppStyle(Application.Current, ThemeManager.GetAccent(accentArray[n]), ThemeManager.GetAppTheme("BaseLight"));
+            myAccent = (myAccent + 1) % 23;
+        }
+
     }
 }
