@@ -35,7 +35,7 @@
 
     <!-- MainWindow Buttons -->
     <system:String x:Key="AcceptTosButton">Eu Accept</system:String>
-    <system:String x:Key="DeclineTosButton">Eu Decline</system:String>
+    <system:String x:Key="DeclineTosButton">Eu Refuz</system:String>
     <system:String x:Key="UpdateAll">Actualizati Tot</system:String>
     <system:String x:Key="CompileAll">Compilati Tot</system:String>
     <system:String x:Key="InstallNewAssembly">Instalati nou ansamblu</system:String>
