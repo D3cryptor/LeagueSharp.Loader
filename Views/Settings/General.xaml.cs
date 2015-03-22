@@ -84,39 +84,41 @@ namespace LeagueSharp.Loader.Views.Settings
 
         private void ComboBox_Loaded(object sender, RoutedEventArgs e)
         {
-            ((ComboBox) sender).Items.Clear();
-            ((ComboBox) sender).Items.Add("Arabic");
-            ((ComboBox) sender).Items.Add("Chinese");
-            ((ComboBox) sender).Items.Add("English");
-            ((ComboBox) sender).Items.Add("German");
-            ((ComboBox) sender).Items.Add("Greek");
-            ((ComboBox) sender).Items.Add("Dutch");
-            ((ComboBox) sender).Items.Add("Spanish");
-            ((ComboBox) sender).Items.Add("Russian");
-            ((ComboBox) sender).Items.Add("Portuguese");
-            ((ComboBox) sender).Items.Add("Italian");
-            ((ComboBox) sender).Items.Add("French");
-            ((ComboBox) sender).Items.Add("Korean");
-            ((ComboBox) sender).Items.Add("Polish");
-            ((ComboBox) sender).Items.Add("Romanian");
-            ((ComboBox) sender).Items.Add("Swedish");
-            ((ComboBox) sender).Items.Add("Turkish");
-            ((ComboBox) sender).Items.Add("Thai");
-            ((ComboBox) sender).Items.Add("Vietnamese");
-            ((ComboBox) sender).Items.Add("Lithuanian");
+            var senderBox = (ComboBox) sender;
+
+            senderBox.Items.Clear();
+            senderBox.Items.Add("Arabic");
+            senderBox.Items.Add("Chinese");
+            senderBox.Items.Add("English");
+            senderBox.Items.Add("German");
+            senderBox.Items.Add("Greek");
+            senderBox.Items.Add("Dutch");
+            senderBox.Items.Add("Spanish");
+            senderBox.Items.Add("Russian");
+            senderBox.Items.Add("Portuguese");
+            senderBox.Items.Add("Italian");
+            senderBox.Items.Add("French");
+            senderBox.Items.Add("Korean");
+            senderBox.Items.Add("Polish");
+            senderBox.Items.Add("Romanian");
+            senderBox.Items.Add("Swedish");
+            senderBox.Items.Add("Turkish");
+            senderBox.Items.Add("Thai");
+            senderBox.Items.Add("Vietnamese");
+            senderBox.Items.Add("Lithuanian");
 
             if (Config.Instance.SelectedLanguage != null)
             {
-                ((ComboBox) sender).SelectedItem =
-                    ((ComboBox) sender).Items.Cast<string>()
+                senderBox.SelectedItem =
+                    senderBox.Items.Cast<string>()
                         .FirstOrDefault(item => item == Config.Instance.SelectedLanguage);
             }
 
 
             //English as default
-            if (((ComboBox) sender).SelectedIndex == -1)
+            if (senderBox.SelectedIndex == -1)
             {
-                ((ComboBox) sender).SelectedIndex = 1;
+                senderBox.SelectedIndex = senderBox.Items.IndexOf("English");
             }
         }
     }
