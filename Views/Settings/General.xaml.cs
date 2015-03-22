@@ -123,7 +123,7 @@ namespace LeagueSharp.Loader.Views.Settings
             }
         }
             
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void ChangeAccent_OnClick(object sender, RoutedEventArgs e)
         {
             ThemeManager.ChangeAppStyle(Application.Current, ThemeManager.GetAccent(accentArray[n]), ThemeManager.GetAppTheme("BaseLight"));
             myAccent = (myAccent + 1) % 23;
