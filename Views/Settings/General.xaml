@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="LeagueSharp.Loader.Views.Settings.General"
+<UserControl x:Class="LeagueSharp.Loader.Views.Settings.General"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -46,6 +46,7 @@
         <CheckBox Content="{DynamicResource Inject}" Margin="0,0,10,0" IsChecked="{Binding Config.Install, UpdateSourceTrigger=PropertyChanged}" Height="18" VerticalAlignment="Bottom"/>
         <ComboBox HorizontalAlignment="Left" Margin="70,0,0,69" Width="135" Height="26" VerticalAlignment="Bottom" Loaded="ComboBox_Loaded" Text="{DynamicResource Language}"  SelectionChanged="ComboBox_SelectionChanged" />
         <Label Content="{DynamicResource Language}" HorizontalAlignment="Left" Margin="0,0,0,69" Height="26" VerticalAlignment="Bottom" Width="65"/>
+        <Button Content="Change Color" HorizontalAlignment="Right" Margin="310,0,0,33" VerticalAlignment="Bottom" Width="90" RenderTransformOrigin="0.947,1.44" Click="ChangeAccent_OnClick" Height="25"/>
 
     </Grid>
 </UserControl>
