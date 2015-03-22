@@ -35,7 +35,7 @@ namespace LeagueSharp.Loader.Views.Settings
     public partial class General
     {
         string[] accentArray = { "Red", "Green", "Blue", "Purple", "Orange", "Lime", "Emerald", "Teal", "Cyan", "Cobalt", "Indigo", "Violet", "Pink", "Magenta", "Crimson", "Amber", "Yellow", "Brown", "Olive", "Steel", "Mauve", "Taupe", "Sienna" };
-        int n = 0;
+        int myAccent = 0;
         
         public General()
         {
@@ -126,7 +126,7 @@ namespace LeagueSharp.Loader.Views.Settings
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             ThemeManager.ChangeAppStyle(Application.Current, ThemeManager.GetAccent(accentArray[n]), ThemeManager.GetAppTheme("BaseLight"));
-            n = (n + 1) % 23;
+            myAccent = (myAccent + 1) % 23;
         }
 
     }
