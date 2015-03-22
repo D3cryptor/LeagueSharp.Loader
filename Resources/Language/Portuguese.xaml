@@ -72,7 +72,7 @@
     <system:String x:Key="Logout">Terminar sessão</system:String>
 	<system:String x:Key="DefaultHotkeys">Restaurar</system:String>
     <system:String x:Key="Language">Idioma</system:String>
-    <system:String x:Key="Color">Color</system:String>
+    <system:String x:Key="Color">Cor</system:String>
 	
     <!-- Settings Hotkeys -->
     <system:String x:Key="Hotkeys">Hotkeys</system:String>
@@ -92,7 +92,7 @@
     <!-- UpdateWindow -->
     <system:String x:Key="UpdatingLeagueSharp">A actualizar LeagueSharp</system:String>
     <system:String x:Key="Updating">A actualizar...</system:String>
-    <system:String x:Key="UpdateWaiting">Waiting...</system:String>
+    <system:String x:Key="UpdateWaiting">Aguarde...</system:String>
     <system:String x:Key="UpdateText">Descarregados {0} KB de {1} KB.</system:String>
 
 	<!-- Errors and other strings -->
