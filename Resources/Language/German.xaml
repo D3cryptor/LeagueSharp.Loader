@@ -34,8 +34,8 @@
     <system:String x:Key="DeleteProfile">Löschen</system:String>
 
     <!-- MainWindow Buttons -->
-    <system:String x:Key="AcceptTosButton">I Accept</system:String>
-    <system:String x:Key="DeclineTosButton">I Decline</system:String>
+    <system:String x:Key="AcceptTosButton">Ich akzeptiere</system:String>
+    <system:String x:Key="DeclineTosButton">Ich lehne ab</system:String>
     <system:String x:Key="UpdateAll">Alle aktualisieren</system:String>
     <system:String x:Key="CompileAll">Alle kompilieren</system:String>
     <system:String x:Key="InstallNewAssembly">Assembly hinzufügen</system:String>
@@ -133,6 +133,6 @@
     <system:String x:Key="LeagueNotFound">Konnte "League of Legends.exe" Pfad nicht finden, versuche ein Custom game zu starten.</system:String>
     <system:String x:Key="UpdateSuccess">LeagueSharp wurde erfolgreich für die installierte League of Legends Version aktualisiert.</system:String>
     <system:String x:Key="UpdateUnknown">Konnte www.joduska.me nicht kontaktieren, um zu überprüfen, ob LeagueSharp mit der installierten League of Legends Version kompatibel ist.</system:String>
-    <system:String x:Key="NotUpdateNeeded">LeagueSharp ist mit der installierte League of Legends Version kompatibel.</system:String>
+    <system:String x:Key="NotUpdateNeeded">LeagueSharp ist mit der installierten League of Legends Version kompatibel.</system:String>
 
 </ResourceDictionary>
