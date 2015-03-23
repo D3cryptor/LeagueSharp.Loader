@@ -734,8 +734,7 @@ namespace LeagueSharp.Loader.Views
 
                 GitUpdater.ClearUnusedRepos(allAssemblies);
                 PrepareAssemblies(allAssemblies, Config.Instance.FirstRun || Config.Instance.UpdateOnLoad, true, true);
-                ServiceFactory.CreateService<ILoaderService, LoaderService>();
-                ServiceFactory.CreateService<ILoaderLogService, LoaderService>();
+                Remoting.Init();
             }
 
             var text = Clipboard.GetText();
