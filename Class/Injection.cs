@@ -18,23 +18,41 @@
 
 #endregion
 
+using System.IO.MemoryMappedFiles;
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
+using System.Linq;
+using System.Runtime.InteropServices;
+using System.Text;
+using LeagueSharp.Loader.Data;
+
 namespace LeagueSharp.Loader.Class
 {
-    #region
-
-    using System;
-    using System.Collections.Generic;
-    using System.Diagnostics;
-    using System.IO;
-    using System.Linq;
-    using System.Runtime.InteropServices;
-    using System.Text;
-    using LeagueSharp.Loader.Data;
-
-    #endregion
-
     public static class Injection
     {
+        [StructLayout(LayoutKind.Sequential, Pack = 1, CharSet = CharSet.Unicode)]
+        struct SharedMemoryLayout
+        {
+            [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 260)]
+            readonly String SandboxPath;
+            [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 260)]
+            readonly String BootstrapPath;
+            [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 64)]
+            readonly String User;
+            [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 64)]
+            readonly String Password;
+
+            public SharedMemoryLayout(String sandboxPath, String bootstrapPath, String user, String password)
+            {
+                SandboxPath = sandboxPath;
+                BootstrapPath = bootstrapPath;
+                User = user;
+                Password = password;
+            }
+        }
+
         [UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet = CharSet.Unicode)]
         private delegate bool InjectDLLDelegate(int processId, string path);
 
@@ -42,7 +60,7 @@ namespace LeagueSharp.Loader.Class
 
         public delegate void OnInjectDelegate(IntPtr hwnd);
 
-        public static event Injection.OnInjectDelegate OnInject;
+        public static event OnInjectDelegate OnInject;
 
         public static bool InjectedAssembliesChanged { get; set; }
 
@@ -54,8 +72,7 @@ namespace LeagueSharp.Loader.Class
                 {
                     return
                         leagueProcess.Modules.Cast<ProcessModule>()
-                            .Any(
-                                processModule => processModule.ModuleName == PathRandomizer.LeagueSharpCoreDllName);
+                            .Any(processModule => processModule.ModuleName == Path.GetFileName(Directories.CoreFilePath));
                 }
                 catch (Exception e)
                 {
@@ -137,18 +154,43 @@ namespace LeagueSharp.Loader.Class
 
         private static void ResolveInjectDLL()
         {
-            var hModule = LoadLibrary(PathRandomizer.LeagueSharpBootstrapDllPath);
-            if (!(hModule != IntPtr.Zero))
+            try
             {
-                return;
+                var mmf = MemoryMappedFile.CreateOrOpen("Local\\LeagueSharpBootstrap", 260 * 2,
+                    MemoryMappedFileAccess.ReadWrite);
+
+                var sharedMem = new SharedMemoryLayout(Directories.SandboxFilePath, Directories.BootstrapFilePath, 
+                    Config.Instance.Username, Config.Instance.Password);
+
+                using (var writer = mmf.CreateViewAccessor())
+                {
+                    var len = Marshal.SizeOf(typeof(SharedMemoryLayout));
+                    var arr = new byte[len];
+                    var ptr = Marshal.AllocHGlobal(len);
+                    Marshal.StructureToPtr(sharedMem, ptr, true);
+                    Marshal.Copy(ptr, arr, 0, len);
+                    Marshal.FreeHGlobal(ptr);
+                    writer.WriteArray(0, arr, 0, arr.Length);
+                }
+
+                var hModule = LoadLibrary(Directories.BootstrapFilePath);
+                if (!(hModule != IntPtr.Zero))
+                {
+                    return;
+                }
+
+                var procAddress = GetProcAddress(hModule, "InjectModule");
+                if (!(procAddress != IntPtr.Zero))
+                {
+                    return;
+                }
+
+                injectDLL = Marshal.GetDelegateForFunctionPointer(procAddress, typeof(InjectDLLDelegate)) as InjectDLLDelegate;
             }
-            var procAddress = GetProcAddress(hModule, "_InjectDLL@8");
-            if (!(procAddress != IntPtr.Zero))
+            catch (Exception e)
             {
-                return;
+                Console.WriteLine(e);
             }
-            injectDLL =
-                Marshal.GetDelegateForFunctionPointer(procAddress, typeof(InjectDLLDelegate)) as InjectDLLDelegate;
         }
 
         public static List<IntPtr> LeagueInstances
@@ -195,7 +237,7 @@ namespace LeagueSharp.Loader.Class
 
                         if (injectDLL != null && GetWindowText(instance.MainWindowHandle).Contains("League of Legends (TM) Client"))
                         {
-                            injectDLL(instance.Id, PathRandomizer.LeagueSharpCoreDllPath);
+                            injectDLL(instance.Id, Directories.CoreFilePath);
 
                             if (OnInject != null)
                             {
@@ -204,7 +246,10 @@ namespace LeagueSharp.Loader.Class
                         }
                     }
                 }
-                catch { }
+                catch
+                {
+                    // ignored
+                }
             }
         }
 

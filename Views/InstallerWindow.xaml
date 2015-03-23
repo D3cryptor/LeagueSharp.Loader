@@ -10,7 +10,7 @@
                       ShowInTaskbar="False"
                       Loaded="InstallerWindow_OnLoaded"
                       BorderThickness="1"
-                      BorderBrush="DeepSkyBlue">
+                      GlowBrush="{DynamicResource AccentColorBrush}">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>

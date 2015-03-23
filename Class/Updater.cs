@@ -158,7 +158,7 @@ namespace LeagueSharp.Loader.Class
                                         }
                                     }
                                 }
-                                PathRandomizer.CopyFiles();
+                                //PathRandomizer.CopyFiles();
                                 Config.Instance.TosAccepted = false;
                                 return new Tuple<bool, bool?, string>(
                                     true, true, Utility.GetMultiLanguageText("UpdateSuccess"));

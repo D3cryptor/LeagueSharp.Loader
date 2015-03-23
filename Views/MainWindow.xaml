@@ -15,7 +15,7 @@
                       Icon="../Resources/icon_64x64.ico"
                       ShowIconOnTitleBar="False"
                       BorderThickness="0.5"
-                      BorderBrush="Black"
+                      GlowBrush="{DynamicResource AccentColorBrush}"
                       SaveWindowPosition="True">
     <Controls:MetroWindow.RightWindowCommands>
         <Controls:WindowCommands>

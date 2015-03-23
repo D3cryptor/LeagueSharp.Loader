@@ -18,6 +18,8 @@
 
 #endregion
 
+using LeagueSharp.Sandbox.Shared;
+
 namespace LeagueSharp.Loader.Views
 {
     #region
@@ -344,7 +346,7 @@ namespace LeagueSharp.Loader.Views
                 MessageBox.Show(Utility.GetMultiLanguageText("ConfigWriteError"));
             }
 
-            PathRandomizer.CopyFiles();
+            //PathRandomizer.CopyFiles();
 
             Injection.OnInject += hwnd => Task.Factory.StartNew(
                 () =>
@@ -732,7 +734,8 @@ namespace LeagueSharp.Loader.Views
 
                 GitUpdater.ClearUnusedRepos(allAssemblies);
                 PrepareAssemblies(allAssemblies, Config.Instance.FirstRun || Config.Instance.UpdateOnLoad, true, true);
-                Shared.ShareInterface<Loader_API>();
+                ServiceFactory.CreateService<ILoaderService, LoaderService>();
+                ServiceFactory.CreateService<ILoaderLogService, LoaderService>();
             }
 
             var text = Clipboard.GetText();
