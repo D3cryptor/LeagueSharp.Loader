@@ -34,8 +34,8 @@
     <system:String x:Key="DeleteProfile">حذف</system:String>
        
     <!-- MainWindow Buttons -->
-    <system:String x:Key="AcceptTosButton">I Accept</system:String>
-    <system:String x:Key="DeclineTosButton">I Decline</system:String>
+    <system:String x:Key="AcceptTosButton">أقبل</system:String>
+    <system:String x:Key="DeclineTosButton">أرفض</system:String>
     <system:String x:Key="UpdateAll">تحديث الكل</system:String>
     <system:String x:Key="CompileAll">تجميع الكل</system:String>
     <system:String x:Key="InstallNewAssembly">تثبيت أسمبلي جديد</system:String>
@@ -72,7 +72,7 @@
     <system:String x:Key="Logout">خروج</system:String>
     <system:String x:Key="DefaultHotkeys">استعادة</system:String>
     <system:String x:Key="Language">اللغة</system:String>
-    <system:String x:Key="Color">Color</system:String>
+    <system:String x:Key="Color">اللون</system:String>
        
     <!-- Settings Hotkeys -->
     <system:String x:Key="Hotkeys">مفاتيح الاختصار</system:String>
@@ -92,7 +92,7 @@
     <!-- UpdateWindow -->
     <system:String x:Key="UpdatingLeagueSharp">عملية تحديث LeagueSharp</system:String>
     <system:String x:Key="Updating">عملية تحديث ...</system:String>
-    <system:String x:Key="UpdateWaiting">Waiting...</system:String>
+    <system:String x:Key="UpdateWaiting">انتظار...</system:String>
     <system:String x:Key="UpdateText">تم تحميل {0}/{1} كيلوبايت.</system:String>
  
     <!-- Errors and other strings -->
