@@ -28,7 +28,7 @@ Source: "..\bin\Release\*.dll"; DestDir: "{app}\bin\"; Flags: ignoreversion
 Source: "..\bin\Release\NativeBinaries\x86\*.dll"; DestDir: "{app}\bin\"; Flags: ignoreversion
 
 ;System
-Source: "..\bin\Release\System\LeagueSharp.AppDomainManager.dll"; DestDir: "{app}\System\"; Flags: ignoreversion
+Source: "..\bin\Release\System\LeagueSharp.Sandbox.dll"; DestDir: "{app}\System\"; Flags: ignoreversion
 Source: "..\bin\Release\System\LeagueSharp.Bootstrap.dll"; DestDir: "{app}\System\"; Flags: ignoreversion
 Source: "..\bin\Release\System\Leaguesharp.Core.dll"; DestDir: "{app}\System\"; Flags: ignoreversion
 Source: "..\bin\Release\System\LeagueSharp.dll"; DestDir: "{app}\System\"; Flags: ignoreversion

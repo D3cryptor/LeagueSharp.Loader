@@ -51,7 +51,7 @@ namespace LeagueSharp.Loader.Class
                 AntiAfk = antiAfk,
                 Console = console,
                 TowerRange = towerRange,
-                ExtendedZoom = extendedZoom,
+                ExtendedZoom = false,
                 Permissions = null
             };
         }

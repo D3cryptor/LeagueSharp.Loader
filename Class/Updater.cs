@@ -129,7 +129,7 @@ namespace LeagueSharp.Loader.Class
                             return new Tuple<bool, bool?, string>(false, false, message);
                         }
 
-                        if (updateInfo.version != Utility.Md5Checksum(Directories.CoreFilePath) && updateInfo.url.StartsWith("https://github.com/joduskame/")) //Update needed
+                        if (updateInfo.version != Utility.Md5Checksum(Directories.CoreFilePath) )//&& updateInfo.url.StartsWith("https://github.com/joduskame/")) //Update needed
                         {
                             if (MainWindow != null)
                             {
