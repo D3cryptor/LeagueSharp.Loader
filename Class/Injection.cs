@@ -62,6 +62,8 @@ namespace LeagueSharp.Loader.Class
 
         public static event OnInjectDelegate OnInject;
 
+        public static MemoryMappedFile mmf = null;
+
         public static bool InjectedAssembliesChanged { get; set; }
 
         private static bool IsProcessInjected(Process leagueProcess)
@@ -156,7 +158,7 @@ namespace LeagueSharp.Loader.Class
         {
             try
             {
-                var mmf = MemoryMappedFile.CreateOrOpen("Local\\LeagueSharpBootstrap", 260 * 2,
+                mmf = MemoryMappedFile.CreateOrOpen("Local\\LeagueSharpBootstrap", 260 * 2,
                     MemoryMappedFileAccess.ReadWrite);
 
                 var sharedMem = new SharedMemoryLayout(Directories.SandboxFilePath, Directories.BootstrapFilePath, 
