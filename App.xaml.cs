@@ -18,6 +18,8 @@
 
 #endregion
 
+using System.Diagnostics;
+
 namespace LeagueSharp.Loader
 {
     #region
@@ -115,29 +117,57 @@ namespace LeagueSharp.Loader
                 }
             }
 
-            #region AppData randomization
+            #region Remove the old loader
 
             try
             {
-                var oldPath = Path.Combine(Environment.GetFolderPath(
-                    Environment.SpecialFolder.ApplicationData), "LeagueSharp");
-
-                if (!Directory.Exists(Directories.AppDataDirectory))
+                if (String.Compare(
+                   Process.GetCurrentProcess().ProcessName, "LeagueSharp.Loader.exe",
+                   StringComparison.InvariantCultureIgnoreCase) != 0 && File.Exists(Path.Combine(Directories.CurrentDirectory, "LeagueSharp.Loader.exe")))
                 {
-                    Directory.CreateDirectory(Directories.AppDataDirectory);
-                }
-
-                if (Directory.Exists(oldPath))
-                {
-                    Utility.CopyDirectory(oldPath, Directories.AppDataDirectory, true, true);
-                    Utility.ClearDirectory(oldPath);
-                    Directory.Delete(oldPath, true);
+                    File.Delete(Path.Combine(Directories.CurrentDirectory, "LeagueSharp.Loader.exe"));
+                    File.Delete(Path.Combine(Directories.CurrentDirectory, "LeagueSharp.Loader.exe.config"));
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("AppData randomization failed.\n" + ex.Message, "Startup", MessageBoxButton.OK, MessageBoxImage.Error);
-                Environment.Exit(1);
+                //ignore
+            }
+
+            #endregion
+
+            #region AppData randomization
+
+            try
+            {
+                if (!Directory.Exists(Directories.AppDataDirectory))
+                {
+                    Directory.CreateDirectory(Directories.AppDataDirectory);
+
+                    var oldPath = Path.Combine(Environment.GetFolderPath(
+                    Environment.SpecialFolder.ApplicationData), "LeagueSharp" + Environment.UserName.GetHashCode().ToString("X"));
+
+                    var oldPath2 = Path.Combine(Environment.GetFolderPath(
+                        Environment.SpecialFolder.ApplicationData), "LeagueSharp");
+
+                    if (Directory.Exists(oldPath))
+                    {
+                        Utility.CopyDirectory(oldPath, Directories.AppDataDirectory, true, true);
+                        Utility.ClearDirectory(oldPath);
+                        Directory.Delete(oldPath, true);
+                    }
+
+                    if (Directory.Exists(oldPath2))
+                    {
+                        Utility.CopyDirectory(oldPath2, Directories.AppDataDirectory, true, true);
+                        Utility.ClearDirectory(oldPath2);
+                        Directory.Delete(oldPath2, true);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                //ignore
             }
 
             #endregion

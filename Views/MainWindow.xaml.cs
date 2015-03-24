@@ -400,8 +400,11 @@ namespace LeagueSharp.Loader.Views
                 MessageBox.Show(Utility.GetMultiLanguageText("ConfigWriteError"));
             }
 
-            InjectThread.Abort();
-
+            if (InjectThread != null)
+            {
+                InjectThread.Abort();
+            }
+            
             var allAssemblies = new List<LeagueSharpAssembly>();
             foreach (var profile in Config.Instance.Profiles)
             {

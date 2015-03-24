@@ -2,7 +2,7 @@
 #expr ParseVersion("..\bin\Release\LeagueSharp.Loader.exe", Version[0], Version[1], Version[2], Version[3])
 #define MyAppVersion Str(Version[0]) + "." + Str(Version[1]) + "." + Str(Version[2]) + "." + Str(Version[3])
 #define MyAppName "LeagueSharp"
-#define MyAppExeName "LeagueSharp.Loader.exe"
+#define MyAppExeName "Loader.exe"
 
 [Setup]
 AppName={#MyAppName}
@@ -22,8 +22,8 @@ PrivilegesRequired=admin
 
 [Files]
 ;Loader
-Source: "..\bin\Release\*.exe"; Excludes: *.vshost.exe; DestDir: {app}; Flags: ignoreversion
-Source: "..\bin\Release\*.config"; Excludes: *.vshost.exe.config;  DestDir: {app}; Flags: ignoreversion
+Source: "..\bin\Release\LeagueSharp.Loader.exe"; DestName: "loader.exe"; Excludes: *.vshost.exe; DestDir: {app}; Flags: ignoreversion
+Source: "..\bin\Release\LeagueSharp.Loader.exe.config"; DestName: "loader.exe.config"; Excludes: *.vshost.exe.config;  DestDir: {app}; Flags: ignoreversion
 Source: "..\bin\Release\*.dll"; DestDir: "{app}\bin\"; Flags: ignoreversion
 Source: "..\bin\Release\NativeBinaries\x86\*.dll"; DestDir: "{app}\bin\"; Flags: ignoreversion
 
