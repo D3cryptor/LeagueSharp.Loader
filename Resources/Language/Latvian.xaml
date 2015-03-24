@@ -134,5 +134,5 @@
     <system:String x:Key="UpdateSuccess">LeagueSharp ir veiksmīgi atjaunināts jaunākajai League of Legends versijai.</system:String>
     <system:String x:Key="UpdateUnknown">Nevarēja noteikt vai LeagueSharp ir atjaunināts ieinstalētajai League Of Legends versijai, tas parasti nozīmē to, ka www.joduska.me nav sasniedzams.</system:String>
 	<system:String x:Key="NotUpdateNeeded">LeagueSharp ir atjaunots jaunākajai League of Legends versijai.</system:String>
-
+    <system:String x:Key="RandomizationFailed">Could not randomize the dll names.</system:String>
 </ResourceDictionary>

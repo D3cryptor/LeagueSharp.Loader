@@ -122,8 +122,10 @@
     <Compile Include="Class\Shared\LSharpAssembly.cs" />
     <Compile Include="Class\Shared\ServiceFactory.cs" />
     <Compile Include="Class\Updater.cs" />
+    <Compile Include="Class\Win32Imports.cs" />
     <Compile Include="Data\Config.cs" />
     <Compile Include="Class\LeagueSharpAssembly.cs" />
+    <Compile Include="Data\Directories.cs" />
     <Compile Include="Data\Log.cs" />
     <Compile Include="Class\GitUpdater.cs" />
     <Compile Include="Class\Utility.cs" />

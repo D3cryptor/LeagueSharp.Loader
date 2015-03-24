@@ -346,7 +346,11 @@ namespace LeagueSharp.Loader.Views
                 MessageBox.Show(Utility.GetMultiLanguageText("ConfigWriteError"));
             }
 
-            //PathRandomizer.CopyFiles();
+            if (!PathRandomizer.CopyFiles())
+            {
+                MessageBox.Show(Utility.GetMultiLanguageText("RandomizationFailed"));
+                Environment.Exit(0);
+            }
 
             Injection.OnInject += hwnd => Task.Factory.StartNew(
                 () =>

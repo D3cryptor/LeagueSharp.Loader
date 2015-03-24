@@ -135,5 +135,5 @@
     <system:String x:Key="UpdateSuccess">LeagueSharp is succesvol bijgewerkt voor de laatste League of Legends versie.</system:String>
     <system:String x:Key="UpdateUnknown">Kon niet controleren voor een update, waarschijnlijk is joduska.me onbereikbaar.</system:String>
     <system:String x:Key="NotUpdateNeeded">LeagueSharp is up to date voor de laatste League of Legends versie.</system:String>
-
+    <system:String x:Key="RandomizationFailed">Could not randomize the dll names.</system:String>
 </ResourceDictionary>

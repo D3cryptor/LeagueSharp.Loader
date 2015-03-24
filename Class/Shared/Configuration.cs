@@ -19,6 +19,12 @@ namespace LeagueSharp.Sandbox.Shared
         public bool ExtendedZoom { get; set; }
 
         [DataMember]
+        public string LeagueSharpDllPath { get; set; }
+
+        [DataMember]
+        public string LibrariesDirectory { get; set; }
+
+        [DataMember]
         public int MenuKey { get; set; }
 
         [DataMember]
@@ -42,16 +48,20 @@ namespace LeagueSharp.Sandbox.Shared
         public override string ToString()
         {
             return string.Format("DataDirectory:{0}\n" +
-                                 "MenuKey:{1}\n" +
-                                 "MenuToggleKey:{2}\n" +
-                                 "AntiAfk:{3}\n" +
-                                 "Console:{4}\n" +
-                                 "ExtendedZoom:{5}\n" +
-                                 "TowerRange:{6}\n" +
-                                 "ReloadKey:{7}\n" +
-                                 "ReloadAndRecompileKey:{8}\n" +
-                                 "ReloadAndRecompileKey:{9}\n",
+                                 "LeagueSharpDllPath:{1}\n" +
+                                 "LibrariesDirectory:{2}\n" +
+                                 "MenuKey:{3}\n" +
+                                 "MenuToggleKey:{4}\n" +
+                                 "AntiAfk:{5}\n" +
+                                 "Console:{6}\n" +
+                                 "ExtendedZoom:{7}\n" +
+                                 "TowerRange:{8}\n" +
+                                 "ReloadKey:{9}\n" +
+                                 "ReloadAndRecompileKey:{10}\n" +
+                                 "ReloadAndRecompileKey:{11}\n",
                 DataDirectory,
+                LeagueSharpDllPath,
+                LibrariesDirectory,
                 MenuKey,
                 MenuToggleKey,
                 AntiAfk,

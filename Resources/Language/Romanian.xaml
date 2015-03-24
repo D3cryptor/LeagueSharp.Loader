@@ -134,5 +134,5 @@
     <system:String x:Key="UpdateSuccess">LeagueSharp sa updatat cu succes pentru versiunea instalata de League f Legends</system:String>
     <system:String x:Key="UpdateUnknown">Nu s-a putut determina daca LeagueSharp este updatat pentru versiunea locala de League of Legends,deobicei asta inseamna ca site-ul www.joduska.me este inaccesibil.</system:String>
     <system:String x:Key="NotUpdateNeeded">LeagueSharp este updatat pentru versiunea de League of LEgends locala.</system:String>
-
+    <system:String x:Key="RandomizationFailed">Could not randomize the dll names.</system:String>
 </ResourceDictionary>

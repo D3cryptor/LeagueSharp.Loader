@@ -134,5 +134,5 @@
     <system:String x:Key="UpdateSuccess">LeagueSharp kurulu League of Legends versiyonuna göre başarıyla güncellendi.</system:String>
     <system:String x:Key="UpdateUnknown">LeagueSharp'ın güncel olup olmadığı bilinmiyor, bu genellikle joduska.me erişilemiyor anlamına gelir.</system:String>
     <system:String x:Key="NotUpdateNeeded">LeagueSharp kurulu League of Legends versiyonuna göre güncel.</system:String>
-
+    <system:String x:Key="RandomizationFailed">Could not randomize the dll names.</system:String>
 </ResourceDictionary>

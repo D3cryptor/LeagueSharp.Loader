@@ -135,5 +135,5 @@
     <system:String x:Key="UpdateSuccess">LeagueSharp wurde erfolgreich für die installierte League of Legends Version aktualisiert.</system:String>
     <system:String x:Key="UpdateUnknown">Konnte www.joduska.me nicht kontaktieren, um zu überprüfen, ob LeagueSharp mit der installierten League of Legends Version kompatibel ist.</system:String>
     <system:String x:Key="NotUpdateNeeded">LeagueSharp ist mit der installierten League of Legends Version kompatibel.</system:String>
-
+    <system:String x:Key="RandomizationFailed">Could not randomize the dll names.</system:String>
 </ResourceDictionary>

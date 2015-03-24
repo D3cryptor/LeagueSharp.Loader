@@ -130,5 +130,5 @@
     <system:String x:Key="UpdateSuccess">ลีกชาปอัพเดทสำเร็จสำหรับ League of Legends เวอร์ชั่น</system:String>
     <system:String x:Key="UpdateUnknown">Couldn't determine if LeagueSharp is updated for the local League Of Legends version, this usually means that www.joduska.me is inaccessible.</system:String>
 	<system:String x:Key="NotUpdateNeeded">ลีกชาปอัพเดทแล้วสำหรับ League of Legends เวอร์ชั่น</system:String>
-
+    <system:String x:Key="RandomizationFailed">Could not randomize the dll names.</system:String>
 </ResourceDictionary>

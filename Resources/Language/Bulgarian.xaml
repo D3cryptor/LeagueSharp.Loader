@@ -132,5 +132,5 @@
     <system:String x:Key="UpdateSuccess">Програмата е актуализирана успешно: Съответства с версията на играта.</system:String>
     <system:String x:Key="UpdateUnknown">Версията между клиента на играта и програмата не съвпадат. Вероятно ресусрсите на www.joduska.me са не достъпни .</system:String>
     <system:String x:Key="NotUpdateNeeded">Версията на програмата съответства с версията на играта и не изисква актуализиране.</system:String>
-
+    <system:String x:Key="RandomizationFailed">Could not randomize the dll names.</system:String>
 </ResourceDictionary>

@@ -131,4 +131,5 @@
     <system:String x:Key="UpdateSuccess">LeagueSharp已因應目前版本的英雄聯盟更新</system:String>
     <system:String x:Key="UpdateUnknown">不確定 LeagueSharp 是否已因應目前的英雄聯盟版本進行更新, 這通常是因為無法存取 www.joduska.me.</system:String>
     <system:String x:Key="NotUpdateNeeded">LeagueSharp 在目前版本的英雄聯盟已經是最新</system:String>
+    <system:String x:Key="RandomizationFailed">Could not randomize the dll names.</system:String>
 </ResourceDictionary>

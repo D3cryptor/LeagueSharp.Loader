@@ -134,5 +134,5 @@
     <system:String x:Key="UpdateSuccess">LeagueSharp đã cập nhật thành công cho phiên bản của bạn</system:String>
     <system:String x:Key="UpdateUnknown">Không thể cập nhật L# cho phiên bản League of legends của bạn</system:String>
     <system:String x:Key="NotUpdateNeeded">LeagueSharp đã cập nhật cho League of legends của bạn</system:String>
-
+    <system:String x:Key="RandomizationFailed">Could not randomize the dll names.</system:String>
 </ResourceDictionary>
