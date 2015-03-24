@@ -46,17 +46,17 @@ namespace LeagueSharp.Loader.Class
 
             try
             {
-                //Temp solution :^) , for some reason calling ModifyIAT() crashes the loader.
-                var byteArray = File.ReadAllBytes(Path.Combine(Directories.CoreDirectory, "LeagueSharp.dll"));
-                byteArray = Utility.ReplaceFilling(byteArray, Encoding.ASCII.GetBytes("LeagueSharp.Core.dll"), Encoding.ASCII.GetBytes(LeagueSharpCoreDllName));
-                File.WriteAllBytes(LeagueSharpDllPath, byteArray);
-
                 //result = result && Utility.OverwriteFile(Path.Combine(Directories.CoreDirectory, "LeagueSharp.dll"), LeagueSharpDllPath, true);
                 //result = result && ModifyIAT(Path.Combine(Directories.CoreDirectory, "LeagueSharp.dll"), LeagueSharpDllPath, "LeagueSharp.Core.dll", LeagueSharpCoreDllName);
                 result = result && Utility.OverwriteFile(Path.Combine(Directories.CoreDirectory, "LeagueSharp.Core.dll"), LeagueSharpCoreDllPath, true);
                 result = result && Utility.OverwriteFile(Path.Combine(Directories.CoreDirectory, "LeagueSharp.Bootstrap.dll"), LeagueSharpBootstrapDllPath, true);
                 result = result && Utility.OverwriteFile(Path.Combine(Directories.CoreDirectory, "LeagueSharp.SandBox.dll"), LeagueSharpSandBoxDllPath, true);
-                
+
+                //Temp solution :^) , for some reason calling ModifyIAT() crashes the loader.
+                var byteArray = File.ReadAllBytes(Path.Combine(Directories.CoreDirectory, "LeagueSharp.dll"));
+                byteArray = Utility.ReplaceFilling(byteArray, Encoding.ASCII.GetBytes("LeagueSharp.Core.dll"), Encoding.ASCII.GetBytes(LeagueSharpCoreDllName));
+                File.WriteAllBytes(LeagueSharpDllPath, byteArray);
+
                 return result;
             }
             catch (Exception ex)
