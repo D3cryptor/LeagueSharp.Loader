@@ -39,6 +39,7 @@ Source: "..\bin\Release\System\SharpDX.XInput.dll"; DestDir: "{app}\System\"; Fl
 Source: "..\bin\Release\System\BehaviorSharp.dll"; DestDir: "{app}\System\"; Flags: ignoreversion
 Source: "..\bin\Release\System\clipper_library.dll"; DestDir: "{app}\System\"; Flags: ignoreversion
 Source: "..\translations\*.xml"; DestDir: "{app}\translations\"; Flags: ignoreversion
+Source: "..\Resources\key.snk"; DestDir: "{app}\System\"; Flags: ignoreversion
 
 [Languages]
 Name: "en"; MessagesFile: "compiler:Default.isl"
