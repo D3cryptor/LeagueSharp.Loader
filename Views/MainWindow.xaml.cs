@@ -346,7 +346,11 @@ namespace LeagueSharp.Loader.Views
                 MessageBox.Show(Utility.GetMultiLanguageText("ConfigWriteError"));
             }
 
-            //PathRandomizer.CopyFiles();
+            if (!PathRandomizer.CopyFiles())
+            {
+                MessageBox.Show(Utility.GetMultiLanguageText("RandomizationFailed"));
+                Environment.Exit(0);
+            }
 
             Injection.OnInject += hwnd => Task.Factory.StartNew(
                 () =>
@@ -734,8 +738,7 @@ namespace LeagueSharp.Loader.Views
 
                 GitUpdater.ClearUnusedRepos(allAssemblies);
                 PrepareAssemblies(allAssemblies, Config.Instance.FirstRun || Config.Instance.UpdateOnLoad, true, true);
-                ServiceFactory.CreateService<ILoaderService, LoaderService>();
-                ServiceFactory.CreateService<ILoaderLogService, LoaderService>();
+                Remoting.Init();
             }
 
             var text = Clipboard.GetText();

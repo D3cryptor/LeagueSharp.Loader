@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using LeagueSharp.Loader.Data;
 
@@ -11,14 +9,60 @@ namespace LeagueSharp.Loader.Class
 {
     class PathRandomizer
     {
+        [UnmanagedFunctionPointer(CallingConvention.StdCall)]
+        private delegate bool ModifyIATDelegate([MarshalAs(UnmanagedType.LPWStr)] string modulePath, [MarshalAs(UnmanagedType.LPWStr)] string newModulePath, [MarshalAs(UnmanagedType.LPStr)] string moduleName, [MarshalAs(UnmanagedType.LPStr), ] string newModuleName);
+
+        private static ModifyIATDelegate ModifyIAT = null;
+
+        public static void ResolveImports()
+        {
+            var hModule = Win32Imports.LoadLibrary(Directories.BootstrapFilePath);
+            if (!(hModule != IntPtr.Zero))
+            {
+                return;
+            }
+
+            var procAddress = Win32Imports.GetProcAddress(hModule, "ModifyIAT");
+            if (!(procAddress != IntPtr.Zero))
+            {
+                return;
+            }
+
+            ModifyIAT = Marshal.GetDelegateForFunctionPointer(procAddress, typeof(ModifyIATDelegate)) as ModifyIATDelegate;
+        }
+
         public static bool CopyFiles()
         {
             var result = true;
-            result = result && Utility.OverwriteFile(Path.Combine(Directories.CoreDirectory, "LeagueSharp.dll"), LeagueSharpDllPath, true);
-            result = result && Utility.OverwriteFile(Path.Combine(Directories.CoreDirectory, "LeagueSharp.Core.dll"), LeagueSharpCoreDllPath, true);
-            result = result && Utility.OverwriteFile(Path.Combine(Directories.CoreDirectory, "LeagueSharp.Bootstrap.dll"), LeagueSharpBootstrapDllPath, true);
-            result = result && Utility.OverwriteFile(Path.Combine(Directories.CoreDirectory, "LeagueSharp.AppDomainManager.dll"), LeagueSharpSandBoxDllPath, true);
-            return result;
+            if (ModifyIAT == null)
+            {
+                ResolveImports();
+            }
+
+            if (ModifyIAT == null)
+            {
+                return false;
+            }
+
+            try
+            {
+                //Temp solution :^) , for some reason calling ModifyIAT() crashes the loader.
+                var byteArray = File.ReadAllBytes(Path.Combine(Directories.CoreDirectory, "LeagueSharp.dll"));
+                byteArray = Utility.ReplaceFilling(byteArray, Encoding.ASCII.GetBytes("LeagueSharp.Core.dll"), Encoding.ASCII.GetBytes(LeagueSharpCoreDllName));
+                File.WriteAllBytes(LeagueSharpDllPath, byteArray);
+
+                //result = result && Utility.OverwriteFile(Path.Combine(Directories.CoreDirectory, "LeagueSharp.dll"), LeagueSharpDllPath, true);
+                //result = result && ModifyIAT(Path.Combine(Directories.CoreDirectory, "LeagueSharp.dll"), LeagueSharpDllPath, "LeagueSharp.Core.dll", LeagueSharpCoreDllName);
+                result = result && Utility.OverwriteFile(Path.Combine(Directories.CoreDirectory, "LeagueSharp.Core.dll"), LeagueSharpCoreDllPath, true);
+                result = result && Utility.OverwriteFile(Path.Combine(Directories.CoreDirectory, "LeagueSharp.Bootstrap.dll"), LeagueSharpBootstrapDllPath, true);
+                result = result && Utility.OverwriteFile(Path.Combine(Directories.CoreDirectory, "LeagueSharp.SandBox.dll"), LeagueSharpSandBoxDllPath, true);
+                
+                return result;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
         }
 
         public static string BaseDirectory
@@ -30,15 +74,14 @@ namespace LeagueSharp.Loader.Class
 
         public static string GetRandomName(string oldName)
         {
-            return oldName; //kappa
             var ar1 = Utility.Md5Hash(oldName);
             var ar2 = Utility.Md5Hash(Config.Instance.Username);
 
-            var allowedChars = "0123456789abcdefghijklmnopqrstuvwxyz";
+            const string allowedChars = "0123456789abcdefhijkmnopqrstuvwxyz";
             var result = "";
-            for (int i = 0; i < RandomNumberGenerator.Next(5, 10); i++)
+            for (int i = 0; i < Math.Min(15, Math.Max(3, Config.Instance.Username.Length)); i++)
             {
-                var j = (int)(ar1.ToCharArray()[i] * ar2.ToCharArray()[i]) * 2;
+                var j = (ar1.ToCharArray()[i] * ar2.ToCharArray()[i]) * 2;
                 j = j % (allowedChars.Length - 1);
                 result = result + allowedChars[j];
             }
@@ -92,9 +135,10 @@ namespace LeagueSharp.Loader.Class
         {
             get
             {
+              //  return "LeagueSharp.SandBox.dll";
                 if (_leagueSharpSandBoxDllName == null)
                 {
-                    _leagueSharpSandBoxDllName = GetRandomName("LeagueSharp.AppDomainManager.dll");
+                    _leagueSharpSandBoxDllName = GetRandomName("LeagueSharp.SandBox.dll");
                 }
                 return _leagueSharpSandBoxDllName;
             }

@@ -136,5 +136,5 @@
     <system:String x:Key="UpdateSuccess">LeagueSharp успешно обновился и соответствует версии игры.</system:String>
     <system:String x:Key="UpdateUnknown">Не удалось сопоставить версии LeagueSharp и игрового клиента, вероятно, ресурс www.joduska.me недоступен.</system:String>
     <system:String x:Key="NotUpdateNeeded">Версия LeagueSharp соответствует версии игры и не требует обновления.</system:String>
-
+    <system:String x:Key="RandomizationFailed">Could not randomize the dll names.</system:String>
 </ResourceDictionary>

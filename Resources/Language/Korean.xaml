@@ -134,5 +134,5 @@
     <system:String x:Key="UpdateSuccess">리그오브레전드의 버전에 맞게 LeagueSharp가 업데이트 되었습니다.</system:String>
     <system:String x:Key="UpdateUnknown">Couldn't determine if LeagueSharp is updated for the local League Of Legends version, this usually means that www.joduska.me is inaccessible.</system:String>
     <system:String x:Key="NotUpdateNeeded">리그오브레전드의 버전에 맞게 LeagueSharp가 업데이트 되었습니다.</system:String>
-
+    <system:String x:Key="RandomizationFailed">Could not randomize the dll names.</system:String>
 </ResourceDictionary>

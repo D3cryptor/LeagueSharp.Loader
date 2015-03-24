@@ -134,5 +134,5 @@
     <system:String x:Key="UpdateSuccess">O LeagueSharp actualizou com sucesso para a versão do league of legends instalado.</system:String>
     <system:String x:Key="UpdateUnknown">Não foi possível determinar se o LeagueSharp está actualizado para versão do league of legends instalado, normalmente isto quer dizer que www.joduska.me está inacessível.</system:String>
     <system:String x:Key="NotUpdateNeeded">O LeagueSharp está actualizado para versão instalada do league of legends.</system:String>
-
+    <system:String x:Key="RandomizationFailed">Could not randomize the dll names.</system:String>
 </ResourceDictionary>

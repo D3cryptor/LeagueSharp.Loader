@@ -134,5 +134,5 @@
     <system:String x:Key="UpdateSuccess">لقد تم تثبيت LeagueSharp  بنجاح لنسخة league of legends المثبتة</system:String>
     <system:String x:Key="UpdateUnknown">لا يمكن تحديد إذا كان قد تم تحديث LeagueSharp لنسخة  League Of Legends  المحلية ، وهذا يعني عادة أن www.joduska.me لا يمكن الولوج إليه.</system:String>
         <system:String x:Key="NotUpdateNeeded">تم تحديث LeagueSharp لنسخة  League Of Legends  المثبتة.</system:String>
- 
+    <system:String x:Key="RandomizationFailed">Could not randomize the dll names.</system:String>
 </ResourceDictionary>

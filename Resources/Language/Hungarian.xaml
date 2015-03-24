@@ -130,5 +130,5 @@
     <system:String x:Key="UpdateSuccess">LeagueSharp sikeresen frissítve a jelenleg telepített league of legends verziójához.</system:String>
     <system:String x:Key="UpdateUnknown">Nem sikerült meghatározni, hogy a LeagueSharp frissítve van e a jelenleg telepített League Of Legends verziójához, ez általában azt jelenti, hogy a www.joduska.me webkiszolgáló nem elérhető.</system:String>
 	<system:String x:Key="NotUpdateNeeded">LeagueSharp már frissítve van a jelenleg telepített league of legends verziójához.</system:String>
-
+    <system:String x:Key="RandomizationFailed">Could not randomize the dll names.</system:String>
 </ResourceDictionary>

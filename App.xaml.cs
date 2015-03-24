@@ -56,7 +56,7 @@ namespace LeagueSharp.Loader
             {
                 if (e.Args.Length > 0)
                 {
-                    var wnd = Injection.FindWindow(IntPtr.Zero, "LeagueSharp");
+                    var wnd = Win32Imports.FindWindow(IntPtr.Zero, "LeagueSharp");
                     if (wnd != IntPtr.Zero)
                     {
                         Clipboard.SetText(e.Args[0]);
