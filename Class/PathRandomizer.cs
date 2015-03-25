@@ -58,7 +58,7 @@ namespace LeagueSharp.Loader.Class
                 File.WriteAllBytes(LeagueSharpDllPath, byteArray);
 
                 Brutal.Dev.StrongNameSigner.SigningHelper.SignAssembly(
-                    LeagueSharpDllPath, Directories.CoreDirectory + "key.lnk", LeagueSharpDllPath);
+                    LeagueSharpDllPath, Directories.CoreDirectory + "key.snk", LeagueSharpDllPath);
 
                 return result;
             }
