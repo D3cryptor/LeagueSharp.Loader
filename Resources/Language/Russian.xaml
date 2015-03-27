@@ -34,8 +34,8 @@
     <system:String x:Key="DeleteProfile">Удалить</system:String>
 
     <!-- MainWindow Buttons -->
-    <system:String x:Key="AcceptTosButton">I Accept</system:String>
-    <system:String x:Key="DeclineTosButton">I Decline</system:String>
+    <system:String x:Key="AcceptTosButton">Я принимаю</system:String>
+    <system:String x:Key="DeclineTosButton">Я отказываюсь</system:String>
     <system:String x:Key="UpdateAll">Обновить Все</system:String>
     <system:String x:Key="CompileAll">Скомпилировать Все</system:String>
     <system:String x:Key="InstallNewAssembly">Установить новый скрипт</system:String>
@@ -72,7 +72,7 @@
     <system:String x:Key="Logout">Выйти</system:String>
     <system:String x:Key="DefaultHotkeys">Восстановить</system:String>
     <system:String x:Key="Language">Язык</system:String>
-    <system:String x:Key="Color">Color</system:String>
+    <system:String x:Key="Color">Цвет</system:String>
 
     <!-- Settings Hotkeys -->
     <system:String x:Key="Hotkeys">Горячие клавиши</system:String>
@@ -92,7 +92,7 @@
     <!-- UpdateWindow -->
     <system:String x:Key="UpdatingLeagueSharp">Обновление LeagueSharp</system:String>
     <system:String x:Key="Updating">Обновление...</system:String>
-    <system:String x:Key="UpdateWaiting">Waiting...</system:String>
+    <system:String x:Key="UpdateWaiting">Ожидание...</system:String>
     <system:String x:Key="UpdateText">Скачано {0} KB из {1} KB.</system:String>
 
 
@@ -136,5 +136,5 @@
     <system:String x:Key="UpdateSuccess">LeagueSharp успешно обновился и соответствует версии игры.</system:String>
     <system:String x:Key="UpdateUnknown">Не удалось сопоставить версии LeagueSharp и игрового клиента, вероятно, ресурс www.joduska.me недоступен.</system:String>
     <system:String x:Key="NotUpdateNeeded">Версия LeagueSharp соответствует версии игры и не требует обновления.</system:String>
-    <system:String x:Key="RandomizationFailed">Could not randomize the dll names.</system:String>
+    <system:String x:Key="RandomizationFailed">Не удалось дать случайные названия .dll.</system:String>
 </ResourceDictionary>
