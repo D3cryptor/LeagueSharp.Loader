@@ -2,62 +2,64 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:system="clr-namespace:System;assembly=mscorlib">
 
-    <!-- MainWindow TopBar -->
-    <system:String x:Key="Website">Web-сайт</system:String>
+<!-- MainWindow TopBar -->
+    <system:String x:Key="Website">Уебсайт</system:String>
     <system:String x:Key="Settings">Настройки</system:String>
 
-    <!-- MainWindow Tabs -->
+<!-- MainWindow Tabs -->
     <system:String x:Key="News">Новини</system:String>
     <system:String x:Key="Assemblies">Скриптове</system:String>
 
-    <!-- MainWindow Profile selector -->
+<!-- MainWindow Profile selector -->
     <system:String x:Key="DefaultProfile">Default</system:String>
 
-    <!-- MainWindow Assemblies datagrid columns -->
+<!-- MainWindow Assemblies datagrid columns -->
     <system:String x:Key="ColumnName">Заглавие</system:String>
     <system:String x:Key="ColumnType">Тип</system:String>
     <system:String x:Key="ColumnVersion">Версия</system:String>
     <system:String x:Key="ColumnLocation">Расположение</system:String>
     <system:String x:Key="ColumnDescription">Описание</system:String>
 
-    <!-- MainWindow Assemblies datagrid Menu -->
+<!-- MainWindow Assemblies datagrid Menu -->
     <system:String x:Key="MenuUpdateAndCompile">Обнови и компилирай</system:String>
     <system:String x:Key="MenuRemove">Премахни</system:String>
     <system:String x:Key="MenuGitub">GitHub</system:String>
     <system:String x:Key="MenuShare">Споделете</system:String>
     <system:String x:Key="MenuViewLog">Покажи дневник</system:String>
 
-    <!-- MainWindow Profiles Menu -->
+<!-- MainWindow Profiles Menu -->
     <system:String x:Key="NewProfile">Създай</system:String>
     <system:String x:Key="ChangeName">Промени</system:String>
     <system:String x:Key="DeleteProfile">Премахни</system:String>
 
-    <!-- MainWindow Buttons -->
+<!-- MainWindow Buttons -->
+	<system:String x:Key="AcceptTosButton">Приемам</system:String>
++ 	<system:String x:Key="DeclineTosButton">Отказвам</system:String>
     <system:String x:Key="UpdateAll">Обнови всички</system:String>
     <system:String x:Key="CompileAll">Компилирай</system:String>
     <system:String x:Key="InstallNewAssembly">Инсталирай нов скрипт</system:String>
 
-    <!-- InstallerWindow Title -->
+<!-- InstallerWindow Title -->
     <system:String x:Key="AssemblyInstaller">Скрипт Инсталатор</system:String>
 
-    <!-- InstallerWindow Tabs -->
+<!-- InstallerWindow Tabs -->
     <system:String x:Key="Search">Търсене</system:String>
     <system:String x:Key="Select">Избор</system:String>
 
-    <!-- InstallerWindow Search tab -->
+<!-- InstallerWindow Search tab -->
     <system:String x:Key="SelectAssembliesText">Изберете папката на скрипта:</system:String>
     <system:String x:Key="Local">Локален Скрипт</system:String>
     <system:String x:Key="Github">GitHub</system:String>
     <system:String x:Key="Installed">Инсталиран</system:String>
     <system:String x:Key="Next">Още</system:String>
 
-    <!-- InstallerWindow Select tab -->
+<!-- InstallerWindow Select tab -->
     <system:String x:Key="SelectAll">Избери вс.</system:String>
     <system:String x:Key="DeselectAll">Премахни</system:String>
     <system:String x:Key="Previous">Предишен</system:String>
     <system:String x:Key="Add">Добави</system:String>
 
-    <!-- Settings General -->
+<!-- Settings General -->
     <system:String x:Key="General">Общи</system:String>
     <system:String x:Key="GameSettings">Настройки за играта</system:String>
     <system:String x:Key="Anti-AFK">Анти-AFK</system:String>
@@ -69,9 +71,9 @@
     <system:String x:Key="Logout">Изход</system:String>
     <system:String x:Key="DefaultHotkeys">Възстанови</system:String>
     <system:String x:Key="Language">Език</system:String>
-    <system:String x:Key="Color">Color</system:String>
+	<system:String x:Key="Color">Цвят</system:String>
 
-    <!-- Settings Hotkeys -->
+<!-- Settings Hotkeys -->
     <system:String x:Key="Hotkeys">Горещи клавиши</system:String>
     <system:String x:Key="Hotkey">Бинд</system:String>
     <system:String x:Key="Reload the assemblies">За да заредите скриптовете натиснете -></system:String>
@@ -79,32 +81,33 @@
     <system:String x:Key="Shows the menu (Press)">Покажи меню (Press)</system:String>
     <system:String x:Key="Shows the menu (Toggle)">Покажи меню (Toggle)</system:String>
 
-    <!-- Settings Log -->
+<!-- Settings Log -->
     <system:String x:Key="Log">Логове</system:String>
     <system:String x:Key="Status">Статус</system:String>
     <system:String x:Key="Source">Източник</system:String>
     <system:String x:Key="Content">Содержание</system:String>
     <system:String x:Key="OpenFolder">Отвори</system:String>
 
-    <!-- UpdateWindow -->
-    <system:String x:Key="UpdatingLeagueSharp">Обнови програмата</system:String>
+<!-- UpdateWindow -->
+    <system:String x:Key="UpdatingLeagueSharp">Обнови Leaguesharp</system:String>
     <system:String x:Key="Updating">Обновяване...</system:String>
+	<system:String x:Key="UpdateWaiting">Изчакване...</system:String>
     <system:String x:Key="UpdateText">Свалени {0} KB от {1} KB.</system:String>
 
 
-    <!-- Errors and other strings -->
+<!-- Errors and other strings -->
     <system:String x:Key="WrongAuth">Невалидно потребителско име или парола. {0}</system:String>
     <system:String x:Key="AuthEmpty">Полето на Логина или Паролата е празно</system:String>
     <system:String x:Key="FailedToDelete">Не можете да изтриете обновените файлове, моля изтрийте ги ръчно и рестарирайте програмата</system:String>
-    <system:String x:Key="WrongVersion">Не потдържана вервия на League Of Legends. Хаш:</system:String>
+    <system:String x:Key="WrongVersion">Не потдържана версия на League Of Legends. Хаш:</system:String>
     <system:String x:Key="FailedToDownload">Грешка при изтегляне.</system:String>
-    <system:String x:Key="FailedToLogin">Грешка при удостоверяване: {0}</system:String>
+    <system:String x:Key="FailedToLogin">Грешка при свързване: {0}</system:String>
     <system:String x:Key="Login">Логин</system:String>
     <system:String x:Key="LoginError">Грешка при влизане..</system:String>
     <system:String x:Key="Uninstall">Отстраняване</system:String>
     <system:String x:Key="UninstallConfirm">Сигурни ли сте, че искате да изтриете този скрипт?</system:String>
     <system:String x:Key="ConfigWriteError">Неусшепно записване на файла config.xml</system:String>
-    <system:String x:Key="ShareText">Копирай линква в клипборада</system:String>
+    <system:String x:Key="ShareText">Копирай линка в клипборада</system:String>
     <system:String x:Key="LogNotFound">Регистрационните файлове не са намерени</system:String>
     <system:String x:Key="NewProfile2">Нов</system:String>
     <system:String x:Key="Rename">Преименувай</system:String>
@@ -119,18 +122,18 @@
     <system:String x:Key="New">Нов</system:String>
     <system:String x:Key="Edit">Редактирай</system:String>
     <system:String x:Key="Clone">Клонирай</system:String>
-
-
+    
     <system:String x:Key="Checking">Проверка...</system:String>
     <system:String x:Key="Updated">Обновен</system:String>
-    <system:String x:Key="OUTDATED">УСТАРЕЛ</system:String>
+    <system:String x:Key="OUTDATED">ОСТАРЯЛ</system:String>
     <system:String x:Key="Unknown">Неизвестен</system:String>
     <system:String x:Key="UpdateStatus">Статус</system:String>
 
-    <system:String x:Key="LoaderUpdateFailed">Неуспешно актуализиране, актуализирай ръчно. Бъг:</system:String>
+
+    <system:String x:Key="LoaderUpdateFailed">Неуспешно актуализиране, актуализирай ръчно. Грешка:</system:String>
     <system:String x:Key="LeagueNotFound">Не може да се определи местоположението на "League of Legends.exe", моля опитайте отново.</system:String>
     <system:String x:Key="UpdateSuccess">Програмата е актуализирана успешно: Съответства с версията на играта.</system:String>
     <system:String x:Key="UpdateUnknown">Версията между клиента на играта и програмата не съвпадат. Вероятно ресусрсите на www.joduska.me са не достъпни .</system:String>
     <system:String x:Key="NotUpdateNeeded">Версията на програмата съответства с версията на играта и не изисква актуализиране.</system:String>
-    <system:String x:Key="RandomizationFailed">Could not randomize the dll names.</system:String>
+    <system:String x:Key="RandomizationFailed">Неуспешно случайни dll имена.</system:String>
 </ResourceDictionary>
